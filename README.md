@@ -1,4 +1,6 @@
-## TSB Project Data Linked Data
+## TSB Project Linked Data
+
+Rails app to serve provide access to information about TSB Projects as Linked Open Data.
 
 ### Getting started
 

@@ -59,6 +59,10 @@ module TsbProjectData
     # Enable the asset pipeline
     config.assets.enabled = true
 
+    config.less.paths << "#{Rails.root}/vendor/assets/stylesheets"
+
+    config.assets.paths << "#{Rails.root}/vendor/assets/images/odi-bootstrap"
+
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
   end

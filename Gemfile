@@ -11,5 +11,7 @@ gem 'publish_my_data', '1.0.0'
 gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git", :branch => 'ead49c'
 
 group :assets do
+  gem 'less-rails', git: 'git://github.com/metaskills/less-rails.git', :branch => '3cca3e37'
+  gem 'therubyracer'
   gem 'yui-compressor' #note:requires java
 end

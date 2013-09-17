@@ -38,8 +38,8 @@ TsbProjectData::Application.configure do
   PublishMyData.configure do |config|
    # config.sparql_endpoint = 'http://localhost:3030/tsb_project_data_dev/sparql'
    # config.local_domain = 'tsb.swirrl.com'
-    config.sparql_endpoint = 'http://localhost:9876'
-    config.local_domain = 'opendatacommunities.org'
+   config.sparql_endpoint = 'http://localhost:3030/dsidev/sparql'
+   config.local_domain = 'data.digitalsocial.eu'
     # uncomment to enable caching.
     config.tripod_cache_store = nil #Tripod::CacheStores::MemcachedCacheStore.new('localhost:11211') #nil
     config.sparql_timeout_seconds = 7

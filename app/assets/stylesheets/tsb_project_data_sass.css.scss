@@ -1,0 +1,30 @@
+@import "bootstrap-sass/bootstrap.scss";
+@import "bootstrap-sass/bootstrap-responsive.scss";
+
+main {
+  @extend .container;
+  background:#eee;
+}
+
+article#dataset, article#ontology, article#concept-scheme {
+
+  & > header {
+    display:none;
+  }
+
+  & > section.metadata {
+    @include makeRow();
+
+    .primary {
+      @include makeColumn(8);
+    }
+
+    .secondary {
+      @include makeColumn(4);
+    }
+  }
+}
+
+section#example-data, section#resource-data, section#linked-data {
+   display:none;
+}

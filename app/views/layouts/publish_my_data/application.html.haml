@@ -6,6 +6,9 @@
     = yield :page_description
     = javascript_include_tag :tsb_project_data
     = stylesheet_link_tag :tsb_project_data
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   %body
     /[if lt IE 8]
       = render 'publish_my_data/shared/browser_warning'
@@ -25,9 +28,9 @@
       .container
         = yield :crumbs
 
-
-
-    %main= yield
+    %main#main
+      .container
+        = yield
 
     = render 'publish_my_data/shared/footer'
     = render 'publish_my_data/shared/google_analytics'

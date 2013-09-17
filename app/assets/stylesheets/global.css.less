@@ -1,10 +1,43 @@
-main {
-  .container;
+html, body {
+  overflow-x:hidden;
 }
 
-header {
+main#main {
+  margin-top:0;
+}
+
+article > header, section > header {
+  padding-top:0;
   background-color: #fff;
   color: @grayDark;
+
+  h1 {
+    margin-top:0;
+    font-size: @baseFontSize * 2.75;
+    background-color: @accent;
+    color: white;
+    margin: 0 -9999px;
+    margin-bottom:20px;
+    padding: 20px 9999px;
+    word-break:break-all;
+  }
+
+  h2 {
+    margin-top:0;
+    font-size: @baseFontSize * 1.75;
+    line-height: @baseFontSize * 1.75;
+    font-weight: bold;
+    word-break:break-all;
+  }
+
+  h3 {
+    margin:0;
+    color: @gray;
+    text-transform: uppercase;
+    font-size: @baseFontSize * 1.25;
+    line-height: @baseFontSize * 1.5;
+  }
+
 }
 
 #topbar {
@@ -18,13 +51,11 @@ header {
 
 
 nav.crumbs {
-  //extend the background full width
-  background-color: #f5f5f5;
-  margin-bottom:8px;
-
-
-  // bootstrap 3 crumbs backport.
+  background: white;
+  // bootstrap 3 crumbs backport with some tweaks
   ol.breadcrumb {
+    padding-left:0;
+    background: white;
     > li {
       display: inline-block;
       &+li:before {
@@ -32,17 +63,23 @@ nav.crumbs {
         padding: 0 5px;
       }
     }
-
-    // some layout tweakery.
-    padding-left:0;
-    margin-bottom:0;
   }
 }
 
-body > header {
-
+body {
+  footer#footer {
+    a {
+      color: #fff;
+    }
+    .footer-nav {
+      margin-left:0;
+    }
+  }
 }
 
-body > footer {
-  #footer;
+footer.alternative-formats {
+  margin-top: 10px;
+  ul {
+    .list-inline;
+  }
 }

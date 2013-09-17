@@ -1,0 +1,77 @@
+section#classes, section#properties, section#concepts, section#themes, section#datasets {
+  ul {
+    .list-unstyled;
+    margin-left:0;
+    li {
+      // add dividerss
+    }
+  }
+}
+
+#resource-data {
+  table {
+    .table;
+
+    thead tr th {
+      border: 0;
+    }
+
+    h3, h5 {
+      margin: 2px 0;
+    }
+
+    ul {
+      .list-unstyled;
+      margin-bottom: 0;
+    }
+
+    a, h3, h4, icon {
+      transition: color 0.3s;
+    }
+
+    &.lowlight tbody {
+      h3, h4, a, icon {
+        color: $grayLighter;
+      }
+      .highlight, .highlight a {
+        color: $linkColor;
+      }
+      h4.highlight {
+        color: $grayDark;
+      }
+    }
+  }
+}
+
+article#dataset, article#ontology, article#concept-scheme {
+  .makeRow();
+  .makeColumn(12);
+
+  & > header {
+    h1, h2 {
+      margin-top: 0;
+    }
+  }
+
+  & > footer {
+    ul {
+    }
+  }
+
+  & > section.metadata {
+    .makeRow();
+
+    .primary {
+      .makeColumn(8);
+    }
+
+    .secondary {
+      .makeColumn(4);
+    }
+  }
+
+  ul.tab-links {
+    .nav;
+    .nav-tabs;
+  }
+}

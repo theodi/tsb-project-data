@@ -1,0 +1,26 @@
+%footer#footer
+  .container
+    .span6.footer-content
+      %h1
+        %a{href:'http://www.theodi.org'} Open Data Institute
+      %p
+        %a{href:'http://www.openstreetmap.org/?lat=51.522205&amp;lon=-0.08176500000001852&amp;zoom=16&amp;layers=T&amp;mlat=51.52210&amp;mlon=-0.08343'} Open Data Institute
+        %span 65 Clifton Street, London EC2A 4JE
+      %p
+        %a{href:'mailto:info@theodi.org'} info@theodi.org
+        · Company
+        %a{href:'http://opencorporates.com/companies/gb/08030289'} 08030289
+        ·
+        %span VAT
+        %span 143 7796 80
+      .credits
+        :markdown
+          Powered by [PublishMyData](http://swirrl.com/publishmydata) Community Edition v#{Gem.loaded_specs["publish_my_data"].version}
+
+    .span6.footer-nav
+      = link_to "Privacy & Cookies", publish_my_data.privacy_path
+      |
+      = link_to "Accessibility", publish_my_data.accessibility_path
+      |
+      = link_to "Developer Docs", publish_my_data.developer_docs_path
+

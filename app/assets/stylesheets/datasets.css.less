@@ -1,0 +1,60 @@
+
+
+article#dataset {
+
+  section#example-data {
+    #resource-data;
+  }
+
+  #further-information {
+    background: white;
+    overflow:hidden;
+    position:relative;
+
+    .fade-out {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%;
+      text-align: center;
+      margin: 0;
+      height:52px; /* dont fade over the whole thing - start half way up */
+
+      background: transparent; /* Old browsers */
+      /* css3 (not many browsers yet!) */
+      background-image: linear-gradient( to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
+      background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, rgba(255,255,255,0)),
+        color-stop(1, rgba(255,255,255,1)));
+      background-image: -moz-linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,1));
+      background-image: -ms-linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,1)); /* ie10*/
+      background-image: -o-linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,1));
+    }
+
+    &.truncated {
+      height:105px;
+    }
+  }
+
+  section#grid-view {
+
+    .grid-intro {
+      margin-top:20px;
+    }
+
+    .controls-wrapper {
+      .clearfix();
+
+      #dimensions-controls {
+        .rows-and-columns {
+          .makeColumn(6);
+        }
+        .other-options {
+          .makeColumn(6);
+        }
+      }
+    }
+  }
+}

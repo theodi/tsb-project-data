@@ -1,0 +1,33 @@
+!!! 5
+%html
+  %head
+    %title
+      = render 'publish_my_data/shared/meta_title'
+    = yield :page_description
+    = javascript_include_tag :tsb_project_data
+    = stylesheet_link_tag :tsb_project_data
+  %body
+    /[if lt IE 8]
+      = render 'publish_my_data/shared/browser_warning'
+
+    #topbar.navbar.navbar-inverse.navbar-static-top
+      .container
+        .navbar-inner
+          %h1
+            %a{href:'/'}
+              TSB Project Data
+          %a.brand{href:'http://theodi.org'}
+            = image_tag("logo.png", alt: 'logo')
+          %span.label{style:'top:-5px; position:absolute; left:270px'}
+            BETA
+
+    %nav.crumbs
+      .container
+        = yield :crumbs
+
+
+
+    %main= yield
+
+    = render 'publish_my_data/shared/footer'
+    = render 'publish_my_data/shared/google_analytics'

@@ -1,0 +1,48 @@
+main {
+  .container;
+}
+
+header {
+  background-color: #fff;
+  color: @grayDark;
+}
+
+#topbar {
+  h1 {
+    a, a:hover, a:visited {
+      color:white;
+      text-decoration:none;
+    }
+  }
+}
+
+
+nav.crumbs {
+  //extend the background full width
+  background-color: #f5f5f5;
+  margin-bottom:8px;
+
+
+  // bootstrap 3 crumbs backport.
+  ol.breadcrumb {
+    > li {
+      display: inline-block;
+      &+li:before {
+        content: "/\00a0"; // Unicode space added since inline-block means non-collapsing white-space
+        padding: 0 5px;
+      }
+    }
+
+    // some layout tweakery.
+    padding-left:0;
+    margin-bottom:0;
+  }
+}
+
+body > header {
+
+}
+
+body > footer {
+  #footer;
+}

@@ -12,4 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require publish_my_data
 //= require_tree .

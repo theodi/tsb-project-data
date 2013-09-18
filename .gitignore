@@ -16,4 +16,5 @@
 
 # deploy files
 config/deploy.rb
+config/deploy/*.rb
 Capfile

@@ -13,3 +13,7 @@ gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git", :bran
 group :assets do
   gem 'yui-compressor' #note:requires java
 end
+
+group :development do
+  gem "capistrano"
+end

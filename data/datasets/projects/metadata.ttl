@@ -1,0 +1,15 @@
+# metadata for the main dataset.
+
+<http://tsb.swirrl.com/data/projects> a <http://publishmydata.com/def/dataset#Dataset>;
+   <http://www.w3.org/2000/01/rdf-schema#label> "Projects";
+   <http://purl.org/dc/terms/title> "Projects";
+   <http://www.w3.org/2000/01/rdf-schema#comment>
+      "TSB Projects Data" ;
+   <http://publishmydata.com/def/dataset#contactEmail> <mailto:hello@swirrl.com>;
+   <http://publishmydata.com/def/dataset#graph> <http://tsb.swirrl.com/graph/projects>;
+   <http://purl.org/dc/terms/publisher> "TBC";
+   <http://purl.org/dc/terms/references> <http://tsb.swirrl.com/docs>;
+   <http://rdfs.org/ns/void#dataDump> <http://tsb.swirrl.com/data/organizations-and-activities/dump>;
+   <http://purl.org/dc/terms/license> "TBC" ;
+   <http://purl.org/dc/terms/description> "TBC";
+   <http://rdfs.org/ns/void#sparqlEndpoint> <http://tsb.swirrl.com/sparql> ;

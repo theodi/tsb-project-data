@@ -43,4 +43,6 @@ TsbProjectData::Application.configure do
     config.sparql_timeout_seconds = 7
   end
 
+  TsbProjectData::DATA_ENDPOINT = 'http://localhost:3030/tsb_project_data_dev/data'
+
 end

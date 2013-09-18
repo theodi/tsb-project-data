@@ -1,0 +1,130 @@
+<http://tsb.swirrl.com/id/project/730001> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Project> .
+<http://tsb.swirrl.com/id/project/730001> <http://www.w3.org/2000/01/rdf-schema#label> "Hybrid Turbocharger" .
+<http://tsb.swirrl.com/id/project/730001> <http://tsb.swirrl.com/def/hasParticipant> <http://tsb.swirrl.com/id/organization/aeristech-limited> .
+<http://tsb.swirrl.com/id/project/730001> <http://tsb.swirrl.com/def/hasLeader> <http://tsb.swirrl.com/id/organization/aeristech-limited> .
+<http://tsb.swirrl.com/id/project/730001> <http://tsb.swirrl.com/def/supportedBy> <http://tsb.swirrl.com/id/grant/730001/aeristech-limited> .
+<http://tsb.swirrl.com/id/organization/aeristech-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Organization> .
+<http://tsb.swirrl.com/id/organization/aeristech-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Aeristech Limited" .
+<http://tsb.swirrl.com/id/organization/aeristech-limited> <http://tsb.swirrl.com/def/participatesIn> <http://tsb.swirrl.com/id/project/730001> .
+<http://tsb.swirrl.com/id/organization/aeristech-limited> <http://tsb.swirrl.com/def/isLeaderOf> <http://tsb.swirrl.com/id/project/730001> .
+<http://tsb.swirrl.com/id/grant/730001/aeristech-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Grant> .
+<http://tsb.swirrl.com/id/grant/730001/aeristech-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Grant for Aeristech Limited, project: Hybrid Turbocharger" .
+<http://tsb.swirrl.com/id/grant/730001/aeristech-limited> <http://tsb.swirrl.com/def/paidTo> <http://tsb.swirrl.com/id/organization/aeristech-limited> .
+<http://tsb.swirrl.com/id/grant/730001/aeristech-limited> <http://tsb.swirrl.com/def/supports> <http://tsb.swirrl.com/id/project/730001> .
+<http://tsb.swirrl.com/id/project/730002> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Project> .
+<http://tsb.swirrl.com/id/project/730002> <http://www.w3.org/2000/01/rdf-schema#label> "Rasberry Tunnel Rig" .
+<http://tsb.swirrl.com/id/project/730002> <http://tsb.swirrl.com/def/hasParticipant> <http://tsb.swirrl.com/id/organization/pattenden-machinery-limited> .
+<http://tsb.swirrl.com/id/project/730002> <http://tsb.swirrl.com/def/hasLeader> <http://tsb.swirrl.com/id/organization/pattenden-machinery-limited> .
+<http://tsb.swirrl.com/id/project/730002> <http://tsb.swirrl.com/def/supportedBy> <http://tsb.swirrl.com/id/grant/730002/pattenden-machinery-limited> .
+<http://tsb.swirrl.com/id/organization/pattenden-machinery-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Organization> .
+<http://tsb.swirrl.com/id/organization/pattenden-machinery-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Pattenden Machinery Limited" .
+<http://tsb.swirrl.com/id/organization/pattenden-machinery-limited> <http://tsb.swirrl.com/def/participatesIn> <http://tsb.swirrl.com/id/project/730002> .
+<http://tsb.swirrl.com/id/organization/pattenden-machinery-limited> <http://tsb.swirrl.com/def/isLeaderOf> <http://tsb.swirrl.com/id/project/730002> .
+<http://tsb.swirrl.com/id/grant/730002/pattenden-machinery-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Grant> .
+<http://tsb.swirrl.com/id/grant/730002/pattenden-machinery-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Grant for Pattenden Machinery Limited, project: Rasberry Tunnel Rig" .
+<http://tsb.swirrl.com/id/grant/730002/pattenden-machinery-limited> <http://tsb.swirrl.com/def/paidTo> <http://tsb.swirrl.com/id/organization/pattenden-machinery-limited> .
+<http://tsb.swirrl.com/id/grant/730002/pattenden-machinery-limited> <http://tsb.swirrl.com/def/supports> <http://tsb.swirrl.com/id/project/730002> .
+<http://tsb.swirrl.com/id/project/730003> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Project> .
+<http://tsb.swirrl.com/id/project/730003> <http://www.w3.org/2000/01/rdf-schema#label> "Project VISION" .
+<http://tsb.swirrl.com/id/project/730003> <http://tsb.swirrl.com/def/hasParticipant> <http://tsb.swirrl.com/id/organization/proteus-software-limited> .
+<http://tsb.swirrl.com/id/project/730003> <http://tsb.swirrl.com/def/hasLeader> <http://tsb.swirrl.com/id/organization/proteus-software-limited> .
+<http://tsb.swirrl.com/id/project/730003> <http://tsb.swirrl.com/def/supportedBy> <http://tsb.swirrl.com/id/grant/730003/proteus-software-limited> .
+<http://tsb.swirrl.com/id/organization/proteus-software-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Organization> .
+<http://tsb.swirrl.com/id/organization/proteus-software-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Proteus Software Limited" .
+<http://tsb.swirrl.com/id/organization/proteus-software-limited> <http://tsb.swirrl.com/def/participatesIn> <http://tsb.swirrl.com/id/project/730003> .
+<http://tsb.swirrl.com/id/organization/proteus-software-limited> <http://tsb.swirrl.com/def/isLeaderOf> <http://tsb.swirrl.com/id/project/730003> .
+<http://tsb.swirrl.com/id/grant/730003/proteus-software-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Grant> .
+<http://tsb.swirrl.com/id/grant/730003/proteus-software-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Grant for Proteus Software Limited, project: Project VISION" .
+<http://tsb.swirrl.com/id/grant/730003/proteus-software-limited> <http://tsb.swirrl.com/def/paidTo> <http://tsb.swirrl.com/id/organization/proteus-software-limited> .
+<http://tsb.swirrl.com/id/grant/730003/proteus-software-limited> <http://tsb.swirrl.com/def/supports> <http://tsb.swirrl.com/id/project/730003> .
+<http://tsb.swirrl.com/id/project/730004> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Project> .
+<http://tsb.swirrl.com/id/project/730004> <http://www.w3.org/2000/01/rdf-schema#label> "Honey Bee Swarm Alarm" .
+<http://tsb.swirrl.com/id/project/730004> <http://tsb.swirrl.com/def/hasParticipant> <http://tsb.swirrl.com/id/organization/arnia-limited> .
+<http://tsb.swirrl.com/id/project/730004> <http://tsb.swirrl.com/def/hasLeader> <http://tsb.swirrl.com/id/organization/arnia-limited> .
+<http://tsb.swirrl.com/id/project/730004> <http://tsb.swirrl.com/def/supportedBy> <http://tsb.swirrl.com/id/grant/730004/arnia-limited> .
+<http://tsb.swirrl.com/id/organization/arnia-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Organization> .
+<http://tsb.swirrl.com/id/organization/arnia-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Arnia Limited" .
+<http://tsb.swirrl.com/id/organization/arnia-limited> <http://tsb.swirrl.com/def/participatesIn> <http://tsb.swirrl.com/id/project/730004> .
+<http://tsb.swirrl.com/id/organization/arnia-limited> <http://tsb.swirrl.com/def/isLeaderOf> <http://tsb.swirrl.com/id/project/730004> .
+<http://tsb.swirrl.com/id/grant/730004/arnia-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Grant> .
+<http://tsb.swirrl.com/id/grant/730004/arnia-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Grant for Arnia Limited, project: Honey Bee Swarm Alarm" .
+<http://tsb.swirrl.com/id/grant/730004/arnia-limited> <http://tsb.swirrl.com/def/paidTo> <http://tsb.swirrl.com/id/organization/arnia-limited> .
+<http://tsb.swirrl.com/id/grant/730004/arnia-limited> <http://tsb.swirrl.com/def/supports> <http://tsb.swirrl.com/id/project/730004> .
+<http://tsb.swirrl.com/id/project/730005> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Project> .
+<http://tsb.swirrl.com/id/project/730005> <http://www.w3.org/2000/01/rdf-schema#label> "Negative Chromatography Technology for Cost Effective manufacturing of Antibody Biopharmaceuticals" .
+<http://tsb.swirrl.com/id/project/730005> <http://tsb.swirrl.com/def/hasParticipant> <http://tsb.swirrl.com/id/organization/biotoolomics-limited> .
+<http://tsb.swirrl.com/id/project/730005> <http://tsb.swirrl.com/def/hasLeader> <http://tsb.swirrl.com/id/organization/biotoolomics-limited> .
+<http://tsb.swirrl.com/id/project/730005> <http://tsb.swirrl.com/def/supportedBy> <http://tsb.swirrl.com/id/grant/730005/biotoolomics-limited> .
+<http://tsb.swirrl.com/id/organization/biotoolomics-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Organization> .
+<http://tsb.swirrl.com/id/organization/biotoolomics-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Biotoolomics Limited" .
+<http://tsb.swirrl.com/id/organization/biotoolomics-limited> <http://tsb.swirrl.com/def/participatesIn> <http://tsb.swirrl.com/id/project/730005> .
+<http://tsb.swirrl.com/id/organization/biotoolomics-limited> <http://tsb.swirrl.com/def/isLeaderOf> <http://tsb.swirrl.com/id/project/730005> .
+<http://tsb.swirrl.com/id/grant/730005/biotoolomics-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Grant> .
+<http://tsb.swirrl.com/id/grant/730005/biotoolomics-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Grant for Biotoolomics Limited, project: Negative Chromatography Technology for Cost Effective manufacturing of Antibody Biopharmaceuticals" .
+<http://tsb.swirrl.com/id/grant/730005/biotoolomics-limited> <http://tsb.swirrl.com/def/paidTo> <http://tsb.swirrl.com/id/organization/biotoolomics-limited> .
+<http://tsb.swirrl.com/id/grant/730005/biotoolomics-limited> <http://tsb.swirrl.com/def/supports> <http://tsb.swirrl.com/id/project/730005> .
+<http://tsb.swirrl.com/id/project/730006> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Project> .
+<http://tsb.swirrl.com/id/project/730006> <http://www.w3.org/2000/01/rdf-schema#label> "Ultra low-power wireless sensor network module" .
+<http://tsb.swirrl.com/id/project/730006> <http://tsb.swirrl.com/def/hasParticipant> <http://tsb.swirrl.com/id/organization/clusterstack-technologies-limited> .
+<http://tsb.swirrl.com/id/project/730006> <http://tsb.swirrl.com/def/hasLeader> <http://tsb.swirrl.com/id/organization/clusterstack-technologies-limited> .
+<http://tsb.swirrl.com/id/project/730006> <http://tsb.swirrl.com/def/supportedBy> <http://tsb.swirrl.com/id/grant/730006/clusterstack-technologies-limited> .
+<http://tsb.swirrl.com/id/organization/clusterstack-technologies-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Organization> .
+<http://tsb.swirrl.com/id/organization/clusterstack-technologies-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Clusterstack Technologies Limited" .
+<http://tsb.swirrl.com/id/organization/clusterstack-technologies-limited> <http://tsb.swirrl.com/def/participatesIn> <http://tsb.swirrl.com/id/project/730006> .
+<http://tsb.swirrl.com/id/organization/clusterstack-technologies-limited> <http://tsb.swirrl.com/def/isLeaderOf> <http://tsb.swirrl.com/id/project/730006> .
+<http://tsb.swirrl.com/id/grant/730006/clusterstack-technologies-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Grant> .
+<http://tsb.swirrl.com/id/grant/730006/clusterstack-technologies-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Grant for Clusterstack Technologies Limited, project: Ultra low-power wireless sensor network module" .
+<http://tsb.swirrl.com/id/grant/730006/clusterstack-technologies-limited> <http://tsb.swirrl.com/def/paidTo> <http://tsb.swirrl.com/id/organization/clusterstack-technologies-limited> .
+<http://tsb.swirrl.com/id/grant/730006/clusterstack-technologies-limited> <http://tsb.swirrl.com/def/supports> <http://tsb.swirrl.com/id/project/730006> .
+<http://tsb.swirrl.com/id/project/730007> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Project> .
+<http://tsb.swirrl.com/id/project/730007> <http://www.w3.org/2000/01/rdf-schema#label> "Platform for semantic web and system engineering applications" .
+<http://tsb.swirrl.com/id/project/730007> <http://tsb.swirrl.com/def/hasParticipant> <http://tsb.swirrl.com/id/organization/daista-software-limited> .
+<http://tsb.swirrl.com/id/project/730007> <http://tsb.swirrl.com/def/hasLeader> <http://tsb.swirrl.com/id/organization/daista-software-limited> .
+<http://tsb.swirrl.com/id/project/730007> <http://tsb.swirrl.com/def/supportedBy> <http://tsb.swirrl.com/id/grant/730007/daista-software-limited> .
+<http://tsb.swirrl.com/id/organization/daista-software-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Organization> .
+<http://tsb.swirrl.com/id/organization/daista-software-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Daista Software Limited" .
+<http://tsb.swirrl.com/id/organization/daista-software-limited> <http://tsb.swirrl.com/def/participatesIn> <http://tsb.swirrl.com/id/project/730007> .
+<http://tsb.swirrl.com/id/organization/daista-software-limited> <http://tsb.swirrl.com/def/isLeaderOf> <http://tsb.swirrl.com/id/project/730007> .
+<http://tsb.swirrl.com/id/grant/730007/daista-software-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Grant> .
+<http://tsb.swirrl.com/id/grant/730007/daista-software-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Grant for Daista Software Limited, project: Platform for semantic web and system engineering applications" .
+<http://tsb.swirrl.com/id/grant/730007/daista-software-limited> <http://tsb.swirrl.com/def/paidTo> <http://tsb.swirrl.com/id/organization/daista-software-limited> .
+<http://tsb.swirrl.com/id/grant/730007/daista-software-limited> <http://tsb.swirrl.com/def/supports> <http://tsb.swirrl.com/id/project/730007> .
+<http://tsb.swirrl.com/id/project/730008> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Project> .
+<http://tsb.swirrl.com/id/project/730008> <http://www.w3.org/2000/01/rdf-schema#label> "PES Development Project" .
+<http://tsb.swirrl.com/id/project/730008> <http://tsb.swirrl.com/def/hasParticipant> <http://tsb.swirrl.com/id/organization/oxford-medical-diagnostics-limited> .
+<http://tsb.swirrl.com/id/project/730008> <http://tsb.swirrl.com/def/hasLeader> <http://tsb.swirrl.com/id/organization/oxford-medical-diagnostics-limited> .
+<http://tsb.swirrl.com/id/project/730008> <http://tsb.swirrl.com/def/supportedBy> <http://tsb.swirrl.com/id/grant/730008/oxford-medical-diagnostics-limited> .
+<http://tsb.swirrl.com/id/organization/oxford-medical-diagnostics-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Organization> .
+<http://tsb.swirrl.com/id/organization/oxford-medical-diagnostics-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Oxford Medical Diagnostics Limited" .
+<http://tsb.swirrl.com/id/organization/oxford-medical-diagnostics-limited> <http://tsb.swirrl.com/def/participatesIn> <http://tsb.swirrl.com/id/project/730008> .
+<http://tsb.swirrl.com/id/organization/oxford-medical-diagnostics-limited> <http://tsb.swirrl.com/def/isLeaderOf> <http://tsb.swirrl.com/id/project/730008> .
+<http://tsb.swirrl.com/id/grant/730008/oxford-medical-diagnostics-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Grant> .
+<http://tsb.swirrl.com/id/grant/730008/oxford-medical-diagnostics-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Grant for Oxford Medical Diagnostics Limited, project: PES Development Project" .
+<http://tsb.swirrl.com/id/grant/730008/oxford-medical-diagnostics-limited> <http://tsb.swirrl.com/def/paidTo> <http://tsb.swirrl.com/id/organization/oxford-medical-diagnostics-limited> .
+<http://tsb.swirrl.com/id/grant/730008/oxford-medical-diagnostics-limited> <http://tsb.swirrl.com/def/supports> <http://tsb.swirrl.com/id/project/730008> .
+<http://tsb.swirrl.com/id/project/730009> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Project> .
+<http://tsb.swirrl.com/id/project/730009> <http://www.w3.org/2000/01/rdf-schema#label> "Development of a skin explant assay as a unique tool for the biotechnology and pharmaceutical industry" .
+<http://tsb.swirrl.com/id/project/730009> <http://tsb.swirrl.com/def/hasParticipant> <http://tsb.swirrl.com/id/organization/alcyomics-limited> .
+<http://tsb.swirrl.com/id/project/730009> <http://tsb.swirrl.com/def/hasLeader> <http://tsb.swirrl.com/id/organization/alcyomics-limited> .
+<http://tsb.swirrl.com/id/project/730009> <http://tsb.swirrl.com/def/supportedBy> <http://tsb.swirrl.com/id/grant/730009/alcyomics-limited> .
+<http://tsb.swirrl.com/id/organization/alcyomics-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Organization> .
+<http://tsb.swirrl.com/id/organization/alcyomics-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Alcyomics Limited" .
+<http://tsb.swirrl.com/id/organization/alcyomics-limited> <http://tsb.swirrl.com/def/participatesIn> <http://tsb.swirrl.com/id/project/730009> .
+<http://tsb.swirrl.com/id/organization/alcyomics-limited> <http://tsb.swirrl.com/def/isLeaderOf> <http://tsb.swirrl.com/id/project/730009> .
+<http://tsb.swirrl.com/id/grant/730009/alcyomics-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Grant> .
+<http://tsb.swirrl.com/id/grant/730009/alcyomics-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Grant for Alcyomics Limited, project: Development of a skin explant assay as a unique tool for the biotechnology and pharmaceutical industry" .
+<http://tsb.swirrl.com/id/grant/730009/alcyomics-limited> <http://tsb.swirrl.com/def/paidTo> <http://tsb.swirrl.com/id/organization/alcyomics-limited> .
+<http://tsb.swirrl.com/id/grant/730009/alcyomics-limited> <http://tsb.swirrl.com/def/supports> <http://tsb.swirrl.com/id/project/730009> .
+<http://tsb.swirrl.com/id/project/730010> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Project> .
+<http://tsb.swirrl.com/id/project/730010> <http://www.w3.org/2000/01/rdf-schema#label> "Dermal Construct" .
+<http://tsb.swirrl.com/id/project/730010> <http://tsb.swirrl.com/def/hasParticipant> <http://tsb.swirrl.com/id/organization/clarinnisbio-limited> .
+<http://tsb.swirrl.com/id/project/730010> <http://tsb.swirrl.com/def/hasLeader> <http://tsb.swirrl.com/id/organization/clarinnisbio-limited> .
+<http://tsb.swirrl.com/id/project/730010> <http://tsb.swirrl.com/def/supportedBy> <http://tsb.swirrl.com/id/grant/730010/clarinnisbio-limited> .
+<http://tsb.swirrl.com/id/organization/clarinnisbio-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Organization> .
+<http://tsb.swirrl.com/id/organization/clarinnisbio-limited> <http://www.w3.org/2000/01/rdf-schema#label> "ClarinnisBio Limited" .
+<http://tsb.swirrl.com/id/organization/clarinnisbio-limited> <http://tsb.swirrl.com/def/participatesIn> <http://tsb.swirrl.com/id/project/730010> .
+<http://tsb.swirrl.com/id/organization/clarinnisbio-limited> <http://tsb.swirrl.com/def/isLeaderOf> <http://tsb.swirrl.com/id/project/730010> .
+<http://tsb.swirrl.com/id/grant/730010/clarinnisbio-limited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://tsb.swirrl.com/def/Grant> .
+<http://tsb.swirrl.com/id/grant/730010/clarinnisbio-limited> <http://www.w3.org/2000/01/rdf-schema#label> "Grant for ClarinnisBio Limited, project: Dermal Construct" .
+<http://tsb.swirrl.com/id/grant/730010/clarinnisbio-limited> <http://tsb.swirrl.com/def/paidTo> <http://tsb.swirrl.com/id/organization/clarinnisbio-limited> .
+<http://tsb.swirrl.com/id/grant/730010/clarinnisbio-limited> <http://tsb.swirrl.com/def/supports> <http://tsb.swirrl.com/id/project/730010> .

@@ -74,4 +74,6 @@ TsbProjectData::Application.configure do
     config.tripod_cache_store = Tripod::CacheStores::MemcachedCacheStore.new('localhost:11211') #nil
     config.sparql_timeout_seconds = 7
   end
+
+  TsbProjectData::DATA_ENDPOIN = 'http://sparql.tsb.swirrl.com/tsb/data'
 end

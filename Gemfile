@@ -4,7 +4,7 @@ gem 'rails', '3.2.13'
 
 gem 'tripod'
 
-gem 'publish_my_data', '1.0.0'
+gem 'publish_my_data', '1.0.1'
 #uncomment to use local pmd (and comment out line above)
 #gem 'publish_my_data', :path => '../publish_my_data'
 

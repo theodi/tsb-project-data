@@ -75,5 +75,5 @@ TsbProjectData::Application.configure do
     config.sparql_timeout_seconds = 7
   end
 
-  TsbProjectData::DATA_ENDPOIN = 'http://sparql.tsb.swirrl.com/tsb/data'
+  TsbProjectData::DATA_ENDPOINT = 'http://sparql.tsb.swirrl.com/tsb/data'
 end

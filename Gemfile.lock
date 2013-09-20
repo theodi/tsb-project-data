@@ -162,11 +162,19 @@ GEM
       json (~> 1.4)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    roo (1.12.2)
+      nokogiri
+      rubyzip
+      spreadsheet (> 0.6.4)
+    ruby-ole (1.2.11.7)
+    rubyzip (1.0.0)
     sass (3.2.10)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    spreadsheet (0.9.0)
+      ruby-ole (>= 1.0)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -201,6 +209,7 @@ DEPENDENCIES
   capistrano
   publish_my_data (= 1.0.1)
   rails (= 3.2.13)
+  roo
   sentry-raven!
   tripod
   yui-compressor

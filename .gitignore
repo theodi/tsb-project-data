@@ -4,6 +4,9 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile ~/.gitignore_global
 
+# DS Store
+.DS_Store
+
 # Ignore bundler config
 /.bundle
 
@@ -18,3 +21,6 @@
 config/deploy.rb
 config/deploy/*.rb
 Capfile
+
+# ouput data
+/data/output-data

@@ -1,3 +1,5 @@
+# vocabularies for use in this project.
+# Note: PublishMyData.local_domain is set in config/environments/development.rb etc.
 module Vocabulary
   FOAF = RDF::Vocabulary.new("http://xmlns.com/foaf/0.1/")
   POST  = RDF::Vocabulary.new("http://data.ordnancesurvey.co.uk/id/postcodeunit/")

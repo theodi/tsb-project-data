@@ -28,6 +28,8 @@ module Import
 
       # write out output
       File.open(OUTPUT_FILE,'w') {|f| f << graph.dump(:ntriples)}
+
+      puts "created #{OUTPUT_FILE}"
     end
 
   end

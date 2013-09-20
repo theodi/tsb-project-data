@@ -21,6 +21,3 @@
 config/deploy.rb
 config/deploy/*.rb
 Capfile
-
-# ouput data
-/data/output-data

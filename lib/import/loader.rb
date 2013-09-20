@@ -8,7 +8,7 @@ module Import
     # vocabularies now defined in config/initializers, in the Vocabulary namespace
 
     INPUT_FILE = File.join(Rails.root, 'data', 'input-data', 'datatest.xlsx')
-    OUTPUT_FILE = File.join(Rails.root, 'data', 'input-data', 'datatest.nt')
+    OUTPUT_FILE = File.join(Rails.root, 'data', 'datasets', 'projects', 'data.nt')
 
     def self.perform_load
 

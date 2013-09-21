@@ -2,7 +2,7 @@ namespace :db do
 
   desc 'replace dataset metadata'
   task replace_dataset_metadata: :environment do
-    puts url = "#{TsbProjectData::DATA_ENDPOINT}?graph=http://#{PublishMyData.local_domain}/graph/projects/metadata"
+    puts url = "#{TsbProjectData::DATA_ENDPOINT}?graph=#{TsbProjectData::DATA_GRAPH}/metadata"
     puts payload = File.read(File.join(Rails.root, 'data', 'datasets', 'projects', 'metadata.ttl'))
 
     response = RestClient::Request.execute(
@@ -17,7 +17,7 @@ namespace :db do
 
   desc 'replace dataset data'
   task replace_dataset_data: :environment do
-    puts url = "#{TsbProjectData::DATA_ENDPOINT}?graph=http://#{PublishMyData.local_domain}/graph/projects"
+    puts url = "#{TsbProjectData::DATA_ENDPOINT}?graph=#{TsbProjectData::DATA_GRAPH}"
 
     RestClient::Request.execute(
       :method => :put,

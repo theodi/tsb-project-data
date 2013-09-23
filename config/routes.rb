@@ -16,6 +16,7 @@ TsbProjectData::Application.routes.draw do
 
   resources :projects, only: [:index]
   match "/id/project/:slug", to: "projects#show"
+  root to: "home#index"
 
   # MOUNT PMD
   ##########

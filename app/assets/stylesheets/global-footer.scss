@@ -1,0 +1,12 @@
+// uncomment for sticky footer
+//
+// body > footer,
+// #push {
+//   height: $main-footer-height;
+// }
+
+body > footer {
+  padding-top:20px;
+  background-color: $main-footer-bg-color;
+  color: $main-footer-color;
+}

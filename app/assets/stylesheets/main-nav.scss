@@ -1,0 +1,13 @@
+main > nav {
+  @extend .navbar;
+  @extend .navbar-default;
+
+  background: none;
+  border: none;
+
+  ul {
+    @extend .nav;
+    @extend .navbar-nav;
+    @extend .navbar-right;
+  }
+}

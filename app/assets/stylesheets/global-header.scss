@@ -1,0 +1,43 @@
+#wrap > header {
+
+  @extend .navbar;
+  @extend .navbar-static-top;
+
+  background-color: $main-header-bg-color;
+  color: $main-header-color;
+
+  nav {
+
+    @extend .container;
+
+    a.home-link {
+      @extend .navbar-brand;
+      color: white;
+      text-shadow: none;
+      &:hover {
+        color: white;
+        text-shadow: none;
+      }
+    }
+
+    form {
+      @extend .navbar-form;
+      @extend .navbar-left;
+
+      input[type="text"] {
+        @extend .form-control;
+      }
+
+      input[type="submit"] {
+        @extend .btn;
+        @extend .btn-default;
+      }
+    }
+
+    .branding {
+      @extend .navbar-right;
+      // TODO: change size to match logo height;
+      @include navbar-vertical-align(19px);
+    }
+  }
+}

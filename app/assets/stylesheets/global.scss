@@ -1,0 +1,32 @@
+html, body {
+  overflow-x: hidden;
+  height: 100%;
+  background-color: $main-footer-bg-color;
+}
+
+#wrap {
+
+  // uncomment for sticky footer
+  //
+  // min-height: 100%;
+  // height: auto !important;
+  // height: 100%;
+  // /* Negative indent footer by it's height */
+  // margin: 0 auto -60px;
+
+  // set the bg colour to white;
+  background-color: #fff;
+  padding-bottom: 60px;
+
+  main {
+    @extend .container;
+  }
+}
+
+h1 {
+  margin: 0 -9999px;
+  padding: 20px 9999px;
+  background: $heading-color;
+  color: white;
+  margin-bottom: 20px;
+}

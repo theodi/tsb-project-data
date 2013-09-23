@@ -1,0 +1,12 @@
+$accent-color: purple;
+
+$main-header-bg-color: $accent-color;
+$main-header-color: white;
+
+$main-footer-bg-color: black;
+$main-footer-color: #eee;
+
+$heading-color: lighten($accent-color, 10%);
+
+// uncomment for sticky footer
+// $main-footer-height: 60px;

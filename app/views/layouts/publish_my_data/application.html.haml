@@ -6,13 +6,50 @@
     = yield :page_description
     = javascript_include_tag :application
     = stylesheet_link_tag :application
+
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
   %body
     /[if lt IE 8]
       = render 'publish_my_data/shared/browser_warning'
-    %header
-      %nav
-        = render 'publish_my_data/shared/logo'
-        = yield :crumbs
-    %main= yield
-    = render 'publish_my_data/shared/footer'
+
+    -# for sticky footer
+    #wrap
+      %header
+        %nav
+          .navbar-header
+            %a.home-link{href:'/'}
+              Project Data
+
+          %form
+            .form-group
+              = text_field_tag :search, nil, placeholder: 'Search'
+            = submit_tag :search
+
+          .branding
+            [TSB LOGO]
+
+          -# probably just leave crumbs off - there's only 1 dataset
+          =# yield :crumbs
+
+      %main
+        %nav
+          %ul
+            %li
+              %a About
+            %li
+              %a Browse
+            %li
+              %a Linked Data (Advanced)
+
+        = yield
+
+        / uncomment for sticky footer
+        / #push
+
+    -# note: intentionally not in #wrap
+    %footer
+      .container
+        [Footer Here]
+
+
     = render 'publish_my_data/shared/google_analytics'

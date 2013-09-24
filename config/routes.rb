@@ -15,7 +15,6 @@ TsbProjectData::Application.routes.draw do
   ##########
 
   resources :projects, only: [:index]
-  match "/id/project/:slug", to: "projects#show"
   match "/about", to: "home#about"
   root to: "home#index"
 

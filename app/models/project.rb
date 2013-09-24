@@ -1,6 +1,6 @@
 class Project
-  include Tripod::Resource
-  include PublishMyData::BasicFeatures
+
+  include TsbResource
 
   graph_uri TsbProjectData::DATA_GRAPH
   rdf_type Vocabulary::TSBDEF.Project
@@ -17,6 +17,7 @@ class Project
     "http://#{PublishMyData.local_domain}/id/#{slug}"
   end
 
-
-
+  def dataset
+    PublishMyData::Dataset.find(PublishMyData::Dataset.uri_from_data_graph_uri(self.graph_uri)) rescue nil
+  end
 end

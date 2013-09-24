@@ -1,0 +1,28 @@
+main > nav {
+  @extend .container;
+  @extend .navbar;
+  @extend .navbar-default;
+
+  background: none;
+  border: none;
+  margin-bottom:0;
+
+  ul {
+    @extend .nav;
+    @extend .navbar-nav;
+    @extend .navbar-right;
+
+    li {
+      a {
+        padding: 20px;
+        font-size: 18px;
+        color: $gray-dark;
+        &:hover {
+          color: $accent-color;
+        }
+      }
+    }
+
+  }
+
+}

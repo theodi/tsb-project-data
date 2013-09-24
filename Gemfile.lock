@@ -9,6 +9,22 @@ GIT
       multi_json (~> 1.0)
       uuidtools
 
+PATH
+  remote: ../publish_my_data
+  specs:
+    publish_my_data (1.0.1)
+      aws-sdk
+      entypo-rails
+      haml-rails
+      jquery-rails
+      kaminari
+      rails (~> 3.2)
+      rails_autolink
+      rdf (~> 1.0)
+      rdiscount
+      sass-rails
+      tripod (~> 0.7.22)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -106,18 +122,6 @@ GEM
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     polyglot (0.3.3)
-    publish_my_data (1.0.1)
-      aws-sdk
-      entypo-rails
-      haml-rails
-      jquery-rails
-      kaminari
-      rails (~> 3.2)
-      rails_autolink
-      rdf (~> 1.0)
-      rdiscount
-      sass-rails
-      tripod (~> 0.7.22)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -207,7 +211,7 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano
-  publish_my_data (= 1.0.1)
+  publish_my_data!
   rails (= 3.2.13)
   roo
   sentry-raven!

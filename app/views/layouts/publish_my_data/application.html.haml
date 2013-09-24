@@ -6,13 +6,66 @@
     = yield :page_description
     = javascript_include_tag :application
     = stylesheet_link_tag :application
+
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
   %body
     /[if lt IE 8]
       = render 'publish_my_data/shared/browser_warning'
-    %header
-      %nav
-        = render 'publish_my_data/shared/logo'
-        = yield :crumbs
-    %main= yield
-    = render 'publish_my_data/shared/footer'
+
+    -# for sticky footer
+    #wrap
+      %header
+        %nav
+          .navbar-header
+            %a.home-link{href:'/'}
+              TSB Projects Data
+
+          %form
+            .form-group
+              = text_field_tag :search, nil, placeholder: 'Search Projects'
+            = submit_tag :search
+
+          .branding
+            = image_tag "tsb-logo.png", alt: "TSB logo"
+
+          -# probably just leave crumbs off - there's only 1 dataset
+          =# yield :crumbs
+
+      %main
+        %nav
+          %ul
+            %li
+              %a{href:'/about'} About
+            %li
+              %a{href:'/projects'} Browse
+            %li
+              %a{href:"/data/#{TsbProjectData::DATASET_SLUG}"} Linked Data (Advanced)
+
+        - if content_for? :header
+          %header
+            .header-content
+              = yield :header
+
+        .container
+          = yield
+
+        - if content_for? :formats
+          %footer.formats
+            .container
+              = yield :formats
+
+        - if content_for? :advanced
+          %footer.advanced
+            .container
+              = yield :advanced
+
+        / uncomment for sticky footer
+        / #push
+
+    -# note: intentionally not in #wrap
+    %footer
+      .container
+        [Footer Here]
+
+
     = render 'publish_my_data/shared/google_analytics'

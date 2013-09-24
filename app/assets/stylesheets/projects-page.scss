@@ -1,0 +1,12 @@
+#projects-page {
+  @include make-row();
+
+  #facets {
+    @include make-md-column(3);
+  }
+
+  #search {
+    @include make-md-column(9);
+  }
+
+}

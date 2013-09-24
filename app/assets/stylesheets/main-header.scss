@@ -1,0 +1,19 @@
+// header-bar inside <main>
+main > header {
+  margin-top:-10px;
+
+  background: $header-color;
+  color: #fff;
+  .header-content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    @extend .container;
+  }
+  h1 {
+    margin: 0; padding: 0;
+  }
+  h3 {
+    margin: 0; padding: 0;
+  }
+  margin-bottom:20px;
+}

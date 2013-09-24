@@ -1,0 +1,78 @@
+// advanced LD details
+main {
+
+  footer.advanced {
+    margin-top:20px;
+    background-color: $gray-lighter;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    .minimal {
+      @include make-row();
+
+      div.formats {
+        @include make-md-column(6);
+        span {
+          float:left;
+          padding-right: 5px
+        }
+        ul.formats {
+          @extend .list-inline;
+          margin-bottom:0;
+        }
+      }
+
+      .reveal {
+        @include make-md-column(6);
+        a {
+          float:right;
+        }
+      }
+    }
+
+    .full {
+       display: none;
+       padding-top: 10px;
+       padding-bottom: 20px;
+
+       a.button {
+        @extend .btn;
+        @extend .btn-primary;
+      }
+
+      code {
+        @include hardwrap();
+      }
+
+      table {
+        margin-bottom:10px;
+        width: 100%;
+        border: 1px solid $gray-medium-light;
+        background: #fff;
+
+        thead {
+          tr, tr:last-child {
+             border-bottom: 1px solid $gray-medium-light;
+          }
+        }
+        tr {
+          border-bottom: 1px solid $gray-medium-light;
+          &:last-child {
+            border-bottom:0;
+          }
+          th, td {
+            @include hardwrap();
+            padding: 5px 10px;
+            border-right: 1px solid $gray-medium-light;
+
+            &:last-child {
+              @include constrain();
+              border-right:none;
+            }
+          }
+        }
+      }
+    }
+
+  }
+}

@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+// override some bootstrap defaults
+$icon-font-path: "/assets/bootstrap/";
+$navbar-height: 70px;
+
+@import "bootstrap/bootstrap"; // bootstrap3 from pmd
+
+@import "slick_grid/slick_grid";
+@import "slick_grid/slick_grid_default_theme";
+
+// this-app specific
+@import "variables";
+@import "mixins";
+@import "global";
+@import "global-header";
+@import "global-footer";
+
+@import "main-header"; // nav inside main element
+@import "main-nav"; // header inside main element
+
+@import "advanced-footer"; // advanced LD details
+
+// pages
+@import "projects-page";
+@import "error-page";

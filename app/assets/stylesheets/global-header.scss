@@ -1,0 +1,57 @@
+#wrap > header {
+
+  @extend .navbar;
+  @extend .navbar-static-top;
+
+  background-color: $global-header-bg-color;
+  color: $global-header-color;
+
+  margin-bottom:0;
+
+  nav {
+
+    @extend .container;
+
+    a.home-link {
+      @extend .navbar-brand;
+      font-size: 32px;
+      color: white;
+      text-shadow: none;
+      &:hover {
+        color: white;
+        text-shadow: none;
+      }
+    }
+
+    .label {
+      padding-top: 10px;
+      background-color: $accent-color;
+      position: relative;
+      left: 200px;
+    }
+
+    form {
+      @extend .visible-md;
+      @extend .visible-lg;
+
+      @extend .navbar-form;
+      @extend .navbar-left;
+
+      input[type="text"] {
+        @extend .form-control;
+      }
+
+      input[type="submit"] {
+        @extend .btn;
+        @extend .btn-default;
+      }
+      margin-right: 10px;
+    }
+
+    .branding {
+      @extend .navbar-right;
+      // TODO: change size to match logo height;
+      @include navbar-vertical-align(48px);
+    }
+  }
+}

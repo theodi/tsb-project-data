@@ -70,10 +70,14 @@ TsbProjectData::Application.configure do
 
   PublishMyData.configure do |config|
     config.sparql_endpoint = 'http://sparql.tsb.swirrl.com/tsb/sparql'
-    config.local_domain = 'tsb.swirrl.com'
+    config.local_domain = 'tsb-projects.labs.theodi.org'
     config.tripod_cache_store = Tripod::CacheStores::MemcachedCacheStore.new('localhost:11211') #nil
     config.sparql_timeout_seconds = 7
   end
 
   TsbProjectData::DATA_ENDPOINT = 'http://sparql.tsb.swirrl.com/tsb/data'
+
+  Tripod.configure do |config|
+    config.update_endpoint = 'http://sparql.tsb.swirrl.com/tsb/update'
+  end
 end

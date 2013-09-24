@@ -16,7 +16,8 @@ PublishMyData::ResourcesController.class_eval do
 
       # extras for this project
       # TODO: allow this to be configured in PMD?
-      Project => 'projects/show'
+      Project => 'projects/show',
+      Organization => 'organizations/show'
     }[resource.class]
   end
 end

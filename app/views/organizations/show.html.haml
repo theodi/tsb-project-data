@@ -1,0 +1,10 @@
+- content_for :header do
+  %h3
+    Organisation
+  %h1
+    = organization.label
+
+- content_for :advanced do
+  = render 'application/advanced_resource_details', resource: organization
+
+[Human-friendly Org dtls here]

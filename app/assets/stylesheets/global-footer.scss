@@ -2,11 +2,12 @@
 //
 // body > footer,
 // #push {
-//   height: $main-footer-height;
+//   height: $global-footer-height;
 // }
 
 body > footer {
   padding-top:20px;
-  background-color: $main-footer-bg-color;
-  color: $main-footer-color;
+  background-color: $global-footer-bg-color;
+  color: $global-footer-color;
+  margin-top:40px;
 }

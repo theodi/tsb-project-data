@@ -1,5 +1,6 @@
-class Organisation
-  include Tripod::Resource
+class Organization
+
+  include TsbResource
 
   graph_uri TsbProjectData::DATA_GRAPH
   rdf_type Vocabulary::TSBDEF.Organization

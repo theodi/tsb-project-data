@@ -1,7 +1,13 @@
 html, body {
   overflow-x: hidden;
   height: 100%;
-  background-color: $main-footer-bg-color;
+  background-color: $global-footer-bg-color;
+}
+
+
+
+h1 {
+  font-weight: normal;
 }
 
 #wrap {
@@ -16,17 +22,18 @@ html, body {
 
   // set the bg colour to white;
   background-color: #fff;
-  padding-bottom: 60px;
 
   main {
-    @extend .container;
+
   }
 }
 
-h1 {
-  margin: 0 -9999px;
-  padding: 20px 9999px;
-  background: $heading-color;
-  color: white;
-  margin-bottom: 20px;
-}
+// // alternative h1 stripe
+// h1 {
+//   margin: 0 -9999px;
+//   padding: 20px 9999px;
+//   background: $header-color;
+//   color: white;
+//   margin-bottom: 20px;
+// }
+

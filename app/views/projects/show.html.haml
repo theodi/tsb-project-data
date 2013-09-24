@@ -1,4 +1,10 @@
-%h1
-  =project.label
+- content_for :header do
+  %h3
+    Project
+  %h1
+    = project.label
 
-[Project dtls]
+- content_for :advanced do
+  = render 'application/advanced_resource_details', resource: project
+
+[Human-friendly Project dtls here]

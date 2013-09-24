@@ -1,0 +1,46 @@
+%noscript
+  :scss
+    footer.advanced {
+      .reveal a { display:none !important; }
+      .full { display:block !important; }
+    }
+
+.minimal
+  .formats
+    %span Get this #{resource.class.name.humanize.downcase} as:
+    %ul.formats
+      %li= link_to("JSON", show_resource_path(:uri => resource.uri, :format => 'json'))
+      %li= link_to("RDF/XML", show_resource_path(:uri => resource.uri, :format => 'rdf'))
+      %li= link_to("Turtle", show_resource_path(:uri => resource.uri, :format => 'ttl'))
+      %li= link_to("N-triples", show_resource_path(:uri => resource.uri, :format => 'nt'))
+
+  .reveal
+    %a{href:'#'}
+      Full Linked Data details
+      %span.glyphicon.glyphicon-collapse-down
+
+    %a{href:'#', style:'display:none'}
+      Hide Linked Data details
+      %span.glyphicon.glyphicon-collapse-up
+
+.full
+  %p
+    URI:
+    %code.click-to-select= resource.uri
+
+  %p
+    Data we hold about this resource:
+
+  = render 'publish_my_data/resources/resource_data', resource: resource
+
+  :markdown
+    This resource is in dataset #{link_to resource.dataset.label, dataset_path(resource.dataset)}.
+
+  %a.button(href="/sparql") Run a SPARQL Query
+
+:javascript
+  $('footer.advanced .reveal a').click( function(e) {
+    e.preventDefault();
+    $('footer.advanced .full').toggle();
+    $('footer.advanced .reveal a').toggle();
+  });

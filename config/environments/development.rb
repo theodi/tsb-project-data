@@ -45,4 +45,8 @@ TsbProjectData::Application.configure do
 
   TsbProjectData::DATA_ENDPOINT = 'http://localhost:3030/tsb_project_data_dev/data'
 
+  Tripod.configure do |config|
+    config.update_endpoint = 'http://127.0.0.1:3030/tsb_project_data_dev/update'
+  end
+
 end

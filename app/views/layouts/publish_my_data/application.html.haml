@@ -18,15 +18,15 @@
         %nav
           .navbar-header
             %a.home-link{href:'/'}
-              Project Data
+              Projects Data
+
+          .branding
+            = image_tag "tsb-logo.png", alt: "TSB logo"
 
           %form
             .form-group
-              = text_field_tag :search, nil, placeholder: 'Search'
+              = text_field_tag :search, nil, placeholder: 'Search Projects'
             = submit_tag :search
-
-          .branding
-            [TSB LOGO]
 
           -# probably just leave crumbs off - there's only 1 dataset
           =# yield :crumbs
@@ -35,13 +35,31 @@
         %nav
           %ul
             %li
-              %a About
+              %a{href:'/about'} About
             %li
-              %a Browse
+              %a{href:'/search'} Search
             %li
-              %a Linked Data (Advanced)
+              %a{href:'/projects'} Browse
+            %li
+              %a{href:"/data/#{TsbProjectData::DATASET_SLUG}"} Linked Data (Advanced)
 
-        = yield
+        - if content_for? :header
+          %header
+            .header-content
+              = yield :header
+
+        .container
+          = yield
+
+        - if content_for? :formats
+          %footer.formats
+            .container
+              = yield :formats
+
+        - if content_for? :advanced
+          %footer.advanced
+            .container
+              = yield :advanced
 
         / uncomment for sticky footer
         / #push

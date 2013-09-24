@@ -1,12 +1,14 @@
-$accent-color: purple;
+$accent-color: #7bbfbb;
 
-$main-header-bg-color: $accent-color;
-$main-header-color: white;
+$global-header-bg-color: #6a3f77;
+$global-header-color: white;
 
-$main-footer-bg-color: black;
-$main-footer-color: #eee;
+$global-footer-bg-color: #1b1b1b;;
+$global-footer-color: #eee;
 
-$heading-color: lighten($accent-color, 10%);
+$header-color: $accent-color;
+
+$gray-medium-light: lighten(#000, 80%);
 
 // uncomment for sticky footer
-// $main-footer-height: 60px;
+// $global-footer-height: 60px;

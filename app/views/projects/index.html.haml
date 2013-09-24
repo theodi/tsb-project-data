@@ -1,0 +1,24 @@
+- content_for :header do
+  %h1
+    Projects
+
+- content_for :advanced do
+  [download formats / atom]
+
+#projects-page
+  #facets
+    [facets chooser]
+
+  #search
+    %form
+      [search form]
+
+    #results
+      [ordering controls]
+
+      %ul
+      - @projects.each do |project|
+        %li= link_to((project.label || project.uri), resource_path_from_uri(project.uri) )
+
+      - if pagination_required?(@projects, @pagination_params)
+        = paginate @projects

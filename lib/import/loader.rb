@@ -10,7 +10,7 @@ module Import
     INPUT_FILE = File.join(Rails.root, 'data', 'input-data', 'datatest.xlsx')
     OUTPUT_FILE = File.join(Rails.root, 'data', 'datasets', 'projects', 'data.nt')
 
-    def self.perform_load
+    def self.create_data_file
 
       excel = Roo::Excelx.new(INPUT_FILE)
 

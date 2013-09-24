@@ -10,4 +10,6 @@ Rails app to provide access to information about TSB Projects as Linked Open Dat
 
 #### Running the data loader
 
-* `rails runner 'Import::Loader.perform_load'`
+* Create the data file to load with `rake db:create_data_file`
+* Import it with 'rake db:replace_dataset_data`
+* Create some dataset metadata with 'rake db:replace_dataset_metadata`

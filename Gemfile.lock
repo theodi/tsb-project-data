@@ -106,7 +106,7 @@ GEM
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     polyglot (0.3.3)
-    publish_my_data (1.0.2)
+    publish_my_data (1.0.3)
       aws-sdk
       entypo-rails
       haml-rails
@@ -207,7 +207,7 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano
-  publish_my_data (= 1.0.2)
+  publish_my_data (= 1.0.3)
   rails (= 3.2.13)
   roo
   sentry-raven!

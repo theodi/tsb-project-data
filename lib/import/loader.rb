@@ -17,16 +17,27 @@ module Import
       # take a copy of the header row for easy reference
       headers = excel.row(1)
 
-      graph = RDF::Graph.new
-
+      
+      # hash of all resources - will build it up gradually from spreadsheet then serialize them at the end
+      # the key is the URI of the resource
+      resources = {}
+      
       for i in 2..excel.last_row
         # make a hash of header names to cell contents for this row
         row = {}
         excel.row(i).each_with_index{|item,index| row[headers[index]] = item}
-        row2rdf(graph,row)
+        row2rdf(resources,row)
       end
 
       # write out output
+      graph = RDF::Graph.new
+      # add statements to graph
+      resources.each_value do |resource|
+        resource.repository.each_statement {|s| graph << s}
+      end
+  
+      
+      
       File.open(OUTPUT_FILE,'w') {|f| f << graph.dump(:ntriples)}
 
       puts "created #{OUTPUT_FILE}"

@@ -2,7 +2,9 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem 'tripod', :git => "https://github.com/Swirrl/tripod.git", :branch => 'links'
+#gem 'tripod', :path => '../tripod'
 gem 'roo'
+gem 'tire'
 
 gem 'publish_my_data', '1.0.3'
 #uncomment to use local pmd (and comment out line above)

@@ -12,5 +12,7 @@ module Vocabulary
   OSPC = RDF::Vocabulary.new("http://data.ordnancesurvey.co.uk/id/postcodeunit/")
   OSDEF = RDF::Vocabulary.new("http://data.ordnancesurvey.co.uk/ontology/postcode/")
   DCTERMS = RDF::Vocabulary.new("http://purl.org/dc/terms/")
+  GEO = RDF::Vocabulary.new("http://www.w3.org/2003/01/geo/wgs84_pos#")
+  OSGEO = RDF::Vocabulary.new("http://data.ordnancesurvey.co.uk/ontology/admingeo/")
 end
 

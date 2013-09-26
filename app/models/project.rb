@@ -8,6 +8,9 @@ class Project
   # literals
   field :label, RDF::RDFS.label
   field :description, Vocabulary::DCTERMS.description
+  field :project_number, Vocabulary::TSBDEF.projectNumber
+  field :start_date, Vocabulary::TSBDEF.startDate
+  field :end_date, Vocabulary::TSBDEF.endDate
 
   # links
   linked_to :leader, Vocabulary::TSBDEF.hasLeader, class_name: 'Organization'

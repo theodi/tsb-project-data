@@ -10,6 +10,7 @@ class Organization
 
   # uris
   field :leads_project_uri, Vocabulary::TSBDEF.isLeaderOf, is_uri: true
-  field :participates_in_project_uri, Vocabulary::TSBDEF.isLeaderOf, is_uri: true
+  field :participates_in_project_uri, Vocabulary::TSBDEF.isLeaderOf, is_uri: true, multivalued: true
+
 
 end

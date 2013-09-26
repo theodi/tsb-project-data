@@ -1,4 +1,22 @@
 GIT
+  remote: https://github.com/Swirrl/tripod.git
+  revision: 5b169212cc7821e4f64af93464b44e2a126704fe
+  branch: links
+  specs:
+    tripod (0.7.23)
+      activemodel (~> 3.2)
+      activesupport (~> 3.2)
+      dalli (~> 2.6)
+      equivalent-xml
+      guid
+      json-ld (~> 0.9.1)
+      rdf (~> 1.0)
+      rdf-json
+      rdf-rdfxml
+      rdf-turtle
+      rest-client
+
+GIT
   remote: https://github.com/getsentry/raven-ruby.git
   revision: ead49c8d8a6ff99260827f9267bd3bda33a5993e
   branch: ead49c
@@ -45,7 +63,7 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
-    backports (3.3.3)
+    backports (3.3.4)
     builder (3.0.4)
     capistrano (2.15.5)
       highline
@@ -187,17 +205,6 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tripod (0.7.22)
-      activemodel (~> 3.2)
-      dalli (~> 2.6)
-      equivalent-xml
-      guid
-      json-ld (~> 0.9.1)
-      rdf (~> 1.0)
-      rdf-json
-      rdf-rdfxml
-      rdf-turtle
-      rest-client
     tzinfo (0.3.37)
     uuidtools (2.1.4)
     yui-compressor (0.11.0)
@@ -211,5 +218,5 @@ DEPENDENCIES
   rails (= 3.2.13)
   roo
   sentry-raven!
-  tripod
+  tripod!
   yui-compressor

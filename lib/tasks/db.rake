@@ -40,7 +40,7 @@ namespace :db do
     RestClient::Request.execute(
       :method => :put,
       :url => url,
-      :payload => File.read(File.join(Rails.root, 'data', 'datasets', 'projects', 'data.nt')),
+      :payload => File.read(File.join(Rails.root, 'data', 'datasets', TsbProjectData::DATASET_SLUG, 'data.nt')),
       :headers => {content_type: 'text/plain'},
       :timeout => 300
     )

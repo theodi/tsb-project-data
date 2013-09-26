@@ -8,7 +8,7 @@ module Import
     # vocabularies now defined in config/initializers, in the Vocabulary namespace
 
     INPUT_FILE = File.join(Rails.root, 'data', 'input-data', 'datatest.xlsx')
-    OUTPUT_FILE = File.join(Rails.root, 'data', 'datasets', 'projects', 'data.nt')
+    OUTPUT_FILE = File.join(Rails.root, 'data', 'datasets', 'tsb-projects-data', 'data.nt')
 
     def self.create_data_file
 

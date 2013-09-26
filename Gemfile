@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
-gem 'tripod'
+gem 'tripod', :git => "https://github.com/Swirrl/tripod.git", :branch => 'links'
 gem 'roo'
 
 gem 'publish_my_data', '1.0.3'

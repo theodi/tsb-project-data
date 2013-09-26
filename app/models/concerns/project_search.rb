@@ -21,14 +21,19 @@ module ProjectSearch
     }
   end
 
-  # to bulk load:
+  # to clear the index
   # Project.index.delete
   #
+  # examples of how to import
   # Project.index.import [ Project.first ]
   # Project.index.import Project.all.limit(10).resources.to_a
   #
+  # # force a refresh
   # Project.index.refresh
   #
+  # Project.search "*"
+  #
+  # # some useful docs re facets.
   # http://www.elasticsearch.org/guide/reference/api/search/facets/
   # http://www.elasticsearch.org/guide/reference/api/search/facets/terms-stats-facet/
 

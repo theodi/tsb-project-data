@@ -20,18 +20,36 @@ module Import
 
 
       ##### Organization ####
-      # uri: use urlified name
+      # uri: use company number if it exists.
+      # if no company number, then use urlified name
       org_name = row["ParticipantName"]
       urlified_org_name = urlify(org_name)
-      org_uri = Vocabulary::TSB["organization/#{urlified_org_name}"]
+      org_number = row["CompanyRegNo"]
+      org_slug = nil
+      if org_number
+        org_slug = org_number.to_s
+
+        # normalise the format - add leading zeroes if necessary
+        unless org_slug.starts_with?('RC')
+          while org_slug.length < 8
+            org_slug = "0" + org_slug
+          end
+          
+        end
+      else
+        org_slug = urlified_org_name
+      end
+      puts org_slug
+
+      org_uri = Vocabulary::TSB["organization/#{org_slug}"]
 
       graph << [org_uri, RDF.type, Vocabulary::TSBDEF.Organization]
       graph << [org_uri, RDF::RDFS.label, RDF::Literal.new(org_name)]
 
       # address
       # TODO: check whether any org appears in the spreadsheet with more than one different address.
-      site_uri = Vocabulary::TSB["organization/#{urlified_org_name}/site"]
-      address_uri = Vocabulary::TSB["organization/#{urlified_org_name}/address"]
+      site_uri = Vocabulary::TSB["organization/#{org_slug}/site"]
+      address_uri = Vocabulary::TSB["organization/#{org_slug}/address"]
       graph << [org_uri, Vocabulary::ORG.hasSite, site_uri]
       graph << [site_uri, RDF.type, Vocabulary::ORG.Site]
       graph << [site_uri, RDF::RDFS.label, RDF::Literal.new("Site of #{org_name}")]
@@ -56,7 +74,7 @@ module Import
 
 
       # Grant
-      grant_uri = Vocabulary::TSB["grant/#{proj_num}/#{urlified_org_name}"]
+      grant_uri = Vocabulary::TSB["grant/#{proj_num}/#{org_slug}"]
 
       graph << [grant_uri, RDF.type, Vocabulary::TSBDEF.Grant]
       graph << [grant_uri, RDF::RDFS.label, RDF::Literal.new("Grant for #{org_name}, project: #{project_title}")]

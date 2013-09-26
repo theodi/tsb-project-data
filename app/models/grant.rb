@@ -11,8 +11,8 @@ class Grant
   field :offer_percentage, Vocabulary::TSBDEF.offerPercentage, datatype: RDF::XSD.decimal
   field :payments_to_date, Vocabulary::TSBDEF.paymentsToDate, datatype: RDF::XSD.integer
 
-  # uris
-  field :paid_to_organisation_uri, Vocabulary::TSBDEF.paidTo, is_uri: true
-  field :supports_project_uri, Vocabulary::TSBDEF.supports, is_uri: true
+  # links
+  linked_to :paid_to_organisation, Vocabulary::TSBDEF.paidTo, class_name: 'Organisation'
+  linked_to :supports_project, Vocabulary::TSBDEF.paidTo, class_name: 'Project'
 
 end

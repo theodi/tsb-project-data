@@ -4,9 +4,15 @@ module ProjectSearch
   included do
     include Tire::Model::Search
 
+     # http://www.elasticsearch.org/guide/reference/mapping/
+     # http://www.elasticsearch.org/guide/reference/mapping/core-types
      tire.mapping do
-      indexes :name, :type => 'string', :analyzer => 'snowball'
-      indexes :leader_name, :type => 'string', :analyzer => 'snowball'
+      indexes :name, type: 'string', analyzer: 'snowball'
+      indexes :leader_uri, type: 'string'
+      indexes :leader_name, type: 'string', analyzer: 'snowball'
+      indexes :participant_uris, type: 'string'
+      indexes :participant_names, type: 'string', analyzer: 'snowball'
+      indexes :offer_grant, type: 'integer'
     end
   end
 
@@ -16,8 +22,12 @@ module ProjectSearch
 
   def to_hash
     {
-      :name => label,
-      :leader_name => leader.label
+      name: label,
+      leader_name: leader.label,
+      leader_uri: leader.uri.to_s,
+      participant_names: participants.map {|p| p.label },
+      participant_uris: participants.map {|p| p.uri.to_s },
+      offer_grant: supported_by.offer_grant
     }
   end
 

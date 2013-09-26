@@ -17,4 +17,6 @@ class Project
   linked_to :leader, Vocabulary::TSBDEF.hasLeader, class_name: 'Organization'
   linked_to :supported_by, Vocabulary::TSBDEF.supportedBy, class_name: 'Grant'
 
+  linked_from :participants, :participates_in_projects, class_name: 'Organization'
+
 end

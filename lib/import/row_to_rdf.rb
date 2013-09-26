@@ -6,17 +6,17 @@ module Import
       # uri: use TSBProjectNumber
       proj_num = row["TSBProjectNumber"].to_i.to_s
       project_uri = Vocabulary::TSB["project/#{proj_num}"]
+      p = Project.new(project_uri)
       project_title = row["ProjectTitle"]
-
-      #type, label, description
-      graph << [project_uri, RDF.type, Vocabulary::TSBDEF.Project]
-      graph << [project_uri, RDF::RDFS.label, RDF::Literal.new(project_title)]
-
+      p.label = project_title
       description = row["PublicDescription"]
-
       # clean up description - replace double line breaks with space chars.
       description.gsub!(/\n\n/,' ')
-      graph << [project_uri, Vocabulary::DCTERMS.description, RDF::Literal.new(description)]
+      p.description = description
+      triples = p.repository.each_statement do |s|
+        graph << s
+      end
+
 
 
       ##### Organization ####

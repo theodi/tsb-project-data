@@ -4,6 +4,8 @@ module TsbResource
   included do
     include Tripod::Resource
     include PublishMyData::BasicFeatures
+
+    graph_uri TsbProjectData::DATA_GRAPH
   end
 
   def dataset

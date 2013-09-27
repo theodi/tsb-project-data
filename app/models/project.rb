@@ -3,7 +3,6 @@ class Project
   include TsbResource # some common (RDF-related) stuff
   include ProjectSearch # for elastic search
 
-  graph_uri TsbProjectData::DATA_GRAPH
   rdf_type Vocabulary::TSBDEF.Project
 
   # literals
@@ -18,5 +17,9 @@ class Project
   linked_to :supported_by, Vocabulary::TSBDEF.supportedBy, class_name: 'Grant'
 
   linked_from :participants, :participates_in_projects, class_name: 'Organization'
+
+  # TODO:
+  # project -> CompetitionCall
+  # Competition -> product, budget area, TSB-team.
 
 end

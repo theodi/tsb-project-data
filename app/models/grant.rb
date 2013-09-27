@@ -1,7 +1,6 @@
 class Grant
   include Tripod::Resource
 
-  graph_uri TsbProjectData::DATA_GRAPH
   rdf_type Vocabulary::TSBDEF.Grant
 
   # literals

@@ -1,0 +1,34 @@
+article#sparql {
+
+  #error-message {
+    h3 {
+      margin-top:0;
+    }
+    @extend .alert;
+    @extend .alert-danger;
+  }
+  form {
+    @extend .form;
+
+    .field {
+      margin-bottom: 10px;
+    }
+
+    label {
+      @extend .control-label;
+    }
+    textarea {
+      @extend .form-control;
+    }
+
+    input[type=text] {
+      @extend .form-control;
+    }
+
+    input[type=submit] {
+      @extend .btn;
+      @extend .btn-primary;
+    }
+  }
+
+}

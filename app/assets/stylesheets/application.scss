@@ -3,9 +3,11 @@
 // override some bootstrap defaults
 $icon-font-path: "/assets/bootstrap/";
 $navbar-height: 70px;
+$gray-even-lighter:  lighten(#000, 97%);
 
 @import "bootstrap/bootstrap"; // bootstrap3 from pmd
 
+@import "publish_my_data/data_grid";
 @import "slick_grid/slick_grid";
 @import "slick_grid/slick_grid_default_theme";
 
@@ -24,3 +26,4 @@ $navbar-height: 70px;
 // pages
 @import "projects-page";
 @import "error-page";
+@import "sparql-page";

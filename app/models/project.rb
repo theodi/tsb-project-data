@@ -5,8 +5,7 @@ class Project
 
   rdf_type Vocabulary::TSBDEF.Project
 
-  # literals
-  field :label, RDF::RDFS.label
+  # literals (label comes from tsb resource)
   field :description, Vocabulary::DCTERMS.description
   field :project_number, Vocabulary::TSBDEF.projectNumber
   field :start_date, Vocabulary::TSBDEF.startDate
@@ -16,10 +15,10 @@ class Project
   linked_to :leader, Vocabulary::TSBDEF.hasLeader, class_name: 'Organization'
   linked_to :supported_by, Vocabulary::TSBDEF.supportedBy, class_name: 'Grant'
 
-  linked_from :participants, :participates_in_projects, class_name: 'Organization'
+  # TODO: update predicates on these.
+  linked_to :competition_call, 'http://example.com/competition-call'
+  linked_to :project_status, 'http://example.com/project-status'
 
-  # TODO:
-  # project -> CompetitionCall
-  # Competition -> product, budget area, TSB-team.
+  linked_from :participants, :participates_in_projects, class_name: 'Organization'
 
 end

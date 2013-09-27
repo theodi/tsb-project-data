@@ -3,8 +3,7 @@ class Grant
 
   rdf_type Vocabulary::TSBDEF.Grant
 
-  # literals
-  field :label, RDF::RDFS.label
+  # literals (label comes from tsb resource)
   field :offer_cost, Vocabulary::TSBDEF.offerCost, datatype: RDF::XSD.integer
   field :offer_grant, Vocabulary::TSBDEF.offerGrant, datatype: RDF::XSD.integer
   field :offer_percentage, Vocabulary::TSBDEF.offerPercentage, datatype: RDF::XSD.decimal

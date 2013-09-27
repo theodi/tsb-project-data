@@ -4,8 +4,7 @@ class Site
 
   rdf_type Vocabulary::ORG.Site
 
-  # literals
-  field :label, RDF::RDFS.label
+  # literals (label comes from tsb resource)
   field :lat, Vocabulary::GEO.lat
   field :long, Vocabulary::GEO.long
 

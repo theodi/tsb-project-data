@@ -7,7 +7,7 @@ module Import
     # note:
     # vocabularies now defined in config/initializers, in the Vocabulary namespace
 
-    INPUT_FILE = File.join(Rails.root, 'data', 'input-data', 'datatest.xlsx')
+    INPUT_FILE = File.join(Rails.root, 'data', 'input-data', 'datatest1000.xlsx')
     OUTPUT_FILE = File.join(Rails.root, 'data', 'datasets', 'tsb-projects-data', 'data.nt')
 
     def self.create_data_file
@@ -23,6 +23,7 @@ module Import
       resources = {}
       
       for i in 2..excel.last_row
+        puts "starting row #{i}"
         # make a hash of header names to cell contents for this row
         row = {}
         excel.row(i).each_with_index{|item,index| row[headers[index]] = item}
@@ -30,6 +31,7 @@ module Import
       end
 
       # write out output
+      puts "starting output to RDF"
       graph = RDF::Graph.new
       # add statements to graph
       resources.each_value do |resource|

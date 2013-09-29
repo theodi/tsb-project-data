@@ -1,6 +1,9 @@
 module Import
   module RowToRdf
     
+    require 'digest'
+    require 'cgi'
+    
     REGIONS = {
       "East Midlands" => "http://data.statistics.gov.uk/id/statistical-geography/E12000004", 
       "West Midlands" => "http://data.statistics.gov.uk/id/statistical-geography/E12000005",
@@ -10,7 +13,10 @@ module Import
       "North East" => "http://data.statistics.gov.uk/id/statistical-geography/E12000001",
       "East of England" => "http://data.statistics.gov.uk/id/statistical-geography/E12000006",
       "Yorkshire and The Humber" => "http://data.statistics.gov.uk/id/statistical-geography/E12000003",
-      "London" => "http://data.statistics.gov.uk/id/statistical-geography/E12000007"
+      "London" => "http://data.statistics.gov.uk/id/statistical-geography/E12000007",
+      "Northern Ireland" => "http://data.statistics.gov.uk/id/statistical-geography/N92000002",
+      "Scotland" => "http://data.statistics.gov.uk/id/statistical-geography/S92000003",
+      "Wales" => "http://data.statistics.gov.uk/id/statistical-geography/W92000004"
     }
     
     def row2rdf(resources,row)
@@ -33,15 +39,19 @@ module Import
         description.gsub!(/\n\n/,' ')
         p.description = description
         p.project_number = proj_num
-        
-        ## TO DO - add project status
-        
-        
+        status = row["ProjectStatus"]
+        status_uri = Vocabulary::TSBDEF["concept/project-status/#{urlify(status)}"]
+        p.project_status_uri = status_uri
+        duration_uri = Vocabulary::TSB["project/#{proj_num}/duration"]
+        d = ProjectDuration.new(duration_uri)
+        p.duration = d
+        resources[duration_uri] = d
+        d.label = "Duration of project #{proj_num}"       
         ## TO DO - sort out date formatting
         t1 = row["StartDate"]
         t2 = row["ProjectEndDate"]
-  #      p.start_date = RDF::Literal::Date.new(t1)
-  #      p.end_date = RDF::Literal::Date.new(t2)
+        d.start  = t1.strftime('%Y-%m-%d')
+        d.end = t2.strftime('%Y-%m-%d')
         
       end
       
@@ -59,17 +69,23 @@ module Import
       if org_number
         org_slug = org_number.to_s
 
-        # normalise the format - add leading zeroes if necessary
+        # normalise the format
+        # replace any spaces with '-'
+        org_slug.gsub!(/ /,'-')
+        #  add leading zeroes if necessary
         unless org_slug.starts_with?('RC')
           while org_slug.length < 8
             org_slug = "0" + org_slug
           end
           
         end
-      else
+      elsif org_number == "Exempt Charity"
+        org_slug = urlified_org_name
+      elsif org_number == "NHS Hospital"
+        org_slug = urlified_org_name
+      else  # no company num at all
         org_slug = urlified_org_name
       end
-      puts org_slug
 
       org_uri = Vocabulary::TSB["organization/#{org_slug}"]
       
@@ -85,12 +101,16 @@ module Import
         # for now, ignore the case where an org might have two addresses - just use the first one
         site_uri = Vocabulary::TSB["organization/#{org_slug}/site"]
         address_uri = Vocabulary::TSB["organization/#{org_slug}/address"]
+
         # will only do site and address once for each org
         s = Site.new(site_uri)
         o.site = s
         a = Address.new(address_uri)
         s.label = "Site of #{org_name}"
         s.address = a
+        
+        resources[site_uri] = s
+        resources[address_uri] = a
 
         # clean up the address cell of the spreadsheet, removing line breaks
         address = row["Address"]
@@ -102,26 +122,87 @@ module Import
         
         region = row["Validated Region"].strip
         region_uri = REGIONS[region]
-        r = Region.new(region_uri)
-        s.region = r
+        if region_uri
+          r = Region.new(region_uri)
+          s.region = r
+        else
+          puts "nil region #{region}"
+        end
 
 
 
         # postcode - connect to OS URI - what should the subject be? the organization? the site?
         postcode = row["Postcode"].gsub(/ /,'') # remove spaces
         pc_uri = Vocabulary::OSPC[postcode]
-        pc = Postcode.new(pc_uri)
         
-        s.postcode = pc
+        s.postcode = pc_uri
         
-        # TODO Look up location and district for OS postcode and connect to site.
+        # Look up location and district for OS postcode and connect to site.
+        query = "SELECT ?lat ?long ?district_gss WHERE {
+          <#{pc_uri}> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ?lat .
+          <#{pc_uri}> <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?long .
+          <#{pc_uri}> <http://data.ordnancesurvey.co.uk/ontology/postcode/district> ?os_district .
+          ?os_district <http://www.w3.org/2002/07/owl#sameAs> ?district_gss         
+        }"
+
+        encoded_query = CGI::escape(query)
+        query_url = "http://opendatacommunities.org/sparql.json?query=" + encoded_query + "&api_key=346ead3fc7282de4827f2a5cf408b089"
+        response = JSON.parse(RestClient.get query_url)
+        result = response["results"]["bindings"][0]
+        lat = result["lat"]["value"] if result && result["lat"]
+        long = result["long"]["value"] if result && result["long"]
+        district = result["district_gss"]["value"] if result && result["district_gss"] 
+        s.lat = lat if lat
+        s.long = long if long
+        s.district = district if district
+        puts "#{lat || 'nil'} #{long || 'nil'}"
+
         
         # TODO connect company to OpenCorporates and Companies House
         
       end
 
+      ##### Competition #####
+      comp_year = row["CompetitionYear"].to_i.to_s
+      comp_call_code = row["CompCallCode"].to_s
+      product = row["Product"]
+      area = row["AreaBudgetHolder"]
+      team = row["TeamBudgetHolder"]
+      
+      # TSB are going to generate a unique identifier for competition call.
+      # but in the mean time, we need to generate our own.
+      
+      competition_string = comp_year + comp_call_code + product + area + team
+      digest = Digest::MD5.hexdigest(competition_string)
+      comp_uri = Vocabulary::TSB["competition-call/#{digest}"]
+      # have we done this competition call?
+      if resources[comp_uri]
+        comp = resources[comp_uri]
+      else
+        comp = CompetitionCall.new(comp_uri)
+        resources[comp_uri] = comp
+        
+        comp.competition_code = comp_call_code
+        comp.competition_year = Vocabulary::REF["year/#{comp_year}"]
+        prod_uri = Vocabulary::TSBDEF["concept/product/#{Product::PRODUCT_CODES[product]}"]
+        
+        # check we are not missing any codes
+        puts product unless Product::PRODUCT_CODES[product]
+        puts team unless Team::TEAM_CODES[team]
+        puts area unless BudgetArea::BUDGET_AREA_CODES[area]
+        
+        t_uri = Vocabulary::TSB["team/#{Team::TEAM_CODES[team]}"]
+        budg_uri = Vocabulary::TSB["budget-area/#{BudgetArea::BUDGET_AREA_CODES[area]}"]
+        # NB use '_uri' setter methods as linking to a URI, not a Tripod Resource
+        comp.product_uri = prod_uri
+        comp.team_uri = t_uri
+        comp.budget_area_uri = budg_uri
+      end
+      
+      #link project to competition call (if not already done)
+      p.competition_call = comp unless p.competition_call_uri
+      
 
-      #TODO translate the remaining RDF.rb stuff into Tripod
 
       # Grant
       grant_uri = Vocabulary::TSB["grant/#{proj_num}/#{org_slug}"]
@@ -142,21 +223,21 @@ module Import
       
       # is this right?
       g.supports_project = p
-      p.supported_by_uris << g.uri
+      p.supported_by_uris = p.supported_by_uris.push(g.uri)
       
       # org - project (2 way)
-      o.participates_in_projects_uris << p.uri
-      p.participants_uris << o.uri
+      o.participates_in_projects_uris = o.participates_in_projects_uris.push(p.uri)
+      p.participants_uris = p.participants_uris.push(o.uri)
 
       if row["IsLead"] && row["IsLead"] == "Lead"
-        o.leads_projects_uris << p.uri
+        o.leads_projects_uris = o.leads_projects_uris.push(p.uri)
         p.leader = o
       end
 
       # grant - org
       g.paid_to_organization = o
       g.supports_project = p
-      p.supported_by_uris << g.uri
+      p.supported_by_uris = p.supported_by_uris.push(g.uri)
 
       return nil
     end

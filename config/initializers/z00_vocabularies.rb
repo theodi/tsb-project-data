@@ -7,12 +7,14 @@ module Vocabulary
   YEAR  = RDF::Vocabulary.new("http://reference.data.gov.uk/id/year/")
   TSBDEF = RDF::Vocabulary.new("http://#{PublishMyData.local_domain}/def/")
   TSB = RDF::Vocabulary.new("http://#{PublishMyData.local_domain}/id/")
-  ORG = RDF::Vocabulary.new("http://www.w3.org/ns/org#hasSite")
+  ORG = RDF::Vocabulary.new("http://www.w3.org/ns/org#")
   VCARD = RDF::Vocabulary.new("http://www.w3.org/2006/vcard/ns#")
   OSPC = RDF::Vocabulary.new("http://data.ordnancesurvey.co.uk/id/postcodeunit/")
   OSDEF = RDF::Vocabulary.new("http://data.ordnancesurvey.co.uk/ontology/postcode/")
   DCTERMS = RDF::Vocabulary.new("http://purl.org/dc/terms/")
   GEO = RDF::Vocabulary.new("http://www.w3.org/2003/01/geo/wgs84_pos#")
   OSGEO = RDF::Vocabulary.new("http://data.ordnancesurvey.co.uk/ontology/admingeo/")
+  REF = RDF::Vocabulary.new("http://reference.data.gov.uk/id/")
+  TIMELINE = RDF::Vocabulary.new("http://purl.org/NET/c4dm/timeline.owl#")
 end
 

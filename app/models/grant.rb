@@ -12,6 +12,6 @@ class Grant
 
   # links
   linked_to :paid_to_organization, Vocabulary::TSBDEF.paidTo, class_name: 'Organization'
-  linked_to :supports_project, Vocabulary::TSBDEF.paidTo, class_name: 'Project'
+  linked_to :supports_project, Vocabulary::TSBDEF.supports, class_name: 'Project'
 
 end

@@ -13,7 +13,8 @@ class Project
 
   # links
   linked_to :leader, Vocabulary::TSBDEF.hasLeader, class_name: 'Organization'
-  linked_to :supported_by, Vocabulary::TSBDEF.supportedBy, class_name: 'Grant'
+  # Note a grant is paid to one org for one project
+  linked_to :supported_by, Vocabulary::TSBDEF.supportedBy, class_name: 'Grant', multivalued: true
 
   # TODO: update predicates on these.
   linked_to :competition_call, 'http://example.com/competition-call'

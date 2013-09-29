@@ -1,5 +1,5 @@
 class Grant
-  include Tripod::Resource
+  include TsbResource # some common (RDF-related) stuff
 
   rdf_type Vocabulary::TSBDEF.Grant
 
@@ -10,7 +10,7 @@ class Grant
   field :payments_to_date, Vocabulary::TSBDEF.paymentsToDate, datatype: RDF::XSD.integer
 
   # links
-  linked_to :paid_to_organisation, Vocabulary::TSBDEF.paidTo, class_name: 'Organisation'
+  linked_to :paid_to_organization, Vocabulary::TSBDEF.paidTo, class_name: 'Organization'
   linked_to :supports_project, Vocabulary::TSBDEF.paidTo, class_name: 'Project'
 
 end

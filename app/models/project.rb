@@ -13,6 +13,8 @@ class Project
 
   # links
   linked_to :leader, Vocabulary::TSBDEF.hasLeader, class_name: 'Organization'
+
+  # Note a grant is paid to one org for one project
   linked_to :supported_by, Vocabulary::TSBDEF.supportedBy, class_name: 'Grant', multivalued: true
   linked_to :participants, Vocabulary::TSBDEF.hasParticipants, class_name: 'Organization', multivalued: true
 

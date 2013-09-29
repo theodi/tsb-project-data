@@ -1,3 +1,4 @@
+# Note a grant is paid to one org for one project
 class Grant
   include TsbResource # some common (RDF-related) stuff
 

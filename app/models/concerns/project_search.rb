@@ -19,8 +19,8 @@ module ProjectSearch
       indexes :end_date, type: 'date'
       indexes :status_uri, type: 'string'
 
-      # from project's grant
-      indexes :offer_grant, type: 'integer'
+      # from project's grants
+      indexes :total_offer_grant, type: 'integer'
 
       # from lead org
       indexes :leader_uri, type: 'string'
@@ -62,7 +62,7 @@ module ProjectSearch
       status_uri: project_status_uri.to_s,
 
       # from project's grant
-      offer_grant: supported_by.offer_grant,
+      offer_grant: supported_by.map {|g| offer_grant }.inject {|sum,x| sum + x },
 
       # from lead org
       leader_uri: leader_uri.to_s,

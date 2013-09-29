@@ -20,8 +20,8 @@ module Import
       proj_num = row["TSBProjectNumber"].to_i.to_s
       project_uri = Vocabulary::TSB["project/#{proj_num}"]
       # if this project already exists, then don't do it again
-      if resources[uri]
-        p = resources[uri]
+      if resources[project_uri]
+        p = resources[project_uri]
       else
         p = Project.new(project_uri)
         # add to resources hash
@@ -33,6 +33,9 @@ module Import
         description.gsub!(/\n\n/,' ')
         p.description = description
         p.project_number = proj_num
+        
+        ## TO DO - add project status
+        
         
         ## TO DO - sort out date formatting
         t1 = row["StartDate"]
@@ -71,13 +74,13 @@ module Import
       org_uri = Vocabulary::TSB["organization/#{org_slug}"]
       
       # if org exists, don't do it again
-      if resources[uri]
-        o = resources[uri]
+      if resources[org_uri]
+        o = resources[org_uri]
       else
-        o = Organization.new(uri)
+        o = Organization.new(org_uri)
         # add to resources hash
-        resources[uri] = o
-        o.label = org.name
+        resources[org_uri] = o
+        o.label = org_name
         o.company_number = org_number
         # for now, ignore the case where an org might have two addresses - just use the first one
         site_uri = Vocabulary::TSB["organization/#{org_slug}/site"]
@@ -97,7 +100,7 @@ module Import
         a.county = row["County"]
         a.postcode = row["Postcode"]
         
-        region = row["ValidatedRegion"].strip
+        region = row["Validated Region"].strip
         region_uri = REGIONS[region]
         r = Region.new(region_uri)
         s.region = r
@@ -106,7 +109,7 @@ module Import
 
         # postcode - connect to OS URI - what should the subject be? the organization? the site?
         postcode = row["Postcode"].gsub(/ /,'') # remove spaces
-        pc_uri = Vocabulary::OSPC[pc]
+        pc_uri = Vocabulary::OSPC[postcode]
         pc = Postcode.new(pc_uri)
         
         s.postcode = pc
@@ -123,33 +126,35 @@ module Import
       # Grant
       grant_uri = Vocabulary::TSB["grant/#{proj_num}/#{org_slug}"]
 
-      graph << [grant_uri, RDF.type, Vocabulary::TSBDEF.Grant]
-      graph << [grant_uri, RDF::RDFS.label, RDF::Literal.new("Grant for #{org_name}, project: #{project_title}")]
-
-      graph << [grant_uri, Vocabulary::TSBDEF.offerCost, RDF::Literal.new(row["OfferCost"].to_i)]
-      graph << [grant_uri, Vocabulary::TSBDEF.offerGrant, RDF::Literal.new(row["OfferCost"].to_i)]
-      graph << [grant_uri, Vocabulary::TSBDEF.offerPercentage, RDF::Literal.new(row["OfferRateOfGrant"])]
-      graph << [grant_uri, Vocabulary::TSBDEF.paymentsToDate, RDF::Literal.new(row["PaymentsToDate"].to_i)]
+      g = Grant.new(grant_uri)
+      g.label = "Grant for #{org_name}, project: #{project_title}"
+      g.offer_cost = row["OfferCost"].to_i
+      g.offer_grant = row["OfferGrant"].to_i
+      g.offer_percentage = row["OfferRateOfGrant"]
+      g.payments_to_date = row["PaymentsToDate"].to_i
 
 
       ##### connections #####
 
+      # grant - project
+      
+      # is this right?
+      g.supports_project = p
+      p.supported_by_uris << g.uri
+      
       # org - project (2 way)
-      graph << [org_uri, Vocabulary::TSBDEF.participatesIn, project_uri]
-      graph << [project_uri, Vocabulary::TSBDEF.hasParticipant,org_uri]
+      o.participates_in_projects_uris << p.uri
+      p.participants_uris << o.uri
+
       if row["IsLead"] && row["IsLead"] == "Lead"
-        graph << [org_uri, Vocabulary::TSBDEF.isLeaderOf, project_uri]
-        graph << [project_uri, Vocabulary::TSBDEF.hasLeader, org_uri]
+        o.leads_projects_uris << p.uri
+        p.leader = o
       end
 
       # grant - org
-      graph << [grant_uri, Vocabulary::TSBDEF.paidTo, org_uri]
-
-      # grant - project
-      graph << [grant_uri, Vocabulary::TSBDEF.supports, project_uri]
-      graph << [project_uri, Vocabulary::TSBDEF.supportedBy, grant_uri]
-
-
+      g.paid_to_organization = o
+      g.supports_project = p
+      p.supported_by_uris << g.uri
 
       return nil
     end

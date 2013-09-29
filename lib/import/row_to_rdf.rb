@@ -127,6 +127,8 @@ module Import
       grant_uri = Vocabulary::TSB["grant/#{proj_num}/#{org_slug}"]
 
       g = Grant.new(grant_uri)
+      resources[grant_uri] = g
+      
       g.label = "Grant for #{org_name}, project: #{project_title}"
       g.offer_cost = row["OfferCost"].to_i
       g.offer_grant = row["OfferGrant"].to_i

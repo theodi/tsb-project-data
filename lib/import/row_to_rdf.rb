@@ -52,6 +52,12 @@ module Import
         t2 = row["ProjectEndDate"]
         d.start  = t1.strftime('%Y-%m-%d')
         d.end = t2.strftime('%Y-%m-%d')
+        costcat = row["CostCategoryType"]
+        if ["Industrial","Academic"].include?(costcat)
+          cc_uri = Vocabulary::TSBDEF["concept/cost-category/#{urlify(costcat)}"]
+          cc = CostCategory.new(cc_uri)
+          p.cost_category = cc
+        end
         
       end
       
@@ -156,18 +162,31 @@ module Import
         s.long = long if long
         s.district = district if district
         puts "#{lat || 'nil'} #{long || 'nil'}"
-
+        # legal entity form and enterprise size
+        esize = row["EnterpriseSize"]
+        if esize
+          esize_uri = Vocabulary::TSBDEF["concept/enterprise-size/#{urlify(esize)}"]
+          o.enterprise_size = EnterpriseSize.new(esize_uri)
+        end
+        legal_form_code = LegalEntityForm::LEGAL_ENTITY_FORMS[row["ParticipantOrganisationType"]]        
+        if legal_form_code
+          form = LegalEntityForm.new(Vocabulary::TSBDEF["concept/legal-entity-form/#{legal_form_code}"])
+          o.legal_entity_form = form
+        end
+          
+          
         
         # TODO connect company to OpenCorporates and Companies House
+        # TODO SIC code
         
-      end
+      end # of organization block
 
       ##### Competition #####
       comp_year = row["CompetitionYear"].to_i.to_s
       comp_call_code = row["CompCallCode"].to_s
       product = row["Product"]
       area = row["AreaBudgetHolder"]
-      team = row["TeamBudgetHolder"]
+      team = row["TeamBudgetHolder"].strip
       
       # TSB are going to generate a unique identifier for competition call.
       # but in the mean time, we need to generate our own.
@@ -184,19 +203,31 @@ module Import
         
         comp.competition_code = comp_call_code
         comp.competition_year = Vocabulary::REF["year/#{comp_year}"]
-        prod_uri = Vocabulary::TSBDEF["concept/product/#{Product::PRODUCT_CODES[product]}"]
+        
         
         # check we are not missing any codes
         puts product unless Product::PRODUCT_CODES[product]
         puts team unless Team::TEAM_CODES[team]
         puts area unless BudgetArea::BUDGET_AREA_CODES[area]
         
-        t_uri = Vocabulary::TSB["team/#{Team::TEAM_CODES[team]}"]
-        budg_uri = Vocabulary::TSB["budget-area/#{BudgetArea::BUDGET_AREA_CODES[area]}"]
+        team_code = Team::TEAM_CODES[team]
+        if team_code
+          t_uri = Vocabulary::TSB["team/#{team_code}"]
+          comp.team_uri = t_uri
+        end
+        budget_area_code = BudgetArea::BUDGET_AREA_CODES[area]
+        if budget_area_code
+          budg_uri = Vocabulary::TSB["budget-area/#{budget_area_code}"]
+          comp.budget_area_uri = budg_uri
+        end
         # NB use '_uri' setter methods as linking to a URI, not a Tripod Resource
-        comp.product_uri = prod_uri
-        comp.team_uri = t_uri
-        comp.budget_area_uri = budg_uri
+        product_code = Product::PRODUCT_CODES[product]
+        if product_code
+          prod_uri = Vocabulary::TSBDEF["concept/product/#{product_code}"]
+          comp.product_uri = prod_uri
+        end
+        
+       
       end
       
       #link project to competition call (if not already done)

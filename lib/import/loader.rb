@@ -21,6 +21,7 @@ module Import
       # hash of all resources - will build it up gradually from spreadsheet then serialize them at the end
       # the key is the URI of the resource
       resources = {}
+      sic_list = []
       
       for i in 2..excel.last_row
         puts "starting row #{i}"
@@ -28,8 +29,10 @@ module Import
         row = {}
         excel.row(i).each_with_index{|item,index| row[headers[index]] = item}
         row2rdf(resources,row)
+        
       end
 
+      
       # write out output
       puts "starting output to RDF"
       graph = RDF::Graph.new

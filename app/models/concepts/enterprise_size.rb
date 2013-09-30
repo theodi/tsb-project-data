@@ -1,4 +1,4 @@
 class EnterpriseSize
   include Concept
-  concept_scheme_uri "http://example.com/def/concept-scheme/enterprise-sizes"
+  concept_scheme_uri Vocabulary::TSBDEF["concept-scheme/enterprise-sizes"]
 end

@@ -19,6 +19,7 @@ class Project
   linked_to :competition_call, Vocabulary::TSBDEF.competitionCall
   linked_to :project_status, Vocabulary::TSBDEF.projectStatus
   linked_to :duration, Vocabulary::TSBDEF.projectDuration, class_name: 'ProjectDuration'
+  linked_to :cost_category, Vocabulary::TSBDEF.costCategory
 
 
 

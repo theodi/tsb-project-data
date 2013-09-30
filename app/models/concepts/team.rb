@@ -37,7 +37,12 @@ class Team
     "Transport" => "transport",
     "ICT" => "ICT",
     "Sustainability" => "sustainability",
-    "Biosciences" => "BIO"
+    "Biosciences" => "BIO",
+    "Sustainable Agriculture & Food" => "SAF",
+    "Centres" => "centres",
+    "Energy" => "energy",
+    "Healthcare" => "healthcare",
+    "Space" => "space"
   }
 end
 

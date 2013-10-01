@@ -23,6 +23,7 @@ module Import
         e.repository.each_statement {|s| graph << s}
         
       end
+      
 
       # write graph to file
       File.open(output_file,'w') {|f| f << graph.dump(:ntriples)}

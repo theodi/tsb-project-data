@@ -1,0 +1,215 @@
+<http://tsb-projects.labs.theodi.org/def/concept/product/CMP> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CMP> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CMP> <http://www.w3.org/2000/01/rdf-schema#label> "Competition" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CMP> <http://www.w3.org/2004/02/skos/core#notation> "CMP" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CMP> <http://www.w3.org/2004/02/skos/core#definition> "A type of Product that provides a process to identify the best Applicants to take part in a Project  or receive funding for a specific innovation" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CMP> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/TCMP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CMP> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/RCMP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CMP> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/CATL> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CMP> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/EU> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CMP> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/ICTom> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CMP> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/Large> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CMP> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/LP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CMP> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/PROC> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CMP> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/SBRI> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/COE> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/COE> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/COE> <http://www.w3.org/2000/01/rdf-schema#label> "Centre of Excellence" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/COE> <http://www.w3.org/2004/02/skos/core#notation> "COE" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/COE> <http://www.w3.org/2004/02/skos/core#definition> "Establishment of specialist facilities and capability to provide a hub for innovation in specific technology area" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/COE> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/CATP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/COM> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/COM> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/COM> <http://www.w3.org/2000/01/rdf-schema#label> "Community" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/COM> <http://www.w3.org/2004/02/skos/core#notation> "COM" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/COM> <http://www.w3.org/2004/02/skos/core#definition> "Services provided by the Technology Strategy Board to connect individuals and ideas" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/COM> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/EVENT> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/COM> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/KTN> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/COM> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/SIG> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/LGC> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/LGC> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/LGC> <http://www.w3.org/2000/01/rdf-schema#label> "Legacy" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/LGC> <http://www.w3.org/2004/02/skos/core#notation> "LGC" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/LGC> <http://www.w3.org/2004/02/skos/core#definition> "Products inherited  or no longer used" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/LGC> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/DTI> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/LGC> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/RDA> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/TCMP> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/TCMP> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/TCMP> <http://www.w3.org/2000/01/rdf-schema#label> "Thematic Competition" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/TCMP> <http://www.w3.org/2004/02/skos/core#notation> "TCMP" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/TCMP> <http://www.w3.org/2004/02/skos/core#definition> "A type of competition run as part of the strategy for the Thematic Area" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/TCMP> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/CMP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/TCMP> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/CRD> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/TCMP> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/FT> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/TCMP> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/FS> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/RCMP> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/RCMP> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/RCMP> <http://www.w3.org/2000/01/rdf-schema#label> "Responsive Competition" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/RCMP> <http://www.w3.org/2004/02/skos/core#notation> "RCMP" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/RCMP> <http://www.w3.org/2004/02/skos/core#definition> "A type of competition run regularly for ideas in any technology area inlcuding thematic ones" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/RCMP> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/CMP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/RCMP> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/IV> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/RCMP> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/KTP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/RCMP> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/GRD> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CATL> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CATL> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CATL> <http://www.w3.org/2000/01/rdf-schema#label> "Catalyst" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CATL> <http://www.w3.org/2004/02/skos/core#notation> "CATL" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CATL> <http://www.w3.org/2004/02/skos/core#definition> "A type of competition run jointly with a Research Council which offers funding to innovative small and medium sized businesses (SMEs) and researchers looking to work either individually or in collaboration to develop solutions" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CATL> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/CMP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CRD> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CRD> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CRD> <http://www.w3.org/2000/01/rdf-schema#label> "Collaborative Research and Development" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CRD> <http://www.w3.org/2004/02/skos/core#notation> "CRD" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CRD> <http://www.w3.org/2004/02/skos/core#definition> "A  type of Competition for Funding designed to encourages businesses and researchers to work together on innovative projects in strategically important areas of science, engineering and technology" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CRD> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/TCMP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/EU> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/EU> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/EU> <http://www.w3.org/2000/01/rdf-schema#label> "European " .
+<http://tsb-projects.labs.theodi.org/def/concept/product/EU> <http://www.w3.org/2004/02/skos/core#notation> "EU" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/EU> <http://www.w3.org/2004/02/skos/core#definition> "A grant scheme where funding is provided by European programmes but administered by Technology Strategy Board" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/EU> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/CMP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/FT> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/FT> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/FT> <http://www.w3.org/2000/01/rdf-schema#label> "Fast Track" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/FT> <http://www.w3.org/2004/02/skos/core#notation> "FT" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/FT> <http://www.w3.org/2004/02/skos/core#definition> "A  type of Competition for Funding designed for short term, business led collaborative projects" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/FT> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/TCMP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/FS> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/FS> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/FS> <http://www.w3.org/2000/01/rdf-schema#label> "Feasibility Study" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/FS> <http://www.w3.org/2004/02/skos/core#notation> "FS" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/FS> <http://www.w3.org/2004/02/skos/core#definition> "Feasibility study funding enables new ideas to be transformed into demonstrable technologies and techniques that can attract the partners, investors and future customers needed for successful and timely commercialisation" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/FS> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/TCMP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/ICTom> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/ICTom> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/ICTom> <http://www.w3.org/2000/01/rdf-schema#label> "IC Tomorrow" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/ICTom> <http://www.w3.org/2004/02/skos/core#notation> "ICTom" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/ICTom> <http://www.w3.org/2004/02/skos/core#definition> "A range of funded contests across the digital and creative sectors" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/ICTom> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/CMP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/IV> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/IV> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/IV> <http://www.w3.org/2000/01/rdf-schema#label> "Innovation Voucher" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/IV> <http://www.w3.org/2004/02/skos/core#notation> "IV" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/IV> <http://www.w3.org/2004/02/skos/core#definition> "A scheme to encourage smaller businesses to work with external experts, gaining new knowledge to help their business innovate, develop and grow" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/IV> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/RCMP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/KTP> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/KTP> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/KTP> <http://www.w3.org/2000/01/rdf-schema#label> "Knowledge Transfer Partnership" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/KTP> <http://www.w3.org/2004/02/skos/core#notation> "KTP" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/KTP> <http://www.w3.org/2004/02/skos/core#definition> "A TSB Programme, enabling innovation in business. KTP helps UK businesses to improve competitiveness, productivity and performance by accessing the knowledge, technology and skills that are available within our world-class knowledge base (universities, colleges and research organisations), through the development of collaborative partnerships which stimulate innovation and can transform the participating organisations." .
+<http://tsb-projects.labs.theodi.org/def/concept/product/KTP> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/RCMP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/Large> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/Large> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/Large> <http://www.w3.org/2000/01/rdf-schema#label> "Large Scale Demonstrator" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/Large> <http://www.w3.org/2004/02/skos/core#notation> "Large" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/Large> <http://www.w3.org/2004/02/skos/core#definition> "A specific type of grant provided to create a major prototype " .
+<http://tsb-projects.labs.theodi.org/def/concept/product/Large> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/CMP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/Large> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/FCD> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/LP> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/LP> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/LP> <http://www.w3.org/2000/01/rdf-schema#label> "Launchpad" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/LP> <http://www.w3.org/2004/02/skos/core#notation> "LP" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/LP> <http://www.w3.org/2004/02/skos/core#definition> "A type of Competition to provide base funding to SMEs  within a georaphical business cluster   for research and development projects and support business growth through connections with mentors and expert advisors in the cluster as well as increasing access to the investor community" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/LP> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/CMP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/PROC> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/PROC> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/PROC> <http://www.w3.org/2000/01/rdf-schema#label> "Procurement" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/PROC> <http://www.w3.org/2004/02/skos/core#notation> "PROC" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/PROC> <http://www.w3.org/2004/02/skos/core#definition> "A contract with TSB to carry out a  service " .
+<http://tsb-projects.labs.theodi.org/def/concept/product/PROC> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/CMP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/SBRI> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/SBRI> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/SBRI> <http://www.w3.org/2000/01/rdf-schema#label> "Small Business Research Initiative" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/SBRI> <http://www.w3.org/2004/02/skos/core#notation> "SBRI" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/SBRI> <http://www.w3.org/2004/02/skos/core#definition> "A public sector procurement contract to support the development of new technical solutions and accelerating technology adoption" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/SBRI> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/CMP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/GRD> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/GRD> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/GRD> <http://www.w3.org/2000/01/rdf-schema#label> "SMART" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/GRD> <http://www.w3.org/2004/02/skos/core#notation> "GRD" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/GRD> <http://www.w3.org/2004/02/skos/core#definition> "A grant scheme which offers funding to small  and medium-sized enterprises (SMEs) to engage in R&D projects in the strategically important areas of science, engineering and technology, from which successful new products, processes and services could emerge." .
+<http://tsb-projects.labs.theodi.org/def/concept/product/GRD> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/RCMP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/GRD> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/POM> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/GRD> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/POC> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/GRD> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/DOP> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CATP> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CATP> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CATP> <http://www.w3.org/2000/01/rdf-schema#label> "Catapult" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CATP> <http://www.w3.org/2004/02/skos/core#notation> "CATP" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CATP> <http://www.w3.org/2004/02/skos/core#definition> "A new technology and innovation centre designed to transform research rapidly into commercial success" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/CATP> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/COE> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/EVENT> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/EVENT> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/EVENT> <http://www.w3.org/2000/01/rdf-schema#label> "Event" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/EVENT> <http://www.w3.org/2004/02/skos/core#notation> "EVENT" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/EVENT> <http://www.w3.org/2004/02/skos/core#definition> "A conference, exhibition, webinar or other promotion activity to bring interested parties together for informing and collaborating" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/EVENT> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/COM> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/EVENT> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/NET> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/EVENT> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/MIS> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/EVENT> <http://www.w3.org/2004/02/skos/core#narrower> <http://tsb-projects.labs.theodi.org/def/concept/product/WKS> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/KTN> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/KTN> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/KTN> <http://www.w3.org/2000/01/rdf-schema#label> "Knowledge Transfer Network" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/KTN> <http://www.w3.org/2004/02/skos/core#notation> "KTN" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/KTN> <http://www.w3.org/2004/02/skos/core#definition> "National over-arching Network which aims to improve the UK's innovation performance by increasing the breadth and depth of the knowledge transfer of technology into UK based businesses." .
+<http://tsb-projects.labs.theodi.org/def/concept/product/KTN> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/COM> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/SIG> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/SIG> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/SIG> <http://www.w3.org/2000/01/rdf-schema#label> "Special Interest Group" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/SIG> <http://www.w3.org/2004/02/skos/core#notation> "SIG" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/SIG> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/COM> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/NET> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/NET> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/NET> <http://www.w3.org/2000/01/rdf-schema#label> "Networking" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/NET> <http://www.w3.org/2004/02/skos/core#notation> "NET" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/NET> <http://www.w3.org/2004/02/skos/core#definition> "A type of Event with the principal objective of bringing individuals together to meet and discuss their technology" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/NET> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/EVENT> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/MIS> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/MIS> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/MIS> <http://www.w3.org/2000/01/rdf-schema#label> "Mission" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/MIS> <http://www.w3.org/2004/02/skos/core#notation> "MIS" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/MIS> <http://www.w3.org/2004/02/skos/core#definition> "A type of Event with the principal objective of taking UK entrepreneurial companies to other countries strong in innovation and enterprise to find collaborators, partners and funders" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/MIS> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/EVENT> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/WKS> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/WKS> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/WKS> <http://www.w3.org/2000/01/rdf-schema#label> "Workshop" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/WKS> <http://www.w3.org/2004/02/skos/core#notation> "WKS" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/WKS> <http://www.w3.org/2004/02/skos/core#definition> "A type of Event with the principal objective of bringing individuals together to share ideas and solve problem" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/WKS> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/EVENT> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/DTI> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/DTI> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/DTI> <http://www.w3.org/2000/01/rdf-schema#label> "Department of Trade & Industry" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/DTI> <http://www.w3.org/2004/02/skos/core#notation> "DTI" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/DTI> <http://www.w3.org/2004/02/skos/core#definition> "Grants awarded as part of former department initiative inherited by the Technology Strategy Board" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/DTI> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/LGC> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/RDA> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/RDA> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/RDA> <http://www.w3.org/2000/01/rdf-schema#label> "Regional Development Agency" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/RDA> <http://www.w3.org/2004/02/skos/core#notation> "RDA" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/RDA> <http://www.w3.org/2004/02/skos/core#definition> "Grants awarded as part of former regional initiative inherited by the Technology Strategy Board" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/RDA> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/LGC> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/FCD> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/FCD> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/FCD> <http://www.w3.org/2000/01/rdf-schema#label> "Future Cities Demonstrator" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/FCD> <http://www.w3.org/2004/02/skos/core#notation> "FCD" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/FCD> <http://www.w3.org/2004/02/skos/core#definition> "A specific grant awarded as result of a Large Scale Demonstrator programme to a single city" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/FCD> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/Large> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/POM> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/POM> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/POM> <http://www.w3.org/2000/01/rdf-schema#label> "Proof of Market" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/POM> <http://www.w3.org/2004/02/skos/core#notation> "POM" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/POM> <http://www.w3.org/2004/02/skos/core#definition> "A type of SMART Grant to enable companies to assess commercial viability" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/POM> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/GRD> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/POC> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/POC> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/POC> <http://www.w3.org/2000/01/rdf-schema#label> "Proof of Concept" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/POC> <http://www.w3.org/2004/02/skos/core#notation> "POC" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/POC> <http://www.w3.org/2004/02/skos/core#definition> "A type of SMART Grant to explore the technical feasibility and commercial potential of a new technology, product or process" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/POC> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/GRD> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/DOP> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/DOP> <http://www.w3.org/2004/02/skos/core#inScheme> <http://tsb-projects.labs.theodi.org/def/concept-scheme/products> .
+<http://tsb-projects.labs.theodi.org/def/concept/product/DOP> <http://www.w3.org/2000/01/rdf-schema#label> "Development of Prototype" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/DOP> <http://www.w3.org/2004/02/skos/core#notation> "DOP" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/DOP> <http://www.w3.org/2004/02/skos/core#definition> "A type of SMART Grant to develop a technologically innovative product, service or industrial process" .
+<http://tsb-projects.labs.theodi.org/def/concept/product/DOP> <http://www.w3.org/2004/02/skos/core#broader> <http://tsb-projects.labs.theodi.org/def/concept/product/GRD> .

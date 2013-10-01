@@ -11,6 +11,8 @@ module Concept
     field :label, RDF::RDFS.label
     field :description, Vocabulary::DCTERMS.description
     field :definition, RDF::SKOS.definition
+    field :notation, RDF::SKOS.notation
+    field :pref_label, RDF::SKOS.prefLabel
 
     field :broader, RDF::SKOS.broader, :is_uri => true
     field :narrower, RDF::SKOS.narrower, :is_uri => true, :multivalued => true

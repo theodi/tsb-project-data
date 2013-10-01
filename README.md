@@ -10,11 +10,12 @@ Rails app to provide access to information about TSB Projects as Linked Open Dat
 * `rails server`
 
 #### Running the data loader
-`INPUT_FILENAME='datatest1000.xlsx' rake loader:complete_load`
+`REPLACE_SUPPORTING=true INPUT_FILENAME='datatest1000.xlsx' rake loader:complete_load`
 
 This will:
 
 * look for an excel file in the `/data/input-data` folder with the name in the `INPUT_FILENAME` env var
+* replace the supporting data (if `REPLACE_SUPPORTING` is `true`)
 * delete search index
 * parse excel file and creates .nt dump,
 * replace dataset data

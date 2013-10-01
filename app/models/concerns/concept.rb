@@ -11,7 +11,6 @@ module Concept
     field :label, RDF::RDFS.label
     field :description, Vocabulary::DCTERMS.description
 
-    field :sub_class_of, RDF::SKOS.subClassOf, :is_uri => true
     field :broader, RDF::SKOS.broader, :is_uri => true
     field :narrower, RDF::SKOS.narrower, :is_uri => true, :multivalued => true
 
@@ -20,7 +19,6 @@ module Concept
     def initialize(uri, graph_uri=nil)
       super
       self.in_scheme = self.class.resource_concept_scheme_uri
-      self.sub_class_of = RDF::SKOS.Concept
     end
   end
 

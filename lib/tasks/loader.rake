@@ -37,5 +37,9 @@ namespace :loader do
     search_index.refresh
     puts ">>> time elasped #{Time.now - start_time}s"
 
+    puts ">>> clearing cache..."
+    `echo 'flush_all' | nc localhost 11211`
+    puts ">>> time elasped #{Time.now - start_time}s"
+
   end
 end

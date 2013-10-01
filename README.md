@@ -6,7 +6,7 @@ Rails app to provide access to information about TSB Projects as Linked Open Dat
 
 * `bundle`
 * Edit the environment config (e.g. development.rb) to point the endpoints to a running [Fuseki](https://jena.apache.org/documentation/serving_data/) instance.
-* Download and install v0.90. [How?](http://www.elasticsearch.org/guide/reference/setup/).
+* Download and install v0.90 of Elastic Search [How?](http://www.elasticsearch.org/guide/reference/setup/).
 * `rails server`
 
 #### Running the data loader

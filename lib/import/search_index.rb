@@ -9,11 +9,18 @@ module Import
       @index_docs = []
     end
 
+    def create
+      Project.create_elasticsearch_index
+    end
+
+    def refresh
+      Project.index.refresh
+    end
+
     # builds up an array of index docs (and returns them)
     def build
 
       puts 'creating index docs'
-
       self.resources.each_pair do |uri, resource|
         if resource.is_a? Project
           puts resource.uri.to_s

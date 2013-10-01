@@ -1,11 +1,11 @@
 module Import
   module RowToRdf
-    
+
     require 'digest'
     require 'cgi'
-    
+
     REGIONS = {
-      "East Midlands" => "http://data.statistics.gov.uk/id/statistical-geography/E12000004", 
+      "East Midlands" => "http://data.statistics.gov.uk/id/statistical-geography/E12000004",
       "West Midlands" => "http://data.statistics.gov.uk/id/statistical-geography/E12000005",
       "South West" => "http://data.statistics.gov.uk/id/statistical-geography/E12000009",
       "South East" => "http://data.statistics.gov.uk/id/statistical-geography/E12000008",
@@ -18,7 +18,7 @@ module Import
       "Scotland" => "http://data.statistics.gov.uk/id/statistical-geography/S92000003",
       "Wales" => "http://data.statistics.gov.uk/id/statistical-geography/W92000004"
     }
-    
+
     def row2rdf(resources,row)
 
       ##### Project #####
@@ -46,7 +46,7 @@ module Import
         d = ProjectDuration.new(duration_uri)
         p.duration = d
         resources[duration_uri] = d
-        d.label = "Duration of project #{proj_num}"       
+        d.label = "Duration of project #{proj_num}"
         ## TO DO - sort out date formatting
         t1 = row["StartDate"]
         t2 = row["ProjectEndDate"]
@@ -58,11 +58,11 @@ module Import
           cc = CostCategory.new(cc_uri)
           p.cost_category = cc
         end
-        
+
       end
-      
-      
- 
+
+
+
 
 
       ##### Organization ####
@@ -83,7 +83,7 @@ module Import
           while org_slug.length < 8
             org_slug = "0" + org_slug
           end
-          
+
         end
       elsif org_number == "Exempt Charity"
         org_slug = urlified_org_name
@@ -94,7 +94,7 @@ module Import
       end
 
       org_uri = Vocabulary::TSB["organization/#{org_slug}"]
-      
+
       # if org exists, don't do it again
       if resources[org_uri]
         o = resources[org_uri]
@@ -114,7 +114,7 @@ module Import
         a = Address.new(address_uri)
         s.label = "Site of #{org_name}"
         s.address = a
-        
+
         resources[site_uri] = s
         resources[address_uri] = a
 
@@ -125,7 +125,7 @@ module Import
         a.locality = row["Town"]
         a.county = row["County"]
         a.postcode = row["Postcode"]
-        
+
         region = row["Validated Region"].strip
         region_uri = REGIONS[region]
         if region_uri
@@ -140,15 +140,15 @@ module Import
         # postcode - connect to OS URI - what should the subject be? the organization? the site?
         postcode = row["Postcode"].gsub(/ /,'') # remove spaces
         pc_uri = Vocabulary::OSPC[postcode]
-        
+
         s.postcode = pc_uri
-        
+
         # Look up location and district for OS postcode and connect to site.
         query = "SELECT ?lat ?long ?district_gss WHERE {
           <#{pc_uri}> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ?lat .
           <#{pc_uri}> <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?long .
           <#{pc_uri}> <http://data.ordnancesurvey.co.uk/ontology/postcode/district> ?os_district .
-          ?os_district <http://www.w3.org/2002/07/owl#sameAs> ?district_gss         
+          ?os_district <http://www.w3.org/2002/07/owl#sameAs> ?district_gss
         }"
 
         encoded_query = CGI::escape(query)
@@ -157,28 +157,28 @@ module Import
         result = response["results"]["bindings"][0]
         lat = result["lat"]["value"] if result && result["lat"]
         long = result["long"]["value"] if result && result["long"]
-        district = result["district_gss"]["value"] if result && result["district_gss"] 
+        district = result["district_gss"]["value"] if result && result["district_gss"]
         s.lat = lat if lat
         s.long = long if long
         s.district = district if district
-        puts "#{lat || 'nil'} #{long || 'nil'}"
+        #puts "#{lat || 'nil'} #{long || 'nil'}"
         # legal entity form and enterprise size
         esize = row["EnterpriseSize"]
         if esize
           esize_uri = Vocabulary::TSBDEF["concept/enterprise-size/#{urlify(esize)}"]
           o.enterprise_size = EnterpriseSize.new(esize_uri)
         end
-        legal_form_code = LegalEntityForm::LEGAL_ENTITY_FORMS[row["ParticipantOrganisationType"]]        
+        legal_form_code = LegalEntityForm::LEGAL_ENTITY_FORMS[row["ParticipantOrganisationType"]]
         if legal_form_code
           form = LegalEntityForm.new(Vocabulary::TSBDEF["concept/legal-entity-form/#{legal_form_code}"])
           o.legal_entity_form = form
         end
-          
-          
-        
+
+
+
         # TODO connect company to OpenCorporates and Companies House
         # TODO SIC code
-        
+
       end # of organization block
 
       ##### Competition #####
@@ -189,13 +189,13 @@ module Import
       while activity_code.length < 4
         activity_code = "0" + activity_code
       end
-      
+
       product = row["Product"]
       area = row["AreaBudgetHolder"]
       team = row["TeamBudgetHolder"].strip
-      
+
       # use Activity Code as the unique identifier for a Competition Call
-      
+
       comp_uri = Vocabulary::TSB["competition-call/#{activity_code}"]
       # have we done this competition call?
       if resources[comp_uri]
@@ -203,18 +203,18 @@ module Import
       else
         comp = CompetitionCall.new(comp_uri)
         resources[comp_uri] = comp
-        
+
         comp.competition_code = comp_call_code
         comp.competition_year = Vocabulary::REF["year/#{comp_year}"]
         comp.activity_code = activity_code
         comp.label = "Competition Call #{activity_code}"
-        
-        
+
+
         # check we are not missing any codes
         puts product unless Product::PRODUCT_CODES[product]
         puts team unless Team::TEAM_CODES[team]
         puts area unless BudgetArea::BUDGET_AREA_CODES[area]
-        
+
         team_code = Team::TEAM_CODES[team]
         if team_code
           t_uri = Vocabulary::TSB["team/#{team_code}"]
@@ -231,13 +231,13 @@ module Import
           prod_uri = Vocabulary::TSBDEF["concept/product/#{product_code}"]
           comp.product_uri = prod_uri
         end
-        
-       
+
+
       end
-      
+
       #link project to competition call (if not already done)
       p.competition_call = comp unless p.competition_call_uri
-      
+
 
 
       # Grant
@@ -245,7 +245,7 @@ module Import
 
       g = Grant.new(grant_uri)
       resources[grant_uri] = g
-      
+
       g.label = "Grant for #{org_name}, project: #{project_title}"
       g.offer_cost = row["OfferCost"].to_i
       g.offer_grant = row["OfferGrant"].to_i
@@ -256,11 +256,11 @@ module Import
       ##### connections #####
 
       # grant - project
-      
+
       # is this right?
       g.supports_project = p
       p.supported_by_uris = p.supported_by_uris.push(g.uri)
-      
+
       # org - project (2 way)
       o.participates_in_projects_uris = o.participates_in_projects_uris.push(p.uri)
       p.participants_uris = p.participants_uris.push(o.uri)

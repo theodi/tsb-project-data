@@ -21,3 +21,5 @@
 config/deploy.rb
 config/deploy/*.rb
 Capfile
+
+/data/*/~*.xlsx

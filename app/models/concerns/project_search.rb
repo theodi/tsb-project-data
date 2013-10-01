@@ -94,8 +94,8 @@ module ProjectSearch
   def duration_index_fields
     @duration_object ||= self.duration
     {
-      start_date: @duration_object.start,
-      start_date: @duration_object.end
+      start_date: @duration_object.start.iso8601,
+      start_date: @duration_object.end.iso8601
     }
   end
 
@@ -144,7 +144,7 @@ module ProjectSearch
   def participant_site_index_fields
     @site_objects ||= @participant_objects.map {|p| p.site }
     {
-      participant_locations: @site_objects.map{ |s| "#{s.lat},#{s.long}" }
+      participant_locations: @site_objects.select{ |s| (s.lat.present? && s.long.present?) }.map{ |s| "#{s.lat},#{s.long}"  }
     }
   end
 

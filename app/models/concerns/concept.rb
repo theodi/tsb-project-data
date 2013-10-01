@@ -10,6 +10,7 @@ module Concept
     field :in_scheme, RDF::SKOS.inScheme, :is_uri => true
     field :label, RDF::RDFS.label
     field :description, Vocabulary::DCTERMS.description
+    field :definition, RDF::SKOS.definition
 
     field :broader, RDF::SKOS.broader, :is_uri => true
     field :narrower, RDF::SKOS.narrower, :is_uri => true, :multivalued => true

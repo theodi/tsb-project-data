@@ -1,22 +1,21 @@
 module Import
   module RowToRdf
 
-    require 'digest'
     require 'cgi'
 
     REGIONS = {
-      "East Midlands" => "http://data.statistics.gov.uk/id/statistical-geography/E12000004",
-      "West Midlands" => "http://data.statistics.gov.uk/id/statistical-geography/E12000005",
-      "South West" => "http://data.statistics.gov.uk/id/statistical-geography/E12000009",
-      "South East" => "http://data.statistics.gov.uk/id/statistical-geography/E12000008",
-      "North West" => "http://data.statistics.gov.uk/id/statistical-geography/E12000002",
-      "North East" => "http://data.statistics.gov.uk/id/statistical-geography/E12000001",
-      "East of England" => "http://data.statistics.gov.uk/id/statistical-geography/E12000006",
-      "Yorkshire and The Humber" => "http://data.statistics.gov.uk/id/statistical-geography/E12000003",
-      "London" => "http://data.statistics.gov.uk/id/statistical-geography/E12000007",
-      "Northern Ireland" => "http://data.statistics.gov.uk/id/statistical-geography/N92000002",
-      "Scotland" => "http://data.statistics.gov.uk/id/statistical-geography/S92000003",
-      "Wales" => "http://data.statistics.gov.uk/id/statistical-geography/W92000004"
+      "East Midlands" => "http://statistics.data.gov.uk/id/statistical-geography/E12000004",
+      "West Midlands" => "http://statistics.data.gov.uk/id/statistical-geography/E12000005",
+      "South West" => "http://statistics.data.gov.uk/id/statistical-geography/E12000009",
+      "South East" => "http://statistics.data.gov.uk/id/statistical-geography/E12000008",
+      "North West" => "http://statistics.data.gov.uk/id/statistical-geography/E12000002",
+      "North East" => "http://statistics.data.gov.uk/id/statistical-geography/E12000001",
+      "East of England" => "http://statistics.data.gov.uk/id/statistical-geography/E12000006",
+      "Yorkshire and The Humber" => "http://statistics.data.gov.uk/id/statistical-geography/E12000003",
+      "London" => "http://statistics.data.gov.uk/id/statistical-geography/E12000007",
+      "Northern Ireland" => "http://statistics.data.gov.uk/id/statistical-geography/N92000002",
+      "Scotland" => "http://statistics.data.gov.uk/id/statistical-geography/S92000003",
+      "Wales" => "http://statistics.data.gov.uk/id/statistical-geography/W92000004"
     }
 
     def row2rdf(resources,row,sic_hash)

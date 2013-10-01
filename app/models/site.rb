@@ -7,7 +7,7 @@ class Site
   # literals (label comes from tsb resource)
   field :lat, Vocabulary::GEO.lat, datatype: RDF::XSD.decimal
   field :long, Vocabulary::GEO.long, datatype: RDF::XSD.decimal
-  field :district, Vocabulary::OSDEF.district, is_uri: true
+  field :district, Vocabulary::OSGEO.district, is_uri: true
   field :postcode, Vocabulary::OSDEF.postcode, is_uri: true
 
   # links

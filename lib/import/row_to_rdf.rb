@@ -19,7 +19,7 @@ module Import
       "Wales" => "http://data.statistics.gov.uk/id/statistical-geography/W92000004"
     }
 
-    def row2rdf(resources,row)
+    def row2rdf(resources,row,sic_hash)
 
       ##### Project #####
       # uri: use TSBProjectNumber
@@ -177,7 +177,13 @@ module Import
 
 
         # TODO connect company to OpenCorporates and Companies House
-        # TODO SIC code
+        # SIC code
+        sic_desc = row["ParticipantSICSubclass"]
+        sic_code = sic_hash[sic_desc]
+        if sic_code
+          sic_uri = Vocabulary::TSBDEF["concept/sic/#{sic_code}"]
+          o.sic_code = sic_uri
+        end
 
       end # of organization block
 

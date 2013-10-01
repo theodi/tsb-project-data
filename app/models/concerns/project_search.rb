@@ -10,6 +10,26 @@ module ProjectSearch
     # http://www.elasticsearch.org/guide/reference/api/search/facets/
     # http://www.elasticsearch.org/guide/reference/api/search/facets/terms-stats-facet/
 
+    # example of building up a search
+    # search = Tire::Search::Search.new('projects')
+    #
+    # search.query do
+    #   string('*')
+    #   term( :competition_call_uri, "http://tsb-projects.labs.theodi.org/id/competition-call/dd97958dedbe59f92dd2089a3140acc7")
+    #   term( :label, "alloy" )
+    # end
+    #
+    # # some facet examples
+    # search.facet('competition_call_uri') { terms 'competition_call_uri', size: 5, script: " '<a href=\"' + term  + '\">' + _source.competition_call_label + '</a>'" }
+    # search.facet('competition_grant_stats') { terms_stats 'competition_call_uri', 'total_offer_grant' } # stats per facet term
+    # search.facet('grant_stats') { statistical 'total_offer_grant' } #stats on a field
+    #
+    # # next line just filters results, leaves facets. See http://www.elasticsearch.org/guide/reference/api/search/filter/
+    # search.filter :term, {competition_call_uri: "http://tsb-projects.labs.theodi.org/id/competition-call/dd97958dedbe59f92dd2089a3140acc7"}
+    # search.from 10 # offset
+    # search.size 5  # limit
+    # search.to_json # to show the request json (to debug)
+    # search.results
 
     tire.mapping do
 
@@ -36,10 +56,10 @@ module ProjectSearch
       # from participants' sites (could be many)
       indexes :region_name, type: 'string'
       indexes :region_uri, type: 'string'
-      indexes :location, type: 'geopoint'
+      indexes :location, type: 'geo_point'
 
       # competition
-      indexes :competition_call_uri, type: 'string'
+      indexes :competition_call_uri, type: 'string', :index  => :not_analyzed
       indexes :competition_call_label, type: 'string', analyzer: 'snowball'
 
       # competition's budget
@@ -57,12 +77,12 @@ module ProjectSearch
     {
       # from project
       label: label,
-      start_date: start_date,
-      start_date: end_date,
+      start_date: duration.start,
+      start_date: duration.end,
       status_uri: project_status_uri.to_s,
 
       # from project's grant
-      offer_grant: supported_by.map {|g| offer_grant }.inject {|sum,x| sum + x },
+      total_offer_grant: supported_by.map {|g| g.offer_grant }.inject {|sum,x| sum + x },
 
       # from lead org
       leader_uri: leader_uri.to_s,
@@ -81,11 +101,15 @@ module ProjectSearch
       locations: participants.map{ |p| "#{p.lat},#{p.long}" rescue nil },
 
       # competition
-      competition_call_uri: (competition_call_uri rescue nil),
+      competition_call_uri: (competition_call_uri.to_s rescue nil),
       competition_call_label: (competition_call.label rescue nil),
 
+      #competition's team
+      team_uri: (competition_call.team_uri.to_s rescue nil),
+      team_label: (competition_call.team.label rescue nil),
+
       # competition's budget
-      budget_area_uri: (competition_call.budget_area_uri rescue nil),
+      budget_area_uri: (competition_call.budget_area_uri.to_s rescue nil),
       budget_area_label: (competition_call.budget_area.label rescue nil),
     }
   end

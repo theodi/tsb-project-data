@@ -181,7 +181,7 @@ module Import
         sic_code = sic_hash[sic_desc]
         if sic_code
           sic_uri = Vocabulary::TSBDEF["concept/sic/#{sic_code}"]
-          o.sic_code = sic_uri
+          o.sic_class_uri = sic_uri
         end
 
       end # of organization block

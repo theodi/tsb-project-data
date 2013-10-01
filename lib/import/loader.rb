@@ -22,7 +22,7 @@ module Import
       resources = {}
       sic_hash = JSON.parse(File.read(sic_hash_file))
 
-      for i in 2..excel.last_row
+      for i in 2..10 #excel.last_row
         puts "starting row #{i}"
         # make a hash of header names to cell contents for this row
         row = {}

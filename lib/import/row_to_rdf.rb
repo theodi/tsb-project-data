@@ -184,16 +184,19 @@ module Import
       ##### Competition #####
       comp_year = row["CompetitionYear"].to_i.to_s
       comp_call_code = row["CompCallCode"].to_s
+      activity_code = row["ActivityCode"].to_i.to_s
+      # fill out the activity code with leading zeroes, if it is shorter than 4 chars
+      while activity_code.length < 4
+        activity_code = "0" + activity_code
+      end
+      
       product = row["Product"]
       area = row["AreaBudgetHolder"]
       team = row["TeamBudgetHolder"].strip
       
-      # TSB are going to generate a unique identifier for competition call.
-      # but in the mean time, we need to generate our own.
+      # use Activity Code as the unique identifier for a Competition Call
       
-      competition_string = comp_year + comp_call_code + product + area + team
-      digest = Digest::MD5.hexdigest(competition_string)
-      comp_uri = Vocabulary::TSB["competition-call/#{digest}"]
+      comp_uri = Vocabulary::TSB["competition-call/#{activity_code}"]
       # have we done this competition call?
       if resources[comp_uri]
         comp = resources[comp_uri]
@@ -203,6 +206,8 @@ module Import
         
         comp.competition_code = comp_call_code
         comp.competition_year = Vocabulary::REF["year/#{comp_year}"]
+        comp.activity_code = activity_code
+        comp.label = "Competition Call #{activity_code}"
         
         
         # check we are not missing any codes

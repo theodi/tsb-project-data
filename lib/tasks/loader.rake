@@ -34,6 +34,7 @@ namespace :loader do
 
     puts ">>> importing search index..."
     search_index.import
+    search_index.refresh
     puts ">>> time elasped #{Time.now - start_time}s"
 
   end

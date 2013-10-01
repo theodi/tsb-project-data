@@ -23,13 +23,17 @@ module ProjectSearch
       indexes :participant_uris, type: 'string', analyzer: 'keyword'
       indexes :participant_labels, type: 'string', analyzer: 'snowball'
       indexes :participant_company_numbers, type: 'string', analyzer: 'keyword'
+
       indexes :participant_size_uris, type: 'string', analyzer: 'keyword'
+      indexes :participant_size_labels, type: 'string', analyzer: 'keyword'
+
       indexes :participant_sic_class_uris, type: 'string', analyzer: 'keyword'
+      indexes :participant_sic_class_labels, type: 'string', analyzer: 'keyword'
 
       # from participants' sites (could be many)
-      indexes :region_name, type: 'string', analyzer: 'keyword'
-      indexes :region_uri, type: 'string', analyzer: 'keyword'
-      indexes :location, type: 'geo_point'
+      indexes :participant_locations, type: 'geo_point'
+      indexes :region_uris, type: 'string', analyzer: 'keyword'
+      indexes :region_labels, type: 'string', analyzer: 'keyword'
 
       # competition
       indexes :competition_call_uri, type: 'string', analyzer: 'keyword'
@@ -48,12 +52,16 @@ module ProjectSearch
 
   # generates an index document, from an in-memory hash of all resources
   def index_doc(resources_hash)
+
+    # pre-load some objects from teh resources hash
     @duration_object = resources_hash[self.duration_uri]
     @grant_objects = self.supported_by_uris.map {|grant_uri| resources_hash[grant_uri] }
     @lead_org_object = resources_hash[self.leader_uri]
     @participant_objects = self.participants_uris.map {|org_uri| resources_hash[org_uri] }
     @site_objects = @participant_objects.map {|p| resources_hash[p.site_uri] }
-    @region_objects = @site_objects.map {|s| resources_hash[s.region_uri] }
+    @competition_call_object ||= resources_hash[self.competition_call_uri]
+
+    # Everything else wont be in the resources hash - we will look up from DB. Queries will be cached.
 
     doc = to_hash({_id: self.uri.to_s, type: 'project'})
   end
@@ -65,7 +73,10 @@ module ProjectSearch
       .merge(lead_org_index_fields)
       .merge(grant_index_fields)
       .merge(participant_index_fields)
-      .merge(region_index_fields)
+      .merge(participant_size_index_fields)
+      .merge(participant_sic_class_index_fields)
+      .merge(participant_site_index_fields)
+      .merge(participant_region_index_fields)
       .merge(competition_index_fields)
       .merge(team_index_fields)
       .merge(budget_area_index_fields)
@@ -91,8 +102,8 @@ module ProjectSearch
   def lead_org_index_fields
     @lead_org_object ||= self.leader
     {
-       leader_uri: @lead_org_object.uri.to_s,
-       leader_label: @lead_org_object.label
+       leader_uri: self.leader_uri.to_s,
+       leader_label: (@lead_org_object.label rescue nil)
     }
   end
 
@@ -109,42 +120,78 @@ module ProjectSearch
       participant_uris: @participant_objects.map { |p| p.uri.to_s },
       participant_labels: @participant_objects.map { |p| p.label },
       participant_company_numbers: @participant_objects.map { |p| p.company_number },
-      participant_size_uris: @participant_objects.map { |p| p.enterprise_size_uri.to_s },
-      participant_sic_class_uris: @participant_objects.map {|p| p.sic_class_uri.to_s },
-      locations: @participant_objects.map{ |p| "#{p.lat},#{p.long}" rescue nil }
     }
   end
 
-  def region_index_fields
-    @region_objects ||= self.participants.map {|p| p.site.region }
+  # ones below here will always need DB lookups from the supporting data, but will be cached.
+
+  def participant_size_index_fields
+    @participant_objects ||= self.participants
     {
-      region_names: @region_objects.map {|r| r.label rescue nil },
-      region_uris: @region_objects.map {|r| r.uri.to_s rescue nil }
+      participant_size_uris: @participant_objects.map { |p| p.enterprise_size_uri.to_s },
+      participant_size_labels: @participant_objects.map { |p| p.enterprise_size.label rescue nil },
+    }
+  end
+
+  def participant_sic_class_index_fields
+    @participant_objects ||= self.participants
+    {
+      participant_sic_class_uris: @participant_objects.map {|p| p.sic_class_uri.to_s },
+      participant_sic_class_labels: @participant_objects.map {|p| p.sic_class.label rescue nil }
+    }
+  end
+
+  def participant_site_index_fields
+    @site_objects ||= @participant_objects.map {|p| p.site }
+    {
+      participant_locations: @site_objects.map{ |s| "#{s.lat},#{s.long}" }
+    }
+  end
+
+  def participant_region_index_fields
+    @participant_objects ||= self.participants
+    @site_objects ||= @participant_objects.map {|p| p.site } # will already be set if doing a bulk load.
+    @region_objects = @site_objects.map { |s| s.region }
+    {
+      region_uris: @site_objects.map {|s| s.uri.to_s },
+      region_labels: @region_objects.map {|r| r.label rescue nil},
     }
   end
 
   def competition_index_fields
-    @competition_object ||= self.competition_call
+    @competition_call_object ||= self.competition_call
     {
-      competition_call_uri: (@competition_object.uri.to_s rescue nil),
-      competition_call_label: (@competition_object.label rescue nil)
+      competition_call_uri: self.competition_call_uri.to_s,
+      competition_call_label: (@competition_call_object.label rescue nil)
     }
   end
 
   def team_index_fields
-    @team_object ||= self.competition_call.team rescue nil
-    {
-      team_uri: (@team_object.uri.to_s rescue nil),
-      team_label: (@team_object.label rescue nil)
-    }
+    @competition_call_object ||= self.competition_call
+
+    if @competition_call_object
+      @team_object ||= @competition_call_object.team
+      {
+        team_uri: @competition_call_object.team_uri.to_s,
+        team_label: (@team_object.label rescue nil)
+      }
+    else
+      {}
+    end
   end
 
   def budget_area_index_fields
-    @budget_area_object ||= self.competition_call.budget_area rescue nil
-    {
-      budget_area_uri: (@budget_area_object.uri.to_s rescue nil),
-      budget_area_label: (@budget_area_object.label rescue nil)
-    }
+    @competition_call_object ||= self.competition_call
+
+    if @competition_call_object
+      @budget_area_object ||= @competition_call_object.budget_area
+      {
+        budget_area_uri: @competition_call_object.budget_area_uri.to_s,
+        budget_area_label: (@budget_area_object.label rescue nil)
+      }
+    else
+      {}
+    end
   end
 
 

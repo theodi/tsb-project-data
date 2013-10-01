@@ -46,9 +46,6 @@ namespace :db do
     )
   end
 
-  desc 'create file to load'
-  task create_data_file: :environment do
-    Import::Loader.create_data_file
-  end
+
 
 end

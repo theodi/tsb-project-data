@@ -6,7 +6,7 @@ namespace :search do
   end
 
   # e.g. DEBUG=true LIMIT=20 rake search:import_projects
-  desc 'imports all the exiting projects in the database into the index'
+  desc 'imports all the exiting projects in the database into the index. SLOW'
   task import_projects: :environment do
     limit = ENV['LIMIT']
     criteria = Project.all

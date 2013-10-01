@@ -16,21 +16,21 @@ module Import
         "Scotland" => "http://statistics.data.gov.uk/id/statistical-geography/S92000003",
         "Wales" => "http://statistics.data.gov.uk/id/statistical-geography/W92000004"
       }
-    
-      output_file = File.join(Rails.root, 'data', 'datasets', 'tsb-projects-data', 'regions.nt')
-  
+
+      output_file = File.join(Rails.root, 'data', 'output-data', 'regions.nt')
+
       graph = RDF::Graph.new
-    
+
       regions.each_pair do |label,uri|
         r = Region.new(uri)
         r.label = label
         r.repository.each_statement {|s| graph << s}
-          
+
       end
-    
+
       # write graph to file
       File.open(output_file,'w') {|f| f << graph.dump(:ntriples)}
-    
+
     end
 
   end

@@ -6,10 +6,10 @@ module Import
 
     # parses the excel file, and creates an ntriples version of the data.
     # returns a hash of resources created in the process.
-    def self.parse_excel_file(input_filename)
+    def self.prepare_project_data(input_filename)
 
       input_file = File.join(Rails.root, 'data', 'input-data', input_filename)
-      output_file = File.join(Rails.root, 'data', 'datasets', 'tsb-projects-data', 'data.nt')
+      output_file = File.join(Rails.root, 'data', 'output-data', 'project_data.nt')
       sic_hash_file = File.join(Rails.root, 'data', 'sic', 'sic.json')
 
       excel = Roo::Excelx.new(input_file)

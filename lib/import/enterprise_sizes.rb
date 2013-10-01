@@ -3,11 +3,11 @@ module Import
 
 # create concept scheme for enterprise sizes
     def self.create_data
-      output_file = File.join(Rails.root, 'data', 'datasets', 'tsb-projects-data', 'enterprise_sizes.nt')
-  
+      output_file = File.join(Rails.root, 'data', 'output-data', 'enterprise_sizes.nt')
+
       graph = RDF::Graph.new
       # concept scheme
-      
+
       options = {
         "large" => "Describes a company with more than 250 employees.",
         "medium" => "Describes a company with between 51 and 250 employees.",
@@ -21,14 +21,14 @@ module Import
         e.label = label
         e.definition = desc
         e.repository.each_statement {|s| graph << s}
-        
+
       end
-      
+
 
       # write graph to file
       File.open(output_file,'w') {|f| f << graph.dump(:ntriples)}
-      
-      
+
+
     end
   end
 end

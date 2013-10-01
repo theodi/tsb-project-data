@@ -2,24 +2,46 @@ namespace :loader do
 
   # e.g. INPUT_FILENAME='datatest1000.xlsx' rake loader:parse_excel
   desc 'reads excel file, and creates a data file'
-  task parse_excel: :environment do
+  task prepare_project_data: :environment do
     input_filename = ENV['INPUT_FILENAME']
-    Import::Loader.parse_excel_file(input_filename)
+    Import::Loader.prepare_project_data(input_filename)
   end
 
-  # e.g. INPUT_FILENAME='datatest1000.xlsx' rake loader:complete_load
+  desc 'reads the excel files for the supporting data'
+  task prepare_supporting_data: :environment do
+    Import::Regions.create_data
+    Import::Products.create_data
+    Import::EnterpriseSizes.create_data
+  end
+
+  # params:
+  #  * INPUT_FILENAME: file to load
+  #  * REPLACE_SUPPORTING: load supporting data? default false.
+  # e.g.
+  #  REPLACE_SUPPORTING=true INPUT_FILENAME='datatest1000.xlsx' rake loader:complete_load
   desc 'deletes search index, parses excel file, creates dump, loads dump into triple store, creates search index'
   task complete_load: :environment do
 
     input_filename = ENV['INPUT_FILENAME']
+
     start_time = Time.now
+
+    if ENV['REPLACE_SUPPORTING']
+      puts '>>> preparing supporting data'
+      Rake::Task['loader:prepare_supporting_data'].invoke
+      puts '>>> replacing supporing data'
+      Rake::Task['db:replace_supporting_data'].invoke
+      puts ">>> time elasped #{Time.now - start_time}s"
+    end
+
+
 
     puts '>>> deleting search index...'
     Rake::Task['search:delete_index'].invoke
     puts ">>> time elasped #{Time.now - start_time}s"
 
     puts '>>> parsing excel'
-    resources = Import::Loader.parse_excel_file(input_filename)
+    resources = Import::Loader.prepare_project_data(input_filename)
     puts ">>> time elasped #{Time.now - start_time}s"
 
     puts ">>> building search index..."
@@ -29,7 +51,7 @@ namespace :loader do
     puts ">>> time elasped #{Time.now - start_time}s"
 
     puts ">>> loading ntriples dump to DB..."
-    Rake::Task['db:replace_dataset_data'].invoke
+    Rake::Task['db:replace_project_data'].invoke
     puts ">>> time elasped #{Time.now - start_time}s"
 
     puts ">>> importing search index..."

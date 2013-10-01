@@ -1,5 +1,19 @@
 namespace :db do
 
+  def replace_graph(graph_uri, filename, content_type='text/plain')
+
+    puts "loading #{filename} -> #{graph_uri}"
+    url = "#{TsbProjectData::DATA_ENDPOINT}?graph=#{graph_uri}"
+
+    RestClient::Request.execute(
+      :method => :put,
+      :url => url,
+      :payload => File.read(File.join(Rails.root, 'data', 'output-data', filename)),
+      :headers => {content_type: content_type},
+      :timeout => 300
+    )
+  end
+
   desc 'Clean Tripod data'
   task clean: :environment do
     Tripod::SparqlClient::Update.update('
@@ -33,17 +47,16 @@ namespace :db do
     puts dataset.save
   end
 
-  desc 'replace dataset data'
-  task replace_dataset_data: :environment do
+  desc 'replace supporting data'
+  task replace_supporting_data: :environment do
+    replace_graph(Region.get_graph_uri, 'regions.nt')
+    replace_graph(Product.get_graph_uri, 'products.nt')
+    replace_graph(EnterpriseSize.get_graph_uri, 'enterprise_sizes.nt')
+  end
 
-    url = "#{TsbProjectData::DATA_ENDPOINT}?graph=#{TsbProjectData::DATA_GRAPH}"
-    RestClient::Request.execute(
-      :method => :put,
-      :url => url,
-      :payload => File.read(File.join(Rails.root, 'data', 'datasets', TsbProjectData::DATASET_SLUG, 'data.nt')),
-      :headers => {content_type: 'text/plain'},
-      :timeout => 300
-    )
+  desc 'replace project dataset data.'
+  task replace_project_data: :environment do
+    replace_graph(TsbProjectData::DATA_GRAPH, 'project_data.nt')
   end
 
 

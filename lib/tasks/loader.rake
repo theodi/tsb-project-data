@@ -31,10 +31,10 @@ namespace :loader do
       Rake::Task['loader:prepare_supporting_data'].invoke
       puts '>>> replacing supporing data'
       Rake::Task['db:replace_supporting_data'].invoke
+      puts ">>> clearing cache..."
+      `echo 'flush_all' | nc localhost 11211`
       puts ">>> time elasped #{Time.now - start_time}s"
     end
-
-
 
     puts '>>> deleting search index...'
     Rake::Task['search:delete_index'].invoke

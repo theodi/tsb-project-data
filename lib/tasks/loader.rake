@@ -14,6 +14,7 @@ namespace :loader do
     Import::EnterpriseSizes.create_data
     Import::LegalEntityForms.create_data
     Import::ProjectStatuses.create_data
+    Import::CostCategories.create_data
   end
 
   # params:

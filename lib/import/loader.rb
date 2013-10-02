@@ -1,7 +1,6 @@
 module Import
   class Loader
 
-    extend Urlify
     extend RowToRdf
 
     # parses the excel file, and creates an ntriples version of the data.
@@ -12,7 +11,7 @@ module Import
       output_file = File.join(Rails.root, 'data', 'output-data', 'project_data.nt')
       sic_hash_file = File.join(Rails.root, 'data', 'sic', 'sic.json')
 
-      excel = Roo::Excelx.new(input_file)
+      excel = Roo::Excelx.new(input_file) 
 
       # take a copy of the header row for easy reference
       headers = excel.row(1)

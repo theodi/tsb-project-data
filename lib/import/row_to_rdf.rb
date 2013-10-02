@@ -39,7 +39,7 @@ module Import
         p.description = description
         p.project_number = proj_num
         status = row["ProjectStatus"]
-        status_uri = Vocabulary::TSBDEF["concept/project-status/#{urlify(status)}"]
+        status_uri = Vocabulary::TSBDEF["concept/project-status/#{Urlify::urlify(status)}"]
         p.project_status_uri = status_uri
         duration_uri = Vocabulary::TSB["project/#{proj_num}/duration"]
         d = ProjectDuration.new(duration_uri)
@@ -53,7 +53,7 @@ module Import
         d.end = t2.strftime('%Y-%m-%d')
         costcat = row["CostCategoryType"]
         if ["Industrial","Academic"].include?(costcat)
-          cc_uri = Vocabulary::TSBDEF["concept/cost-category/#{urlify(costcat)}"]
+          cc_uri = Vocabulary::TSBDEF["concept/cost-category/#{Urlify::urlify(costcat)}"]
           cc = CostCategory.new(cc_uri)
           p.cost_category = cc
         end
@@ -68,7 +68,7 @@ module Import
       # uri: use company number if it exists.
       # if no company number, then use urlified name
       org_name = row["ParticipantName"]
-      urlified_org_name = urlify(org_name)
+      urlified_org_name = Urlify::urlify(org_name)
       org_number = row["CompanyRegNo"]
       org_slug = nil
       if org_number
@@ -164,7 +164,7 @@ module Import
         # legal entity form and enterprise size
         esize = row["EnterpriseSize"]
         if esize
-          esize_uri = Vocabulary::TSBDEF["concept/enterprise-size/#{urlify(esize)}"]
+          esize_uri = Vocabulary::TSBDEF["concept/enterprise-size/#{Urlify::urlify(esize)}"]
           o.enterprise_size = EnterpriseSize.new(esize_uri)
         end
         legal_form_code = LegalEntityForm::LEGAL_ENTITY_FORMS[row["ParticipantOrganisationType"]]

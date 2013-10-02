@@ -13,6 +13,7 @@ namespace :loader do
     Import::Products.create_data
     Import::EnterpriseSizes.create_data
     Import::LegalEntityForms.create_data
+    Import::ProjectStatuses.create_data
   end
 
   # params:

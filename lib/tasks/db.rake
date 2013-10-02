@@ -52,6 +52,7 @@ namespace :db do
     replace_graph(Region.get_graph_uri, 'regions.nt')
     replace_graph(Product.get_graph_uri, 'products.nt')
     replace_graph(EnterpriseSize.get_graph_uri, 'enterprise_sizes.nt')
+    replace_graph(LegalEntityForm.get_graph_uri, 'legal_entity_forms.nt')
   end
 
   desc 'replace project dataset data.'

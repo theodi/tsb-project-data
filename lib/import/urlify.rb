@@ -1,6 +1,6 @@
 module Import
   module Urlify
-    def urlify(str)
+    def self.urlify(str)
       url_str = ""
       url_str = String.new(str) if str
 

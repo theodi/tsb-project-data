@@ -1,4 +1,4 @@
 class SicClass
   include Concept
-  concept_scheme_uri "http://example.com/def/concept-scheme/sic-classes"
+  concept_scheme_uri Vocabulary::TSBDEF["concept-scheme/sic"]
 end

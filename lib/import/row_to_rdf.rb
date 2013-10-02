@@ -72,23 +72,29 @@ module Import
       org_number = row["CompanyRegNo"]
       org_slug = nil
       if org_number
-        org_slug = org_number.to_s
-
-        # normalise the format
-        # replace any spaces with '-'
-        org_slug.gsub!(/ /,'-')
-        #  add leading zeroes if necessary
-        unless org_slug.starts_with?('RC')
-          while org_slug.length < 8
-            org_slug = "0" + org_slug
-          end
-
+        # does the spreadsheet/Roo think it's a number or a string?       
+        if org_number.class == Float
+          org_slug = org_number.to_i.to_s 
+        else
+          org_slug = org_number
         end
-      elsif org_number == "Exempt Charity"
-        org_slug = urlified_org_name
-      elsif org_number == "NHS Hospital"
-        org_slug = urlified_org_name
-      else  # no company num at all
+        
+        if ["0","","Exempt Charity","NHS Hospital", "N/A", "null"].include?(org_slug)
+          org_slug = urlified_org_name
+        else
+          # normalise the format
+          # replace any spaces with '-'
+          org_slug.gsub!(/ /,'-')
+          #  add leading zeroes if necessary
+          unless org_slug.starts_with?('RC')
+            while org_slug.length < 8
+              org_slug = "0" + org_slug
+            end
+
+          end
+        end
+      
+      else  # org_number is nil: no company num at all
         org_slug = urlified_org_name
       end
 
@@ -102,7 +108,13 @@ module Import
         # add to resources hash
         resources[org_uri] = o
         o.label = org_name
-        o.company_number = org_number
+        if org_number
+          if org_number.class == Float
+            o.company_number = org_number.to_i.to_s
+          elsif org_number.length > 0 && org_number != "null"
+            o.company_number = org_number.to_i.to_s
+          end
+        end
         # for now, ignore the case where an org might have two addresses - just use the first one
         site_uri = Vocabulary::TSB["organization/#{org_slug}/site"]
         address_uri = Vocabulary::TSB["organization/#{org_slug}/address"]

@@ -115,7 +115,7 @@ module Import
           if org_number.class == Float
             o.company_number = org_number.to_i.to_s
           elsif org_number.length > 0 && org_number != "null"
-            o.company_number = org_number.to_i.to_s
+            o.company_number = org_number
           end
         end
         # for now, ignore the case where an org might have two addresses - just use the first one

@@ -37,8 +37,8 @@ module ProjectSearch
       indexes :region_labels, type: 'string', analyzer: 'keyword'
 
       # competition
-      indexes :competition_call_uri, type: 'string', analyzer: 'keyword'
-      indexes :competition_call_label, type: 'string'
+      indexes :competition_uri, type: 'string', analyzer: 'keyword'
+      indexes :competition_label, type: 'string'
 
       # competition's budget
       indexes :budget_area_uri, type: 'string', analyzer: 'keyword'
@@ -60,7 +60,7 @@ module ProjectSearch
     @lead_org_object = resources_hash[self.leader_uri]
     @participant_objects = self.participants_uris.map {|org_uri| resources_hash[org_uri] }
     @site_objects = @participant_objects.map {|p| resources_hash[p.site_uri] }
-    @competition_call_object ||= resources_hash[self.competition_call_uri]
+    @competition_object ||= resources_hash[self.competition_uri]
 
     # Everything else wont be in the resources hash - we will look up from DB. Queries will be cached.
 
@@ -161,20 +161,20 @@ module ProjectSearch
   end
 
   def competition_index_fields
-    @competition_call_object ||= self.competition_call
+    @competition_object ||= self.competition
     {
-      competition_call_uri: self.competition_call_uri.to_s,
-      competition_call_label: (@competition_call_object.label rescue nil)
+      competition_uri: self.competition_uri.to_s,
+      competition_label: (@competition_object.label rescue nil)
     }
   end
 
   def team_index_fields
-    @competition_call_object ||= self.competition_call
+    @competition_object ||= self.competition
 
-    if @competition_call_object
-      @team_object ||= @competition_call_object.team
+    if @competition_object
+      @team_object ||= @competition_object.team
       {
-        team_uri: @competition_call_object.team_uri.to_s,
+        team_uri: @competition_object.team_uri.to_s,
         team_label: (@team_object.label rescue nil)
       }
     else
@@ -183,12 +183,12 @@ module ProjectSearch
   end
 
   def budget_area_index_fields
-    @competition_call_object ||= self.competition_call
+    @competition_object ||= self.competition
 
-    if @competition_call_object
-      @budget_area_object ||= @competition_call_object.budget_area
+    if @competition_object
+      @budget_area_object ||= @competition_object.budget_area
       {
-        budget_area_uri: @competition_call_object.budget_area_uri.to_s,
+        budget_area_uri: @competition_object.budget_area_uri.to_s,
         budget_area_label: (@budget_area_object.label rescue nil)
       }
     else

@@ -39,18 +39,21 @@ module Import
         p.description = description
         p.project_number = proj_num
         status = row["ProjectStatus"]
-        status_uri = Vocabulary::TSBDEF["concept/project-status/#{Urlify::urlify(status)}"]
-        p.project_status_uri = status_uri
+        if status && status.length > 0
+          status_uri = Vocabulary::TSBDEF["concept/project-status/#{Urlify::urlify(status)}"]
+          p.project_status_uri = status_uri
+        end
         duration_uri = Vocabulary::TSB["project/#{proj_num}/duration"]
         d = ProjectDuration.new(duration_uri)
         p.duration = d
         resources[duration_uri] = d
-        d.label = "Duration of project #{proj_num}"
+        
         ## TO DO - sort out date formatting
         t1 = row["StartDate"]
         t2 = row["ProjectEndDate"]
         d.start  = t1.strftime('%Y-%m-%d')
         d.end = t2.strftime('%Y-%m-%d')
+        d.label = "From #{t1.strftime('%d/%m/%Y')} to #{t2.strftime('%d/%m/%Y')}"
         costcat = row["CostCategoryType"]
         if ["Industrial","Academic"].include?(costcat)
           cc_uri = Vocabulary::TSBDEF["concept/cost-category/#{Urlify::urlify(costcat)}"]
@@ -131,11 +134,13 @@ module Import
 
         # clean up the address cell of the spreadsheet, removing line breaks
         address = row["Address"]
-        cleaned_address = address.gsub(/\n/,', ')
-        a.street_address = cleaned_address
-        a.locality = row["Town"]
-        a.county = row["County"]
-        a.postcode = row["Postcode"]
+        if address && address.length > 0 && address != "null"
+          cleaned_address = address.gsub(/\n/,', ')
+          a.street_address = cleaned_address
+        end
+        a.locality = row["Town"] if row["Town"] && row["Town"] != "null"
+        a.county = row["County"] if row["County"] && row["County"] != "null"
+        a.postcode = row["Postcode"] if row["Postcode"] && row["Postcode"] != "null"
 
         region = row["Validated Region"].strip
         region_uri = REGIONS[region]
@@ -149,38 +154,40 @@ module Import
 
 
         # postcode - connect to OS URI - what should the subject be? the organization? the site?
-        postcode = row["Postcode"].gsub(/ /,'') # remove spaces
-        pc_uri = Vocabulary::OSPC[postcode]
+        if row["Postcode"] && row["Postcode"] != "null"
+          postcode = row["Postcode"].gsub(/ /,'') # remove spaces
+          pc_uri = Vocabulary::OSPC[postcode]
 
-        s.postcode = pc_uri
+          s.postcode = pc_uri
 
-        # Look up location and district for OS postcode and connect to site.
-        query = "SELECT ?lat ?long ?district_gss WHERE {
-          <#{pc_uri}> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ?lat .
-          <#{pc_uri}> <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?long .
-          <#{pc_uri}> <http://data.ordnancesurvey.co.uk/ontology/postcode/district> ?os_district .
-          ?os_district <http://www.w3.org/2002/07/owl#sameAs> ?district_gss
-        }"
+          # Look up location and district for OS postcode and connect to site.
+          query = "SELECT ?lat ?long ?district_gss WHERE {
+            <#{pc_uri}> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ?lat .
+            <#{pc_uri}> <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?long .
+            <#{pc_uri}> <http://data.ordnancesurvey.co.uk/ontology/postcode/district> ?os_district .
+            ?os_district <http://www.w3.org/2002/07/owl#sameAs> ?district_gss
+          }"
 
-        encoded_query = CGI::escape(query)
-        query_url = "http://opendatacommunities.org/sparql.json?query=" + encoded_query + "&api_key=346ead3fc7282de4827f2a5cf408b089"
-        response = JSON.parse(RestClient.get query_url)
-        result = response["results"]["bindings"][0]
-        lat = result["lat"]["value"] if result && result["lat"]
-        long = result["long"]["value"] if result && result["long"]
-        district = result["district_gss"]["value"] if result && result["district_gss"]
-        s.lat = lat if lat
-        s.long = long if long
-        s.district = district if district
-        #puts "#{lat || 'nil'} #{long || 'nil'}"
+          encoded_query = CGI::escape(query)
+          query_url = "http://opendatacommunities.org/sparql.json?query=" + encoded_query + "&api_key=346ead3fc7282de4827f2a5cf408b089"
+          response = JSON.parse(RestClient.get query_url)
+          result = response["results"]["bindings"][0]
+          lat = result["lat"]["value"] if result && result["lat"]
+          long = result["long"]["value"] if result && result["long"]
+          district = result["district_gss"]["value"] if result && result["district_gss"]
+          s.lat = lat if lat
+          s.long = long if long
+          s.district = district if district
+        end
+       
         # legal entity form and enterprise size
         esize = row["EnterpriseSize"]
-        if esize
+        if esize && esize != "null"
           esize_uri = Vocabulary::TSBDEF["concept/enterprise-size/#{Urlify::urlify(esize)}"]
           o.enterprise_size = EnterpriseSize.new(esize_uri)
         end
         legal_form_code = LegalEntityForm::LEGAL_ENTITY_FORMS[row["ParticipantOrganisationType"]]
-        if legal_form_code
+        if legal_form_code && legal_form_code != "null"
           form = LegalEntityForm.new(Vocabulary::TSBDEF["concept/legal-entity-form/#{legal_form_code}"])
           o.legal_entity_form = form
         end
@@ -190,10 +197,12 @@ module Import
         # TODO connect company to OpenCorporates and Companies House
         # SIC code
         sic_desc = row["ParticipantSICSubclass"]
-        sic_code = sic_hash[sic_desc]
-        if sic_code
-          sic_uri = Vocabulary::TSBDEF["concept/sic/#{sic_code}"]
-          o.sic_class_uri = sic_uri
+        if sic_desc && sic_desc != "Unknown" && sic_desc != "null"
+          sic_code = sic_hash[sic_desc]
+          if sic_code
+            sic_uri = Vocabulary::TSBDEF["concept/sic/#{sic_code}"]
+            o.sic_class_uri = sic_uri
+          end
         end
 
       end # of organization block
@@ -207,8 +216,8 @@ module Import
         activity_code = "0" + activity_code
       end
 
-      product = row["Product"]
-      area = row["AreaBudgetHolder"]
+      product = row["Product"].strip
+      area = row["AreaBudgetHolder"].strip
       team = row["TeamBudgetHolder"].strip
 
       # use Activity Code as the unique identifier for a Competition Call
@@ -218,7 +227,7 @@ module Import
       if resources[comp_uri]
         comp = resources[comp_uri]
       else
-        comp = CompetitionCall.new(comp_uri)
+        comp = Competition.new(comp_uri)
         resources[comp_uri] = comp
 
         comp.competition_code = comp_call_code
@@ -233,18 +242,18 @@ module Import
         puts area unless BudgetArea::BUDGET_AREA_CODES[area]
 
         team_code = Team::TEAM_CODES[team]
-        if team_code
+        if team_code && team_code != "null"
           t_uri = Vocabulary::TSB["team/#{team_code}"]
           comp.team_uri = t_uri
         end
         budget_area_code = BudgetArea::BUDGET_AREA_CODES[area]
-        if budget_area_code
+        if budget_area_code && budget_area_code != "null"
           budg_uri = Vocabulary::TSB["budget-area/#{budget_area_code}"]
           comp.budget_area_uri = budg_uri
         end
         # NB use '_uri' setter methods as linking to a URI, not a Tripod Resource
         product_code = Product::PRODUCT_CODES[product]
-        if product_code
+        if product_code && product_code != "null"
           prod_uri = Vocabulary::TSBDEF["concept/product/#{product_code}"]
           comp.product_uri = prod_uri
         end
@@ -253,7 +262,7 @@ module Import
       end
 
       #link project to competition call (if not already done)
-      p.competition_call = comp unless p.competition_call_uri
+      p.competition = comp unless p.competition_uri
 
 
 

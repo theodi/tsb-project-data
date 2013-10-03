@@ -16,7 +16,7 @@ class Project
   linked_to :supported_by, Vocabulary::TSBDEF.supportedBy, class_name: 'Grant', multivalued: true
   linked_to :participants, Vocabulary::TSBDEF.hasParticipant, class_name: 'Organization', multivalued: true
 
-  linked_to :competition_call, Vocabulary::TSBDEF.competitionCall
+  linked_to :competition, Vocabulary::TSBDEF.competition
   linked_to :project_status, Vocabulary::TSBDEF.projectStatus
   linked_to :duration, Vocabulary::TSBDEF.projectDuration, class_name: 'ProjectDuration'
   linked_to :cost_category, Vocabulary::TSBDEF.costCategory

@@ -10,15 +10,21 @@
     [facets chooser]
 
   #search
-    %form
-      [search form]
+    = form_tag '/projects', method: 'get' do
+      Search:
+      = text_field_tag :search_string, @search.original_search_string, :placeholder => 'Search projects'
+      = submit_tag 'search'
 
     #results
-      [ordering controls]
+
+      %div
+        #{@projects.total} projects matched your search
+
+      %div
+        [ordering controls here]
 
       %ul
       - @projects.each do |project|
         %li= link_to((project.label || project.uri), resource_path_from_uri(project.uri) )
 
-      - if pagination_required?(@projects, @pagination_params)
-        = paginate @projects
+      = paginate @projects

@@ -7,6 +7,7 @@ module ProjectSearch
     tire.mapping do
 
       # from project
+      indexes :uri, type: 'string', analyzer: 'keyword' # this is the same as what will be in id, but index this field for convenince too.
       indexes :label, type: 'string', analyzer: 'snowball'
       indexes :start_date, type: 'date'
       indexes :end_date, type: 'date'
@@ -86,6 +87,7 @@ module ProjectSearch
 
   def project_index_fields
     {
+      uri: uri.to_s,
       label: label,
       status_uri: project_status_uri.to_s
     }

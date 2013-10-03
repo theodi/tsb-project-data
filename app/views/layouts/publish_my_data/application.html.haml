@@ -20,9 +20,9 @@
             %a.home-link{href:'/'}
               TSB Projects Data
 
-          %form
+          = form_tag '/projects', method: 'get' do
             .form-group
-              = text_field_tag :search, nil, placeholder: 'Search Projects'
+              = text_field_tag :search_string, nil, :placeholder => 'Search projects'
             = submit_tag :search
 
           .branding
@@ -68,4 +68,4 @@
         [Footer Here]
 
 
-    = render 'publish_my_data/shared/google_analytics'
+    =# render 'publish_my_data/shared/google_analytics'

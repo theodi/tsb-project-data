@@ -1,11 +1,11 @@
 #projects-page {
   @include make-row();
 
-  #facets {
+  #search {
     @include make-md-column(3);
   }
 
-  #search {
+  #results {
     @include make-md-column(9);
   }
 

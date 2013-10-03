@@ -4,21 +4,26 @@ module ProjectSearch
   included do
     include Tire::Model::Search
 
+    # check the mapping with
+    # curl http://localhost:9200/projects/_mapping
     tire.mapping do
 
       # from project
       indexes :uri, type: 'string', analyzer: 'keyword' # this is the same as what will be in id, but index this field for convenince too.
-      indexes :label, type: 'string', analyzer: 'snowball'
+      indexes :label, type: 'string', analyzer: 'snowball', :boost => 10
       indexes :start_date, type: 'date'
       indexes :end_date, type: 'date'
       indexes :status_uri, type: 'string', analyzer: 'keyword'
 
+      indexes :description, type: 'string', analyzer: 'snowball'
+
       # from project's grants
       indexes :total_offer_grant, type: 'integer'
+      indexes :total_offer_cost, type: 'integer'
 
       # from lead org
       indexes :leader_uri, type: 'string', analyzer: 'keyword'
-      indexes :leader_label, type: 'string', analyzer: 'snowball'
+      indexes :leader_label, type: 'string', analyzer: 'snowball', :boost => 5
 
       # from participants (could be many)
       indexes :participant_uris, type: 'string', analyzer: 'keyword'
@@ -89,7 +94,8 @@ module ProjectSearch
     {
       uri: uri.to_s,
       label: label,
-      status_uri: project_status_uri.to_s
+      status_uri: project_status_uri.to_s,
+      description: description
     }
   end
 
@@ -112,7 +118,8 @@ module ProjectSearch
   def grant_index_fields
     @grant_objects ||= self.supported_by
     {
-       total_offer_grant: @grant_objects.map {|g| g.offer_grant }.inject {|sum,x| sum + x }
+       total_offer_grant: @grant_objects.map {|g| g.offer_grant }.inject {|sum,x| sum + x },
+       total_offer_cost: @grant_objects.map {|g| g.offer_cost }.inject {|sum,x| sum + x }
     }
   end
 
@@ -155,7 +162,7 @@ module ProjectSearch
     @site_objects ||= @participant_objects.map {|p| p.site } # will already be set if doing a bulk load.
     @region_objects = @site_objects.map { |s| s.region }
     {
-      region_uris: @site_objects.map {|s| s.uri.to_s },
+      region_uris: @site_objects.map {|s| s.region_uri.to_s },
       region_labels: @region_objects.map {|r| r.label rescue nil},
     }
   end

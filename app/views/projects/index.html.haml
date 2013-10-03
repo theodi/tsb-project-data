@@ -17,7 +17,7 @@
           - @projects.facets["regions"]["terms"].each do |t|
             - term = t["term"]
             = check_box_tag("regions[#{term}]", true, @search.regions_filter.include?(term) )
-            #{term} (#{t["count"]})
+            #{term}
             %br
 
         %div#enterprise-size-facets
@@ -25,7 +25,7 @@
           - @projects.facets["enterprise_sizes"]["terms"].each do |t|
             - term = t["term"]
             = check_box_tag("enterprise_sizes[#{term}]", true, @search.enterprise_sizes_filter.include?(term) )
-            #{term} (#{t["count"]})
+            #{term}
             %br
 
       = submit_tag 'update'

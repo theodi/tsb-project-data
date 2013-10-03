@@ -27,13 +27,20 @@ class Search
       search.facet('offer_cost_stats') { statistical 'total_offer_cost' }
       search.facet('regions') do |facet|
         facet.terms 'region_labels'
-        facet.filter :terms, { participant_size_labels: enterprise_sizes_filter } if enterprise_sizes_filter.any?
+        # want all the facets except regions.
+        facet.facet_filter :terms, { participant_size_labels: enterprise_sizes_filter } if enterprise_sizes_filter.any?
       end
-      search.facet('enterprise_sizes') { terms 'participant_size_labels' }
+
+      search.facet('enterprise_sizes') do |facet|
+        facet.terms 'participant_size_labels'
+
+        # want all the facets except sizes
+        facet.facet_filter :terms, { region_labels: regions_filter } if regions_filter.any?
+      end
 
       # filters
-      # search.filter :terms, { region_labels: regions_filter } if regions_filter.any?
-      # search.filter :terms, { participant_size_labels: enterprise_sizes_filter } if  enterprise_sizes_filter.any?
+      search.filter :terms, { region_labels: regions_filter } if regions_filter.any?
+      search.filter :terms, { participant_size_labels: enterprise_sizes_filter } if  enterprise_sizes_filter.any?
 
       Rails.logger.debug search.to_json
     end

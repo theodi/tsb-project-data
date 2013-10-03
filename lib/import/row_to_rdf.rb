@@ -276,7 +276,7 @@ module Import
       g.offer_cost = row["OfferCost"].to_i
       g.offer_grant = row["OfferGrant"].to_i
       g.offer_percentage = row["OfferRateOfGrant"]
-      g.payments_to_date = row["PaymentsToDate"].to_i
+      g.payments_to_date = row["PaymentsToDate"]
 
 
       ##### connections #####

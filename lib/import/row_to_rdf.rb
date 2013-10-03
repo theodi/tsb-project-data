@@ -220,10 +220,10 @@ module Import
       area = row["AreaBudgetHolder"].strip
       team = row["TeamBudgetHolder"].strip
 
-      # use Activity Code as the unique identifier for a Competition Call
+      # use Activity Code as the unique identifier for a Competition
 
-      comp_uri = Vocabulary::TSB["competition-call/#{activity_code}"]
-      # have we done this competition call?
+      comp_uri = Vocabulary::TSB["competition/#{activity_code}"]
+      # have we done this competition?
       if resources[comp_uri]
         comp = resources[comp_uri]
       else
@@ -233,7 +233,7 @@ module Import
         comp.competition_code = comp_call_code
         comp.competition_year = Vocabulary::REF["year/#{comp_year}"]
         comp.activity_code = activity_code
-        comp.label = "Competition Call #{activity_code}"
+        comp.label = "Competition #{activity_code}"
 
 
         # check we are not missing any codes
@@ -261,7 +261,7 @@ module Import
 
       end
 
-      #link project to competition call (if not already done)
+      #link project to competition (if not already done)
       p.competition = comp unless p.competition_uri
 
 

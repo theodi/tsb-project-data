@@ -12,21 +12,9 @@
       = submit_tag 'search'
 
       #facets
-        %div#region-facets
-          %h4 Regions:
-          - @projects.facets["regions"]["terms"].each do |t|
-            - term = t["term"]
-            = check_box_tag("regions[#{term}]", true, @search.regions_filter.include?(term) )
-            #{term}
-            %br
-
-        %div#enterprise-size-facets
-          %h4 Enterprise Sizes:
-          - @projects.facets["enterprise_sizes"]["terms"].each do |t|
-            - term = t["term"]
-            = check_box_tag("enterprise_sizes[#{term}]", true, @search.enterprise_sizes_filter.include?(term) )
-            #{term}
-            %br
+        = render 'facet', title: 'Region', facet_name: 'region_labels'
+        = render 'facet', title: 'Enterprise Size', facet_name: 'participant_size_labels'
+        = render 'facet', title: 'Status', facet_name: 'status_label'
 
       = submit_tag 'update'
 
@@ -49,22 +37,6 @@
 
     %ul
     - @projects.each do |project|
-      %li{style:"border-bottom:1px solid #eee"}
-        %h4
-          = link_to((project.label || project.uri), resource_path_from_uri(project.uri) )
-        %p
-          = truncate(project.description, length: 100)
-        - if project.leader_uri
-          Leader: #{link_to((project.leader_label || project.leader_uri), resource_path_from_uri(project.leader_uri) ) }
-          %br
-        - if project.participant_labels.many?
-          Participants:
-          - for i in 0...project.participant_uris.reject{|p| p == project.leader_uri }.length
-            - participant_uri = project.participant_uris[i]
-            - participant_label = project.participant_labels[i]
-            = link_to((participant_label || participant_uri), resource_path_from_uri(participant_uri) )
-          %br
-        Offer grant: &pound;#{project.total_offer_grant}, cost: &pound;#{project.total_offer_cost}
-        %br
-        Regions: #{project.region_labels.join(',')}
+      = render 'result', project: project
+
     = paginate @projects

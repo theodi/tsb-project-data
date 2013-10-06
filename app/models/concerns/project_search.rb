@@ -14,6 +14,7 @@ module ProjectSearch
       indexes :start_date, type: 'date'
       indexes :end_date, type: 'date'
       indexes :status_uri, type: 'string', analyzer: 'keyword'
+      indexes :status_label, type: 'string', analyzer: 'keyword'
 
       indexes :description, type: 'string', analyzer: 'snowball'
 
@@ -67,7 +68,7 @@ module ProjectSearch
     @site_objects = @participant_objects.map {|p| resources_hash[p.site_uri] }
     @competition_object ||= resources_hash[self.competition_uri]
 
-    # Everything else wont be in the resources hash - we will look up from DB. Queries will be cached.
+    # Everything else wont be in the resources hash - we will look up from DB. Queries will be cached tho.
 
     doc = to_hash({_id: self.uri.to_s, type: 'project'})
   end
@@ -95,6 +96,7 @@ module ProjectSearch
       uri: uri.to_s,
       label: label,
       status_uri: project_status_uri.to_s,
+      status_label: project_status.label, # needs a lookup, but after first few will be cached.
       description: description
     }
   end

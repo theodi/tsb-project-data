@@ -1,0 +1,23 @@
+-# expects local params:
+-#   project (Tire project search result)
+
+%li{style:"border-bottom:1px solid #eee"}
+  %h4
+    = link_to((project.label || project.uri), resource_path_from_uri(project.uri) )
+  %p
+    = truncate(project.description, length: 100)
+  - if project.leader_uri
+    Leader: #{link_to((project.leader_label || project.leader_uri), resource_path_from_uri(project.leader_uri) ) }
+    %br
+  - if project.participant_labels.many?
+    Participants:
+    - for i in 0...project.participant_uris.reject{|p| p == project.leader_uri }.length
+      - participant_uri = project.participant_uris[i]
+      - participant_label = project.participant_labels[i]
+      = link_to((participant_label || participant_uri), resource_path_from_uri(participant_uri) )
+    %br
+  Offer grant: &pound;#{project.total_offer_grant}, cost: &pound;#{project.total_offer_cost}
+  %br
+  Regions: #{project.region_labels.join(',')}
+  %br
+  Status: #{project.status_label}

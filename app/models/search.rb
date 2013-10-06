@@ -5,14 +5,21 @@ class Search
   attr_accessor :original_search_string
   attr_accessor :search_string
 
-  attr_accessor :regions_filter
-  attr_accessor :enterprise_sizes_filter
+  attr_accessor :facets # hash of field => filter
 
   attr_accessor :page
   attr_accessor :per_page
 
   def initialize(params)
     self.params = params # store the raw params
+
+    # hash of field => filter
+    self.facets = {
+      'region_labels' => [],
+      'participant_size_labels' => [],
+      'status_label' => []
+    }
+
     process_params()
   end
 
@@ -25,22 +32,10 @@ class Search
       # facets
       search.facet('offer_grant_stats') { statistical 'total_offer_grant' }
       search.facet('offer_cost_stats') { statistical 'total_offer_cost' }
-      search.facet('regions') do |facet|
-        facet.terms 'region_labels'
-        # want all the facets except regions.
-        facet.facet_filter :terms, { participant_size_labels: enterprise_sizes_filter } if enterprise_sizes_filter.any?
+
+      self.facets.each_pair do |facet_field, facet_filter|
+        add_facet_with_filter(search, facet_field, facet_filter)
       end
-
-      search.facet('enterprise_sizes') do |facet|
-        facet.terms 'participant_size_labels'
-
-        # want all the facets except sizes
-        facet.facet_filter :terms, { region_labels: regions_filter } if regions_filter.any?
-      end
-
-      # filters
-      search.filter :terms, { region_labels: regions_filter } if regions_filter.any?
-      search.filter :terms, { participant_size_labels: enterprise_sizes_filter } if  enterprise_sizes_filter.any?
 
       Rails.logger.debug search.to_json
     end
@@ -49,6 +44,26 @@ class Search
   end
 
   private
+
+  def add_facet_with_filter(search, field, filter)
+
+    Rails.logger.debug "adding facet for #{field} with filter #{filter}"
+
+    search.facet(field) do |facet|
+      facet.terms field # add a term for this field
+
+      # for all fields except this one, add a facet filter
+      self.facets.each_pair do |facet_field, facet_filter|
+        unless facet_field == field
+          facet.facet_filter :terms, { facet_field => facet_filter } if facet_filter.any?
+        end
+      end
+
+    end
+
+    # add the filter
+    search.filter :terms, { field => filter } if filter.any?
+  end
 
   def process_params
     get_pagination_params
@@ -60,25 +75,21 @@ class Search
       self.search_string = self.original_search_string
     end
 
-    process_regions()
-    process_enterprise_sizes()
-
+    process_facets()
   end
 
-  def process_regions
-    self.regions_filter = []
-    if self.params[:regions]
-      params[:regions].each_key do |region_label|
-        self.regions_filter << region_label
-      end
+  def process_facets
+    self.facets.each_key do |facet_name|
+      process_facet(facet_name)
     end
   end
 
-  def process_enterprise_sizes
-    self.enterprise_sizes_filter = []
-    if self.params[:enterprise_sizes]
-      params[:enterprise_sizes].each_key do |e|
-        self.enterprise_sizes_filter << e
+  def process_facet(facet_name)
+    Rails.logger.debug "processing #{facet_name}"
+
+    if self.params[facet_name]
+      params[facet_name].each_key do |val|
+        self.facets[facet_name] << val
       end
     end
   end

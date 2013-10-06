@@ -25,7 +25,7 @@ module Import
         puts "starting row #{i}"
         # make a hash of header names to cell contents for this row
         row = {}
-        excel.row(i).each_with_index{|item,index| row[headers[index]] = item}
+        excel.row(i).each_with_index{|item,index| row[headers[index].strip] = item}
         row2rdf(resources,row,sic_hash)
       end
 

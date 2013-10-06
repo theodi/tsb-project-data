@@ -24,6 +24,7 @@ module Import
       # uri: use TSBProjectNumber
       proj_num = row["TSBProjectNumber"].to_i.to_s
       project_uri = Vocabulary::TSB["project/#{proj_num}"]
+      project_title = row["ProjectTitle"]
       # if this project already exists, then don't do it again
       if resources[project_uri]
         p = resources[project_uri]
@@ -31,7 +32,6 @@ module Import
         p = Project.new(project_uri)
         # add to resources hash
         resources[project_uri] = p
-        project_title = row["ProjectTitle"]
         p.label = project_title
         description = row["PublicDescription"]
         # clean up description - replace double line breaks with space chars.
@@ -79,7 +79,7 @@ module Import
         if org_number.class == Float
           org_slug = org_number.to_i.to_s 
         else
-          org_slug = org_number
+          org_slug = org_number.strip
         end
         
         if ["0","","Exempt Charity","NHS Hospital", "N/A", "null"].include?(org_slug)
@@ -268,11 +268,28 @@ module Import
 
       # Grant
       grant_uri = Vocabulary::TSB["grant/#{proj_num}/#{org_slug}"]
+      
+      # is there already a grant for this combination of organisation and project?
+      # if so, assign a separate URI for this one by adding /1 or /2 etc at the end.
+      
+      exists = resources[grant_uri]
+      i = 1
+      
+      while exists
+        grant_uri = Vocabulary::TSB["grant/#{proj_num}/#{org_slug}/#{i.to_s}"]
+        exists = resources[grant_uri]
+        i += 1
+      end
+      
 
       g = Grant.new(grant_uri)
       resources[grant_uri] = g
 
-      g.label = "Grant for #{org_name}, project: #{project_title}"
+      if i ==1
+        g.label = "Grant for #{org_name}, project: #{project_title}"
+      else
+        g.label = "Grant number #{i.to_s} for #{org_name}, project: #{project_title}"
+      end
       g.offer_cost = row["OfferCost"].to_i
       g.offer_grant = row["OfferGrant"].to_i
       g.offer_percentage = row["OfferRateOfGrant"]
@@ -283,7 +300,6 @@ module Import
 
       # grant - project
 
-      # is this right?
       g.supports_project = p
       p.supported_by_uris = p.supported_by_uris.push(g.uri)
 
@@ -298,8 +314,6 @@ module Import
 
       # grant - org
       g.paid_to_organization = o
-      g.supports_project = p
-      p.supported_by_uris = p.supported_by_uris.push(g.uri)
 
       return nil
     end

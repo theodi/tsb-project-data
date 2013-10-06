@@ -8,4 +8,6 @@
     - term = t["term"]
     = check_box_tag("#{facet_name}[#{term}]", true, @search.facets[facet_name].include?(term) )
     #{term}
+    // This is probably confusing. leave off counts for now.
+    // (#{t["count"]})
     %br

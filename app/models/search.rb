@@ -45,24 +45,41 @@ class Search
 
   private
 
-  def add_facet_with_filter(search, field, filter)
+  def add_facet_with_filter(search, field, filter_values)
 
-    Rails.logger.debug "adding facet for #{field} with filter #{filter}"
+    Rails.logger.debug "adding facet for #{field} with filter #{filter_values}"
 
     search.facet(field) do |facet|
       facet.terms field # add a term for this field
 
-      # for all fields except this one, add a facet filter
-      self.facets.each_pair do |facet_field, facet_filter|
+      # for all fields except this one, add facet filters
+      # for values of the other selected filters, plus the current selection of this filter
+
+      other_facet_terms = []
+      self.facets.each_pair do |facet_field, values|
         unless facet_field == field
-          facet.facet_filter :terms, { facet_field => facet_filter } if facet_filter.any?
+          other_facet_terms << { :terms => {facet_field => values} } if values.any?
         end
       end
 
+      if other_facet_terms.any?
+        other_facets_filter = Tire::Search::Filter.new(:and, other_facet_terms).to_hash
+      end
+
+      # Make a filter for this facet. We always want to display any selections of this facet.
+      this_facet_filter = Tire::Search::Filter.new(:terms, {field => filter_values}).to_hash if filter_values.any?
+
+      if other_facets_filter && this_facet_filter
+        # if we have other facets and a selection for this facet, OR the filtes
+        facet.facet_filter :or, [other_facets_filter, this_facet_filter]
+      elsif other_facets_filter
+        # otherwise just use the other facet terms, in an AND.
+        facet.facet_filter :and, other_facet_terms
+      end
     end
 
-    # add the filter
-    search.filter :terms, { field => filter } if filter.any?
+    # add the search filter
+    search.filter :terms, { field => filter_values } if filter_values.any?
   end
 
   def process_params

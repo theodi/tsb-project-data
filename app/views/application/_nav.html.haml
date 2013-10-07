@@ -2,15 +2,15 @@
   %ul
     %li
       %a{href:'/about'} About
-      - if @current_nav_tab == 'about'
+      - if controller_name == 'home' && action_name == 'about'
         .arrow-down
 
     %li
       %a{href:'/projects'} Browse
-      - if @current_nav_tab == 'browse'
+      - if ['projects', 'resources'].include? controller_name
         .arrow-down
 
     %li
       %a{href:"/data/#{TsbProjectData::DATASET_SLUG}"} Linked Data (Advanced)
-      - if @current_nav_tab == 'ld'
+      - if ['information_resources'].include? controller_name
         .arrow-down

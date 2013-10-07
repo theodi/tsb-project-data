@@ -32,14 +32,7 @@
           =# yield :crumbs
 
       %main
-        %nav
-          %ul
-            %li
-              %a{href:'/about'} About
-            %li
-              %a{href:'/projects'} Browse
-            %li
-              %a{href:"/data/#{TsbProjectData::DATASET_SLUG}"} Linked Data (Advanced)
+        = render 'application/nav'
 
         - if content_for? :header
           %header

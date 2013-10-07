@@ -1,0 +1,13 @@
+-# expects local params:
+-#   facet_name (the name of the facet in our search's facets hash).
+-#   title
+
+%div{id: "#{facet_name.downcase}-facet"}
+  %h4= title
+  - @projects.facets[facet_name]["terms"].each do |t|
+    - term = t["term"]
+    = check_box_tag("#{facet_name}[#{term}]", true, @search.facets[facet_name].include?(term) )
+    #{term}
+    // This is probably confusing. leave off counts for now.
+    // (#{t["count"]})
+    %br

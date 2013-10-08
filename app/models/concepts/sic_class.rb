@@ -1,4 +1,12 @@
 class SicClass
   include Concept
+  
   concept_scheme_uri Vocabulary::TSBDEF["concept-scheme/sic"]
+  
+  field :code, Vocabulary::TSBDEF.sicCode
+  
+  linked_to :sic_section, Vocabulary::TSBDEF.sicSection, class_name: 'SicClass'
+  linked_to :sic_division, Vocabulary::TSBDEF.sicDivision, class_name: 'SicClass'
+  linked_to :sic_group, Vocabulary::TSBDEF.sicGroup, class_name: 'SicClass'
+  linked_to :sic_class, Vocabulary::TSBDEF.sicClass, class_name: 'SicClass'
 end

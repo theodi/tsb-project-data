@@ -16,17 +16,14 @@
     #wrap
       %header
         %nav
-          .navbar-header
-            %a.home-link{href:'/'}
-              TSB Projects Data
+          .branding
+            = image_tag "tsb-logo.png", alt: "TSB logo"
 
           = form_tag '/projects', method: 'get' do
             .form-group
               = text_field_tag :search_string, nil, :placeholder => 'Search projects'
-            = submit_tag :search
 
-          .branding
-            = image_tag "tsb-logo.png", alt: "TSB logo"
+          
 
           -# probably just leave crumbs off - there's only 1 dataset
           =# yield :crumbs

@@ -11,4 +11,5 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require publish_my_data
+//= require jquery/jquery-ui-1.10.3.custom
 //= require_tree .

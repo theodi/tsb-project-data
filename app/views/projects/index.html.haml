@@ -11,6 +11,94 @@
       = text_field_tag :search_string, @search.original_search_string, :placeholder => 'Search projects'
       = submit_tag 'search'
 
+      #filters
+        grant from:
+        = text_field_tag :offer_grant_from, @search.offer_grant_from
+        %br
+        offer to:
+        = text_field_tag :offer_grant_to, @search.offer_grant_to
+
+        #offer-grant-summary
+        #offer-grant-slider
+
+        / :javascript
+        /   $(function() {
+
+        /     function roundToNearest(val, nearest, up) {
+        /       multiplier = 1/nearest;
+
+        /       if(up) {
+        /         return Math.ceil(val * multiplier) / multiplier;
+        /       }
+        /       else {
+        /         return Math.floor(val * multiplier) / multiplier;
+        /       }
+        /     }
+
+        /     function getRoundValue(range) {
+        /       if ( range < 1000 ) {
+        /         return 10;
+        /       } else if ( range >= 1000 && range < 10000 ) {
+        /         return 100;
+        /       } else if (range >= 10000 && range <= 100000 ) {
+        /         return 1000;
+        /       } else if (range >= 100009 ) {
+        /         return 10000;
+        /       }
+        /     }
+
+        /     var minGrant = #{@projects.facets["offer_grant_stats"]["min"]};
+        /     var maxGrant = #{@projects.facets["offer_grant_stats"]["max"]};
+        /     var range = maxGrant - minGrant;
+        /     var roundValue = getRoundValue( range );
+
+        /     minGrant = roundToNearest( minGrant, roundValue, false );
+        /     maxGrant = roundToNearest( maxGrant, roundValue, true );
+
+        /     step = (range / 20);
+
+        /     $( "#offer-grant-slider" ).slider({
+        /       range: true,
+        /       min: minGrant,
+        /       max: maxGrant,
+        /       step: step,
+        /       values: [ minGrant, maxGrant ],
+        /       slide: function( event, ui ) {
+        /         setOfferGrant(ui.values[0], ui.values[1], roundValue );
+        /       }
+        /     });
+
+        /     function setOfferGrant(from, to, roundValue) {
+        /       from = roundToNearest( from.toFixed(2), roundValue, false );
+        /       to = roundToNearest( to.toFixed(2), roundValue, true );
+        /       setOfferGrantTextFields(from,to);
+        /       setOfferGrantSummary(from,to);
+        /     }
+
+        /     function setOfferGrantSummary(from,to) {
+        /       $( "#offer-grant-summary" ).html( '£' + from + " - " + '£' + to );
+        /     }
+
+        /     function setOfferGrantTextFields(from,to) {
+        /       $("#offer_grant_from").val( from );
+        /       $("#offer_grant_to").val( to );
+        /     }
+
+        /     setOfferGrant(
+        /       $( "#offer-grant-slider" ).slider("values", 0),
+        /       $( "#offer-grant-slider" ).slider("values", 1),
+        /       roundValue
+        /     );
+
+        /   });
+
+        %br
+        date from:
+        = text_field_tag :date_from, @search.date_from
+        %br
+        to:
+        = text_field_tag :date_to, @search.date_to
+
       #facets
         = render 'facet', title: 'Region', facet_name: 'region_labels'
         = render 'facet', title: 'Enterprise Size', facet_name: 'participant_size_labels'
@@ -28,11 +116,14 @@
       #{@projects.total} projects matched your search
     %div
       Offer grant total: &pound;#{@projects.facets["offer_grant_stats"]["total"].to_i},
-      Mean: &pound;#{@projects.facets["offer_grant_stats"]["mean"]}
-      %br
-      Offer cost total &pound;#{@projects.facets["offer_cost_stats"]["total"].to_i},
-      Mean: &pound;#{@projects.facets["offer_cost_stats"]["mean"]}
-      %br
+      Mean: &pound;#{@projects.facets["offer_grant_stats"]["mean"]},
+      Min: &pound;#{@projects.facets["offer_grant_stats"]["min"]},
+      Max: &pound;#{@projects.facets["offer_grant_stats"]["max"]}
+
+      / %br
+      / Offer cost total &pound;#{@projects.facets["offer_cost_stats"]["total"].to_i},
+      / Mean: &pound;#{@projects.facets["offer_cost_stats"]["mean"]}
+      / %br
       %br
     %div
       Ordered by relevance.

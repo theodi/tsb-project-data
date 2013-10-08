@@ -17,7 +17,11 @@ class Search
     self.facets = {
       'region_labels' => [],
       'participant_size_labels' => [],
-      'status_label' => []
+      'status_label' => [],
+      'competition_label' => [],
+      'budget_area_label' => [],
+      'team_label' => [],
+      'participant_sic_class_labels' => []
     }
 
     process_params()
@@ -52,8 +56,8 @@ class Search
     search.facet(field) do |facet|
       facet.terms field # add a term for this field
 
-      # for all fields except this one, add facet filters
-      # for values of the other selected filters, plus the current selection of this filter
+      # for all fields except this one, add facet filters for values of the other selected filters,
+      # OR the current selections of this filter
 
       other_facet_terms = []
       self.facets.each_pair do |facet_field, values|

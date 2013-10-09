@@ -120,10 +120,12 @@
       Min: &pound;#{@projects.facets["offer_grant_stats"]["min"]},
       Max: &pound;#{@projects.facets["offer_grant_stats"]["max"]}
 
-      / %br
-      / Offer cost total &pound;#{@projects.facets["offer_cost_stats"]["total"].to_i},
-      / Mean: &pound;#{@projects.facets["offer_cost_stats"]["mean"]}
-      / %br
+      %br
+      Offer cost total &pound;#{@projects.facets["offer_cost_stats"]["total"].to_i},
+      Mean: &pound;#{@projects.facets["offer_cost_stats"]["mean"]}
+      Min: &pound;#{@projects.facets["offer_cost_stats"]["min"]},
+      Max: &pound;#{@projects.facets["offer_cost_stats"]["max"]}
+      %br
       %br
     %div
       Ordered by relevance.

@@ -16,6 +16,11 @@ class Search
   attr_accessor :page
   attr_accessor :per_page
 
+  attr_accessor :terms_filters # terms filters
+
+  attr_accessor :grant_range_filter # range filters
+  attr_accessor :date_range_filter # just the date range filters
+
   def initialize(params)
     self.params = params # store the raw params
 
@@ -29,6 +34,7 @@ class Search
       'team_label' => [],
       'participant_sic_class_labels' => []
     }
+    self.terms_filters = []
 
     process_params()
   end
@@ -38,19 +44,46 @@ class Search
       search.query do |query|
         query.boolean do |boolean|
           boolean.must { |b| b.string self.search_string }
-          boolean.must { |b| add_grant_range(b) } if self.offer_grant_from || self.offer_grant_to
-          boolean.must { |b| add_end_date_range(b) } if self.date_from
-          boolean.must { |b| add_start_date_range(b) } if self.date_to
+          # boolean.must { |b| add_grant_range(b) } if self.offer_grant_from || self.offer_grant_to
+          # boolean.must { |b| add_end_date_range(b) } if self.date_from
+          # boolean.must { |b| add_start_date_range(b) } if self.date_to
         end
       end
 
       # facets
-      search.facet('offer_grant_stats') { statistical 'total_offer_grant' }
-      search.facet('offer_cost_stats') { statistical 'total_offer_cost' }
-
       self.facets.each_pair do |facet_field, facet_filter|
         add_facet_with_filter(search, facet_field, facet_filter)
       end
+
+      # stats facets
+      search.facet('offer_grant_stats') do |facet|
+        facet.statistical 'total_offer_grant'
+        self.terms_filters.each { |f| facet.facet_filter :terms, f }
+        add_range_facet_filters(facet)
+      end
+
+      search.facet('offer_cost_stats') do |facet|
+        facet.statistical 'total_offer_cost'
+        self.terms_filters.each { |f| facet.facet_filter :terms, f }
+        add_range_facet_filters(facet)
+      end
+
+      # these ones are the facet filters but without the amount filters applied
+      search.facet('offer_grant_stats_unfiltered') do |facet|
+        facet.statistical 'total_offer_grant'
+        self.terms_filters.each { |f| facet.facet_filter :terms, f }
+        add_range_facet_filters(facet, :omit_grant_range => true )
+      end
+
+      search.facet('offer_cost_stats_unfiltered') do |facet|
+        facet.statistical 'total_offer_cost'
+        self.terms_filters.each { |f| facet.facet_filter :terms, f }
+        add_range_facet_filters(facet, :omit_grant_range => true )
+      end
+
+      # add the search filters from the facets
+      self.terms_filters.each { |f| search.filter :terms, f }
+      add_range_filters(search)
 
       Rails.logger.debug search.to_json
     end
@@ -71,25 +104,65 @@ class Search
     end
 
     process_facets()
-    process_grant_range()
-    process_date_range()
+    process_ranges()
+
   end
 
-  def add_grant_range(query)
+  def process_ranges
+    process_grant_range
+    process_date_range
+
+    self.grant_range_filter = get_grant_range
+    self.date_range_filter = get_date_range
+
+  end
+
+  def get_grant_range
 
     grant_range= {}
     grant_range.merge!({ gte: self.offer_grant_from }) if self.offer_grant_from
     grant_range.merge!({ lte: self.offer_grant_to }) if self.offer_grant_to
-    query.range :total_offer_grant, grant_range
+
+    Tire::Search::Filter.new( :range, {:total_offer_grant => grant_range }).to_hash if self.offer_grant_from || self.offer_grant_to
 
   end
 
-  def add_end_date_range(query)
-    query.range :end_date, { :gte => self.date_from }  # the project ends after the start of our range
+  def get_date_range
+
+    from_range = Tire::Search::Filter.new( :range, {:end_date => { :gte => self.date_from } } ) if self.date_from
+    to_range = Tire::Search::Filter.new( :range, {:start_date => { :lte => self.date_to } } ) if self.date_to
+
+    if from_range && to_range
+      Tire::Search::Filter.new( :and, [from_range, to_range] )
+    elsif from_range
+      from_range
+    elsif to_range
+      to_range
+    end
+
   end
 
-  def add_start_date_range(query)
-    query.filter :range, start_date: { :lte => self.date_to }  # the project starts before the end of our range
+  # def process_end_date_range(scope)
+  #   scope.range :range, :end_date, { :gte => self.date_from }  # the project ends after the start of our range
+  # end
+
+  # def process_start_date_range(scope)
+  #   scope.filter :range, start_date: { :lte => self.date_to }  # the project starts before the end of our range
+  # end
+
+  def add_range_filters(search)
+    search.filter :and, get_range_filters
+  end
+
+  def add_range_facet_filters(search, opts={})
+    search.facet_filter :and, get_range_filters(opts)
+  end
+
+  def get_range_filters(opts={})
+    filters = []
+    filters << self.grant_range_filter if (self.grant_range_filter && !opts[:omit_grant_range])
+    filters << self.date_range_filter if self.date_range_filter
+    filters
   end
 
 
@@ -127,7 +200,8 @@ class Search
     end
 
     # add the search filter
-    search.filter :terms, { field => filter_values } if filter_values.any?
+    self.terms_filters << { field => filter_values } if filter_values.any?
+
   end
 
 

@@ -104,7 +104,7 @@
       padding: 0;
 
       li {
-        padding: 18px 0 24px;
+        padding: 30px 0 36px;
         background: transparent url(image-path('divider.png')) repeat-x bottom;
 
         > div {
@@ -161,6 +161,67 @@
             }
           }
         }
+
+        .result-intro {
+          .result-description {
+            @include make-md-column(12);
+            font-size: 16px;
+          }
+        }
+
+        .result-details {
+          > div {
+            @include make-md-column(3);
+
+            > div:first-child {
+              color: #888;
+              font-size: 16px;
+            }
+          }
+
+          .result-participants {
+            @include make-md-column(9);
+
+            .result-participant-links {
+              font-size: 20px;
+              color: #888;
+
+              a:first-child {
+                font-weight: bold;
+              }
+            }
+          }
+
+          .figure {
+            font-size: 20px;
+            @include clearfix();
+
+            .pounds, .pence {
+              float: left;
+            }
+
+            .pounds {
+              font-weight: bold;
+              //letter-spacing: -1px;
+            }
+
+            .pence {
+              font-size: 14px;
+              margin-left: 1px;
+              padding-top: 8px;
+            }
+
+          }
+        }
+      }
+    }
+
+    .pagination {
+      width: 100%;
+      text-align: center;
+
+      a, span.current, span.gap {
+        padding: 6px 9px;
       }
     }
   }

@@ -2,7 +2,7 @@ module Import
   module ProjectStatuses
     
 
-# create concept scheme for enterprise sizes
+# create concept scheme for project status values
     def self.create_data
       output_file = File.join(Rails.root, 'data', 'output-data', 'project_statuses.nt')
 

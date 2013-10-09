@@ -5,5 +5,6 @@
   .prog-bar-background
     .prog-bar-fill{ style: "width: #{((payments_to_date.to_f / offer_grant) * 100).round}%;"}
 .percent
-  #{"%.1f" % ((payments_to_date.to_f / offer_grant) * 100)}%
-  of grant paid
+  Payments are
+  %span #{"%.1f" % ((payments_to_date.to_f / offer_grant) * 100)}%
+  of grant

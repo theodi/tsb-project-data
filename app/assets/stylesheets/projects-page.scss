@@ -315,7 +315,7 @@
     #project-grant-summary {
       > div {
         > div {
-          @include make-md-column(4);
+          @include make-md-column(6);
         }
       }
     }
@@ -375,7 +375,7 @@
 
         .project-participant-grant {
           > div {
-            @include make-md-column(4);
+            @include make-md-column(6);
           }
         }
       }
@@ -404,20 +404,25 @@
 
         .prog-bar-background {
           position: relative;
-          height: 12px;
+          height: 16px;
           background: #ddd;
           width: 80%;
+          overflow: hidden;
 
           .prog-bar-fill {
-            height: 12px;
+            height: 16px;
             background: $accent-color;
           }
         }
       }
 
       .percent {
-        color: #aaa;
-        font-size: 14px;
+        color: #888;
+        font-size: 16px;
+
+        span {
+          font-weight: bold;
+        }
       }
   
     }

@@ -13,10 +13,7 @@
               = participant.label
 
       .project-participant-grant.project-grant-details
-        .project-participant-offer-cost
-          %div Cost
-          = render "projects/show/grant/offer_cost", offer_cost: project.offer_cost_sum_for_organization(participant)
-        
+
         .project-participant-offer-grant
           %div Grant
           = render "projects/show/grant/offer_grant", offer_grant: project.offer_grant_sum_for_organization(participant), offer_cost: project.offer_cost_sum_for_organization(participant)

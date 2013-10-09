@@ -5,5 +5,7 @@
   .prog-bar-background
     .prog-bar-fill{ style: "width: #{((offer_grant.to_f / offer_cost) * 100).round}%;"}
 .percent
-  #{"%.1f" % ((offer_grant.to_f / offer_cost) * 100)}%
+  Grant is
+  %span.percent #{((offer_grant.to_f / offer_cost) * 100).round(1)}%
   of cost
+  (<span class='total-cost'>#{number_to_currency offer_cost.to_f, unit: '&pound;'}</span>)

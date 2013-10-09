@@ -35,7 +35,7 @@
       @extend .visible-lg;
 
       @extend .navbar-form;
-      @extend .navbar-left;
+      @extend .navbar-right;
 
       input[type="text"] {
         @extend .form-control;
@@ -49,7 +49,7 @@
     }
 
     .branding {
-      @extend .navbar-right;
+      @extend .navbar-left;
       // TODO: change size to match logo height;
       @include navbar-vertical-align(48px);
     }

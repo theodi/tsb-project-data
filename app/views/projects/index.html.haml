@@ -24,23 +24,40 @@
 
   #results
 
-    %div
-      #{@projects.total} projects matched your search
-    %div
-      Offer grant total: &pound;#{@projects.facets["offer_grant_stats"]["total"].to_i},
-      Mean: &pound;#{@projects.facets["offer_grant_stats"]["mean"]}
-      %br
-      Offer cost total &pound;#{@projects.facets["offer_cost_stats"]["total"].to_i},
-      Mean: &pound;#{@projects.facets["offer_cost_stats"]["mean"]}
-      %br
-      %br
-    %div
-      Ordered by relevance.
-      %br
-      [ordering controls here]
+    #results-summary
+      #results-summary-header
+        #results-summary-count
+          %span= pluralize(@projects.total, 'project')
+          matched your search.
 
-    %ul
-    - @projects.each do |project|
-      = render 'result', project: project
+      #results-summary-figures
+        #results-summary-total-grant
+          %div Total grant
+          .figure
+            .pounds &pound;#{number_with_delimiter @projects.facets["offer_grant_stats"]["total"].to_i}
+            .pence .#{"%.2d" % (@projects.facets["offer_grant_stats"]["total"].modulo(1).round(2) * 100).to_i}
+
+        #results-summary-average-grant
+          %div Average grant
+          .figure
+            .pounds &pound;#{number_with_delimiter @projects.facets["offer_grant_stats"]["mean"].to_i}
+            .pence .#{"%.2d" % (@projects.facets["offer_grant_stats"]["mean"].modulo(1).round(2) * 100).to_i}
+
+      #results-summary-progress
+        #results-summary-progress-bar
+          .prog-bar-background
+            .prog-bar-fill{ style: "width: #{((@projects.facets["offer_grant_stats"]["total"].to_f / @projects.facets["offer_cost_stats"]["total"]) * 100).round}%;"}
+
+      #results-summary-total-cost
+        %div
+          %span.percent #{((@projects.facets["offer_grant_stats"]["total"].to_f / @projects.facets["offer_cost_stats"]["total"]) * 100).round(1)}%
+          of
+          %span.total-cost= number_to_currency @projects.facets["offer_cost_stats"]["total"].to_f, unit: '&pound;'
+          (total cost)
+
+
+    %ul#results-list
+      - @projects.each do |project|
+        = render 'result', project: project
 
     = paginate @projects

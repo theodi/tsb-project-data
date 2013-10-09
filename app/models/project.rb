@@ -21,6 +21,34 @@ class Project
   linked_to :duration, Vocabulary::TSBDEF.projectDuration, class_name: 'ProjectDuration'
   linked_to :cost_category, Vocabulary::TSBDEF.costCategory
 
+  def offer_cost_sum
+    supported_by.sum(&:offer_cost).to_f
+  end
 
+  def offer_grant_sum
+    supported_by.sum(&:offer_grant).to_f
+  end
+
+  def payments_to_date_sum
+    supported_by.sum(&:payments_to_date).to_f
+  end
+
+  def offer_cost_sum_for_organization(organization)
+    grants_for_organization(organization).resources.sum(&:offer_cost).to_f
+  end
+
+  def offer_grant_sum_for_organization(organization)
+    grants_for_organization(organization).resources.sum(&:offer_grant).to_f
+  end
+
+  def payments_to_date_sum_for_organization(organization)
+    grants_for_organization(organization).resources.sum(&:payments_to_date).to_f
+  end
+
+  def grants_for_organization(organization)
+    Grant
+      .where("?uri <#{Vocabulary::TSBDEF.supports}> <#{self.uri}>")
+      .where("?uri <#{Vocabulary::TSBDEF.paidTo}> <#{organization.uri}>")
+  end
 
 end

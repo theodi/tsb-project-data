@@ -1,9 +1,13 @@
 -# expects local params:
 -#   project (Tire project search result)
 
-%li{style:"border-bottom:1px solid #eee"}
-  %h4
-    = link_to((project.label || project.uri), resource_path_from_uri(project.uri) )
+%li
+  .result-header
+    .result-name
+      = link_to((project.label || project.uri), resource_path_from_uri(project.uri) )
+    .result-status
+      .result-status-label{ class: "result-status-#{project.status_label.parameterize}" }
+        %span= project.status_label
   %p
     = truncate(project.description, length: 100)
   - if project.leader_uri

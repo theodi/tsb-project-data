@@ -9,7 +9,7 @@
     @include make-md-column(9);
 
     #results-summary {
-      margin-bottom: 30px;
+      margin-bottom: 18px;
 
       > div {
         @include make-row();
@@ -94,6 +94,71 @@
 
           span {
             font-weight: bold;
+          }
+        }
+      }
+    }
+
+    ul#results-list {
+      list-style-type: none;
+      padding: 0;
+
+      li {
+        padding: 18px 0 24px;
+        background: transparent url(image-path('divider.png')) repeat-x bottom;
+
+        > div {
+          @include make-row();
+
+          > div {
+            padding-top: 6px;
+            padding-bottom: 6px;
+          }
+        }
+
+        .result-header {
+
+          .result-name {
+            @include make-md-column(10);
+
+            a {
+              font-size: 22px;
+              font-weight: bold;
+            }
+          }
+
+          .result-status {
+            @include make-md-column(2);
+
+            .result-status-label {
+              background: #ccc;
+              color: #fff;
+              padding: 6px 0;
+              text-align: center;
+              text-transform: uppercase;
+              font-size: 14px;
+              //@include border-radius(3px);
+              display: inline-block;
+              letter-spacing: 1px;
+              font-weight: bold;
+              width: 100%;
+
+              &.result-status-live {
+                background: #64ab62;
+              }
+
+              &.result-status-closed {
+                background: #e54b3f;
+              }
+
+              &.result-status-final-claim {
+                background: #f09034;
+              }
+
+              span {
+                opacity: 0.8;
+              }
+            }
           }
         }
       }

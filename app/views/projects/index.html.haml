@@ -52,8 +52,8 @@
           (total cost)
 
 
-    %ul
-    - @projects.each do |project|
-      = render 'result', project: project
+    %ul#results-list
+      - @projects.each do |project|
+        = render 'result', project: project
 
     = paginate @projects

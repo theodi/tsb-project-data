@@ -1,7 +1,6 @@
 - content_for :header do
   %h3
-    Project
-    &raquo;
+    = link_to "Project", "/projects"
   %h1
     = project.label
 
@@ -41,8 +40,9 @@
         #project-description
           %div Description
           %div
-            :markdown
-              #{project.description.truncate(300)}
+            
+            = project.description.truncate(300)
+            %a{ href: '#' } Read more
     
 
     %section#project-grant-summary.project-grant-details

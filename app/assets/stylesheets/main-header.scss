@@ -19,5 +19,13 @@ main > header {
     margin: 0; padding: 0;
     font-weight: lighter;
   }
+
+  a {
+    color: #fff;
+
+    &:hover {
+      color: #fff;
+    }
+  }
   margin-bottom:20px;
 }

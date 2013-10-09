@@ -7,6 +7,97 @@
 
   #results {
     @include make-md-column(9);
+
+    #results-summary {
+      margin-bottom: 30px;
+
+      > div {
+        @include make-row();
+        background: #eee;
+
+        > div {
+          padding-top: 6px;
+          padding-bottom: 6px;
+        }
+      }
+
+      #results-summary-header {
+        
+      }
+
+      #results-summary-count {
+        @include make-md-column(12);
+        padding-top: 15px;
+        font-size: 24px;
+
+        span {
+          font-weight: bold;
+        }
+      }
+
+      #results-summary-figures {
+
+        > div {
+          @include make-md-column(4);
+
+          > div:first-child {
+            color: #888;
+            font-size: 16px;
+          }
+
+          .figure {
+            font-size: 28px;
+            @include clearfix();
+
+            .pounds, .pence {
+              float: left;
+            }
+
+            .pounds {
+              font-weight: bold;
+              letter-spacing: -1px;
+            }
+
+            .pence {
+              font-size: 16px;
+              margin-left: 1px;
+              padding-top: 13px;
+            }
+
+          }
+        }
+      }
+
+      #results-summary-progress {
+        #results-summary-progress-bar {
+          @include make-md-column(12);
+
+          .prog-bar-background {
+            position: relative;
+            height: 18px;
+            background: #ddd;
+            width: 100%;
+
+            .prog-bar-fill {
+              height: 18px;
+              background: $accent-color;
+            }
+          }
+        }
+      }
+
+      #results-summary-total-cost {
+        > div {
+          @include make-md-column(12);
+          padding-bottom: 15px;
+          color: #888;
+
+          span {
+            font-weight: bold;
+          }
+        }
+      }
+    }
   }
 
 }

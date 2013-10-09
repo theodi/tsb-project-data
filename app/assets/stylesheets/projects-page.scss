@@ -7,6 +7,426 @@
 
   #results {
     @include make-md-column(9);
+
+    #results-summary {
+      margin-bottom: 18px;
+
+      > div {
+        @include make-row();
+        background: #eee;
+
+        > div {
+          padding-top: 6px;
+          padding-bottom: 6px;
+        }
+      }
+
+      #results-summary-header {
+        
+      }
+
+      #results-summary-count {
+        @include make-md-column(12);
+        padding-top: 15px;
+        font-size: 24px;
+
+        span {
+          font-weight: bold;
+        }
+      }
+
+      #results-summary-figures {
+
+        > div {
+          @include make-md-column(4);
+
+          > div:first-child {
+            color: #888;
+            font-size: 16px;
+          }
+
+          .figure {
+            font-size: 28px;
+            @include clearfix();
+
+            .pounds, .pence {
+              float: left;
+            }
+
+            .pounds {
+              font-weight: bold;
+              letter-spacing: -1px;
+            }
+
+            .pence {
+              font-size: 16px;
+              margin-left: 1px;
+              padding-top: 13px;
+            }
+
+          }
+        }
+      }
+
+      #results-summary-progress {
+        #results-summary-progress-bar {
+          @include make-md-column(12);
+
+          .prog-bar-background {
+            position: relative;
+            height: 18px;
+            background: #ddd;
+            width: 100%;
+
+            .prog-bar-fill {
+              height: 18px;
+              background: $accent-color;
+            }
+          }
+        }
+      }
+
+      #results-summary-total-cost {
+        > div {
+          @include make-md-column(12);
+          padding-bottom: 15px;
+          color: #888;
+
+          span {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    ul#results-list {
+      list-style-type: none;
+      padding: 0;
+
+      li {
+        padding: 30px 0 36px;
+        background: transparent url(image-path('divider.png')) repeat-x bottom;
+
+        > div {
+          @include make-row();
+
+          > div {
+            padding-top: 6px;
+            padding-bottom: 6px;
+          }
+        }
+
+        .result-header {
+
+          .result-name {
+            @include make-md-column(10);
+
+            a {
+              font-size: 24px;
+              font-weight: bold;
+            }
+          }
+
+          .result-status {
+            @include make-md-column(2);
+
+            .result-status-label {
+              background: #ccc;
+              color: #fff;
+              padding: 6px 0;
+              text-align: center;
+              text-transform: uppercase;
+              font-size: 14px;
+              //@include border-radius(3px);
+              display: inline-block;
+              letter-spacing: 1px;
+              font-weight: bold;
+              width: 100%;
+
+              &.result-status-live {
+                background: #64ab62;
+              }
+
+              &.result-status-closed {
+                background: #e54b3f;
+              }
+
+              &.result-status-final-claim {
+                background: #f09034;
+              }
+
+              span {
+                opacity: 0.8;
+              }
+            }
+          }
+        }
+
+        .result-intro {
+          .result-description {
+            @include make-md-column(12);
+            font-size: 16px;
+          }
+        }
+
+        .result-details {
+          > div {
+            @include make-md-column(3);
+
+            > div:first-child {
+              color: #888;
+              font-size: 16px;
+            }
+          }
+
+          .result-participants {
+            @include make-md-column(9);
+
+            .result-participant-links {
+              font-size: 20px;
+              color: #888;
+
+              a:first-child {
+                font-weight: bold;
+              }
+            }
+          }
+
+          .figure {
+            font-size: 20px;
+            @include clearfix();
+
+            .pounds, .pence {
+              float: left;
+            }
+
+            .pounds {
+              font-weight: bold;
+              //letter-spacing: -1px;
+            }
+
+            .pence {
+              font-size: 14px;
+              margin-left: 1px;
+              padding-top: 8px;
+            }
+
+          }
+        }
+      }
+    }
+
+    .pagination {
+      width: 100%;
+      text-align: center;
+
+      a, span.current, span.gap {
+        padding: 6px 9px;
+      }
+    }
+  }
+
+}
+
+#project-page {
+  
+  @include make-row();
+
+  #project-main {
+    @include make-md-column(9);
+    @extend .container;
+
+    section {
+      padding: 18px 0 24px;
+      background: transparent url(image-path('divider.png')) repeat-x bottom;
+
+      h3 {
+        margin: 20px 0;
+        font-weight: bold;
+      }
+
+      > div {
+        @include make-row();
+
+        > div {
+          @include make-md-column(3);
+          padding-top: 18px;
+          padding-bottom: 18px;
+
+          > div:first-child {
+            color: #888;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    #project-about-primary {
+      #project-name {
+        @include make-md-column(6);
+      }
+
+      #project-start-date {
+        display: inline-block;
+      }
+
+      #project-status-label {
+        background: #ccc;
+        color: #fff;
+        padding: 6px 18px;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 16px;
+        //@include border-radius(3px);
+        display: inline-block;
+        letter-spacing: 1px;
+        font-weight: bold;
+
+        &.project-status-live {
+          background: #64ab62;
+        }
+
+        &.project-status-closed {
+          background: #e54b3f;
+        }
+
+        &.project-status-final-claim {
+          background: #f09034;
+        }
+
+        span {
+          opacity: 0.8;
+        }
+      }
+    }
+    
+    #project-about-secondary {
+      > div {
+        @include make-md-column(6);
+      }
+    }
+
+    #project-about-tertiary {
+      > div {
+        @include make-md-column(12);
+      }
+    }
+
+    #project-grant-summary {
+      > div {
+        > div {
+          @include make-md-column(6);
+        }
+      }
+    }
+
+    #project-map-container {
+      width: 100%;
+      height: 480px;
+      @include make-row();
+
+      #project-map {
+        @include make-md-column(12);
+        height: 100%;
+
+        #project-map-canvas {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    ul#project-participants-list {
+      list-style-type: none;
+      padding: 0;
+
+      li {
+        padding: 18px 0;
+        border-bottom: 2px solid #eee;
+
+        &:last-child {
+          border-bottom: 0;
+        }
+
+        > div {
+          @include make-row();
+
+          > div {
+            @include make-md-column(3);
+            padding-top: 18px;
+            padding-bottom: 18px;
+
+            > div:first-child {
+              color: #888;
+              font-size: 16px;
+            }
+          }
+        }
+
+        .project-participant-name {
+          @include make-md-column(12);
+          padding-bottom: 0;
+
+          a {
+            font-size: 24px;
+            font-weight: bold;
+          }
+        }
+
+        .project-participant-grant {
+          > div {
+            @include make-md-column(6);
+          }
+        }
+      }
+    }
+
+    .project-grant-details {
+      .fixed {
+        font-size: 28px;
+        @include clearfix();
+        margin-bottom: 6px;
+
+        .pounds, .pence {
+          float: left;
+        }
+
+        .pence {
+          font-size: 16px;
+          margin-left: 1px;
+          padding-top: 13px;
+        }
+
+      }
+
+      .prog-bar {
+        margin-bottom: 6px;
+
+        .prog-bar-background {
+          position: relative;
+          height: 16px;
+          background: #ddd;
+          width: 80%;
+          overflow: hidden;
+
+          .prog-bar-fill {
+            height: 16px;
+            background: $accent-color;
+          }
+        }
+      }
+
+      .percent {
+        color: #888;
+        font-size: 16px;
+
+        span {
+          font-weight: bold;
+        }
+      }
+  
+    }
+    
   }
 
 }

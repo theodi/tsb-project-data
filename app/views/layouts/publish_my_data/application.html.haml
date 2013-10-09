@@ -4,9 +4,15 @@
     %title
       = render 'publish_my_data/shared/meta_title'
     = yield :page_description
-    = javascript_include_tag :application
-    = stylesheet_link_tag :application
 
+    = stylesheet_link_tag :application
+    %link{rel:"stylesheet", href:"//cdn.leafletjs.com/leaflet-0.6.4/leaflet.css"}
+    %link{rel:"stylesheet", href:"//api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.standalone.css"}
+
+    %script{src: "//cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"}
+    %script{src: "//api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.standalone.js"}
+    = javascript_include_tag :application
+    
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
   %body
     /[if lt IE 8]
@@ -16,30 +22,21 @@
     #wrap
       %header
         %nav
-          .navbar-header
-            %a.home-link{href:'/'}
-              TSB Projects Data
+          .branding
+            = link_to "/" do
+              = image_tag "tsb-logo.png", alt: "TSB logo"
 
           = form_tag '/projects', method: 'get' do
             .form-group
               = text_field_tag :search_string, nil, :placeholder => 'Search projects'
-            = submit_tag :search
 
-          .branding
-            = image_tag "tsb-logo.png", alt: "TSB logo"
+          
 
           -# probably just leave crumbs off - there's only 1 dataset
           =# yield :crumbs
 
       %main
-        %nav
-          %ul
-            %li
-              %a{href:'/about'} About
-            %li
-              %a{href:'/projects'} Browse
-            %li
-              %a{href:"/data/#{TsbProjectData::DATASET_SLUG}"} Linked Data (Advanced)
+        = render 'application/nav'
 
         - if content_for? :header
           %header

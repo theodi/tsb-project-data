@@ -1,0 +1,10 @@
+.fixed
+  .pounds &pound;#{number_with_delimiter payments_to_date.to_i}
+  .pence .#{"%.2d" % (payments_to_date.modulo(1).round(2) * 100).to_i}
+.prog-bar
+  .prog-bar-background
+    .prog-bar-fill{ style: "width: #{((payments_to_date.to_f / offer_grant) * 100).round}%;"}
+.percent
+  Payments are
+  %span #{"%.1f" % ((payments_to_date.to_f / offer_grant) * 100)}%
+  of grant

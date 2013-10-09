@@ -1,0 +1,16 @@
+%nav
+  %ul
+    %li
+      %a{href:'/about'} About
+      - if controller_name == 'home' && action_name == 'about'
+        .arrow-down
+
+    %li
+      %a{href:'/projects'} Browse
+      - if ['projects', 'resources'].include? controller_name
+        .arrow-down
+
+    %li
+      %a{href:"/data/#{TsbProjectData::DATASET_SLUG}"} Linked Data (Advanced)
+      - if ['information_resources'].include? controller_name
+        .arrow-down

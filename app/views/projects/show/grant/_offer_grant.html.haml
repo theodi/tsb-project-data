@@ -1,0 +1,9 @@
+.fixed
+  .pounds &pound;#{number_with_delimiter offer_grant.to_i}
+  .pence .#{"%.2d" % (offer_grant.modulo(1).round(2) * 100).to_i}
+.prog-bar
+  .prog-bar-background
+    .prog-bar-fill{ style: "width: #{((offer_grant.to_f / offer_cost) * 100).round}%;"}
+.percent
+  #{"%.1f" % ((offer_grant.to_f / offer_cost) * 100)}%
+  of cost

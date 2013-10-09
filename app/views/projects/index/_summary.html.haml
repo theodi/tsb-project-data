@@ -2,7 +2,7 @@
   #results-summary-header
     #results-summary-count
       %span= pluralize(projects.total, 'project')
-      matched your search.
+      found
 
   #results-summary-figures
     #results-summary-total-grant
@@ -24,7 +24,8 @@
 
   #results-summary-total-cost
     %div
+      Total grant is
       %span.percent #{((projects.facets["offer_grant_stats"]["total"].to_f / projects.facets["offer_cost_stats"]["total"]) * 100).round(1)}%
-      of
-      %span.total-cost= number_to_currency projects.facets["offer_cost_stats"]["total"].to_f, unit: '&pound;'
-      (total cost)
+      of total cost
+      (<span class='total-cost'>#{number_to_currency projects.facets["offer_cost_stats"]["total"].to_f, unit: '&pound;'}</span>)
+      

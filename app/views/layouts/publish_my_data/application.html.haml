@@ -23,7 +23,8 @@
       %header
         %nav
           .branding
-            = image_tag "tsb-logo.png", alt: "TSB logo"
+            = link_to "/" do
+              = image_tag "tsb-logo.png", alt: "TSB logo"
 
           = form_tag '/projects', method: 'get' do
             .form-group

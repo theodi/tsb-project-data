@@ -44,12 +44,15 @@ module ProjectSearch
 
       # competition
       indexes :competition_uri, type: 'string', analyzer: 'keyword'
-      indexes :competition_label, type: 'string'
+      indexes :competition_label, type: 'string', analyzer: 'keyword'
 
       # competition's budget
       indexes :budget_area_uri, type: 'string', analyzer: 'keyword'
       indexes :budget_area_label, type: 'string', analyzer: 'keyword'
 
+      # competition's team
+      indexes :team_uri, type: 'string', analyzer: 'keyword'
+      indexes :team_label, type: 'string', analyzer: 'keyword'
     end
   end
 

@@ -32,7 +32,7 @@ class Search
       'competition_label' => [],
       'budget_area_label' => [],
       'team_label' => [],
-      'participant_sic_class_labels' => []
+      'participant_sic_section_labels' => []
     }
     self.terms_filters = []
 
@@ -44,9 +44,6 @@ class Search
       search.query do |query|
         query.boolean do |boolean|
           boolean.must { |b| b.string self.search_string }
-          # boolean.must { |b| add_grant_range(b) } if self.offer_grant_from || self.offer_grant_to
-          # boolean.must { |b| add_end_date_range(b) } if self.date_from
-          # boolean.must { |b| add_start_date_range(b) } if self.date_to
         end
       end
 
@@ -67,19 +64,6 @@ class Search
         self.terms_filters.each { |f| facet.facet_filter :terms, f }
         add_range_facet_filters(facet)
       end
-
-      # these ones are the facet filters but without the amount filters applied
-      # search.facet('offer_grant_stats_unfiltered') do |facet|
-      #   facet.statistical 'total_offer_grant'
-      #   self.terms_filters.each { |f| facet.facet_filter :terms, f }
-      #   add_range_facet_filters(facet, :omit_grant_range => true )
-      # end
-
-      # search.facet('offer_cost_stats_unfiltered') do |facet|
-      #   facet.statistical 'total_offer_cost'
-      #   self.terms_filters.each { |f| facet.facet_filter :terms, f }
-      #   add_range_facet_filters(facet, :omit_grant_range => true )
-      # end
 
       # add the search filters from the facets
       self.terms_filters.each { |f| search.filter :terms, f }
@@ -111,44 +95,7 @@ class Search
   def process_ranges
     process_grant_range
     process_date_range
-
-    self.grant_range_filter = get_grant_range
-    self.date_range_filter = get_date_range
-
   end
-
-  def get_grant_range
-
-    grant_range= {}
-    grant_range.merge!({ gte: self.offer_grant_from }) if self.offer_grant_from
-    grant_range.merge!({ lte: self.offer_grant_to }) if self.offer_grant_to
-
-    Tire::Search::Filter.new( :range, {:total_offer_grant => grant_range }).to_hash if self.offer_grant_from || self.offer_grant_to
-
-  end
-
-  def get_date_range
-
-    from_range = Tire::Search::Filter.new( :range, {:end_date => { :gte => self.date_from } } ) if self.date_from
-    to_range = Tire::Search::Filter.new( :range, {:start_date => { :lte => self.date_to } } ) if self.date_to
-
-    if from_range && to_range
-      Tire::Search::Filter.new( :and, [from_range, to_range] )
-    elsif from_range
-      from_range
-    elsif to_range
-      to_range
-    end
-
-  end
-
-  # def process_end_date_range(scope)
-  #   scope.range :range, :end_date, { :gte => self.date_from }  # the project ends after the start of our range
-  # end
-
-  # def process_start_date_range(scope)
-  #   scope.filter :range, start_date: { :lte => self.date_to }  # the project starts before the end of our range
-  # end
 
   def add_range_filters(search)
     search.filter :and, get_range_filters if get_range_filters.any?
@@ -164,7 +111,6 @@ class Search
     filters << self.date_range_filter if self.date_range_filter
     filters
   end
-
 
   def add_facet_with_filter(search, field, filter_values)
 
@@ -223,11 +169,28 @@ class Search
   def process_grant_range()
     self.offer_grant_from = self.params[:offer_grant_from].to_i unless self.params[:offer_grant_from].blank?
     self.offer_grant_to = self.params[:offer_grant_to].to_i unless self.params[:offer_grant_to].blank?
+
+    grant_range= {}
+    grant_range.merge!({ gte: self.offer_grant_from }) if self.offer_grant_from
+    grant_range.merge!({ lte: self.offer_grant_to }) if self.offer_grant_to
+
+    self.grant_range_filter = Tire::Search::Filter.new( :range, {:total_offer_grant => grant_range }).to_hash if self.offer_grant_from || self.offer_grant_to
   end
 
   def process_date_range()
     self.date_from = DateTime.parse self.params[:date_from] unless self.params[:date_from].blank?
     self.date_to = DateTime.parse self.params[:date_to] unless self.params[:date_to].blank?
+
+    from_range = Tire::Search::Filter.new( :range, {:end_date => { :gte => self.date_from } } ) if self.date_from
+    to_range = Tire::Search::Filter.new( :range, {:start_date => { :lte => self.date_to } } ) if self.date_to
+
+    if from_range && to_range
+      self.date_range_filter = Tire::Search::Filter.new( :and, [from_range, to_range] )
+    elsif from_range
+      self.date_range_filter = from_range
+    elsif to_range
+      self.date_range_filter = to_range
+    end
   end
 
   def get_pagination_params

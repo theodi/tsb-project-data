@@ -15,6 +15,9 @@ namespace :loader do
     Import::LegalEntityForms.create_data
     Import::ProjectStatuses.create_data
     Import::CostCategories.create_data
+    Import::SicCodes.create_data
+    Import::BudgetAreas.create_data
+    Import::OntologyLoader.prepare_ontology
   end
 
   # params:

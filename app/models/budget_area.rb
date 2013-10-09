@@ -1,7 +1,8 @@
 class BudgetArea
   include TsbResource
   rdf_type Vocabulary::TSBDEF["BudgetArea"]
-  
+  graph_uri "http://#{PublishMyData.local_domain}/graph/budget-areas"
+
   BUDGET_AREA_CODES = {
     "Development" => "DEVL",
     "Digital" => "DIGS",
@@ -14,7 +15,7 @@ class BudgetArea
     "Transport" => "TRAN",
     "TSB Programmes" => 'tsb-programmes'
   }
-  
+
   BUDGET_AREA_COMMENTS = {
     "Development" => "A TSB Programme underpinning other programmes and with a focus on emerging technologies",
     "Digital" => "A TSB Programme with a focus on exploiting data,new value models, resilient and interoperable digital systems, linking services to customers, and supporting the implementation of the Government's Information Economy Industrial Strategy",

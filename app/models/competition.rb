@@ -9,7 +9,7 @@ class Competition
   field :activity_code, Vocabulary::TSBDEF.activityCode
 
   linked_to :team, Vocabulary::TSBDEF.team
-  linked_to :budget_area,  Vocabulary::TSBDEF.budgetArea
+  linked_to :budget_area, Vocabulary::TSBDEF.budgetArea
   linked_to :product,  Vocabulary::TSBDEF.product
 
 end

@@ -8,11 +8,11 @@
   = render 'application/advanced_resource_details', resource: project
 
 #project-page
-  
+
   #project-main
 
     %section#project-about
-      
+
       #project-about-primary
         #project-name
           %div Project name
@@ -34,7 +34,7 @@
           %div= project.project_number
         #project-budget-area
           %div Budget area
-          %div= project.competition.budget_area || "-"
+          %div= (project.competition.budget_area.label rescue nil) || "-"
 
       #project-about-tertiary
         #project-description
@@ -42,21 +42,21 @@
           %div
             = project.description.truncate(300)
             %a{ href: '#' } Read more
-    
+
 
     %section#project-grant-summary.project-grant-details
       %h3 Grant summary
 
       #project-grant-summary-figures
-        
+
         #project-total-offer-grant
           %div Total grant
           = render "projects/show/grant/offer_grant", offer_grant: project.offer_grant_sum, offer_cost: project.offer_cost_sum
-        
+
         #project-total-payments
           %div Total payments to date
           = render "projects/show/grant/payments_to_date", payments_to_date: project.payments_to_date_sum, offer_grant: project.offer_grant_sum
-          
+
 
     %section#project-participants
       %h3 Participants

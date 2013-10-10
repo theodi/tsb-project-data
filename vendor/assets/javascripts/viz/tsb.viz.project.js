@@ -44,7 +44,7 @@ var regionsMap = {
 };
 
 var ds = new SPARQLDataSource(TSB.Viz.Config.sparqlEndpoint);
-var exampleProject = 'http://tsb-projects.labs.theodi.org/id/project/100416';
+//var exampleProject = 'http://tsb-projects.labs.theodi.org/id/project/730004';
 var HIGHER_EDUCATION = 'http://tsb-projects.labs.theodi.org/def/concept/legal-entity-form/higher-education';
 
 function regionNameToSvgId(name) {

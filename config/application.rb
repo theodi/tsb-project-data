@@ -68,6 +68,7 @@ module TsbProjectData
       config.assets.paths.unshift Rails.root.join("app", "assets", "bootstrap", "fonts").to_s
       config.assets.paths.unshift Rails.root.join("vendor", "assets", "stylesheets", "jquery-ui-lightness").to_s
       config.assets.paths.unshift Rails.root.join("vendor", "assets", "svg").to_s
+      config.assets.paths.unshift Rails.root.join("vendor", "assets", "pickadate").to_s
     end
 
     # Version of your assets, change this if you want to expire all your assets

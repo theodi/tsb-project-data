@@ -14,9 +14,9 @@
     %section#project-about
 
       #project-about-primary
-        #project-name
-          %div Project name
-          %div= project.label
+        #project-number
+          %div Project number
+          %div= project.project_number
         #project-dates
           %div Dates
           %div
@@ -30,8 +30,8 @@
 
       #project-about-secondary
         #project-number
-          %div Project number
-          %div= project.project_number
+          %div Cost Category
+          %div= (project.cost_category.label rescue nil ) || "-"
         #project-budget-area
           %div Budget area
           %div= (project.competition.budget_area.label rescue nil) || "-"
@@ -45,7 +45,7 @@
 
 
     %section#project-grant-summary.project-grant-details
-      %h3 Grant summary
+      %h3 Grant summary (all participants)
 
       #project-grant-summary-figures
 

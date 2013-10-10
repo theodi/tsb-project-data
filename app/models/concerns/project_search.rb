@@ -104,7 +104,7 @@ module ProjectSearch
     @duration_object ||= self.duration
     {
       start_date: @duration_object.start.iso8601,
-      start_date: @duration_object.end.iso8601
+      end_date: @duration_object.end.iso8601
     }
   end
 

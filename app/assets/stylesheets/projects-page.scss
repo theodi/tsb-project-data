@@ -22,7 +22,7 @@
       }
 
       #results-summary-header {
-        
+
       }
 
       #results-summary-count {
@@ -229,7 +229,7 @@
 }
 
 #project-page {
-  
+
   @include make-row();
 
   #project-main {
@@ -262,7 +262,7 @@
     }
 
     #project-about-primary {
-      #project-name {
+      #project-number {
         @include make-md-column(6);
       }
 
@@ -299,7 +299,7 @@
         }
       }
     }
-    
+
     #project-about-secondary {
       > div {
         @include make-md-column(6);
@@ -424,9 +424,9 @@
           font-weight: bold;
         }
       }
-  
+
     }
-    
+
   }
 
 }

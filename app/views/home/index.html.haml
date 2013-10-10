@@ -1,6 +1,29 @@
+
+= stylesheet_link_tag "viz/tsb.viz.css"
+
+= javascript_include_tag 'd3.v3.min.js'
+= javascript_include_tag 'sparql.js'
+= javascript_include_tag 'q.min.js'
+
+= javascript_include_tag 'viz/DataSet.js'
+= javascript_include_tag 'viz/SPARQLDataSource.js'
+= javascript_include_tag 'viz/tsb.viz.project.js'
+
 %p
   [home page - will use different layout]
+
+#container{style: '1140px'}
+  #projectChart
 
 %ul
   %li= link_to "Dataset Metadata", "/data/#{TsbProjectData::DATASET_SLUG}"
   %li= link_to "About", "/about"
+
+:javascript
+  window.onload = function() {
+    TSB.Viz.Config.sparqlEndpoint = '/sparql';
+    //TSB.Viz.Config.bgColor = 'transparent'; //remove bg color
+    var projectId = 'http://tsb-projects.labs.theodi.org/id/project/730048';
+    var container = document.getElementById('projectChart');
+    TSB.Viz.Project(projectId, container, 570, 400);
+  }

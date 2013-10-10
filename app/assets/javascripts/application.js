@@ -12,4 +12,7 @@
 //
 //= require publish_my_data
 //= require jquery/jquery-ui-1.10.3.custom
+//= require d3.v3.min.js
+//= require sparql.js
+//= require q.min.js
 //= require_tree .

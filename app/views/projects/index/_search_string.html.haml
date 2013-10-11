@@ -5,9 +5,7 @@
 
   :javascript
     $(function() {
-      console.log('wiring up keyup');
       $("form#faceted-search #search_string").bind('keyup', $.debounce( 400, function() {
-        console.log('fire');
         $("form#faceted-search").submit();
       }));
     });

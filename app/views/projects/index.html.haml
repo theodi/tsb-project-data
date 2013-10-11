@@ -9,6 +9,8 @@
   #search
     = form_tag '/projects', id: 'faceted-search', method: 'get' do
 
+      = submit_tag 'update results'
+
       = render 'projects/index/search_string'
 
       #filters
@@ -22,7 +24,25 @@
         = render 'projects/index/facet', title: 'Budget Area', facet_name: 'budget_area_label'
         = render 'projects/index/facet', title: 'SIC Section', facet_name:'participant_sic_section_labels'
 
-      = submit_tag 'update', style: "display:none"
+      = submit_tag 'update results'
+
+      %noscript
+        :scss
+          form#faceted-search {
+            input[type='submit'] {
+              display:inline !important;
+            }
+
+            a.reset {
+              display:none !important;
+            }
+
+            #filters {
+              .text-fields {
+                display:block !important;
+              }
+            }
+          }
 
       :javascript
         $(function() {

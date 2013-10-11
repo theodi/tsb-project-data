@@ -5,6 +5,16 @@
     @include make-md-column(3);
     font-size:16px;
 
+    form#faceted-search {
+      input[type='submit'] {
+        display:none; // only shown in noscript mode.
+        margin-top:10px;
+        margin-bottom:10px;
+        @extend .btn;
+        @extend .btn-primary;
+      }
+    }
+
     div.ui-slider-range {
       background: #0099cc;
     }
@@ -37,6 +47,12 @@
     }
 
     #filters {
+      .text-fields {
+        display:none;
+        input {
+          @extend .form-control;
+        }
+      }
 
       .slider {
         margin:10px auto;
@@ -245,7 +261,6 @@
           }
 
           .result-participants {
-            margin-top:20px;
             @include make-md-column(12);
             .result-participant-links {
               font-size: 20px;

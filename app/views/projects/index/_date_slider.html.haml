@@ -3,19 +3,16 @@
   %a.reset{href:"#", id:'reset-dates'}
     reset
 
-  .collapsible
-    %div{style:'display:none'}
-      %br
+  %div.text-fields
+    %label
       date from:
-      %br
-      = text_field_tag :date_from, @search.date_from
-      %br
+    = text_field_tag :date_from, @search.date_from
+    %label
       date to:
-      %br
-      = text_field_tag :date_to, @search.date_to
+    = text_field_tag :date_to, @search.date_to
 
-    #date-slider.slider
-    #date-range-desc.value-desc
+  #date-slider.slider
+  #date-range-desc.value-desc
 
 :javascript
   $(function() {

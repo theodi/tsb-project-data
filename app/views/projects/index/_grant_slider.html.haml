@@ -3,15 +3,13 @@
   %a.reset{href:"#", id:'reset-grants'}
     reset
 
-  %div{style:'display:none'}
-    grant from:
-    %br
+  %div.text-fields
+    %label
+      grant from:
     = text_field_tag :offer_grant_from, @search.offer_grant_from, placeholder: '£amount'
-    %br
-    grant to:
-    %br
+    %label
+      grant to:
     = text_field_tag :offer_grant_to, @search.offer_grant_to, placeholder: '£amount'
-    %br
 
   #offer-grant-slider.slider
   #grant-range-desc.value-desc

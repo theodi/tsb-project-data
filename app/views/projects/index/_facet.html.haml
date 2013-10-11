@@ -6,19 +6,22 @@
   clear_facet_id = "clear-#{facet_name.downcase}-facet"
   facet_div_id = "#{facet_name.downcase}-facet"
 
+.facet{id: facet_div_id}
+  %label= title
 
-%div{id: facet_div_id}
-  %h4= title
-  %a{href:"#", id:clear_facet_id}
-    clear
-  %br
-  - @projects.facets[facet_name]["terms"].each do |t|
-    - term = t["term"]
-    = check_box_tag("#{facet_name}[#{term}]", true, @search.facets[facet_name].include?(term) )
-    #{term}
-    // This is probably confusing. leave off counts for now.
-    // (#{t["count"]})
-    %br
+  %a.reset{href:"#", id:clear_facet_id}
+    reset
+
+  .collapsible
+
+    - @projects.facets[facet_name]["terms"].each do |t|
+      .facet-term
+        %label
+          - term = t["term"]
+          = check_box_tag("#{facet_name}[#{term}]", true, @search.facets[facet_name].include?(term) )
+          #{term}
+          / This is probably confusing. leave off counts for now.
+          / (#{t["count"]})
 
 :javascript
   $(function() {

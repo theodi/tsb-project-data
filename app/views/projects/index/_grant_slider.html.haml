@@ -1,16 +1,20 @@
-%div{style:'display:none'}
-  grant from:
-  %br
-  = text_field_tag :offer_grant_from, @search.offer_grant_from, placeholder: '£amount'
-  %br
-  grant to:
-  %br
-  = text_field_tag :offer_grant_to, @search.offer_grant_to, placeholder: '£amount'
+.filter
+  %label Grant Amount
+  %a.reset{href:"#", id:'reset-grants'}
+    reset
 
-  %br
+  %div{style:'display:none'}
+    grant from:
+    %br
+    = text_field_tag :offer_grant_from, @search.offer_grant_from, placeholder: '£amount'
+    %br
+    grant to:
+    %br
+    = text_field_tag :offer_grant_to, @search.offer_grant_to, placeholder: '£amount'
+    %br
 
-#grant-range-desc
-#offer-grant-slider
+  #offer-grant-slider.slider
+  #grant-range-desc.value-desc
 
 :javascript
   $(function() {
@@ -87,6 +91,12 @@
       stop: function( event, ui ) {
         $("form#faceted-search").submit();
       }
+    });
+
+    $("#reset-grants").click( function() {
+      setSliderValues(minExtent, maxExtent);
+      setOfferGrantTextFields(minExtent, maxExtent, roundValue);
+      $("form#faceted-search").submit();
     });
 
     setSliderValues(grantFrom, grantTo);

@@ -1,12 +1,13 @@
-= text_field_tag :search_string, @search.original_search_string, placeholder: 'search projects'
+.search-string
+  %label{for: 'search-string'}
+    Search Query
+    = text_field_tag :search_string, @search.original_search_string
 
-:javascript
-  $(function() {
-
-    console.log('wiring up keyup');
-
-    $("form#faceted-search #search_string").bind('keyup', $.debounce( 400, function() {
-      console.log('fire');
-      $("form#faceted-search").submit();
-    }));
-  });
+  :javascript
+    $(function() {
+      console.log('wiring up keyup');
+      $("form#faceted-search #search_string").bind('keyup', $.debounce( 400, function() {
+        console.log('fire');
+        $("form#faceted-search").submit();
+      }));
+    });

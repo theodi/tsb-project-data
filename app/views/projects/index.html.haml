@@ -8,13 +8,12 @@
 #projects-page
   #search
     = form_tag '/projects', id: 'faceted-search', method: 'get' do
+
       = render 'projects/index/search_string'
 
       #filters
-
         = render 'projects/index/grant_slider'
         = render 'projects/index/date_slider'
-        =# render 'projects/index/date_pickers'
 
       #facets
         = render 'projects/index/facet', title: 'Region', facet_name: 'region_labels'
@@ -23,7 +22,7 @@
         = render 'projects/index/facet', title: 'Budget Area', facet_name: 'budget_area_label'
         = render 'projects/index/facet', title: 'SIC Section', facet_name:'participant_sic_section_labels'
 
-      = submit_tag 'update'
+      = submit_tag 'update', style: "display:none"
 
       :javascript
         $(function() {

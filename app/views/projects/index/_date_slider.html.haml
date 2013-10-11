@@ -1,15 +1,21 @@
-%div{style:'display:none'}
-  %br
-  date from:
-  %br
-  = text_field_tag :date_from, @search.date_from
-  %br
-  date to:
-  %br
-  = text_field_tag :date_to, @search.date_to
+.filter
+  %label Project Dates
+  %a.reset{href:"#", id:'reset-dates'}
+    reset
 
-#date-range-desc
-#date-slider
+  .collapsible
+    %div{style:'display:none'}
+      %br
+      date from:
+      %br
+      = text_field_tag :date_from, @search.date_from
+      %br
+      date to:
+      %br
+      = text_field_tag :date_to, @search.date_to
+
+    #date-slider.slider
+    #date-range-desc.value-desc
 
 :javascript
   $(function() {
@@ -76,6 +82,12 @@
       stop: function( event, ui ) {
         $("form#faceted-search").submit();
       }
+    });
+
+    $("#reset-dates").click( function() {
+      setSliderValues(0, extentInMonths);
+      setDateTextFields(0, extentInMonths);
+      $("form#faceted-search").submit();
     });
 
     setSliderValues(dateFromInMonths, dateToInMonths);

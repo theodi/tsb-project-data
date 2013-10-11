@@ -1,0 +1,37 @@
+%br
+date from:
+%br
+= text_field_tag :date_from, @search.date_from
+%br
+date to:
+%br
+= text_field_tag :date_to, @search.date_to
+
+:javascript
+  $(function() {
+    var format= 'd mmm yyyy';
+    var selectYears = true;
+
+    var opts = {format: format, selectYears: selectYears }
+
+    var fromInput = $("#date_from").pickadate(opts);
+    var toInput = $("#date_to").pickadate(opts);
+
+    var fromPicker = fromInput.pickadate('picker');
+    var toPicker = toInput.pickadate('picker');
+
+    var dateFromStr = '#{@search.date_from}';
+    var dateToStr = '#{@search.date_to}';
+
+    if (dateFromStr.length > 0 ) { fromPicker.set('select', new Date(dateFromStr)); }
+    if (dateToStr.length > 0 ) { toPicker.set('select', new Date(dateToStr)); }
+
+    fromPicker.on('set', function() {
+      $("form#faceted-search").submit();
+    });
+
+    toPicker.on('set', function() {
+      $("form#faceted-search").submit();
+    });
+
+  });

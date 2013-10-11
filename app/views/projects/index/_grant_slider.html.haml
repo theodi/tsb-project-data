@@ -1,0 +1,103 @@
+%div{style:'display:none'}
+  grant from:
+  %br
+  = text_field_tag :offer_grant_from, @search.offer_grant_from, placeholder: '£amount'
+  %br
+  grant to:
+  %br
+  = text_field_tag :offer_grant_to, @search.offer_grant_to, placeholder: '£amount'
+
+  %br
+
+#grant-range-desc
+#offer-grant-slider
+
+:javascript
+  $(function() {
+
+    var minExtent = #{@projects_unfiltered.facets["offer_grant_stats_unfiltered"]["min"]};
+    var maxExtent = #{@projects_unfiltered.facets["offer_grant_stats_unfiltered"]["max"]};
+    var grantFrom =  #{@search.offer_grant_from || @projects_unfiltered.facets["offer_grant_stats_unfiltered"]["min"]};
+    var grantTo =  #{@search.offer_grant_to || @projects_unfiltered.facets["offer_grant_stats_unfiltered"]["max"]};
+    var range = maxExtent - minExtent;
+    var roundValue = getRoundValue( range );
+
+    function roundToNearest(val, nearest, up) {
+      multiplier = 1/nearest;
+
+      if(up) {
+        return Math.ceil(val * multiplier) / multiplier;
+      }
+      else {
+        return Math.floor(val * multiplier) / multiplier;
+      }
+    }
+
+    function getRoundValue(range) {
+      if ( range < 1000 ) {
+        return 10;2
+      } else if ( range >= 1000 && range < 10000 ) {
+        return 100;
+      } else if (range >= 10000 && range <= 100000 ) {
+        return 1000;
+      } else if (range >= 100009 ) {
+        return 10000;
+      }
+    }
+
+    function setSliderValues(from, to) {
+
+      if(!from || from < minExtent) { from = minExtent }
+      if(!to || to > maxExtent) { to = maxExtent }
+
+      if( from > maxExtent ) { from = maxExtent }
+      if( to < minExtent ) { to = minExtent }
+
+      if (to <= from ) {
+        to = from;
+      }
+
+      $( "#offer-grant-slider" ).slider( "values", [ from, to ] );
+    }
+
+    function setOfferGrantTextFields(from, to, roundValue) {
+      from = roundToNearest( from.toFixed(2), roundValue, false );
+      to = roundToNearest( to.toFixed(2), roundValue, true );
+
+      $("#offer_grant_from").val( from );
+      $("#offer_grant_to").val( to );
+    }
+
+    function updateGrantRangeDesc() {
+      var str = '&pound;' + $("#offer_grant_from").val() + ' - &pound;' + $("#offer_grant_to").val();
+      $("#grant-range-desc").html( str );
+    }
+
+    step = (range / 20);
+
+    $( "#offer-grant-slider" ).slider({
+      range: true,
+      min: minExtent,
+      max: maxExtent,
+      step: step,
+      slide: function( event, ui ) {
+        setOfferGrantTextFields(ui.values[0], ui.values[1], roundValue );
+        updateGrantRangeDesc();
+      },
+      stop: function( event, ui ) {
+        $("form#faceted-search").submit();
+      }
+    });
+
+    setSliderValues(grantFrom, grantTo);
+
+    // initialise the text fields with the initial slider values.
+    setOfferGrantTextFields(
+      $( "#offer-grant-slider" ).slider("values", 0),
+      $( "#offer-grant-slider" ).slider("values", 1),
+      roundValue
+    );
+
+    updateGrantRangeDesc();
+
+  });

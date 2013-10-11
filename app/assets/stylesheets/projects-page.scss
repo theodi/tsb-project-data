@@ -3,6 +3,18 @@
 
   #search {
     @include make-md-column(3);
+    font-size:16px;
+
+    div.ui-slider-range {
+      background: #0099cc;
+    }
+
+    a.ui-slider-handle {
+      &.ui-state-hover, &.ui-state-focus {
+        border: 1px solid #bbb;
+        background: #eee;
+      }
+    }
   }
 
   #results {
@@ -170,18 +182,26 @@
         }
 
         .result-details {
-          > div {
+          .grant {
             @include make-md-column(3);
+          }
 
-            > div:first-child {
-              color: #888;
+          .duration {
+            @include make-md-column(9);
+            #project-start-date, #project-end-date {
+              display: inline-block;
               font-size: 16px;
             }
           }
 
-          .result-participants {
-            @include make-md-column(9);
+          .lbl {
+            color: #888;
+            font-size: 16px;
+          }
 
+          .result-participants {
+            margin-top:20px;
+            @include make-md-column(12);
             .result-participant-links {
               font-size: 20px;
               color: #888;

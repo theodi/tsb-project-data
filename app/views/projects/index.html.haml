@@ -7,164 +7,32 @@
 
 #projects-page
   #search
-    = form_tag '/projects', method: 'get' do
-      = text_field_tag :search_string, @search.original_search_string, :placeholder => 'Search projects'
-      = submit_tag 'search'
+    = form_tag '/projects', id: 'faceted-search', method: 'get' do
+      = render 'projects/index/search_string'
 
       #filters
 
-        grant from:
-        %br
-        = text_field_tag :offer_grant_from, @search.offer_grant_from
-        %br
-        grant to:
-        %br
-        = text_field_tag :offer_grant_to, @search.offer_grant_to
-
-        %br
-        / #offer-grant-slider
-        / :javascript
-        /   $(function() {
-
-        /     function roundToNearest(val, nearest, up) {
-        /       multiplier = 1/nearest;
-
-        /       if(up) {
-        /         return Math.ceil(val * multiplier) / multiplier;
-        /       }
-        /       else {
-        /         return Math.floor(val * multiplier) / multiplier;
-        /       }
-        /     }
-
-        /     function getRoundValue(range) {
-        /       if ( range < 1000 ) {
-        /         return 10;
-        /       } else if ( range >= 1000 && range < 10000 ) {
-        /         return 100;
-        /       } else if (range >= 10000 && range <= 100000 ) {
-        /         return 1000;
-        /       } else if (range >= 100009 ) {
-        /         return 10000;
-        /       }
-        /     }
-
-        /     function setSliderValues(from, to) {
-
-        /       if(!from || from < minGrantExtent) { from = minGrantExtent }
-        /       if(!to || to > maxGrantExtent) { to = maxGrantExtent }
-
-        /       if( from > maxGrantExtent ) { from = maxGrantExtent }
-        /       if( to < minGrantExtent ) { to = minGrantExtent }
-
-        /       if (to <= from ) {
-        /         to = from;
-        /       }
-
-        /       $( "#offer-grant-slider" ).slider( "values", [ from, to ] );
-        /     }
-
-        /     function setOfferGrantTextFields(from, to, roundValue) {
-        /       console.log( from, to );
-
-        /       from = roundToNearest( from.toFixed(2), roundValue, false );
-        /       to = roundToNearest( to.toFixed(2), roundValue, true );
-
-        /       console.log( from, to );
-
-        /       $("#offer_grant_from").val( from );
-        /       $("#offer_grant_to").val( to );
-        /     }
-
-        /     var minGrant =  #{@projects.facets["offer_grant_stats"]["min"]};
-        /     var maxGrant =  #{@projects.facets["offer_grant_stats"]["max"]};
-
-        /     var minGrantExtent = #{@projects.facets["offer_grant_stats_unfiltered"]["min"]};
-        /     var maxGrantExtent = #{@projects.facets["offer_grant_stats_unfiltered"]["max"]};
-
-        /     var range = maxGrantExtent - minGrantExtent;
-
-        /     var roundValue = getRoundValue( range );
-        /     // minGrant = roundToNearest( minGrant, roundValue, false );
-        /     // maxGrant = roundToNearest( maxGrant, roundValue, true );
-
-        /     step = (range / 20);
-
-        /     console.log( minGrantExtent, maxGrantExtent );
-        /     console.log( minGrant, maxGrant );
-
-        /     $( "#offer-grant-slider" ).slider({
-        /       range: true,
-        /       min: minGrantExtent,
-        /       max: maxGrantExtent,
-        /       step: step,
-        /     //  values: [ minGrant, maxGrant ],
-        /       slide: function( event, ui ) {
-        /         setOfferGrantTextFields(ui.values[0], ui.values[1], roundValue );
-        /       }
-        /     });
-
-        /     setSliderValues(minGrant, maxGrant);
-
-        /     $( "#offer_grant_from, #offer_grant_to" ).bind('keyup', function(e) {
-        /       console.log('in here');
-        /       var from = parseInt( $("#offer_grant_from").val() );
-        /       var to = parseInt( $("#offer_grant_to").val() );
-        /       setSliderValues( from, to );
-        /     });
-
-
-        /     // initialise the text fields with the initial slider values.
-        /     setOfferGrantTextFields(
-        /       $( "#offer-grant-slider" ).slider("values", 0),
-        /       $( "#offer-grant-slider" ).slider("values", 1),
-        /       roundValue
-        /     );
-
-        /   });
-
-        %br
-        date from:
-        %br
-        = text_field_tag :date_from, @search.date_from
-        %br
-        date to:
-        %br
-        = text_field_tag :date_to, @search.date_to
-
-        :javascript
-          (function() {
-            var format= 'd mmm yyyy';
-            var selectYears = true;
-
-            var opts = {format: format, selectYears: selectYears }
-
-            var fromInput = $("#date_from").pickadate(opts);
-            var toInput = $("#date_to").pickadate(opts);
-
-            var fromPicker = fromInput.pickadate('picker');
-            var toPicker = toInput.pickadate('picker');
-
-            var dateFromStr = '#{@search.date_from}';
-            var dateToStr = '#{@search.date_to}';
-
-            console.log(dateFromStr);
-            console.log(dateFromStr.length);
-
-            if (dateFromStr.length > 0 ) { fromPicker.set('select', new Date(dateFromStr)); }
-            if (dateToStr.length > 0 ) { toPicker.set('select', new Date(dateToStr)); }
-
-
-          })();
+        = render 'projects/index/grant_slider'
+        = render 'projects/index/date_slider'
+        =# render 'projects/index/date_pickers'
 
       #facets
-        = render 'facet', title: 'Region', facet_name: 'region_labels'
-        = render 'facet', title: 'Enterprise Size', facet_name: 'participant_size_labels'
-        = render 'facet', title: 'Status', facet_name: 'status_label'
-        = render 'facet', title: 'Budget Area', facet_name: 'budget_area_label'
-        = render 'facet', title: 'SIC Section', facet_name:'participant_sic_section_labels'
+        = render 'projects/index/facet', title: 'Region', facet_name: 'region_labels'
+        = render 'projects/index/facet', title: 'Enterprise Size', facet_name: 'participant_size_labels'
+        = render 'projects/index/facet', title: 'Status', facet_name: 'status_label'
+        = render 'projects/index/facet', title: 'Budget Area', facet_name: 'budget_area_label'
+        = render 'projects/index/facet', title: 'SIC Section', facet_name:'participant_sic_section_labels'
 
       = submit_tag 'update'
+
+      :javascript
+        $(function() {
+          $("form#faceted-search input[type='checkbox']").change( function(e) {
+              console.log('checkbox changed');
+              $("form#faceted-search").submit();
+            }
+          )
+        });
 
   #results
 

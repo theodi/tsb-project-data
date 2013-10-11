@@ -1,0 +1,90 @@
+%div{style:'display:none'}
+  %br
+  date from:
+  %br
+  = text_field_tag :date_from, @search.date_from
+  %br
+  date to:
+  %br
+  = text_field_tag :date_to, @search.date_to
+
+#date-range-desc
+#date-slider
+
+:javascript
+  $(function() {
+
+    var minExtentDate = new Date(#{@projects_unfiltered.facets["start_date_stats_unfiltered"]["min"]});
+    var maxExtentDate = new Date(#{@projects_unfiltered.facets["end_date_stats_unfiltered"]["max"]});
+
+    var dateFromDate = new Date(#{ @search.date_from ? "'#{@search.date_from}'" : @projects_unfiltered.facets["start_date_stats_unfiltered"]["min"]});
+    var dateToDate = new Date(#{@search.date_to ? "'#{@search.date_to}'" : @projects_unfiltered.facets["end_date_stats_unfiltered"]["max"]});
+
+    var maxExtentDate = maxExtentDate.setMonth( maxExtentDate.getMonth() + 1 ); // add a month to the ends
+    var dateToDate = dateToDate.setMonth( dateToDate.getMonth() + 1 ); // add a month to the ends
+
+    var minExtentMoment = moment.utc(minExtentDate);
+    var maxExtentMoment = moment.utc(maxExtentDate);
+
+    var dateFromMoment = moment.utc(dateFromDate);
+    var dateToMoment = moment.utc(dateToDate);
+
+    var extentInMonths = maxExtentMoment.diff(minExtentMoment, 'months')
+
+    var dateFromInMonths = dateFromMoment.diff(minExtentMoment, 'months')
+    var dateToInMonths = dateToMoment.diff(minExtentMoment, 'months')
+
+
+    function setSliderValues(from, to) {
+
+      if(!from || from < 0) { from = 0 }
+      if(!to || to > extentInMonths) { to = extentInMonths }
+
+      if( from > extentInMonths ) { from = extentInMonths }
+      if( to < 0 ) { to = 0 }
+
+      if (to <= from ) {
+        to = from;
+      }
+
+      $( "#date-slider" ).slider( "values", [ from, to ] );
+    }
+
+    function updateDescription() {
+      var str = moment.utc($("#date_from").val()).format("MMM YYYY") + ' - ' + moment.utc($("#date_to").val()).format("MMM YYYY")
+      $("#date-range-desc").html( str );
+    }
+
+    function monthsToISODateString(noOfMonths) {
+      return minExtentMoment.clone().add('months', noOfMonths).format("YYYY-MM-DD");
+    }
+
+    function setDateTextFields(monthsFrom, monthsTto) {
+      $("#date_from").val( monthsToISODateString(monthsFrom) );
+      $("#date_to").val( monthsToISODateString(monthsTto) );
+    }
+
+    $( "#date-slider" ).slider({
+      range: true,
+      min: 0,
+      max: extentInMonths,
+      step: 1,
+      slide: function( event, ui ) {
+        setDateTextFields(ui.values[0], ui.values[1] );
+        updateDescription();
+      },
+      stop: function( event, ui ) {
+        $("form#faceted-search").submit();
+      }
+    });
+
+    setSliderValues(dateFromInMonths, dateToInMonths);
+
+    setDateTextFields(
+      $( "#date-slider" ).slider("values", 0),
+      $( "#date-slider" ).slider("values", 1)
+    );
+    updateDescription();
+
+
+  });

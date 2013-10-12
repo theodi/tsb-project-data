@@ -7,7 +7,7 @@
 
 .minimal
   .formats
-    %span Get this #{resource.class.name.humanize.downcase} as:
+    %span Get as:
     %ul.formats
       %li= link_to("JSON", show_resource_path(:uri => resource.uri, :format => 'json'))
       %li= link_to("RDF/XML", show_resource_path(:uri => resource.uri, :format => 'rdf'))
@@ -16,11 +16,11 @@
 
   .reveal
     %a{href:'#'}
-      Full Linked Data details
-      %span.glyphicon.glyphicon-collapse-down
+      Linked Data details
+      %span.glyphicon.glyphicon-expand
 
     %a{href:'#', style:'display:none'}
-      Hide Linked Data details
+      Linked Data details
       %span.glyphicon.glyphicon-collapse-up
 
 .full

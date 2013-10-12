@@ -1,0 +1,35 @@
+-# expects local params:
+-#   facet_name (the name of the facet in our search's facets hash).
+-#   title
+
+:ruby
+  clear_facet_id = "clear-#{facet_name.downcase}-facet"
+  facet_div_id = "#{facet_name.downcase}-facet"
+
+.facet{id: facet_div_id}
+  %label= title
+
+  %a.reset{href:"#", id:clear_facet_id}
+    reset
+
+  - @projects.facets[facet_name]["terms"].each do |t|
+    .facet-term
+      %label
+        - term = t["term"]
+        = check_box_tag("#{facet_name}[#{term}]", true, @search.facets[facet_name].include?(term) )
+        #{term}
+        / This is probably confusing. leave off counts for now.
+        / (#{t["count"]})
+
+:javascript
+  $(function() {
+    var clearFacetId = '#{clear_facet_id}';
+    var facetDivId = '#{facet_div_id}';
+
+    $('#' + clearFacetId).click( function(e) {
+      e.preventDefault();
+      $('#' + facetDivId + ' input[type="checkbox"]').attr('checked', false);
+      $("form#faceted-search").submit();
+    });
+
+  });

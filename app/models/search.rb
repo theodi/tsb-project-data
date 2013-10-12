@@ -41,10 +41,14 @@ class Search
 
   def results
     r = Project.search page: self.page, per_page: self.per_page do |search|
+      # search.query do |query|
+      #   query.boolean do |boolean|
+      #     boolean.must { |b| b.string self.search_string }
+      #   end
+      # end
+
       search.query do |query|
-        query.boolean do |boolean|
-          boolean.must { |b| b.string self.search_string }
-        end
+        query.string self.search_string
       end
 
       # facets
@@ -63,6 +67,18 @@ class Search
         facet.statistical 'total_offer_cost'
         self.terms_filters.each { |f| facet.facet_filter :terms, f }
         add_range_facet_filters(facet)
+      end
+
+      search.facet('offer_grant_stats_unfiltered') do |facet|
+        facet.statistical 'total_offer_grant'
+      end
+
+      search.facet('start_date_stats_unfiltered') do |facet|
+        facet.statistical 'start_date'
+      end
+
+      search.facet('end_date_stats_unfiltered') do |facet|
+        facet.statistical 'end_date'
       end
 
       # add the search filters from the facets
@@ -101,8 +117,9 @@ class Search
     search.filter :and, get_range_filters if get_range_filters.any?
   end
 
-  def add_range_facet_filters(search, opts={})
-    search.facet_filter :and, get_range_filters(opts) if get_range_filters.any?
+
+  def add_range_facet_filters(facet, opts={})
+    facet.facet_filter :and, get_range_filters(opts) if get_range_filters(opts).any?
   end
 
   def get_range_filters(opts={})
@@ -149,8 +166,6 @@ class Search
     self.terms_filters << { field => filter_values } if filter_values.any?
 
   end
-
-
 
   def process_facets
     self.facets.each_key do |facet_name|

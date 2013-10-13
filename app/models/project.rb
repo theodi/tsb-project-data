@@ -98,6 +98,7 @@ class Project
     ?competition_code
     ?competition_year
     ?product
+    ?budget_area
     ?org_id
     ?org_name
     ?company_number
@@ -139,7 +140,7 @@ class Project
       ?e_size rdfs:label ?company_size .}
     OPTIONAL {
       ?org_id tsb:standardIndustrialClassification ?sic .
-      ?sic rdfs:label ?sic_code .}
+      ?sic tsb:sicCode ?sic_code .}
     ?org_id org:hasSite ?site .
     ?site org:siteAddress ?address .
     OPTIONAL {
@@ -158,7 +159,7 @@ class Project
     ?comp tsb:product ?prod .
     ?prod rdfs:label ?product .
     OPTIONAL {
-      ?prod tsb:budgetArea ?budg_id .
+      ?comp tsb:budgetArea ?budg_id .
       ?budg_id rdfs:label ?budget_area .}
     ?grant tsb:offerGrant ?offer_grant ;
            tsb:offerCost ?offer_cost ;

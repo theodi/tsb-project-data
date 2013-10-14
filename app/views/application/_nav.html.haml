@@ -10,7 +10,9 @@
       - if ['projects', 'resources'].include? controller_name
         .arrow-down
 
-    %li
-      %a{href:"/data/#{TsbProjectData::DATASET_SLUG}"} Linked Data (Advanced)
+    %li.advanced
+      %a{href:"/data/#{TsbProjectData::DATASET_SLUG}"}
+        %span.primary Linked Data
+        %span.secondary Advanced users
       - if ['information_resources'].include? controller_name
         .arrow-down

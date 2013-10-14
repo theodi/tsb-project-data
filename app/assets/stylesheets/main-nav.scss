@@ -24,6 +24,28 @@ main > nav {
         }
       }
 
+      &.advanced {
+        a {
+          padding: 15px 20px;
+          line-height: 1;
+          text-align: center;
+
+          span {
+            display: block;
+
+            &.secondary {
+              font-size: 12px;
+              color: #888;
+            }
+          } 
+
+          &:hover span {
+            color: $accent-color;
+          } 
+        }
+        
+      }
+
       .arrow-down {
         position: absolute;
         left: 50%;

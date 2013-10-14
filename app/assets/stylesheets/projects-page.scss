@@ -79,7 +79,8 @@
   }
 
   #results {
-    @include make-md-column(9);
+    @include make-md-column(8);
+    @include make-md-column-offset(1);
 
     #results-summary {
       margin-bottom: 18px;
@@ -242,7 +243,9 @@
           }
         }
 
-        .result-details {
+
+
+        .result-grant-and-duration {
           .grant {
             @include make-md-column(3);
           }
@@ -254,45 +257,50 @@
               font-size: 16px;
             }
           }
+        }
 
-          .lbl {
-            color: #888;
-            font-size: 16px;
-          }
+        .lbl {
+          color: #888;
+          font-size: 16px;
+        }
 
-          .result-participants {
-            @include make-md-column(12);
-            .result-participant-links {
-              font-size: 20px;
-              color: #888;
+          
+  
 
-              a:first-child {
-                font-weight: bold;
-              }
-            }
-          }
-
-          .figure {
+        .result-participants {
+          @include make-row();
+          .result-participants-links {
             font-size: 20px;
-            @include clearfix();
+            color: #888;
+            @include make-md-column(12);
 
-            .pounds, .pence {
-              float: left;
-            }
-
-            .pounds {
+            a:first-child {
               font-weight: bold;
-              //letter-spacing: -1px;
             }
-
-            .pence {
-              font-size: 14px;
-              margin-left: 1px;
-              padding-top: 8px;
-            }
-
           }
         }
+
+        .figure {
+          font-size: 20px;
+          @include clearfix();
+
+          .pounds, .pence {
+            float: left;
+          }
+
+          .pounds {
+            font-weight: bold;
+            //letter-spacing: -1px;
+          }
+
+          .pence {
+            font-size: 14px;
+            margin-left: 1px;
+            padding-top: 8px;
+          }
+
+        }
+        
       }
     }
 

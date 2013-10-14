@@ -12,6 +12,7 @@ module ProjectCsv
     Rails.logger.debug("no of rows: #{results.length}")
 
     results_array = results.collect do |result|
+
       row = []
 
       csv_headers.each do |h|

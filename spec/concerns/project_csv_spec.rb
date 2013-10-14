@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Project do
 
   before do
-   # `RAILS_ENV=test REPLACE_SUPPORTING=true INPUT_FILENAME='datatest10.xlsx' rake loader:complete_load `
+   #`RAILS_ENV=test REPLACE_SUPPORTING=true INPUT_FILENAME='datatest10.xlsx' rake loader:complete_load `
   end
 
   describe 'csv_headers' do
@@ -13,8 +13,40 @@ describe Project do
   end
 
   describe 'csv_data' do
-    it "should" do
 
+    before do
+      Tripod::SparqlClient::Query.should_receive(:select).at_least(:once).and_return(
+        [
+          # field 3 ommited
+          {
+            "field_1" => { "type" => "literal", "value" => "value_1" } ,
+            "field_2" => { "type" => "uri", "value" => "value_2" }
+          },
+          {
+            "field_1" => { "type" => "literal", "value" => "value_1" } ,
+            "field_2" => { "type" => "uri", "value" => "value_2" } ,
+            "field_3" => { "type" => "uri", "value" => "value_3" }
+          }
+        ]
+
+      )
+
+      Project.should_receive(:csv_headers).at_least(:once).and_return(
+        ["field_1", "field_2", "field_3"]
+      )
+
+    end
+
+    it "should return an array of data based on the result of the query" do
+      Project.csv_data('http://blah').length.should == 2
+      Project.csv_data('http://blah')
+        .should == [
+          ["value_1", "value_2", ""], ["value_1", "value_2", "value_3"]
+        ]
+    end
+
+    it "should return empty blank cells if there's no data returned" do
+      Project.csv_data('http://blah')[0][2].should == ""
     end
   end
 

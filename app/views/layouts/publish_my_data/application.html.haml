@@ -6,11 +6,9 @@
     = yield :page_description
 
     = stylesheet_link_tag :application
-    / %link{rel:"stylesheet", href:"//cdn.leafletjs.com/leaflet-0.6.4/leaflet.css"}
-    / %link{rel:"stylesheet", href:"//api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.standalone.css"}
 
-    / %script{src: "//cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"}
-    / %script{src: "//api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.standalone.js"}
+    = yield :head
+    
     = javascript_include_tag :application
 
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
@@ -60,7 +58,7 @@
         / #push
 
     -# note: intentionally not in #wrap
-    = render "footer"
+    = render "application/footer"
         
 
 

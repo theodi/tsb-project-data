@@ -7,6 +7,13 @@
 - content_for :advanced do
   = render 'application/advanced_resource_details', resource: project
 
+- content_for :head do
+  %link{rel:"stylesheet", href:"//cdn.leafletjs.com/leaflet-0.6.4/leaflet.css"}
+  %link{rel:"stylesheet", href:"//api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.standalone.css"}
+
+  %script{src: "//cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"}
+  %script{src: "//api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.standalone.js"}
+
 #project-page
 
   #project-main

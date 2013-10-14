@@ -3,7 +3,8 @@
     Projects
 
 - content_for :advanced do
-  [download formats / atom]
+  Get these results as
+  = link_to "CSV", projects_path( params.merge(format: 'csv') )
 
 #projects-page
   #search

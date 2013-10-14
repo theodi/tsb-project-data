@@ -17,6 +17,7 @@ group :assets do
   gem 'yui-compressor' #note:requires java
 end
 
-group :development do
+group :development, :test do
   gem "capistrano"
+  gem 'rspec-rails', '~> 2.0'
 end

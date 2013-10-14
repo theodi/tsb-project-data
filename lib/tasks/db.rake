@@ -45,16 +45,27 @@ namespace :db do
     dataset.write_predicate("http://rdfs.org/ns/void#sparqlEndpoint", "http://#{PublishMyData.local_domain}/sparql")
     dataset.write_predicate("http://publishmydata.com/def/dataset#graph", TsbProjectData::DATA_GRAPH)
     puts dataset.save
+
+    #TODO: datasets for regions and budget areas
+
   end
 
   desc 'replace supporting data'
   task replace_supporting_data: :environment do
-    replace_graph(Region.get_graph_uri, 'regions.nt')
+
     replace_graph(Product.get_graph_uri, 'products.nt')
     replace_graph(EnterpriseSize.get_graph_uri, 'enterprise_sizes.nt')
     replace_graph(LegalEntityForm.get_graph_uri, 'legal_entity_forms.nt')
     replace_graph(ProjectStatus.get_graph_uri, 'project_statuses.nt')
     replace_graph(CostCategory.get_graph_uri, 'cost_categories.nt')
+    replace_graph(SicClass.get_graph_uri, 'sic_codes.nt')
+
+    # TODO: budget areas and regions need their own dataset metadata.
+    replace_graph(Region.get_graph_uri, 'regions.nt')
+    replace_graph(BudgetArea.get_graph_uri, 'budget_areas.nt')
+
+    # TODO: add some ontology metadata
+    replace_graph(TsbProjectData::ONTOLOGY_GRAPH, 'ontology.nt')
   end
 
   desc 'replace project dataset data.'

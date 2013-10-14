@@ -3,6 +3,79 @@
 
   #search {
     @include make-md-column(3);
+    font-size:16px;
+
+    form#faceted-search {
+      input[type='submit'] {
+        display:none; // only shown in noscript mode.
+        margin-top:10px;
+        margin-bottom:10px;
+        @extend .btn;
+        @extend .btn-primary;
+      }
+    }
+
+    div.ui-slider-range {
+      background: #0099cc;
+    }
+
+    a.ui-slider-handle {
+      &.ui-state-hover, &.ui-state-focus {
+        border: 1px solid #bbb;
+        background: #eee;
+      }
+    }
+
+    .search-string, .filter, .facet {
+      padding-top:5px;
+      border-bottom: 1px solid #ddd;
+      .reset {
+        float:right;
+        font-size:14px;
+      }
+    }
+
+    .search-string {
+      label {
+        width:100%;
+        input {
+          @extend .form-control;
+          width:100%;
+        }
+      }
+      padding-bottom:20px;
+    }
+
+    #filters {
+      .text-fields {
+        display:none;
+        input {
+          @extend .form-control;
+        }
+      }
+
+      .slider {
+        margin:10px auto;
+        width: 90%;
+      }
+
+      .value-desc {
+        text-align:center;
+        font-size:14px;
+        margin-bottom: 20px;
+      }
+
+    }
+
+    #facets {
+      .facet {
+
+        .facet-term {
+          font-size:14px;
+          @extend .checkbox
+        }
+      }
+    }
   }
 
   #results {
@@ -22,7 +95,7 @@
       }
 
       #results-summary-header {
-        
+
       }
 
       #results-summary-count {
@@ -170,18 +243,25 @@
         }
 
         .result-details {
-          > div {
+          .grant {
             @include make-md-column(3);
+          }
 
-            > div:first-child {
-              color: #888;
+          .duration {
+            @include make-md-column(9);
+            #project-start-date, #project-end-date {
+              display: inline-block;
               font-size: 16px;
             }
           }
 
-          .result-participants {
-            @include make-md-column(9);
+          .lbl {
+            color: #888;
+            font-size: 16px;
+          }
 
+          .result-participants {
+            @include make-md-column(12);
             .result-participant-links {
               font-size: 20px;
               color: #888;
@@ -229,7 +309,7 @@
 }
 
 #project-page {
-  
+
   @include make-row();
 
   #project-main {
@@ -262,7 +342,7 @@
     }
 
     #project-about-primary {
-      #project-name {
+      #project-number {
         @include make-md-column(6);
       }
 
@@ -299,7 +379,7 @@
         }
       }
     }
-    
+
     #project-about-secondary {
       > div {
         @include make-md-column(6);
@@ -424,9 +504,9 @@
           font-weight: bold;
         }
       }
-  
+
     }
-    
+
   }
 
 }

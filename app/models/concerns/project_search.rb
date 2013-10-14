@@ -34,8 +34,8 @@ module ProjectSearch
       indexes :participant_size_uris, type: 'string', analyzer: 'keyword'
       indexes :participant_size_labels, type: 'string', analyzer: 'keyword'
 
-      indexes :participant_sic_class_uris, type: 'string', analyzer: 'keyword'
-      indexes :participant_sic_class_labels, type: 'string', analyzer: 'keyword'
+      indexes :participant_sic_section_uris, type: 'string', analyzer: 'keyword'
+      indexes :participant_sic_section_labels, type: 'string', analyzer: 'keyword'
 
       # from participants' sites (could be many)
       indexes :participant_locations, type: 'geo_point'
@@ -50,9 +50,6 @@ module ProjectSearch
       indexes :budget_area_uri, type: 'string', analyzer: 'keyword'
       indexes :budget_area_label, type: 'string', analyzer: 'keyword'
 
-      # competition's team
-      indexes :team_uri, type: 'string', analyzer: 'keyword'
-      indexes :team_label, type: 'string', analyzer: 'keyword'
     end
   end
 
@@ -88,7 +85,6 @@ module ProjectSearch
       .merge(participant_site_index_fields)
       .merge(participant_region_index_fields)
       .merge(competition_index_fields)
-      .merge(team_index_fields)
       .merge(budget_area_index_fields)
   end
 
@@ -108,7 +104,7 @@ module ProjectSearch
     @duration_object ||= self.duration
     {
       start_date: @duration_object.start.iso8601,
-      start_date: @duration_object.end.iso8601
+      end_date: @duration_object.end.iso8601
     }
   end
 
@@ -150,8 +146,8 @@ module ProjectSearch
   def participant_sic_class_index_fields
     @participant_objects ||= self.participants
     {
-      participant_sic_class_uris: @participant_objects.map {|p| p.sic_class_uri.to_s },
-      participant_sic_class_labels: @participant_objects.map {|p| p.sic_class.label rescue nil }
+      participant_sic_section_uris: @participant_objects.map {|p| p.sic_class.sic_section_uri.to_s rescue nil},
+      participant_sic_section_labels: @participant_objects.map {|p| p.sic_class.sic_section.label rescue nil }
     }
   end
 
@@ -178,20 +174,6 @@ module ProjectSearch
       competition_uri: self.competition_uri.to_s,
       competition_label: (@competition_object.label rescue nil)
     }
-  end
-
-  def team_index_fields
-    @competition_object ||= self.competition
-
-    if @competition_object
-      @team_object ||= @competition_object.team
-      {
-        team_uri: @competition_object.team_uri.to_s,
-        team_label: (@team_object.label rescue nil)
-      }
-    else
-      {}
-    end
   end
 
   def budget_area_index_fields

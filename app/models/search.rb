@@ -21,7 +21,7 @@ class Search
   attr_accessor :grant_range_filter # range filters
   attr_accessor :date_range_filter # just the date range filters
 
-  def initialize(params)
+  def initialize(params={})
     self.params = params # store the raw params
 
     # hash of field => filter
@@ -32,7 +32,7 @@ class Search
       'competition_label' => [],
       'budget_area_label' => [],
       'team_label' => [],
-      'participant_sic_class_labels' => []
+      'participant_sic_section_labels' => []
     }
     self.terms_filters = []
 
@@ -41,49 +41,45 @@ class Search
 
   def results
     r = Project.search page: self.page, per_page: self.per_page do |search|
+
       search.query do |query|
-        query.boolean do |boolean|
-          boolean.must { |b| b.string self.search_string }
-          # boolean.must { |b| add_grant_range(b) } if self.offer_grant_from || self.offer_grant_to
-          # boolean.must { |b| add_end_date_range(b) } if self.date_from
-          # boolean.must { |b| add_start_date_range(b) } if self.date_to
-        end
+        query.string self.search_string
       end
 
       # facets
-      self.facets.each_pair do |facet_field, facet_filter|
-        add_facet_with_filter(search, facet_field, facet_filter)
+      self.facets.each_pair do |facet_field, filter_values|
+        add_facet_with_filter(search, facet_field)
+        self.terms_filters << { facet_field => filter_values } if filter_values.any? # store the terms filters for later
       end
 
       # stats facets
       search.facet('offer_grant_stats') do |facet|
         facet.statistical 'total_offer_grant'
-        self.terms_filters.each { |f| facet.facet_filter :terms, f }
-        add_range_facet_filters(facet)
+        add_facet_filter('offer_grant_stats', facet)
       end
 
       search.facet('offer_cost_stats') do |facet|
         facet.statistical 'total_offer_cost'
-        self.terms_filters.each { |f| facet.facet_filter :terms, f }
-        add_range_facet_filters(facet)
+        add_facet_filter('offer_grant_stats', facet)
       end
 
-      # these ones are the facet filters but without the amount filters applied
-      # search.facet('offer_grant_stats_unfiltered') do |facet|
-      #   facet.statistical 'total_offer_grant'
-      #   self.terms_filters.each { |f| facet.facet_filter :terms, f }
-      #   add_range_facet_filters(facet, :omit_grant_range => true )
-      # end
+      search.facet('offer_grant_stats_unfiltered') do |facet|
+        facet.statistical 'total_offer_grant'
+      end
 
-      # search.facet('offer_cost_stats_unfiltered') do |facet|
-      #   facet.statistical 'total_offer_cost'
-      #   self.terms_filters.each { |f| facet.facet_filter :terms, f }
-      #   add_range_facet_filters(facet, :omit_grant_range => true )
-      # end
+      search.facet('start_date_stats_unfiltered') do |facet|
+        facet.statistical 'start_date'
+      end
 
-      # add the search filters from the facets
+      search.facet('end_date_stats_unfiltered') do |facet|
+        facet.statistical 'end_date'
+      end
+
+      # add the terms filters to the search
       self.terms_filters.each { |f| search.filter :terms, f }
-      add_range_filters(search)
+
+      # finally, add the range filters.
+      search.filter :and, get_range_filters if get_range_filters.any?
 
       Rails.logger.debug search.to_json
     end
@@ -94,7 +90,13 @@ class Search
   private
 
   def process_params
-    get_pagination_params
+    process_pagination_params()
+    process_search_string()
+    process_facets()
+    process_ranges()
+  end
+
+  def process_search_string
     self.original_search_string = params[:search_string]
 
     if self.original_search_string.blank?
@@ -102,109 +104,56 @@ class Search
     else
       self.search_string = self.original_search_string
     end
-
-    process_facets()
-    process_ranges()
-
   end
 
   def process_ranges
-    process_grant_range
-    process_date_range
-
-    self.grant_range_filter = get_grant_range
-    self.date_range_filter = get_date_range
-
-  end
-
-  def get_grant_range
-
-    grant_range= {}
-    grant_range.merge!({ gte: self.offer_grant_from }) if self.offer_grant_from
-    grant_range.merge!({ lte: self.offer_grant_to }) if self.offer_grant_to
-
-    Tire::Search::Filter.new( :range, {:total_offer_grant => grant_range }).to_hash if self.offer_grant_from || self.offer_grant_to
-
-  end
-
-  def get_date_range
-
-    from_range = Tire::Search::Filter.new( :range, {:end_date => { :gte => self.date_from } } ) if self.date_from
-    to_range = Tire::Search::Filter.new( :range, {:start_date => { :lte => self.date_to } } ) if self.date_to
-
-    if from_range && to_range
-      Tire::Search::Filter.new( :and, [from_range, to_range] )
-    elsif from_range
-      from_range
-    elsif to_range
-      to_range
-    end
-
-  end
-
-  # def process_end_date_range(scope)
-  #   scope.range :range, :end_date, { :gte => self.date_from }  # the project ends after the start of our range
-  # end
-
-  # def process_start_date_range(scope)
-  #   scope.filter :range, start_date: { :lte => self.date_to }  # the project starts before the end of our range
-  # end
-
-  def add_range_filters(search)
-    search.filter :and, get_range_filters if get_range_filters.any?
-  end
-
-  def add_range_facet_filters(search, opts={})
-    search.facet_filter :and, get_range_filters(opts) if get_range_filters.any?
+    process_grant_range()
+    process_date_range()
   end
 
   def get_range_filters(opts={})
     filters = []
-    filters << self.grant_range_filter if (self.grant_range_filter && !opts[:omit_grant_range])
+    filters << self.grant_range_filter if self.grant_range_filter
     filters << self.date_range_filter if self.date_range_filter
     filters
   end
 
-
-  def add_facet_with_filter(search, field, filter_values)
-
-    Rails.logger.debug "adding facet for #{field} with filter #{filter_values}"
-
-    search.facet(field) do |facet|
-      facet.terms field # add a term for this field
-
-      # for all fields except this one, add facet filters for values of the other selected filters,
-      # OR the current selections of this filter
-
-      other_facet_terms = []
-      self.facets.each_pair do |facet_field, values|
-        unless facet_field == field
-          other_facet_terms << { :terms => {facet_field => values} } if values.any?
-        end
-      end
-
-      if other_facet_terms.any?
-        other_facets_filter = Tire::Search::Filter.new(:and, other_facet_terms).to_hash
-      end
-
-      # Make a filter for this facet. We always want to display any selections of this facet.
-      this_facet_filter = Tire::Search::Filter.new(:terms, {field => filter_values}).to_hash if filter_values.any?
-
-      if other_facets_filter && this_facet_filter
-        # if we have other facets and a selection for this facet, OR the filtes
-        facet.facet_filter :or, [other_facets_filter, this_facet_filter]
-      elsif other_facets_filter
-        # otherwise just use the other facet terms, in an AND.
-        facet.facet_filter :and, other_facet_terms
-      end
+  def get_filter_for_other_facets(field)
+    other_facet_terms = []
+    self.facets.each_pair do |facet_field, values|
+      other_facet_terms << { :terms => {facet_field => values} } if (facet_field != field && values.any?)
     end
+    other_facet_terms
 
-    # add the search filter
-    self.terms_filters << { field => filter_values } if filter_values.any?
-
+    Tire::Search::Filter.new(:and, other_facet_terms).to_hash if other_facet_terms.any?
   end
 
+  def get_facet_filters(field)
+    other_facets_filter = get_filter_for_other_facets(field)
 
+    # AND-ed range filtres
+    range_filters = Tire::Search::Filter.new(:and, get_range_filters).to_hash if get_range_filters.any?
+
+    facet_filters = []
+    facet_filters << other_facets_filter if other_facets_filter
+    facet_filters << range_filters if range_filters
+
+    facet_filters
+  end
+
+  # add a facet filter for our field.
+  # this will filter this facet by all the other facets.
+  def add_facet_filter(field, facet)
+    facet_filters = get_facet_filters(field)
+    facet.facet_filter :and, facet_filters if facet_filters.any?
+  end
+
+  def add_facet_with_filter(search, field)
+    search.facet(field) do |facet|
+      facet.terms field # add a facet term for this field
+      add_facet_filter(field, facet) # add a facet filter
+    end
+  end
 
   def process_facets
     self.facets.each_key do |facet_name|
@@ -220,17 +169,38 @@ class Search
     end
   end
 
-  def process_grant_range()
+  def process_grant_range
     self.offer_grant_from = self.params[:offer_grant_from].to_i unless self.params[:offer_grant_from].blank?
     self.offer_grant_to = self.params[:offer_grant_to].to_i unless self.params[:offer_grant_to].blank?
+
+    grant_range= {}
+    grant_range.merge!({ gte: self.offer_grant_from }) if self.offer_grant_from
+    grant_range.merge!({ lte: self.offer_grant_to }) if self.offer_grant_to
+
+    if self.offer_grant_from || self.offer_grant_to
+      self.grant_range_filter = Tire::Search::Filter.new( :range, {:total_offer_grant => grant_range }).to_hash
+    end
   end
 
-  def process_date_range()
+  def process_date_range
     self.date_from = DateTime.parse self.params[:date_from] unless self.params[:date_from].blank?
     self.date_to = DateTime.parse self.params[:date_to] unless self.params[:date_to].blank?
+
+    from_range = Tire::Search::Filter.new( :range, {:end_date => { :gte => self.date_from } } ) if self.date_from
+    to_range = Tire::Search::Filter.new( :range, {:start_date => { :lte => self.date_to } } ) if self.date_to
+
+    if from_range && to_range
+      range_filter = Tire::Search::Filter.new( :and, [from_range.to_hash, to_range.to_hash] )
+    elsif from_range
+      range_filter = from_range
+    elsif to_range
+      range_filter = to_range
+    end
+
+    self.date_range_filter = range_filter.to_hash if range_filter
   end
 
-  def get_pagination_params
+  def process_pagination_params
     self.page = params[:page].to_i if params[:page].present?
     self.per_page = params[:per_page].to_i if params[:per_page].present?
 

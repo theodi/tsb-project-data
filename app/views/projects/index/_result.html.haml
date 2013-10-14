@@ -14,14 +14,22 @@
       = truncate(project.description, length: 200)
 
   .result-details
-    .result-grant
-      %div Grant
-      .figure
-        .pounds &pound;#{number_with_delimiter project.total_offer_grant.to_i}
-        .pence .#{"%.2d" % (project.total_offer_grant.modulo(1).round(2) * 100).to_i}
+    .result-grant-and-duration
+      .grant
+        .lbl Grant
+        .figure
+          .pounds &pound;#{number_with_delimiter project.total_offer_grant.to_i}
+          .pence .#{"%.2d" % (project.total_offer_grant.modulo(1).round(2) * 100).to_i}
+
+
+      .duration
+        .lbl Duration
+        %div
+          #project-start-date= DateTime.parse(project.start_date).strftime("%-d %b %Y") if project.start_date.present?
+          \-
+          #project-end-date= DateTime.parse(project.end_date).strftime("%-d %b %Y") if project.start_date.present?
 
     .result-participants
-      %div Participants
+      %div.lbl Participants
       .result-participant-links
         = (0...project.participant_uris.length).collect { |i| link_to project.participant_labels[i], resource_path_from_uri(project.participant_uris[i]) }.join(', ').html_safe
-    

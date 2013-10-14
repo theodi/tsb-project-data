@@ -1,0 +1,11 @@
+.search-string
+  %label{for: 'search-string'}
+    Search Query
+    = text_field_tag :search_string, @search.original_search_string
+
+  :javascript
+    $(function() {
+      $("form#faceted-search #search_string").bind('keyup', $.debounce( 400, function() {
+        $("form#faceted-search").submit();
+      }));
+    });

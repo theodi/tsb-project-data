@@ -12,4 +12,12 @@
 //
 //= require publish_my_data
 //= require jquery/jquery-ui-1.10.3.custom
+//= require moment.js
+//= require debounce.js
+// require pickadate/picker
+// require pickadate/picker.date
+// require pickadate/legacy
+//= require d3.v3.min.js
+//= require sparql.js
+//= require q.min.js
 //= require_tree .

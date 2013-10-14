@@ -37,7 +37,7 @@ module ProjectCsv
     PREFIX osgeo: <http://data.ordnancesurvey.co.uk/ontology/admingeo/>
 
     select
-    (<#{uri.to_s}> as ?project_id)
+    (<http://tsb-projects.labs.theodi.org/id/project/730041> as ?project_id)
     ?project_name
     ?start_date
     ?end_date
@@ -70,7 +70,7 @@ module ProjectCsv
     ?postcode
     ?project_desc
     WHERE
-    {<#{uri.to_s}> tsb:hasParticipant ?org_id ;
+    {<http://tsb-projects.labs.theodi.org/id/project/730041> tsb:hasParticipant ?org_id ;
                    tsb:hasLeader ?leader_id ;
                    rdfs:label ?project_name ;
                    dct:description ?project_desc ;
@@ -79,15 +79,15 @@ module ProjectCsv
                    tsb:costCategory ?cc ;
                    tsb:projectStatus ?stat ;
                    tsb:supportedBy ?grant .
-    ?grant tsb:paidTo ?org_id .
     ?cc rdfs:label ?cost_category .
     ?stat rdfs:label ?project_status .
     ?d time:start ?start_date .
     ?d time:end ?end_date .
     ?org_id rdfs:label ?org_name ;
-            tsb:companyNumber ?company_number ;
-            tsb:legalEntityForm ?legal_entity_form .
-    ?legal_entity_form rdfs:label ?company_type .
+            tsb:companyNumber ?company_number .
+    OPTIONAL {
+      ?org_id tsb:legalEntityForm ?legal_entity_form .
+      ?legal_entity_form rdfs:label ?company_type .}
     OPTIONAL {
       ?org_id tsb:enterpriseSize ?e_size .
       ?e_size rdfs:label ?company_size .}

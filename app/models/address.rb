@@ -10,4 +10,8 @@ class Address
   field :county, Vocabulary::VCARD.region
   field :postcode, Vocabulary::VCARD['postal-code']
 
+  def label(connector=", ")
+    [street_address, locality, county, postcode].reject(&:blank?).join(connector)
+  end
+
 end

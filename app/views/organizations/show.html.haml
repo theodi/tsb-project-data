@@ -19,23 +19,25 @@
           %div= organization.label
         #organization-number
           %div Company number
-          %div 1234567
+          %div= organization.company_number
             
 
       #organization-about-secondary
         #organization-size
           %div Organization size
-          %div 50
+          %div= organization.enterprise_size.label.humanize
         #organization-sic
           %div SIC class
-          %div= link_to 'An SIC class', '#'
+          %div
+            - if organization.sic_class.present?
+              = link_to organization.sic_class.label, '#'
+            - else
+              \-
 
       #organization-about-tertiary
         #organization-address
           %div Address
-          %div
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua.
+          %div= organization.site.address.label.gsub(', ', ',<br>').html_safe
 
       #organization-map-container
         #organization-map

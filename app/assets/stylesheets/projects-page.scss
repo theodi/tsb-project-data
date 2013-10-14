@@ -173,9 +173,45 @@
       }
     }
 
+    #no-results {
+      
+      @include make-row();
+
+      #no-results-message {
+        @include make-md-column(12);
+        padding: 15px;
+
+        h3 {
+          margin: 0 0 18px;
+          font-weight: bold;
+        }
+
+        p {
+          font-size: 16px;
+        }
+      }
+
+    }
+
+    #results-header {
+      padding: 18px 0;
+      @include make-row();
+      font-size: 16px;
+
+      #results-header-position {
+        @include make-md-column(6);
+
+        span {
+          font-weight: bold;
+        }
+      }
+    }
+
     ul#results-list {
       list-style-type: none;
       padding: 0;
+
+      background: transparent url(image-path('divider.png')) repeat-x top;
 
       li {
         padding: 30px 0 36px;

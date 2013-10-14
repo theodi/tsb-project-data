@@ -10,6 +10,8 @@ class ProjectsController < ApplicationController
         @projects = @search.results
         @search_unfiltered = Search.new()
         @projects_unfiltered = @search_unfiltered.results
+        @min_index = (@search.page - 1) * @search.per_page + 1
+        @max_index = (@search.page - 1) * @search.per_page + @search.results.length
       end
 
       format.csv do

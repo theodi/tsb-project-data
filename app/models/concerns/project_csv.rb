@@ -86,6 +86,7 @@ module ProjectCsv
                    tsb:costCategory ?cc ;
                    tsb:projectStatus ?stat ;
                    tsb:supportedBy ?grant .
+    ?grant tsb:paidTo ?org_id .
     ?cc rdfs:label ?cost_category .
     ?stat rdfs:label ?project_status .
     ?d time:start ?start_date .

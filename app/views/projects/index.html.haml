@@ -55,8 +55,10 @@
 
   #results
 
-    = render 'projects/index/summary', projects: @projects
-    = render 'projects/index/header', projects: @projects
-    = render 'projects/index/list', projects: @projects
-    = paginate @projects
-
+    - if @projects.any?
+      = render 'projects/index/summary', projects: @projects
+      = render 'projects/index/header', projects: @projects
+      = render 'projects/index/list', projects: @projects
+      = paginate @projects
+    - else
+      = render 'projects/index/no_results'

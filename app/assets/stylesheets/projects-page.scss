@@ -173,6 +173,26 @@
       }
     }
 
+    #no-results {
+      
+      @include make-row();
+
+      #no-results-message {
+        @include make-md-column(12);
+        padding: 15px;
+
+        h3 {
+          margin: 0 0 18px;
+          font-weight: bold;
+        }
+
+        p {
+          font-size: 16px;
+        }
+      }
+
+    }
+
     #results-header {
       padding: 18px 0;
       @include make-row();

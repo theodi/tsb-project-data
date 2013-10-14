@@ -1,0 +1,167 @@
+#organization-page {
+  
+  @include make-row();
+
+  #organization-main {
+    @include make-md-column(9);
+    @extend .container;
+
+    section {
+      padding: 18px 0 24px;
+      background: transparent url(image-path('divider.png')) repeat-x bottom;
+
+      h3 {
+        margin: 20px 0;
+        font-weight: bold;
+      }
+
+      > div {
+        @include make-row();
+
+        > div {
+          @include make-md-column(3);
+          padding-top: 18px;
+          padding-bottom: 18px;
+
+          > div:first-child {
+            color: #888;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    #organization-about {
+      > div {
+        > div {
+          @include make-md-column(6);
+        }
+      }
+
+      #organization-address {
+        @include make-md-column(12);
+      }
+    }
+
+    #organization-map-container {
+      width: 100%;
+      height: 480px;
+      @include make-row();
+
+      #organization-map {
+        @include make-md-column(12);
+        height: 100%;
+
+        #organization-map-canvas {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    #organization-grant-summary {
+      > div {
+        > div {
+          @include make-md-column(6);
+        }
+      }
+    }
+
+    ul#organization-project-list {
+      list-style-type: none;
+      padding: 0;
+
+      li {
+        padding: 18px 0;
+        border-bottom: 2px solid #eee;
+
+        &:first-child {
+          padding-top: 0;
+        }
+
+        &:last-child {
+          border-bottom: 0;
+        }
+
+        > div {
+          @include make-row();
+
+          > div {
+            @include make-md-column(3);
+            padding-top: 18px;
+            padding-bottom: 18px;
+
+            > div:first-child {
+              color: #888;
+              font-size: 16px;
+            }
+          }
+        }
+
+        .organization-project-name {
+          @include make-md-column(12);
+          padding-bottom: 0;
+
+          a {
+            font-size: 24px;
+            font-weight: bold;
+          }
+        }
+
+        .organization-project-grant {
+          > div {
+            @include make-md-column(6);
+          }
+        }
+      }
+    }
+
+    .organization-grant-details {
+      .fixed {
+        font-size: 28px;
+        @include clearfix();
+        margin-bottom: 6px;
+
+        .pounds, .pence {
+          float: left;
+        }
+
+        .pence {
+          font-size: 16px;
+          margin-left: 1px;
+          padding-top: 13px;
+        }
+
+      }
+
+      .prog-bar {
+        margin-bottom: 6px;
+
+        .prog-bar-background {
+          position: relative;
+          height: 16px;
+          background: #ddd;
+          width: 80%;
+          overflow: hidden;
+
+          .prog-bar-fill {
+            height: 16px;
+            background: $accent-color;
+          }
+        }
+      }
+
+      .percent {
+        color: #888;
+        font-size: 16px;
+
+        span {
+          font-weight: bold;
+        }
+      }
+  
+    }
+
+  }
+
+}

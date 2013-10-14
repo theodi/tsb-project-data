@@ -1,10 +1,63 @@
 - content_for :header do
   %h3
-    Organisation
+    = link_to "Organizations", "/organizations"
   %h1
     = organization.label
 
 - content_for :advanced do
   = render 'application/advanced_resource_details', resource: organization
 
-[Human-friendly Org dtls here]
+#organization-page
+
+  #organization-main
+
+    %section#organization-about
+      
+      #organization-about-primary
+        #organization-name
+          %div Organisation name
+          %div= organization.label
+        #organization-number
+          %div Company number
+          %div 1234567
+            
+
+      #organization-about-secondary
+        #organization-size
+          %div Organization size
+          %div 50
+        #organization-sic
+          %div SIC class
+          %div= link_to 'An SIC class', '#'
+
+      #organization-about-tertiary
+        #organization-address
+          %div Address
+          %div
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua.
+
+      #organization-map-container
+        #organization-map
+          #organization-map-canvas
+      = render "organizations/show/map_js"
+
+
+    %section#organization-grant-summary.organization-grant-details
+      %h3 Grant summary
+
+      #organization-grant-summary-figures
+        
+        #organization-total-offer-grant
+          %div Total grant
+          = render "projects/show/grant/offer_grant", offer_grant: organization.offer_grant_sum, offer_cost: organization.offer_cost_sum
+        
+        #organization-total-payments
+          %div Total payments to date
+          = render "projects/show/grant/payments_to_date", payments_to_date: organization.payments_to_date_sum, offer_grant: organization.offer_grant_sum
+
+
+    %section#organization-projects
+      %h3 Projects
+
+      = render "organizations/show/project_list", organization: organization

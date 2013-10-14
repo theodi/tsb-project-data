@@ -15,4 +15,20 @@ class Organization
   linked_to :enterprise_size, Vocabulary::TSBDEF.enterpriseSize
   linked_to :sic_class, Vocabulary::TSBDEF.standardIndustrialClassification, class_name: 'SicClass'
 
+  def offer_cost_sum
+    grants.resources.sum(&:offer_cost).to_f
+  end
+
+  def offer_grant_sum
+    grants.resources.sum(&:offer_grant).to_f
+  end
+
+  def payments_to_date_sum
+    grants.resources.sum(&:payments_to_date).to_f
+  end
+
+  def grants
+    Grant.where("?uri <#{Vocabulary::TSBDEF.paidTo}> <#{self.uri}>")
+  end
+
 end

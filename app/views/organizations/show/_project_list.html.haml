@@ -1,0 +1,21 @@
+%ul#organization-project-list
+  - organization.participates_in_projects.each do |project|
+    %li
+      .organization-project-header
+        .organization-project-name
+          %div
+            Project name
+          %div
+            = link_to resource_path_from_uri(project.uri) do
+              = project.label
+
+      .organization-project-grant.organization-grant-details
+
+        .organization-project-offer-grant
+          %div Grant
+          = render "projects/show/grant/offer_grant", offer_grant: project.offer_grant_sum_for_organization(organization), offer_cost: project.offer_cost_sum_for_organization(organization)
+          
+        .organization-project-payments
+          %div Payments to date
+          = render "projects/show/grant/payments_to_date", payments_to_date: project.payments_to_date_sum_for_organization(organization), offer_grant: project.offer_grant_sum_for_organization(organization)
+          

@@ -1,10 +1,65 @@
 - content_for :header do
   %h3
-    Organisation
+    = link_to "Organizations", "/organizations"
   %h1
     = organization.label
 
 - content_for :advanced do
   = render 'application/advanced_resource_details', resource: organization
 
-[Human-friendly Org dtls here]
+#organization-page
+
+  #organization-main
+
+    %section#organization-about
+      
+      #organization-about-primary
+        #organization-name
+          %div Organisation name
+          %div= organization.label
+        #organization-number
+          %div Company number
+          %div= organization.company_number
+            
+
+      #organization-about-secondary
+        #organization-size
+          %div Organization size
+          %div= organization.enterprise_size.label.humanize
+        #organization-sic
+          %div SIC class
+          %div
+            - if organization.sic_class.present?
+              = link_to organization.sic_class.label, '#'
+            - else
+              \-
+
+      #organization-about-tertiary
+        #organization-address
+          %div Address
+          %div= organization.site.address.label.gsub(', ', ',<br>').html_safe
+
+      #map-container
+        #map
+          #map-canvas
+      = render "organizations/show/map_js", organization: organization
+
+
+    %section#organization-grant-summary.organization-grant-details
+      %h3 Grant summary
+
+      #organization-grant-summary-figures
+        
+        #organization-total-offer-grant
+          %div Total grant
+          = render "projects/show/grant/offer_grant", offer_grant: organization.offer_grant_sum, offer_cost: organization.offer_cost_sum
+        
+        #organization-total-payments
+          %div Total payments to date
+          = render "projects/show/grant/payments_to_date", payments_to_date: organization.payments_to_date_sum, offer_grant: organization.offer_grant_sum
+
+
+    %section#organization-projects
+      %h3 Projects
+
+      = render "organizations/show/project_list", organization: organization

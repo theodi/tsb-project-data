@@ -39,8 +39,17 @@ class Search
     process_params()
   end
 
-  def results
-    r = Project.search page: self.page, per_page: self.per_page do |search|
+  def results(opts={})
+
+    if opts[:unpaginated]
+      results_page = 1
+      results_per_page = 10000
+    else
+      results_page = self.page
+      results_per_page = self.per_page
+    end
+
+    r = Project.search page: results_page, per_page: results_per_page do |search|
 
       search.query do |query|
         query.string self.search_string

@@ -7,6 +7,9 @@ class ProjectsController < ApplicationController
 
     @projects = @search.results
     @projects_unfiltered = @search_unfiltered.results
+
+    @min_index = (@search.page - 1) * @search.per_page + 1
+    @max_index = (@search.page - 1) * @search.per_page + @search.results.length
   end
 
   def raw_search

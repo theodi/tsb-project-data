@@ -400,16 +400,16 @@
       }
     }
 
-    #project-map-container {
+    #map-container {
       width: 100%;
       height: 480px;
       @include make-row();
 
-      #project-map {
+      #map {
         @include make-md-column(12);
         height: 100%;
 
-        #project-map-canvas {
+        #map-canvas {
           width: 100%;
           height: 100%;
         }

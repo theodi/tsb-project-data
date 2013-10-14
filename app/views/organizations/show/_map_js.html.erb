@@ -3,10 +3,20 @@
 
     var defaultZoom = 13;
 
-    var map = L.mapbox.map('organization-map-canvas', "swirrl.map-gowc8qqk", {
-      scrollWheelZoom: false
+    var map = L.mapbox.map('map-canvas', "swirrl.map-gowc8qqk", {
+      scrollWheelZoom: false,
+      center: [<%= organization.site.lat %>, <%= organization.site.long %>],
+      zoom: 13
     });
 
+    var marker = L.marker(new L.LatLng("<%= organization.site.lat %>", "<%= organization.site.long %>"), {
+      icon: new L.Icon({
+        iconSize: new L.Point(14, 20),
+        iconUrl: "/assets/pin.png"
+      })
+    });
+  
+    marker.addTo(map);
 
   });
 

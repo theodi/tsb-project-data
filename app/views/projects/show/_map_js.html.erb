@@ -3,10 +3,27 @@
 
     var defaultZoom = 13;
 
-    var map = L.mapbox.map('project-map-canvas', "swirrl.map-gowc8qqk", {
-      scrollWheelZoom: false
+    var map = L.mapbox.map('map-canvas', "swirrl.map-gowc8qqk", {
+      scrollWheelZoom: false,
+      zoom: 12
     });
 
+    var latlngs = [];
+
+    <% project.participants.each do |organization| %>
+      var latlng = new L.LatLng("<%= organization.site.lat %>", "<%= organization.site.long %>");
+      var marker = L.marker(latlng, {
+        icon: new L.Icon({
+          iconSize: new L.Point(14, 20),
+          iconUrl: "/assets/pin.png"
+        })
+      });
+      marker.addTo(map);
+      latlngs.push(latlng);
+    <% end %>
+
+    var bounds = new L.LatLngBounds(latlngs);
+    map.fitBounds(bounds);
 
   });
 

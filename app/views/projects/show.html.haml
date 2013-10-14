@@ -61,10 +61,14 @@
     %section#project-participants
       %h3 Participants
 
-      #project-map-container
-        #project-map
-          #project-map-canvas
-      = render "projects/show/map_js"
+      #map-container
+        #map
+          #map-canvas
+
+      - if project.participants.count > 1
+        = render "projects/show/map_js", project: project
+      - else
+        = render "organizations/show/map_js", organization: project.participants.first
 
       = render "projects/show/participant_list", project: project
 

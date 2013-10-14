@@ -13,9 +13,15 @@ module ProjectCsv
 
     results_array = results.collect do |result|
       row = []
-      result.each_pair do |k,v|
-        row << v["value"]
+
+      csv_headers.each do |h|
+        if result[h]
+          row << result[h]["value"]
+        else
+          row << ""
+        end
       end
+
       row
     end
 
@@ -37,7 +43,7 @@ module ProjectCsv
     PREFIX osgeo: <http://data.ordnancesurvey.co.uk/ontology/admingeo/>
 
     select
-    (<http://tsb-projects.labs.theodi.org/id/project/730041> as ?project_id)
+    (<#{uri.to_s}> as ?project_id)
     ?project_name
     ?start_date
     ?end_date
@@ -70,7 +76,7 @@ module ProjectCsv
     ?postcode
     ?project_desc
     WHERE
-    {<http://tsb-projects.labs.theodi.org/id/project/730041> tsb:hasParticipant ?org_id ;
+    {<#{uri.to_s}> tsb:hasParticipant ?org_id ;
                    tsb:hasLeader ?leader_id ;
                    rdfs:label ?project_name ;
                    dct:description ?project_desc ;

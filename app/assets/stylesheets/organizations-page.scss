@@ -55,6 +55,22 @@
         #map-canvas {
           width: 100%;
           height: 100%;
+
+          .leaflet-popup-content {
+            p {
+              margin: 0;
+              line-height: 1.3;
+
+              &.name {
+                margin-bottom: 6px;
+              }
+
+              &.address {
+                color: #888;
+                font-size: 12px;
+              }
+            }
+          }
         }
       }
     }

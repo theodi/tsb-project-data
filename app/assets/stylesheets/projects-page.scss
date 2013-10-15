@@ -229,7 +229,7 @@
         .result-header {
 
           .result-name {
-            @include make-md-column(10);
+            @include make-md-column(9);
 
             a {
               font-size: 24px;
@@ -238,7 +238,7 @@
           }
 
           .result-status {
-            @include make-md-column(2);
+            @include make-md-column(3);
 
             .result-status-label {
               background: #ccc;

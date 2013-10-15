@@ -37,13 +37,47 @@
       @extend .navbar-form;
       @extend .navbar-right;
 
+      padding: 0;
+      margin-right: 0 !important;
+
+      input {
+        font-size: 18px;
+        line-height: 1;
+        
+      }
+
       input[type="text"] {
         @extend .form-control;
+        @include border-radius(0);
+        float: left;
+        display: block;
+        width: 70%;
+        border: 0;
+        height: auto;
+        font-size: 16px;
+        outline: 0;
+        overflow: hidden;
       }
 
       input[type="submit"] {
         @extend .btn;
         @extend .btn-default;
+        float: left;
+        display: block;
+        @include border-radius(0);
+        width: 30%;
+        border: 0;
+        height: auto;
+        background: #61cc66;
+        color: white;
+        font-size: 16px;
+        outline: 0;
+        @include transition(background, 0.1s);
+
+        &:hover {
+          background: #61d867;
+          color: white;
+        }
       }
       margin-right: 10px;
     }
@@ -52,6 +86,7 @@
       @extend .navbar-left;
       // TODO: change size to match logo height;
       @include navbar-vertical-align(48px);
+      margin: 12px 0 10px;
     }
   }
 }

@@ -1,27 +1,118 @@
-= stylesheet_link_tag "viz/tsb.viz.css"
 
-= javascript_include_tag 'd3.v3.min.js'
-= javascript_include_tag 'sparql.js'
-= javascript_include_tag 'q.min.js'
 
-= javascript_include_tag 'viz/DataSet.js'
-= javascript_include_tag 'viz/SPARQLDataSource.js'
-= javascript_include_tag 'viz/tsb.viz.project.js'
+/ = stylesheet_link_tag "viz/tsb.viz.css"
 
-%p
-  [home page - will use different layout]
+/ = javascript_include_tag 'd3.v3.min.js'
+/ = javascript_include_tag 'sparql.js'
+/ = javascript_include_tag 'q.min.js'
 
-#container{style: '1140px'}
-  #project-chart
+/ = javascript_include_tag 'viz/DataSet.js'
+/ = javascript_include_tag 'viz/SPARQLDataSource.js'
+/ = javascript_include_tag 'viz/tsb.viz.project.js'
 
-%ul
-  %li= link_to "Dataset Metadata", "/data/#{TsbProjectData::DATASET_SLUG}"
-  %li= link_to "About", "/about"
 
-:javascript
-  window.onload = function() {
-    //TSB.Viz.Config.bgColor = 'transparent'; //remove bg color
-    var projectId = 'http://tsb-projects.labs.theodi.org/id/project/730004';
-    var container = document.getElementById('project-chart');
-    TSB.Viz.Project(projectId, container, 570, 400);
-  }
+
+/ :javascript
+/   window.onload = function() {
+/     //TSB.Viz.Config.bgColor = 'transparent'; //remove bg color
+/     var projectId = 'http://tsb-projects.labs.theodi.org/id/project/730004';
+/     var container = document.getElementById('project-chart');
+/     TSB.Viz.Project(projectId, container, 570, 400);
+/   }
+
+!!! 5
+%html
+  %head
+    %title
+      = render 'publish_my_data/shared/meta_title'
+    = yield :page_description
+
+    = stylesheet_link_tag :application
+
+    %link{rel:"stylesheet", href:"//cdn.leafletjs.com/leaflet-0.6.4/leaflet.css"}
+    %link{rel:"stylesheet", href:"//api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.standalone.css"}
+
+    %script{src: "//cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"}
+    %script{src: "//api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.standalone.js"}
+    
+    = javascript_include_tag :application
+
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+  %body
+    /[if lt IE 8]
+      = render 'publish_my_data/shared/browser_warning'
+
+    #home-viz
+      = render "home/temp_map"
+      #home-message Visualisation will appear here
+
+
+    -# for sticky footer
+    #wrap
+      %header
+        %nav
+          .branding
+            = link_to "/" do
+              = image_tag "tsb-logo.png", alt: "TSB logo"
+
+      %main
+
+        - if content_for? :header
+          %header
+            .header-content
+              = yield :header
+
+        #home
+          #home-header
+            .container
+              #home-header-title
+                %h1
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                  tempor incididunt
+
+              #home-header-actions
+                #home-header-search
+                  = form_tag '/projects', method: 'get' do
+                    = text_field_tag :search_string, nil, :placeholder => 'Enter a project name...', :autocomplete => :off
+                    = submit_tag 'Search'
+
+
+                #home-header-browse
+                  %a{ href: '/projects' } Browse the data
+
+          .container
+            #home-main
+
+              #home-intro
+                :markdown
+                  Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam quis risus eget urna mollis ornare vel eu leo.
+
+                  Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas sed diam eget risus varius blandit sit amet non magna. 
+
+                  Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta gravida at eget metus. Donec sed odio dui.
+
+                  Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+
+              #home-panels
+                .home-panel
+                  :markdown
+                    ### This is a header
+
+                    Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Donec sed odio dui. Cras mattis consectetur purus sit amet fermentum. 
+
+                    [Go somewhere &raquo;](#)
+
+                .home-panel
+                  :markdown
+                    ### This is a header
+
+                    Nulla vitae elit libero, a pharetra augue. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam quis risus eget urna mollis ornare vel eu leo. 
+
+                    [Go somewhere &raquo;](#)
+
+
+    = render "application/footer"
+        
+
+
+    =# render 'publish_my_data/shared/google_analytics'

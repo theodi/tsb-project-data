@@ -42,8 +42,12 @@
         return 100;
       } else if (range >= 10000 && range <= 100000 ) {
         return 1000;
-      } else if (range >= 100009 ) {
+      } else if (range >= 100000 && range <= 1000000) {
         return 10000;
+      } else if (range >= 1000000 && range <= 10000000) {
+        return 1000000;
+      } else if (range >= 10000000 && range <= 100000000) {
+        return 10000000;
       }
     }
 
@@ -75,7 +79,7 @@
       $("#grant-range-desc").html( str );
     }
 
-    step = (range / 20);
+    step = (range / 200);
 
     $( "#offer-grant-slider" ).slider({
       range: true,

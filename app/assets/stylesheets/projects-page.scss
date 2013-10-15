@@ -174,7 +174,7 @@
     }
 
     #no-results {
-      
+
       @include make-row();
 
       #no-results-message {
@@ -300,8 +300,8 @@
           font-size: 16px;
         }
 
-          
-  
+
+
 
         .result-participants {
           @include make-row();
@@ -336,7 +336,7 @@
           }
 
         }
-        
+
       }
     }
 

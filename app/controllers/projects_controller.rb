@@ -14,6 +14,10 @@ class ProjectsController < ApplicationController
         @max_index = (@search.page - 1) * @search.per_page + @search.results.length
       end
 
+      format.atom do
+        @projects = @search.results
+      end
+
       format.csv do
 
         unpaginated_results = @search.results(unpaginated: true)

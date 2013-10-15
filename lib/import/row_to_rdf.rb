@@ -20,6 +20,8 @@ module Import
 
     def row2rdf(resources,row,sic_hash)
 
+      modified_datetime = DateTime.now
+
       ##### Project #####
       # uri: use TSBProjectNumber
       proj_num = row["TSBProjectNumber"].to_i.to_s
@@ -47,7 +49,7 @@ module Import
         d = ProjectDuration.new(duration_uri)
         p.duration = d
         resources[duration_uri] = d
-        
+
         ## TO DO - sort out date formatting
         t1 = row["StartDate"]
         t2 = row["ProjectEndDate"]
@@ -75,13 +77,13 @@ module Import
       org_number = row["CompanyRegNo"]
       org_slug = nil
       if org_number
-        # does the spreadsheet/Roo think it's a number or a string?       
+        # does the spreadsheet/Roo think it's a number or a string?
         if org_number.class == Float
-          org_slug = org_number.to_i.to_s 
+          org_slug = org_number.to_i.to_s
         else
           org_slug = org_number.strip
         end
-        
+
         if ["0","","Exempt Charity","NHS Hospital", "N/A", "null"].include?(org_slug)
           org_slug = urlified_org_name
         else
@@ -96,7 +98,7 @@ module Import
 
           end
         end
-      
+
       else  # org_number is nil: no company num at all
         org_slug = urlified_org_name
       end
@@ -179,7 +181,7 @@ module Import
           s.long = long if long
           s.district = district if district
         end
-       
+
         # legal entity form and enterprise size
         esize = row["EnterpriseSize"]
         if esize && esize != "null"
@@ -268,19 +270,19 @@ module Import
 
       # Grant
       grant_uri = Vocabulary::TSB["grant/#{proj_num}/#{org_slug}"]
-      
+
       # is there already a grant for this combination of organisation and project?
       # if so, assign a separate URI for this one by adding /1 or /2 etc at the end.
-      
+
       exists = resources[grant_uri]
       i = 1
-      
+
       while exists
         grant_uri = Vocabulary::TSB["grant/#{proj_num}/#{org_slug}/#{i.to_s}"]
         exists = resources[grant_uri]
         i += 1
       end
-      
+
 
       g = Grant.new(grant_uri)
       resources[grant_uri] = g
@@ -314,6 +316,9 @@ module Import
 
       # grant - org
       g.paid_to_organization = o
+
+      p.modified = modified_datetime
+      g.modified = modified_datetime
 
       return nil
     end

@@ -1,8 +1,6 @@
 <script>
   $(function() {
-
-    var defaultZoom = 13;
-
+    
     var map = L.mapbox.map('map-canvas', "swirrl.map-gowc8qqk", {
       scrollWheelZoom: false,
       zoom: 12
@@ -11,17 +9,19 @@
     var latlngs = [];
 
     <% project.participants.each do |organization| %>
-      var latlng = new L.LatLng("<%= organization.site.lat %>", "<%= organization.site.long %>");
-      var marker = L.marker(latlng, {
-        icon: new L.Icon({
-          iconSize: new L.Point(14, 20),
-          iconUrl: "/assets/pin.png"
-        })
-      }).bindPopup('<p class="name"><a href="<%= resource_path_from_uri(organization.uri) %>"><%= organization.label %></a></p><p class="address"><%= organization.site.address.label %></p>', {
-        closeButton: false
-      });
-      marker.addTo(map);
-      latlngs.push(latlng);
+      <% if organization.has_lat_long? %>
+        var latlng = new L.LatLng("<%= organization.site.lat %>", "<%= organization.site.long %>");
+        var marker = L.marker(latlng, {
+          icon: new L.Icon({
+            iconSize: new L.Point(14, 20),
+            iconUrl: "/assets/pin.png"
+          })
+        }).bindPopup('<p class="name"><a href="<%= resource_path_from_uri(organization.uri) %>"><%= organization.label %></a></p><p class="address"><%= organization.site.address.label %></p>', {
+          closeButton: false
+        });
+        marker.addTo(map);
+        latlngs.push(latlng);
+      <% end %>
     <% end %>
 
     var bounds = new L.LatLngBounds(latlngs);

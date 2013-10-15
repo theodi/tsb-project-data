@@ -46,10 +46,11 @@
           %div Address
           %div= organization.site.address.label.gsub(', ', ',<br>').html_safe
 
-      #map-container
-        #map
-          #map-canvas
-      = render "organizations/show/map_js", organization: organization
+      - if organization.has_lat_long?
+        #map-container
+          #map
+            #map-canvas
+        = render "organizations/show/map_js", organization: organization
 
 
     %section#organization-grant-summary.organization-grant-details

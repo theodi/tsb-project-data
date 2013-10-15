@@ -1,5 +1,5 @@
 #home-viz {
-  height: 600px;
+  height: 480px;
   background: white;
   position: relative;
 
@@ -52,6 +52,11 @@
         @include clearfix();
         padding: 15px;
 
+        form {
+          margin-bottom: 12px;
+          @include clearfix();
+        }
+
         input {
           border: 0;
           outline: 0;
@@ -78,6 +83,10 @@
             background: #333;
 
           }
+        }
+
+        p.help {
+          color: #aaddee;
         }
       }
 

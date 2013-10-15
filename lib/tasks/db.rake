@@ -27,24 +27,27 @@ namespace :db do
   desc 'replace dataset metadata'
   task replace_dataset_metadata: :environment do
 
-    dataset = PublishMyData::Dataset.new(
+    # main projects data
+    projects_dataset = PublishMyData::Dataset.new(
       "http://#{PublishMyData.local_domain}/data/#{TsbProjectData::DATASET_SLUG}",
       "#{TsbProjectData::DATA_GRAPH}/metadata"
     )
 
-    dataset.title = "TSB Projects Data"
-    dataset.label = dataset.title
-    dataset.description = "TSB"
-    dataset.comment = "TSB Projects Data"
-    dataset.contact_email = "mailto:hello@swirrl.com"
+    projects_dataset.title = "TSB Projects Data"
+    projects_dataset.label = dataset.title
+    projects_dataset.description = "TSB"
+    projects_dataset.comment = "TSB Projects Data"
+    projects_dataset.contact_email = "mailto:hello@swirrl.com"
     #dataset.license = "TBC"
     #dataset.publisher = "TBC"
 
-    dataset.data_dump = "http://#{PublishMyData.local_domain}/data/#{TsbProjectData::DATASET_SLUG}/dump"
-    dataset.write_predicate(Vocabulary::DCTERMS.references, "http://#{PublishMyData.local_domain}/docs")
-    dataset.write_predicate("http://rdfs.org/ns/void#sparqlEndpoint", "http://#{PublishMyData.local_domain}/sparql")
-    dataset.write_predicate("http://publishmydata.com/def/dataset#graph", TsbProjectData::DATA_GRAPH)
-    puts dataset.save
+    projects_dataset.data_dump = "http://#{PublishMyData.local_domain}/data/#{TsbProjectData::DATASET_SLUG}/dump"
+    projects_dataset.write_predicate(Vocabulary::DCTERMS.references, "http://#{PublishMyData.local_domain}/docs")
+    projects_dataset.write_predicate("http://rdfs.org/ns/void#sparqlEndpoint", "http://#{PublishMyData.local_domain}/sparql")
+    projects_dataset.write_predicate("http://publishmydata.com/def/dataset#graph", TsbProjectData::DATA_GRAPH)
+    projects_dataset.save
+
+    # 
 
     #TODO: datasets for regions and budget areas
 

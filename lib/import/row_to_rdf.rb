@@ -20,6 +20,8 @@ module Import
 
     def row2rdf(resources,row,sic_hash)
 
+      modified_datetime = DateTime.now
+
       ##### Project #####
       # uri: use TSBProjectNumber
       proj_num = row["TSBProjectNumber"].to_i.to_s
@@ -47,7 +49,7 @@ module Import
         d = ProjectDuration.new(duration_uri)
         p.duration = d
         resources[duration_uri] = d
-        
+
         ## TO DO - sort out date formatting
         t1 = row["StartDate"]
         t2 = row["ProjectEndDate"]
@@ -72,31 +74,11 @@ module Import
       # if no company number, then use urlified name
       org_name = row["ParticipantName"]
       urlified_org_name = Urlify::urlify(org_name)
-      org_number = row["CompanyRegNo"]
       org_slug = nil
-      if org_number
-        # does the spreadsheet/Roo think it's a number or a string?       
-        if org_number.class == Float
-          org_slug = org_number.to_i.to_s 
-        else
-          org_slug = org_number.strip
-        end
-        
-        if ["0","","Exempt Charity","NHS Hospital", "N/A", "null"].include?(org_slug)
-          org_slug = urlified_org_name
-        else
-          # normalise the format
-          # replace any spaces with '-'
-          org_slug.gsub!(/ /,'-')
-          #  add leading zeroes if necessary
-          unless org_slug.starts_with?('RC')
-            while org_slug.length < 8
-              org_slug = "0" + org_slug
-            end
+      org_number = RowToRdf.clean_company_number(row["CompanyRegNo"])
 
-          end
-        end
-      
+      if org_number
+        org_slug = org_number
       else  # org_number is nil: no company num at all
         org_slug = urlified_org_name
       end
@@ -111,13 +93,8 @@ module Import
         # add to resources hash
         resources[org_uri] = o
         o.label = org_name
-        if org_number
-          if org_number.class == Float
-            o.company_number = org_number.to_i.to_s
-          elsif org_number.length > 0 && org_number != "null"
-            o.company_number = org_number
-          end
-        end
+        o.company_number = org_number if org_number
+
         # for now, ignore the case where an org might have two addresses - just use the first one
         site_uri = Vocabulary::TSB["organization/#{org_slug}/site"]
         address_uri = Vocabulary::TSB["organization/#{org_slug}/address"]
@@ -179,7 +156,7 @@ module Import
           s.long = long if long
           s.district = district if district
         end
-       
+
         # legal entity form and enterprise size
         esize = row["EnterpriseSize"]
         if esize && esize != "null"
@@ -194,16 +171,24 @@ module Import
 
 
 
-        # TODO connect company to OpenCorporates and Companies House
-        # SIC code
-        sic_desc = row["ParticipantSICSubclass"]
-        if sic_desc && sic_desc != "Unknown" && sic_desc != "null"
-          sic_code = sic_hash[sic_desc]
-          if sic_code
-            sic_uri = Vocabulary::TSBDEF["concept/sic/#{sic_code}"]
-            o.sic_class_uri = sic_uri
-          end
+
+        # retrieve SIC codes from Companies House
+        if org_number
+          # codes = Import::CompaniesHouse.sicCodes(org_number)
+          # codes.each do |code|
+          #   sic_uri = Vocabulary::TSBDEF["concept/sic/#{code}"]
+          #   o.sic_class_uris = o.sic_class_uris.push(sic_uri)
+          # end
+
+          # connect company to OpenCorporates and Companies House
+          # TODO - should check whether the remote URIs exist
+          opencorp_uri = "http://opencorporates.com/id/companies/gb/#{org_number}"
+          ch_uri = "http://business.data.gov.uk/id/company/#{org_number}"
+          o.same_as = [opencorp_uri,ch_uri]
+
+
         end
+
 
       end # of organization block
 
@@ -268,19 +253,19 @@ module Import
 
       # Grant
       grant_uri = Vocabulary::TSB["grant/#{proj_num}/#{org_slug}"]
-      
+
       # is there already a grant for this combination of organisation and project?
       # if so, assign a separate URI for this one by adding /1 or /2 etc at the end.
-      
+
       exists = resources[grant_uri]
       i = 1
-      
+
       while exists
         grant_uri = Vocabulary::TSB["grant/#{proj_num}/#{org_slug}/#{i.to_s}"]
         exists = resources[grant_uri]
         i += 1
       end
-      
+
 
       g = Grant.new(grant_uri)
       resources[grant_uri] = g
@@ -315,7 +300,45 @@ module Import
       # grant - org
       g.paid_to_organization = o
 
+      p.modified = modified_datetime
+      g.modified = modified_datetime
+
       return nil
     end
+
+    # takes the cell from the spreadsheet and tidies it up into a company number
+    # if it can't make a company number out of it, returns nil
+    def self.clean_company_number(raw_number)
+      org_number = nil
+      if raw_number
+        # does the spreadsheet/Roo think it's a number or a string?
+        if raw_number.class == Float
+          org_number = raw_number.to_i.to_s
+        else
+          org_number = raw_number.strip
+        end
+
+        if ["0","","Exempt Charity","NHS Hospital", "N/A", "null"].include?(org_number)
+          org_number = nil
+        else
+          # normalise the format
+          # replace any spaces with '-'
+          org_number.gsub!(/ /,'-')
+          #  add leading zeroes if necessary
+          unless org_number.starts_with?('RC')
+            while org_number.length < 8
+              org_number = "0" + org_number
+            end
+
+          end
+        end
+
+
+      end
+
+      return org_number
+
+    end
+
   end
 end

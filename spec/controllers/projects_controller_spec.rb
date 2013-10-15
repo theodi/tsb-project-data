@@ -33,6 +33,15 @@ describe ProjectsController do
 
     end
 
+    context "atom format" do
+      let(:atom_params) { params.merge(format: 'atom') }
+      it "should not call search_unfiltered" do
+        get :index, atom_params
+        assigns[:search].should_not be_nil
+        assigns[:search_unfiltered].should be_nil
+      end
+    end
+
     context "csv format" do
 
       let(:csv_params) { params.merge(format: 'csv') }
@@ -59,7 +68,7 @@ describe ProjectsController do
           [Project.new('http://foo'), Project.new('http://bar'), Project.new('http://baz')]
         )
 
-        get :index, csv_params.merge(format: 'csv')
+        get :index, csv_params
       end
 
       it "should not call search_unfiltered" do

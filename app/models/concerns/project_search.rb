@@ -15,6 +15,7 @@ module ProjectSearch
       indexes :end_date, type: 'date'
       indexes :status_uri, type: 'string', analyzer: 'keyword'
       indexes :status_label, type: 'string', analyzer: 'keyword'
+      indexes :modified, type: 'date'
 
       indexes :description, type: 'string', analyzer: 'snowball'
 
@@ -118,7 +119,11 @@ module ProjectSearch
 
   def grant_index_fields
     @grant_objects ||= self.supported_by
+
+    latest_grant_date = @grant_objects.map{ |g| g.modified }.max
+
     {
+       modified: (latest_grant_date > modified)? latest_grant_date : modified,
        total_offer_grant: @grant_objects.map {|g| g.offer_grant }.inject {|sum,x| sum + x },
        total_offer_cost: @grant_objects.map {|g| g.offer_cost }.inject {|sum,x| sum + x }
     }

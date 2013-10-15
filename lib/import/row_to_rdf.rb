@@ -76,7 +76,7 @@ module Import
       urlified_org_name = Urlify::urlify(org_name)
       org_slug = nil
       org_number = RowToRdf.clean_company_number(row["CompanyRegNo"])
-      
+
       if org_number
         org_slug = org_number
       else  # org_number is nil: no company num at all
@@ -171,22 +171,22 @@ module Import
 
 
 
-       
+
         # retrieve SIC codes from Companies House
         if org_number
-          codes = Import::CompaniesHouse.sicCodes(org_number)
-          codes.each do |code|
-            sic_uri = Vocabulary::TSBDEF["concept/sic/#{code}"]
-            o.sic_class_uris = o.sic_class_uris.push(sic_uri)
-          end
-          
+          # codes = Import::CompaniesHouse.sicCodes(org_number)
+          # codes.each do |code|
+          #   sic_uri = Vocabulary::TSBDEF["concept/sic/#{code}"]
+          #   o.sic_class_uris = o.sic_class_uris.push(sic_uri)
+          # end
+
           # connect company to OpenCorporates and Companies House
           # TODO - should check whether the remote URIs exist
           opencorp_uri = "http://opencorporates.com/id/companies/gb/#{org_number}"
           ch_uri = "http://business.data.gov.uk/id/company/#{org_number}"
           o.same_as = [opencorp_uri,ch_uri]
-          
-            
+
+
         end
 
 
@@ -305,19 +305,19 @@ module Import
 
       return nil
     end
-    
+
     # takes the cell from the spreadsheet and tidies it up into a company number
     # if it can't make a company number out of it, returns nil
     def self.clean_company_number(raw_number)
       org_number = nil
       if raw_number
-        # does the spreadsheet/Roo think it's a number or a string?       
+        # does the spreadsheet/Roo think it's a number or a string?
         if raw_number.class == Float
-          org_number = raw_number.to_i.to_s 
+          org_number = raw_number.to_i.to_s
         else
           org_number = raw_number.strip
         end
-        
+
         if ["0","","Exempt Charity","NHS Hospital", "N/A", "null"].include?(org_number)
           org_number = nil
         else
@@ -335,10 +335,10 @@ module Import
 
 
       end
-      
+
       return org_number
-      
+
     end
-    
+
   end
 end

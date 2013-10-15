@@ -6,6 +6,7 @@ class Organization
 
   # TODO: check what predicate Companies House uses to link company to number
   field :company_number, Vocabulary::TSBDEF.companyNumber
+  field :same_as, RDF::OWL.sameAs, is_uri: true, multivalued: true
 
   # links
   linked_to :leads_projects, Vocabulary::TSBDEF.isLeaderOf, class_name: 'Project', multivalued: true

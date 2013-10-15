@@ -171,8 +171,7 @@ module Import
 
 
 
-        # TODO connect company to OpenCorporates and Companies House
-        
+       
         # retrieve SIC codes from Companies House
         if org_number
           codes = Import::CompaniesHouse.sicCodes(org_number)
@@ -180,17 +179,16 @@ module Import
             sic_uri = Vocabulary::TSBDEF["concept/sic/#{code}"]
             o.sic_class_uris = o.sic_class_uris.push(sic_uri)
           end
+          
+          # connect company to OpenCorporates and Companies House
+          # TODO - should check whether the remote URIs exist
+          opencorp_uri = "http://opencorporates.com/id/companies/gb/#{org_number}"
+          ch_uri = "http://business.data.gov.uk/id/company/#{org_number}"
+          o.same_as = [opencorp_uri,ch_uri]
+          
             
         end
-        # SIC code
-        # sic_desc = row["ParticipantSICSubclass"]
-        # if sic_desc && sic_desc != "Unknown" && sic_desc != "null"
-        #   sic_code = sic_hash[sic_desc]
-        #   if sic_code
-        #     sic_uri = Vocabulary::TSBDEF["concept/sic/#{sic_code}"]
-        #     o.sic_class_uri = sic_uri
-        #   end
-        # end
+
 
       end # of organization block
 

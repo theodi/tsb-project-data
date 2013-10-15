@@ -109,7 +109,7 @@ module Import
             s.sic_group = parent
             s.sic_division = resources[current_division]
             s.sic_section = resources[current_section]
-            s.sic_class_uris << resources[current_class].uri
+            s.sic_class = resources[current_class]
             parent.narrower << s.uri
           else
             raise "unexpected format of code"

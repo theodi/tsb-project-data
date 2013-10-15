@@ -35,8 +35,12 @@ namespace :db do
 
     projects_dataset.title = "TSB Projects Data"
     projects_dataset.label = projects_dataset.title
-    projects_dataset.description = "TSB"
-    projects_dataset.comment = "TSB Projects Data"
+    projects_dataset.comment = "Etiam vitae nisi elit. Cras ultricies risus a scelerisque gravida. Aliquam rutrum fermentum venenatis. Nullam ac est in purus semper gravida. Vestibulum eleifend eu risus et viverra."
+    projects_dataset.description = "
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus in molestie sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent consequat quam a erat aliquam tincidunt. Nulla convallis, felis a bibendum pellentesque, leo sem auctor est, ac porttitor elit arcu non ligula. Quisque felis arcu, ultricies a libero iaculis, facilisis ultricies nisl. Vestibulum volutpat ac tellus sit amet cursus. Etiam cursus iaculis pretium. Praesent pulvinar orci eget arcu tincidunt, porttitor sollicitudin augue gravida. Etiam id cursus felis. Praesent vulputate sodales sapien a scelerisque. Integer posuere est eget arcu pretium, consectetur eleifend lacus adipiscing. Phasellus egestas pretium tortor, vel mollis nisl luctus et. Sed cursus ultrices odio, vitae porta leo posuere id.
+
+Nulla facilisi. Nam metus purus, aliquam at cursus vel, mattis in leo. Etiam vitae nisi elit. Cras ultricies risus a scelerisque gravida. Aliquam rutrum fermentum venenatis. Nullam ac est in purus semper gravida. Vestibulum eleifend eu risus et viverra. Praesent mauris massa, adipiscing nec nulla sagittis, cursus imperdiet nunc. Duis eu massa vitae turpis vulputate cursus gravida a lorem.
+    "
     projects_dataset.contact_email = "mailto:hello@swirrl.com"
     #dataset.license = "TBC"
     #dataset.publisher = "TBC"
@@ -48,20 +52,61 @@ namespace :db do
     projects_dataset.save
 
     # regions
+
     regions_dataset = PublishMyData::Dataset.new(
-      "http://#{PublishMyData.local_domain}/data/regions",
+      Region.get_graph_uri.to_s.gsub("/graph/", "/data/"),
       "#{Region.get_graph_uri}/metadata"
     )
 
     regions_dataset.title = "TSB Regions"
     regions_dataset.label = regions_dataset.title
+    regions_dataset.comment = "Nulla facilisi. Nam metus purus, aliquam at cursus vel, mattis in leo"
+    regions_dataset.description = "
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus in molestie sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent consequat quam a erat aliquam tincidunt. Nulla convallis, felis a bibendum pellentesque, leo sem auctor est, ac porttitor elit arcu non ligula. Quisque felis arcu, ultricies a libero iaculis, facilisis ultricies nisl. Vestibulum volutpat ac tellus sit amet cursus. Etiam cursus iaculis pretium. Praesent pulvinar orci eget arcu tincidunt, porttitor sollicitudin augue gravida. Etiam id cursus felis. Praesent vulputate sodales sapien a scelerisque. Integer posuere est eget arcu pretium, consectetur eleifend lacus adipiscing. Phasellus egestas pretium tortor, vel mollis nisl luctus et. Sed cursus ultrices odio, vitae porta leo posuere id.
 
-    #TODO: datasets for regions and budget areas
+Nulla facilisi. Nam metus purus, aliquam at cursus vel, mattis in leo. Etiam vitae nisi elit. Cras ultricies risus a scelerisque gravida. Aliquam rutrum fermentum venenatis. Nullam ac est in purus semper gravida. Vestibulum eleifend eu risus et viverra. Praesent mauris massa, adipiscing nec nulla sagittis, cursus imperdiet nunc. Duis eu massa vitae turpis vulputate cursus gravida a lorem.
+    "
+    regions_dataset.contact_email = "mailto:hello@swirrl.com"
+    #dataset.license = "TBC"
+    #dataset.publisher = "TBC"
+
+    regions_dataset.data_dump = "http://#{PublishMyData.local_domain}/data/#{Region::DATASET_SLUG}/dump"
+    regions_dataset.write_predicate(Vocabulary::DCTERMS.references, "http://#{PublishMyData.local_domain}/docs")
+    regions_dataset.write_predicate("http://rdfs.org/ns/void#sparqlEndpoint", "http://#{PublishMyData.local_domain}/sparql")
+    regions_dataset.write_predicate("http://publishmydata.com/def/dataset#graph", Region.get_graph_uri)
+    regions_dataset.save
+
+
+    # budget areas
+    ba_dataset = PublishMyData::Dataset.new(
+      BudgetArea.get_graph_uri.to_s.gsub("/graph/", "/data/"),
+      "#{Region.get_graph_uri}/metadata"
+    )
+
+    ba_dataset.title = "TSB Budget Areas"
+    ba_dataset.label = regions_dataset.title
+    ba_dataset.comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus in molestie sapien. "
+    ba_dataset.description = "
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus in molestie sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent consequat quam a erat aliquam tincidunt. Nulla convallis, felis a bibendum pellentesque, leo sem auctor est, ac porttitor elit arcu non ligula. Quisque felis arcu, ultricies a libero iaculis, facilisis ultricies nisl. Vestibulum volutpat ac tellus sit amet cursus. Etiam cursus iaculis pretium. Praesent pulvinar orci eget arcu tincidunt, porttitor sollicitudin augue gravida. Etiam id cursus felis. Praesent vulputate sodales sapien a scelerisque. Integer posuere est eget arcu pretium, consectetur eleifend lacus adipiscing. Phasellus egestas pretium tortor, vel mollis nisl luctus et. Sed cursus ultrices odio, vitae porta leo posuere id.
+
+Nulla facilisi. Nam metus purus, aliquam at cursus vel, mattis in leo. Etiam vitae nisi elit. Cras ultricies risus a scelerisque gravida. Aliquam rutrum fermentum venenatis. Nullam ac est in purus semper gravida. Vestibulum eleifend eu risus et viverra. Praesent mauris massa, adipiscing nec nulla sagittis, cursus imperdiet nunc. Duis eu massa vitae turpis vulputate cursus gravida a lorem.
+    "
+    ba_dataset.contact_email = "mailto:hello@swirrl.com"
+    #dataset.license = "TBC"
+    #dataset.publisher = "TBC"
+
+    ba_dataset.data_dump = "http://#{PublishMyData.local_domain}/data/#{BudgetArea::DATASET_SLUG}/dump"
+    ba_dataset.write_predicate(Vocabulary::DCTERMS.references, "http://#{PublishMyData.local_domain}/docs")
+    ba_dataset.write_predicate("http://rdfs.org/ns/void#sparqlEndpoint", "http://#{PublishMyData.local_domain}/sparql")
+    ba_dataset.write_predicate("http://publishmydata.com/def/dataset#graph", BudgetArea.get_graph_uri)
+    ba_dataset.save
 
   end
 
   desc 'replace supporting data'
   task replace_supporting_data: :environment do
+
+    Rake::Task['db:replace_dataset_metadata'].invoke
 
     replace_graph(Product.get_graph_uri, 'products.nt')
     replace_graph(EnterpriseSize.get_graph_uri, 'enterprise_sizes.nt')
@@ -82,7 +127,5 @@ namespace :db do
   task replace_project_data: :environment do
     replace_graph(TsbProjectData::DATA_GRAPH, 'project_data.nt')
   end
-
-
 
 end

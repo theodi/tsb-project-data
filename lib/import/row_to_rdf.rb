@@ -72,31 +72,11 @@ module Import
       # if no company number, then use urlified name
       org_name = row["ParticipantName"]
       urlified_org_name = Urlify::urlify(org_name)
-      org_number = row["CompanyRegNo"]
       org_slug = nil
-      if org_number
-        # does the spreadsheet/Roo think it's a number or a string?       
-        if org_number.class == Float
-          org_slug = org_number.to_i.to_s 
-        else
-          org_slug = org_number.strip
-        end
-        
-        if ["0","","Exempt Charity","NHS Hospital", "N/A", "null"].include?(org_slug)
-          org_slug = urlified_org_name
-        else
-          # normalise the format
-          # replace any spaces with '-'
-          org_slug.gsub!(/ /,'-')
-          #  add leading zeroes if necessary
-          unless org_slug.starts_with?('RC')
-            while org_slug.length < 8
-              org_slug = "0" + org_slug
-            end
-
-          end
-        end
+      org_number = RowToRdf.clean_company_number(row["CompanyRegNo"])
       
+      if org_number
+        org_slug = org_number
       else  # org_number is nil: no company num at all
         org_slug = urlified_org_name
       end
@@ -111,13 +91,8 @@ module Import
         # add to resources hash
         resources[org_uri] = o
         o.label = org_name
-        if org_number
-          if org_number.class == Float
-            o.company_number = org_number.to_i.to_s
-          elsif org_number.length > 0 && org_number != "null"
-            o.company_number = org_number
-          end
-        end
+        o.company_number = org_number if org_number
+
         # for now, ignore the case where an org might have two addresses - just use the first one
         site_uri = Vocabulary::TSB["organization/#{org_slug}/site"]
         address_uri = Vocabulary::TSB["organization/#{org_slug}/address"]
@@ -195,15 +170,25 @@ module Import
 
 
         # TODO connect company to OpenCorporates and Companies House
-        # SIC code
-        sic_desc = row["ParticipantSICSubclass"]
-        if sic_desc && sic_desc != "Unknown" && sic_desc != "null"
-          sic_code = sic_hash[sic_desc]
-          if sic_code
-            sic_uri = Vocabulary::TSBDEF["concept/sic/#{sic_code}"]
-            o.sic_class_uri = sic_uri
+        
+        # retrieve SIC codes from Companies House
+        if org_number
+          codes = Import::CompaniesHouse.sicCodes(org_number)
+          codes.each do |code|
+            sic_uri = Vocabulary::TSBDEF["concept/sic/#{code}"]
+            o.sic_class_uris = o.sic_class_uris.push(sic_uri)
           end
+            
         end
+        # SIC code
+        # sic_desc = row["ParticipantSICSubclass"]
+        # if sic_desc && sic_desc != "Unknown" && sic_desc != "null"
+        #   sic_code = sic_hash[sic_desc]
+        #   if sic_code
+        #     sic_uri = Vocabulary::TSBDEF["concept/sic/#{sic_code}"]
+        #     o.sic_class_uri = sic_uri
+        #   end
+        # end
 
       end # of organization block
 
@@ -317,5 +302,40 @@ module Import
 
       return nil
     end
+    
+    # takes the cell from the spreadsheet and tidies it up into a company number
+    # if it can't make a company number out of it, returns nil
+    def self.clean_company_number(raw_number)
+      org_number = nil
+      if raw_number
+        # does the spreadsheet/Roo think it's a number or a string?       
+        if raw_number.class == Float
+          org_number = raw_number.to_i.to_s 
+        else
+          org_number = raw_number.strip
+        end
+        
+        if ["0","","Exempt Charity","NHS Hospital", "N/A", "null"].include?(org_number)
+          org_number = nil
+        else
+          # normalise the format
+          # replace any spaces with '-'
+          org_number.gsub!(/ /,'-')
+          #  add leading zeroes if necessary
+          unless org_number.starts_with?('RC')
+            while org_number.length < 8
+              org_number = "0" + org_number
+            end
+
+          end
+        end
+
+
+      end
+      
+      return org_number
+      
+    end
+    
   end
 end

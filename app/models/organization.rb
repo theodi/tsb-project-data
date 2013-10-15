@@ -13,7 +13,7 @@ class Organization
   linked_to :site, Vocabulary::ORG.hasSite, class_name: 'Site'
   linked_to :legal_entity_form, Vocabulary::TSBDEF.legalEntityForm
   linked_to :enterprise_size, Vocabulary::TSBDEF.enterpriseSize
-  linked_to :sic_class, Vocabulary::TSBDEF.standardIndustrialClassification, class_name: 'SicClass'
+  linked_to :sic_class, Vocabulary::TSBDEF.standardIndustrialClassification, class_name: 'SicClass', multivalued: true
 
   def offer_cost_sum
     grants.resources.sum(&:offer_cost).to_f

@@ -34,7 +34,7 @@ namespace :db do
     )
 
     projects_dataset.title = "TSB Projects Data"
-    projects_dataset.label = dataset.title
+    projects_dataset.label = projects_dataset.title
     projects_dataset.description = "TSB"
     projects_dataset.comment = "TSB Projects Data"
     projects_dataset.contact_email = "mailto:hello@swirrl.com"
@@ -47,7 +47,14 @@ namespace :db do
     projects_dataset.write_predicate("http://publishmydata.com/def/dataset#graph", TsbProjectData::DATA_GRAPH)
     projects_dataset.save
 
-    # 
+    # regions
+    regions_dataset = PublishMyData::Dataset.new(
+      "http://#{PublishMyData.local_domain}/data/regions",
+      "#{Region.get_graph_uri}/metadata"
+    )
+
+    regions_dataset.title = "TSB Regions"
+    regions_dataset.label = regions_dataset.title
 
     #TODO: datasets for regions and budget areas
 

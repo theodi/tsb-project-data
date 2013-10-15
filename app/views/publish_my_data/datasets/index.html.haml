@@ -1,0 +1,10 @@
+- content_for :header do
+  %h1
+    Linked Data
+
+%ul#datasets-list
+  - @datasets.each do |dataset|
+    = render 'publish_my_data/datasets/index/dataset', dataset: dataset
+
+
+

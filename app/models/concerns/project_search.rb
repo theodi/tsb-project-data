@@ -151,8 +151,8 @@ module ProjectSearch
   def participant_sic_class_index_fields
     @participant_objects ||= self.participants
     {
-      participant_sic_section_uris: @participant_objects.map {|p| p.sic_class.sic_section_uri.to_s rescue nil},
-      participant_sic_section_labels: @participant_objects.map {|p| p.sic_class.sic_section.label rescue nil }
+      participant_sic_section_uris: @participant_objects.map {|p| p.sic_classes.map{ |c| c.sic_section_uri.to_s } } rescue nil},
+      participant_sic_section_labels: @participant_objects.map {|p| p.sic_classes.map { |c| c.sic_section.label } } rescue nil }
     }
   end
 

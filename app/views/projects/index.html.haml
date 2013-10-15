@@ -3,8 +3,12 @@
     Projects
 
 - content_for :advanced do
-  Get these results as
-  = link_to "CSV", projects_path( params.merge(format: 'csv') )
+  .minimal
+    .formats
+      %span Get as:
+      %ul.formats
+        %li= link_to("CSV", projects_path( params.merge(format: 'csv').tap { |h| h.delete(:page); h.delete(:per_page)}))
+        %li= link_to("Atom", projects_path( params.merge(format: 'atom', page: 1, per_page: 20 )))
 
 #projects-page
   #search

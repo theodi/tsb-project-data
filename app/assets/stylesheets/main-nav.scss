@@ -27,6 +27,7 @@ main > nav {
       &.advanced {
         a {
           padding: 20px;
+          padding-bottom: 10px;
           text-align: center;
 
           span {
@@ -38,13 +39,13 @@ main > nav {
               margin-top: -2px;
               line-height: 1;
             }
-          } 
+          }
 
           &:hover span {
             color: $accent-color;
-          } 
+          }
         }
-        
+
       }
 
       .arrow-down {

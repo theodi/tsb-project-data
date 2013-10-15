@@ -67,6 +67,11 @@
     }
 
     function setOfferGrantTextFields(from, to, roundValue) {
+
+      if (!roundValue) {
+        roundValue = 1;
+      }
+
       from = roundToNearest( from.toFixed(2), roundValue, false );
       to = roundToNearest( to.toFixed(2), roundValue, true );
 
@@ -87,7 +92,7 @@
       max: maxExtent,
       step: step,
       slide: function( event, ui ) {
-        setOfferGrantTextFields(ui.values[0], ui.values[1], roundValue );
+        setOfferGrantTextFields(ui.values[0], ui.values[1] );
         updateGrantRangeDesc();
       },
       stop: function( event, ui ) {
@@ -103,7 +108,7 @@
 
     setSliderValues(grantFrom, grantTo);
 
-    // initialise the text fields with the initial slider values.
+    // initialise the text fields with the initial slider values (rounded).
     setOfferGrantTextFields(
       $( "#offer-grant-slider" ).slider("values", 0),
       $( "#offer-grant-slider" ).slider("values", 1),

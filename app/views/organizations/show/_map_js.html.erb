@@ -14,6 +14,8 @@
         iconSize: new L.Point(14, 20),
         iconUrl: "/assets/pin.png"
       })
+    }).bindPopup('<p class="name"><a href="<%= resource_path_from_uri(organization.uri) %>"><%= organization.label %></a></p><p class="address"><%= organization.site.address.label %></p>', {
+      closeButton: false
     });
   
     marker.addTo(map);

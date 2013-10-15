@@ -31,4 +31,8 @@ class Organization
     Grant.where("?uri <#{Vocabulary::TSBDEF.paidTo}> <#{self.uri}>")
   end
 
+  def has_lat_long?
+    site.lat.present? && site.long.present?
+  end
+
 end

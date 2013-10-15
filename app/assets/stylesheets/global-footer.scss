@@ -6,8 +6,51 @@
 // }
 
 body > footer {
-  padding-top:20px;
+  padding: 40px 0;
   background-color: $global-footer-bg-color;
   color: $global-footer-color;
-  margin-top:40px;
+  //margin-top:40px;
+  font-size: 14px;
+
+  #footer-header {
+    @include make-row();
+  }
+
+  #footer-logos {
+    @include make-md-column(9);
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    .footer-logo {
+      float: left;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      margin-right: 48px;
+
+      &.footer-logo-variable {
+        padding-top: 20px;
+      }
+
+      a {
+        opacity: 0.5;
+        @include transition(opacity, 0.15s);
+        display: block;
+
+        &:hover {
+          opacity: 1;
+        }
+
+      }
+    }
+  }
+
+  #footer-info {
+    @include make-row();
+  }
+
+  #footer-links {
+    @include make-md-column(9);
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
 }

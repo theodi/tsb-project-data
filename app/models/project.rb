@@ -9,6 +9,7 @@ class Project
   # literals (label comes from tsb resource)
   field :description, Vocabulary::DCTERMS.description
   field :project_number, Vocabulary::TSBDEF.projectNumber
+  field :modified, Vocabulary::DCTERMS.modified, datatype: RDF::XSD.dateTime
 
   # links
   linked_to :leader, Vocabulary::TSBDEF.hasLeader, class_name: 'Organization'
@@ -21,6 +22,7 @@ class Project
   linked_to :project_status, Vocabulary::TSBDEF.projectStatus, class_name: 'ProjectStatus'
   linked_to :duration, Vocabulary::TSBDEF.projectDuration, class_name: 'ProjectDuration'
   linked_to :cost_category, Vocabulary::TSBDEF.costCategory
+
 
   def offer_cost_sum
     supported_by.sum(&:offer_cost).to_f

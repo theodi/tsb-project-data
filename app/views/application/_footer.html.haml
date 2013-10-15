@@ -1,0 +1,25 @@
+%footer
+  .container
+    #footer-header
+      #footer-logos
+        .footer-logo.footer-logo-odi
+          = link_to image_tag('odi-logo.png'), 'http://www.theodi.org'
+        .footer-logo.footer-logo-swirrl
+          = link_to image_tag('swirrl-logo.png'), 'http://www.swirrl.com/publishmydata'
+        .footer-logo.footer-logo-variable
+          = link_to image_tag('variable-logo.png'), 'http://variable.io'
+
+    #footer-info
+      #footer-links
+        %p
+          %a{ href: '#' } Privacy &amp; Cookies
+          \|
+          %a{ href: '#' } Accessiblity
+          \|
+          %a{ href: '#' } Developer Docs
+
+        %p
+          &copy; 2013 Crown Copyright &amp;
+          <a href='http://www.swirrl.com'>Swirrl IT Limited</a>.
+
+          Powered by the <a href='http://www.swirrl.com/publishmydata'>PublishMyData Linked Data Platform</a>.

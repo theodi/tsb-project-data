@@ -228,7 +228,7 @@
       <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
                     <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
       <http://www.w3.org/2000/01/rdf-schema#label>
-                    "The administrative geography ontology"@en ;
+                    "Administrative Geography"@en ;
       <http://purl.org/dc/elements/1.1/creator>
                     "Ordnance Survey"@en ;
       <http://www.w3.org/2002/07/owl#imports>

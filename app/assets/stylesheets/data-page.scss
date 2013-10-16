@@ -23,12 +23,12 @@
         font-size:14px;
         @extend .list-unstyled;
         li {
-          padding-bottom: 8px;
           line-height: 1.1;
           @include hardwrap();
           &.internal {
             font-weight:bold;
           }
+          padding-bottom: 8px;
         }
         margin-bottom:0;
       }

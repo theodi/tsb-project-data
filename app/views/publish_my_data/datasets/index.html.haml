@@ -25,7 +25,7 @@
         %li.internal
           = link_to (ont.label || ont.uri.to_s), resource_path_from_uri(ont.uri.to_s).to_s
 
-        - PublishMyData::ThirdParty::Ontology.all.resources.each do |o|
+        - PublishMyData::ThirdParty::Ontology.all.resources.sort{ |o1, o2| o1.label <=> o2.label }.each do |o|
           - unless o.uri == ont.uri
             %li.external
               = link_to (o.label || o.uri.to_s), resource_path_from_uri(o.uri.to_s).to_s
@@ -33,6 +33,6 @@
     .concept-schemes
       %h4 Concept Schemes
       %ul
-        - PublishMyData::ConceptScheme.all.resources.sort{ |cs| cs.label <=> cs.label }.each do |cs|
+        - PublishMyData::ConceptScheme.all.resources.sort{ |cs1, cs2| cs1.label <=> cs2.label }.each do |cs|
           %li.internal
             = link_to (cs.label || cs.uri.to_s), resource_path_from_uri(cs.uri.to_s).to_s

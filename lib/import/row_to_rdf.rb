@@ -51,8 +51,14 @@ module Import
         resources[duration_uri] = d
 
         ## TO DO - sort out date formatting
+        min_valid_date = Date.parse('2000-01-01')
+        dummy_date = Date.parse('2001-04-01')
         t1 = row["StartDate"]
         t2 = row["ProjectEndDate"]
+        if t1 < min_valid_date || t2 < min_valid_date
+          t1 = dummy_date
+          t2 = dummy_date
+        end
         d.start  = t1.strftime('%Y-%m-%d')
         d.end = t2.strftime('%Y-%m-%d')
         d.label = "From #{t1.strftime('%d/%m/%Y')} to #{t2.strftime('%d/%m/%Y')}"

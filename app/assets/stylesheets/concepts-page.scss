@@ -40,7 +40,7 @@
     #concept-figures {
 
       > div {
-        @include make-md-column(4);
+        @include make-md-column(5);
 
         > div:first-child {
           color: $grey-label;
@@ -99,6 +99,16 @@
         span {
           font-weight: bold;
         }
+      }
+    }
+
+    #concept-search-button {
+      @include make-md-column(12);
+
+      a {
+        @include tsb-button(#fff, $green);
+        display: inline-block;
+        padding: 25px 30px;
       }
     }
 

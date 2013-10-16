@@ -17,7 +17,7 @@ module Import
         "Wales" => "http://statistics.data.gov.uk/id/statistical-geography/W92000004"
       }
 
-      output_file = File.join(Rails.root, 'data', 'output-data', 'regions.nt')
+      output_file = File.join(Rails.root, 'public', 'dumps', 'regions.nt')
 
       graph = RDF::Graph.new
 

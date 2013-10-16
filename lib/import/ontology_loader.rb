@@ -1,16 +1,16 @@
 module Import
   class OntologyLoader
-    
+
     def self.prepare_ontology
       input_file = File.join(Rails.root, 'data', 'input-data', 'ontology.xlsx')
-      output_file = File.join(Rails.root, 'data', 'output-data', 'ontology.nt')
-      
+      output_file = File.join(Rails.root, 'public', 'dumps', 'ontology.nt')
+
       excel = Roo::Excelx.new(input_file)
       graph = RDF::Graph.new
-     
+
       ontology_uri = Vocabulary::TSBDEF["ontology"]
-      
-#  Classes 
+
+#  Classes
       excel.default_sheet = "Classes"
       for i in 2..excel.last_row
         class_uri = Vocabulary::TSBDEF[excel.cell(i,1)]
@@ -28,11 +28,11 @@ module Import
           end
           graph << [class_uri, RDF::RDFS.subClassOf, RDF::URI.new(obj_uri)]
         end
-        
-        
+
+
       end
-      
-# Properties      
+
+# Properties
       excel.default_sheet = "Properties"
       for i in 2..excel.last_row
         property_uri = Vocabulary::TSBDEF[excel.cell(i,1)]
@@ -57,7 +57,7 @@ module Import
             obj_uri = Vocabulary::TSBDEF[obj]
           end
           graph << [property_uri, RDF::RDFS.domain, RDF::URI.new(obj_uri)]
-        end  
+        end
         if excel.cell(i,6)
           obj = excel.cell(i,6)
           if obj.starts_with?('http://')
@@ -67,14 +67,14 @@ module Import
           end
           graph << [property_uri, RDF::RDFS.range, RDF::URI.new(obj_uri)]
         end
-        
-        
-        
-      end      
-      
+
+
+
+      end
+
       File.open(output_file, "w") {|f| f << graph.dump(:ntriples)}
-      
+
     end
-    
+
   end
 end

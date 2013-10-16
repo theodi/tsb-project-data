@@ -1,29 +1,64 @@
 #data-page {
-
   @include make-row();
+
   h3 { font-weight:bold }
 
   .supporting-data {
     @include make-md-column(3);
-    background-color:#eee;
-    ul {
-      @extend .list-unstyled;
-      li.external {
-        font-size:16px;
+    @include make-md-column-offset(1);
+
+    padding-top:18px;
+
+    .ontologies, .concept-schemes {
+      background: #eee;
+      padding: 12px 18px;
+      margin-bottom:18px;
+
+      h4 {
+        margin-top:0;
+        font-weight:bold;
+      }
+
+      ul {
+        font-size:14px;
+        @extend .list-unstyled;
+        li {
+          line-height: 1.1;
+          @include hardwrap();
+          &.internal {
+            font-weight:bold;
+          }
+          padding-bottom: 8px;
+        }
+        margin-bottom:0;
       }
     }
   }
 
   .datasets {
-    @include make-md-column(9);
 
-    .datasets-header {
-      padding: 18px 0;
-      color: #888;
+    @include make-md-column(8);
+
+    .intro {
+      p {
+        padding: 18px 0;
+        color: #888;
+        font-size:16px;
+      }
+      a.sparql {
+        @include tsb-bootstrap-btn(#fff, #1b1b1b);
+        margin-top:18px;
+        margin-left:10px;
+        float:right;
+      }
+
     }
 
+
     ul#datasets-list {
+
       @extend .list-unstyled;
+
       margin-bottom:36px;
 
       background: transparent url(image-path('divider.png')) repeat-x top;
@@ -50,5 +85,6 @@
         }
       }
     }
+
   }
 }

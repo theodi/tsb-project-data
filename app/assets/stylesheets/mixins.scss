@@ -14,3 +14,27 @@
   -khtml-border-radius: $radius;
   border-radius: $radius;
 }
+
+@mixin read-more-content {
+  position: relative;
+  height: 102px;
+  min-height: 102px;
+  overflow: hidden;
+
+  .read-more-overlay {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: transparent url(image-path('read-more-overlay.png')) repeat-x;
+    height: 50px;
+  }
+
+  &.visible {
+    height: auto;
+
+    .read-more-overlay {
+      display: none;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 - content_for :header do
   %h3
-    = link_to "Organizations", "/organizations"
+    Organization
   %h1
     = organization.label
 
@@ -19,7 +19,7 @@
   #organization-main
 
     %section#organization-about
-      
+
       #organization-about-primary
         #organization-name
           %div Organisation name
@@ -27,17 +27,17 @@
         #organization-number
           %div Company number
           %div= organization.company_number
-            
+
 
       #organization-about-secondary
         #organization-size
           %div Organization size
           %div= organization.enterprise_size.label.humanize
         #organization-sic
-          %div SIC class
+          %div SIC classes
           %div
-            - if organization.sic_class.present?
-              = link_to organization.sic_class.label, '#'
+            - if organization.sic_classes.any?
+              = organization.sic_classes.map { |s| "#{link_to s.label, '#'}" }.join(',').html_safe
             - else
               \-
 
@@ -57,11 +57,11 @@
       %h3 Grant summary
 
       #organization-grant-summary-figures
-        
+
         #organization-total-offer-grant
           %div Total grant
           = render "projects/show/grant/offer_grant", offer_grant: organization.offer_grant_sum, offer_cost: organization.offer_cost_sum
-        
+
         #organization-total-payments
           %div Total payments to date
           = render "projects/show/grant/payments_to_date", payments_to_date: organization.payments_to_date_sum, offer_grant: organization.offer_grant_sum

@@ -1,4 +1,7 @@
 #projects-page {
+
+  h3 { font-weight:bold }
+
   @include make-row();
 
   #search {
@@ -183,7 +186,6 @@
 
         h3 {
           margin: 0 0 18px;
-          font-weight: bold;
         }
 
         p {
@@ -208,8 +210,7 @@
     }
 
     ul#results-list {
-      list-style-type: none;
-      padding: 0;
+      @extend .list-unstyled;
 
       background: transparent url(image-path('divider.png')) repeat-x top;
 
@@ -229,7 +230,7 @@
         .result-header {
 
           .result-name {
-            @include make-md-column(10);
+            @include make-md-column(9);
 
             a {
               font-size: 24px;
@@ -238,7 +239,7 @@
           }
 
           .result-status {
-            @include make-md-column(2);
+            @include make-md-column(3);
 
             .result-status-label {
               background: #ccc;
@@ -279,8 +280,6 @@
           }
         }
 
-
-
         .result-grant-and-duration {
           .grant {
             @include make-md-column(3);
@@ -299,9 +298,6 @@
           color: #888;
           font-size: 16px;
         }
-
-
-
 
         .result-participants {
           @include make-row();
@@ -366,7 +362,6 @@
 
       h3 {
         margin: 20px 0;
-        font-weight: bold;
       }
 
       > div {
@@ -444,6 +439,12 @@
       }
     }
 
+    #project-description {
+      .description {
+        @include read-more-content();
+      }
+    }
+
     #map-container {
       width: 100%;
       height: 480px;
@@ -477,8 +478,7 @@
     }
 
     ul#project-participants-list {
-      list-style-type: none;
-      padding: 0;
+      @extend .list-unstyled;
 
       li {
         padding: 18px 0;
@@ -568,5 +568,7 @@
     }
 
   }
+
+
 
 }

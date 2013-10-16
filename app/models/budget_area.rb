@@ -1,7 +1,11 @@
 class BudgetArea
   include TsbResource
   rdf_type Vocabulary::TSBDEF["BudgetArea"]
-  graph_uri "http://#{PublishMyData.local_domain}/graph/budget-areas"
+
+  DATASET_SLUG = "budget-areas"
+
+  graph_uri "http://#{PublishMyData.local_domain}/graph/#{BudgetArea::DATASET_SLUG}"
+
 
   BUDGET_AREA_CODES = {
     "Development" => "DEVL",

@@ -1,8 +1,6 @@
 @charset "UTF-8";
 
 @import "jquery-ui-lightness/jquery-ui-1.10.3.custom.css";
-@import "pickadate/default.css";
-@import "pickadate/default.date.css";
 
 // override some bootstrap defaults
 $icon-font-path: "/assets/bootstrap/";
@@ -30,5 +28,7 @@ $gray-even-lighter:  lighten(#000, 97%);
 // pages
 @import "projects-page";
 @import "organizations-page";
+@import "data-page";
 @import "error-page";
 @import "sparql-page";
+@import "home-page";

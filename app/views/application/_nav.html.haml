@@ -11,8 +11,8 @@
         .arrow-down
 
     %li.advanced
-      %a{href:"/data/#{TsbProjectData::DATASET_SLUG}"}
+      %a{href:"/data"}
         %span.primary Linked Data
         %span.secondary Advanced users
-      - if ['information_resources'].include? controller_name
+      - if ['information_resources', 'datasets'].include? controller_name
         .arrow-down

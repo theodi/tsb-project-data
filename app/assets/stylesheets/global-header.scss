@@ -43,42 +43,36 @@
       input {
         font-size: 18px;
         line-height: 1;
-        
       }
 
-      input[type="text"] {
-        @extend .form-control;
-        @include border-radius(0);
-        float: left;
-        display: block;
-        width: 70%;
-        border: 0;
-        height: auto;
-        font-size: 16px;
-        outline: 0;
-        overflow: hidden;
-      }
 
-      input[type="submit"] {
-        @extend .btn;
-        @extend .btn-default;
-        float: left;
-        display: block;
-        @include border-radius(0);
-        width: 30%;
-        border: 0;
-        height: auto;
-        background: #61cc66;
-        color: white;
-        font-size: 16px;
-        outline: 0;
-        @include transition(background, 0.1s);
+      .form-group {
+        width: 300px;
+        float:right;
 
-        &:hover {
-          background: #61d867;
-          color: white;
+        input[type="text"] {
+          @extend .form-control;
+          @include border-radius(0);
+          width: 200px;
+          float:right;
+          overflow: hidden;
+          border:0;
+          outline:0;
+          &:active {
+            border:0;
+            outline:0;
+          }
+        }
+
+        input[type="submit"] {
+          @include tsb-button(#fff, $green);
+          float:right;
+          font-size: 16px;
+          padding-top:9px;
+          padding-bottom:9px;
         }
       }
+
       margin-right: 10px;
     }
 

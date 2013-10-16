@@ -75,7 +75,9 @@ module Import
           s.notation = slug
           if code.length == 1
             # section
-            # at top of tree, don't add relations
+            # at top of tree, don't add relations to others
+            # specify as top concept
+            s.top_concept_of = s.resource_concept_scheme_uri
 
           elsif code.length == 2
             # division

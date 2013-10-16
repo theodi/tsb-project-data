@@ -8,7 +8,7 @@
     = stylesheet_link_tag :application
 
     = yield :head
-    
+
     = javascript_include_tag :application
 
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
@@ -28,8 +28,8 @@
 
           = form_tag '/projects', method: 'get' do
             .form-group
-              = text_field_tag :search_string, nil, :placeholder => 'Search projects...'
               = submit_tag 'Search'
+              = text_field_tag :search_string, nil, :placeholder => 'Search projects...'
 
 
 
@@ -62,7 +62,7 @@
 
     -# note: intentionally not in #wrap
     = render "application/footer"
-        
+
 
 
     =# render 'publish_my_data/shared/google_analytics'

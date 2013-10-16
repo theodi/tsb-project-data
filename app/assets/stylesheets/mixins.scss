@@ -14,3 +14,40 @@
   -khtml-border-radius: $radius;
   border-radius: $radius;
 }
+
+@mixin tsb-button($color, $background) {
+  @include transition(background, 0.1s);
+  @include border-radius(0);
+
+  background: $background;
+  color: $color;
+  text-align: center;
+  display:block;
+  font-weight:bold;
+  padding: 4% 5%;
+  border: 0;
+  outline: 0;
+  -webkit-appearance: none;
+
+  &:hover, &:active {
+    text-decoration:none;
+    border: 0;
+    outline :0;
+  }
+
+  &:hover {
+    background: lighten($background, 5%);
+  }
+  &:active {
+    background: darken($background, 5%);
+  }
+
+}
+
+
+@mixin tsb-bootstrap-btn($color, $background) {
+  @extend .btn;
+  @include button-variant($color, $background, $background);
+  @include border-radius(0);
+}
+

@@ -1,0 +1,1883 @@
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/LondonBorough>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "The London boroughs are the local government areas within Greater London. The borough councils are unitary administrations with a status similar to metropolitan districts, but will also be affected by any policies implemented by the Greater London Authority (GLA)." ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "London Borough"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilAdministrativeArea> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#cardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#notation>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#minQualifiedCardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#altLabel>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/ward> ;
+                      <http://www.w3.org/2002/07/owl#someValuesFrom>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/LondonBoroughWard>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onClass>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/GreaterLondonAuthority> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/inCounty> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasCensusCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/Ward>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "Electoral wards/divisions are the base unit of UK administrative geography such that all higher units are built up from them. They are also used as a base unit for many other geographies such as parliamentary constituencies and Primary Care Trusts (PCTs). Electoral wards are found across Scotland, Northern Ireland and most of England, whereas the equivalents in Wales and the Isle of Wight are known as electoral divisions."@en ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Ward"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilVotingArea> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onClass>
+                                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                                    <http://www.w3.org/2002/07/owl#Class> ;
+                                      <http://www.w3.org/2002/07/owl#unionOf>
+                                                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/District> <http://data.ordnancesurvey.co.uk/ontology/admingeo/LondonBorough> <http://data.ordnancesurvey.co.uk/ontology/admingeo/MetropolitanDistrict> <http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthority>)
+                                    ] ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/inDistrict> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2002/07/owl#equivalentClass>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Class> ;
+                      <http://www.w3.org/2002/07/owl#unionOf>
+                                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/DistrictWard> <http://data.ordnancesurvey.co.uk/ontology/admingeo/LondonBoroughWard> <http://data.ordnancesurvey.co.uk/ontology/admingeo/MetropolitanDistrictWard> <http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthorityWard>)
+                    ] .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/Borough>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "Borough"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Borough"@en .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/Constinuency>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "Constituencies are used to elect members to legislatures." ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Constituency" ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilVotingArea> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/MetropolitanDistrict>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "Metropolitan districts are subdivisions of the 6 metropolitan county areas of England. Since the abolition of the metropolitan county councils in 1986 the metropolitan district councils have been unitary administrations."@en ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Metropolitan District"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilAdministrativeArea> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#minQualifiedCardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#altLabel>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasCensusCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/ward> ;
+                      <http://www.w3.org/2002/07/owl#someValuesFrom>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/MetropolitanDistrictWard>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#cardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#notation>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Ontology> ;
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Thing> ;
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#NamedIndividual> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "An ontology describing the administrative and voting area geography of Great Britain"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "The administrative geography and civil voting area ontology"@en ;
+      <http://purl.org/dc/elements/1.1/creator>
+                    "Ordnance Survey"@en ;
+      <http://www.w3.org/2002/07/owl#imports>
+                    <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/> ;
+      <http://www.w3.org/2002/07/owl#imports>
+                    <http://data.ordnancesurvey.co.uk/ontology/geometry/> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/GreaterLondonAuthority>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "The area covered by the Greater London Authority (GLA). The GLA is the body responsible for strategic citywide government for London, and consists of the Mayor of London and the London Assembly. The remit of the GLA covers the Greater London area."@en ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Greater London Authority"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilAdministrativeArea> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/constituency> ;
+                      <http://www.w3.org/2002/07/owl#someValuesFrom>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/GreaterLondonAuthorityAssemblyConstituency>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#minQualifiedCardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#altLabel>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/district> ;
+                      <http://www.w3.org/2002/07/owl#someValuesFrom>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/LondonBorough>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasCensusCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#cardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#notation>
+                    ] .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/ward>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#ObjectProperty> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "this relates an administrative regions to the wards and unitary electoral divisions contained within that region" ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "ward" ;
+      <http://www.w3.org/2000/01/rdf-schema#range>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Class> ;
+                      <http://www.w3.org/2002/07/owl#unionOf>
+                                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthorityElectoralDivision> <http://data.ordnancesurvey.co.uk/ontology/admingeo/Ward>)
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subPropertyOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/contains> ;
+      <http://www.w3.org/2002/07/owl#propertyChainAxiom>
+                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/district> <http://data.ordnancesurvey.co.uk/ontology/admingeo/ward>) .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/westminsterConstituency>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#ObjectProperty> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "this relates European regions to the Westminster constituencies contains within those regions" ;
+      <http://www.w3.org/2000/01/rdf-schema#domain>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/EuropeanRegion> ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "westminster constituency" ;
+      <http://www.w3.org/2000/01/rdf-schema#range>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/WestminsterConstituency> ;
+      <http://www.w3.org/2000/01/rdf-schema#subPropertyOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/contains> .
+
+<http://www.w3.org/2004/02/skos/core#altLabel>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+
+[]    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#AllDisjointClasses> ;
+      <http://www.w3.org/2002/07/owl#members>
+                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/DistrictWard> <http://data.ordnancesurvey.co.uk/ontology/admingeo/LondonBoroughWard> <http://data.ordnancesurvey.co.uk/ontology/admingeo/MetropolitanDistrictWard> <http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthorityWard>) .
+
+<http://data.ordnancesurvey.co.uk/ontology/geometry/extent>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#ObjectProperty> .
+
+<http://purl.org/dc/elements/1.1/title>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+
+<http://data.ordnancesurvey.co.uk/ontology/geometry/AbstractGeometry>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/district>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#ObjectProperty> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "this relates counties and european regions to the districts, unitary authorites, metropolitan districts and London boroughs they contain." ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "district" ;
+      <http://www.w3.org/2000/01/rdf-schema#range>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Class> ;
+                      <http://www.w3.org/2002/07/owl#unionOf>
+                                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/District> <http://data.ordnancesurvey.co.uk/ontology/admingeo/LondonBorough> <http://data.ordnancesurvey.co.uk/ontology/admingeo/MetropolitanDistrict> <http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthority>)
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subPropertyOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/contains> ;
+      <http://www.w3.org/2002/07/owl#propertyChainAxiom>
+                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/county> <http://data.ordnancesurvey.co.uk/ontology/admingeo/district>) .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/District>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "Districts are local administrative units and have at various times been used in all four countries of the UK. The only current references to districts however are found in metropolitan and non-metropolitan districts in England, and district council areas in Northern Ireland."@en ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "District"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilAdministrativeArea> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasCensusCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2000/01/rdf-schema#label> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onClass>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/County> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/inCounty> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/ward> ;
+                      <http://www.w3.org/2002/07/owl#someValuesFrom>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/DistrictWard>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#minQualifiedCardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#altLabel>
+                    ] .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilVotingArea>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Civil Voting Area" ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onClass>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/EuropeanRegion> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/inEuropeanRegion> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/geometry/extent> ;
+                      <http://www.w3.org/2002/07/owl#someValuesFrom>
+                                    <http://data.ordnancesurvey.co.uk/ontology/geometry/AbstractGeometry>
+                    ] .
+
+<http://purl.org/dc/elements/1.1/rights>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+
+[]    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#AllDisjointClasses> ;
+      <http://www.w3.org/2002/07/owl#members>
+                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/Constinuency> <http://data.ordnancesurvey.co.uk/ontology/admingeo/CountyElectoralDivision> <http://data.ordnancesurvey.co.uk/ontology/admingeo/ScottishParliamentElectoralRegion> <http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthorityElectoralDivision> <http://data.ordnancesurvey.co.uk/ontology/admingeo/Ward> <http://data.ordnancesurvey.co.uk/ontology/admingeo/WelshAssemblyElectoralRegion>) .
+
+<http://purl.org/dc/elements/1.1/creator>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+
+<http://www.w3.org/2004/02/skos/core#notation>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/inDistrict>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#FunctionalProperty> ;
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#ObjectProperty> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "this relates parishes, wards and unitary electoral divisions to their containing districts" ;
+      <http://www.w3.org/2000/01/rdf-schema#domain>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Class> ;
+                      <http://www.w3.org/2002/07/owl#unionOf>
+                                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilParish> <http://data.ordnancesurvey.co.uk/ontology/admingeo/Community> <http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthorityElectoralDivision> <http://data.ordnancesurvey.co.uk/ontology/admingeo/Ward>)
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "in district" ;
+      <http://www.w3.org/2000/01/rdf-schema#range>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Class> ;
+                      <http://www.w3.org/2002/07/owl#unionOf>
+                                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/District> <http://data.ordnancesurvey.co.uk/ontology/admingeo/LondonBorough> <http://data.ordnancesurvey.co.uk/ontology/admingeo/MetropolitanDistrict> <http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthority>)
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subPropertyOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/within> .
+
+[]    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#AllDisjointClasses> ;
+      <http://www.w3.org/2002/07/owl#members>
+                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilParish> <http://data.ordnancesurvey.co.uk/ontology/admingeo/Community> <http://data.ordnancesurvey.co.uk/ontology/admingeo/County> <http://data.ordnancesurvey.co.uk/ontology/admingeo/District> <http://data.ordnancesurvey.co.uk/ontology/admingeo/GreaterLondonAuthority> <http://data.ordnancesurvey.co.uk/ontology/admingeo/LondonBorough> <http://data.ordnancesurvey.co.uk/ontology/admingeo/MetropolitanDistrict> <http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthority>) .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/County>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "Counties were formerly administrative units across the whole UK. Due to various administrative restructurings however then the only administrative areas still referred to as counties are the non-metropolitan (shire) counties of England. The English metropolitan counties, although no longer administrative units, are also used for statistical purposes."@en ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "County"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilAdministrativeArea> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasCensusCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#minQualifiedCardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#altLabel>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#cardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#notation>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/district> ;
+                      <http://www.w3.org/2002/07/owl#someValuesFrom>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/District>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/CountyElectoralDivision>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "Apart from the special cases of the Isles of Scilly and the Greater London Authority (GLA), the English county councils are the only type of local authority in the UK which does not use standard electoral wards/divisions for electing councillors. Instead they use their own larger units, which are confusingly also termed electoral divisions. These county electoral divisions must be confined within district boundaries, but need not be based on whole electoral wards. Like electoral wards/divisions, county electoral divisions are defined by the Boundary Committee for England (BCFE)."@en ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "County Electoral Division"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilVotingArea> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onClass>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/County> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/inCounty> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] .
+
+[]    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#AllDisjointClasses> ;
+      <http://www.w3.org/2002/07/owl#members>
+                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/GreaterLondonAuthorityAssemblyConstituency> <http://data.ordnancesurvey.co.uk/ontology/admingeo/ScottishParliamentConstituency> <http://data.ordnancesurvey.co.uk/ontology/admingeo/WelshAssemblyConstituency> <http://data.ordnancesurvey.co.uk/ontology/admingeo/WestminsterConstituency>) .
+
+<http://data.ordnancesurvey.co.uk/ontology/spatialrelations/contains>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#ObjectProperty> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/WelshAssemblyConstituency>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "The  Welsh Assembly constituencies are used to elect members to the National Assembly for Wales (NAW)."@en ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Welsh Assembly Constituency"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/Constinuency> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onClass>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/WelshAssemblyElectoralRegion> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/inRegion> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/GreaterLondonAuthorityAssemblyConstituency>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "Greater London Authority (GLA) Assembly constituencies are used to elect members to the London Assembly, which is part of the GLA."@en ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Greater London Authority Assembly Constituency"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/Constinuency> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onClass>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/GreaterLondonAuthority> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/inRegion> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilParish>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "Parishes are subdivisions of local authorities in many parts of England, and their councils are the most local level of government. Unlike electoral wards/divisions however, parishes are not found in all parts of England. The Welsh equivalents are communities. Note that the full term for administrative parishes is &apos;civil parishes&apos;, to distinguish them from the ecclesiastical parishes which are found in all parts of the UK."@en ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Civil Parish"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilAdministrativeArea> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#cardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#notation>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasCensusCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#maxQualifiedCardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onClass>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/County> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/inCounty>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onClass>
+                                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                                    <http://www.w3.org/2002/07/owl#Class> ;
+                                      <http://www.w3.org/2002/07/owl#unionOf>
+                                                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/District> <http://data.ordnancesurvey.co.uk/ontology/admingeo/LondonBorough> <http://data.ordnancesurvey.co.uk/ontology/admingeo/MetropolitanDistrict> <http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthority>)
+                                    ] ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/inDistrict> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] .
+
+<http://data.ordnancesurvey.co.uk/ontology/spatialrelations/within>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#ObjectProperty> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/ScottishParliamentElectoralRegion>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "The Scottish parliamentary electoral regions are used for the proportional component of the elections to the Scottish Parliament. They are made up of groups of Scottish parliamentary constituencies."@en ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Scottish Parliament Electoral Region"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilVotingArea> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/constituency> ;
+                      <http://www.w3.org/2002/07/owl#someValuesFrom>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/ScottishParliamentConstituency>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] .
+
+<http://purl.org/dc/elements/1.1/date>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+
+<http://www.w3.org/2000/01/rdf-schema#comment>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/DistrictWard>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "District Ward"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onClass>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/County> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/inCounty> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#cardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#notation>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasCensusCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#allValuesFrom>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/District> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/inDistrict>
+                    ] .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthorityElectoralDivision>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "Electoral wards/divisions are the base unit of UK administrative geography such that all higher units are built up from them. They are also used as a base unit for many other geographies such as parliamentary constituencies and Primary Care Trusts (PCTs). Electoral wards are found across Scotland, Northern Ireland and most of England, whereas the equivalents in Wales and the Isle of Wight are known as electoral divisions." ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Unitary Authority Electoral Division" ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilVotingArea> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasCensusCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#cardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#notation>
+                    ] .
+
+<http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/WestminsterConstituency>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "Westminster parliamentary constituencies are used to elect members to the UK Parliament in Westminster, London."@en ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Westminster Constituency"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/Constinuency> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/parish>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#ObjectProperty> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "this relates various administrative areas to the parishes they contain" ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "parish" ;
+      <http://www.w3.org/2000/01/rdf-schema#range>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Class> ;
+                      <http://www.w3.org/2002/07/owl#unionOf>
+                                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilParish> <http://data.ordnancesurvey.co.uk/ontology/admingeo/Community>)
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subPropertyOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/contains> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/inEuropeanRegion>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#FunctionalProperty> ;
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#ObjectProperty> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "this relates various administrative and civil voting areas to their containing European region" ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "in European region" ;
+      <http://www.w3.org/2000/01/rdf-schema#range>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/EuropeanRegion> ;
+      <http://www.w3.org/2000/01/rdf-schema#subPropertyOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/within> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/inCounty>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#FunctionalProperty> ;
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#ObjectProperty> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "this relates districts, parish, county electoral divisions and wards to their containing counties" ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "in county" ;
+      <http://www.w3.org/2000/01/rdf-schema#range>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Class> ;
+                      <http://www.w3.org/2002/07/owl#unionOf>
+                                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/County> <http://data.ordnancesurvey.co.uk/ontology/admingeo/GreaterLondonAuthority>)
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subPropertyOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/within> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/LondonBoroughWard>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "London Borough Ward"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#cardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#notation>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onClass>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/GreaterLondonAuthority> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/inCounty> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#allValuesFrom>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/LondonBorough> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/inDistrict>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasCensusCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/EuropeanRegion>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "European Regions correspond to Scotland, Wales and the nine Government Office Regions of England. The nine Government Office Regions (GORs) are the primary statistical subdivisions of England and also the areas in which the Government Offices for the Regions fulfil their role. Each GOR covers a number of local authorities." ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "European Region" ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://www.w3.org/2002/07/owl#Thing> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/westminsterConstituency> ;
+                      <http://www.w3.org/2002/07/owl#someValuesFrom>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/WestminsterConstituency>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/geometry/extent> ;
+                      <http://www.w3.org/2002/07/owl#someValuesFrom>
+                                    <http://data.ordnancesurvey.co.uk/ontology/geometry/AbstractGeometry>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/hasCensusCode>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#FunctionalProperty> ;
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#DatatypeProperty> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "These code area unique system of referencing for administrative units. These codes are allocated by the Office of National Statistics (ONS) for England and Wales, and by the General Register Office for Scotland (GROS) for Scottish Areas." ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "has census code" .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/gssCode>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#FunctionalProperty> ;
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#DatatypeProperty> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    """Office for National Statistics (ONS) have reconfigured their GSS coding structure 
+(providing a unique system of referencing for administrative units) to a new 9 character
+alpha numeric format,replacing the current alpha numeric format (up to 6 characters).This
+change has now been implemented in this October 2010 release of Boundary-Line. 
+
+However,the new GSS Coding and Naming policy for some statistical geographies will be implemented 
+on 1 January 2011. From this date, where new codes have been allocated they should be used in all
+exchanges of statistics and published outputs that normally include codes.
+
+The following types of unit are coded where they have been made available by ONS: 
+Counties, Districts, Wards/Electoral Divisions, London Boroughs, Unitary Authorities, GLA's,
+Parish/Communities, Euro Regions, Welsh Assembly Const and Electoral Regions, 
+Scottish Parliamentary Const and Electoral Regions, Westminster Const."""^^<http://www.w3.org/2001/XMLSchema#string> ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "GSS"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+<http://www.w3.org/2000/01/rdf-schema#label>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#AnnotationProperty> ;
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/hasOfficialName>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#DatatypeProperty> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "has official name" .
+
+<http://purl.org/dc/elements/1.1/publisher>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/MetropolitanDistrictWard>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Metropolitan District Ward"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#allValuesFrom>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/MetropolitanDistrict> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/inDistrict>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasCensusCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#cardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#notation>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] .
+
+<http://www.w3.org/2004/02/skos/core#prefLabel>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/inRegion>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#FunctionalProperty> ;
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#ObjectProperty> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "this relates Greater London Authority Assembly Constituencies, Scottish Parliament Constituenices and Welsh AssemblyConstituencies to their containing regions." ;
+      <http://www.w3.org/2000/01/rdf-schema#domain>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Class> ;
+                      <http://www.w3.org/2002/07/owl#unionOf>
+                                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/GreaterLondonAuthorityAssemblyConstituency> <http://data.ordnancesurvey.co.uk/ontology/admingeo/ScottishParliamentConstituency> <http://data.ordnancesurvey.co.uk/ontology/admingeo/WelshAssemblyConstituency>)
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "in region" ;
+      <http://www.w3.org/2000/01/rdf-schema#range>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Class> ;
+                      <http://www.w3.org/2002/07/owl#unionOf>
+                                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/GreaterLondonAuthority> <http://data.ordnancesurvey.co.uk/ontology/admingeo/ScottishParliamentElectoralRegion> <http://data.ordnancesurvey.co.uk/ontology/admingeo/WelshAssemblyElectoralRegion>)
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subPropertyOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/within> ;
+      <http://www.w3.org/2002/07/owl#inverseOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/constituency> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/Community>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "The Welsh equivalent of Civil Parish."@en ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Community"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilAdministrativeArea> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasCensusCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#cardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#notation>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onClass>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthority> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/inDistrict> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilAdministrativeArea>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Civil Administrative Area"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://www.w3.org/2002/07/owl#Thing> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onClass>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/EuropeanRegion> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/inEuropeanRegion> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/geometry/extent> ;
+                      <http://www.w3.org/2002/07/owl#someValuesFrom>
+                                    <http://data.ordnancesurvey.co.uk/ontology/geometry/AbstractGeometry>
+                    ] ;
+      <http://www.w3.org/2002/07/owl#disjointWith>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilVotingArea> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthorityWard>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Unitary Authority Ward"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#allValuesFrom>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthority> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/inDistrict>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasCensusCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#cardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#notation>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] .
+
+<http://www.w3.org/2002/07/owl#Thing>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/ScottishParliamentConstituency>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "The Scottish parliamentary constituencies are used to elect members to the Scottish Parliament."@en ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Scottish Parliament Constituency"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/Constinuency> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onClass>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/ScottishParliamentElectoralRegion> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/inRegion> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#FunctionalProperty> ;
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#DatatypeProperty> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "A unique ID for the region" ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "has unit ID" .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/county>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#ObjectProperty> ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#range>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Class> ;
+                      <http://www.w3.org/2002/07/owl#unionOf>
+                                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/County> <http://data.ordnancesurvey.co.uk/ontology/admingeo/GreaterLondonAuthority>)
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subPropertyOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/contains> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/constituency>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#ObjectProperty> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "this relates European regions, Scottish Parliament Electoral Regions and Welsh Assembly Electoral Regions to their consistuencies." ;
+      <http://www.w3.org/2000/01/rdf-schema#domain>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Class> ;
+                      <http://www.w3.org/2002/07/owl#unionOf>
+                                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/GreaterLondonAuthority> <http://data.ordnancesurvey.co.uk/ontology/admingeo/ScottishParliamentElectoralRegion> <http://data.ordnancesurvey.co.uk/ontology/admingeo/WelshAssemblyElectoralRegion>)
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "constituency" ;
+      <http://www.w3.org/2000/01/rdf-schema#range>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Class> ;
+                      <http://www.w3.org/2002/07/owl#unionOf>
+                                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/GreaterLondonAuthorityAssemblyConstituency> <http://data.ordnancesurvey.co.uk/ontology/admingeo/ScottishParliamentConstituency> <http://data.ordnancesurvey.co.uk/ontology/admingeo/WelshAssemblyConstituency>)
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subPropertyOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/contains> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/WelshAssemblyElectoralRegion>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "The Welsh Assembly electoral regions are used for the proportional component of the elections to the National Assembly for Wales (NAW). They are made up of groups of Welsh Assembly constituencies."@en ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Welsh Assembly Electoral Region"@en ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilVotingArea> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/constituency> ;
+                      <http://www.w3.org/2002/07/owl#someValuesFrom>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/WelshAssemblyConstituency>
+                    ] .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#FunctionalProperty> ;
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#DatatypeProperty> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "This code describing the area type" ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "has area code" .
+
+<http://creativecommons.org/ns#license>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthority>
+      <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    <http://www.w3.org/2002/07/owl#Class> ;
+      <http://www.w3.org/2000/01/rdf-schema#comment>
+                    "Unitary authorities (UAs) are areas with a single tier of local government (as opposed to the two-tier county:district structure)."@en ;
+      <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
+                    <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
+      <http://www.w3.org/2000/01/rdf-schema#label>
+                    "Unitary Authority" ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilAdministrativeArea> ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasUnitID> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#cardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#notation>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/ward> ;
+                      <http://www.w3.org/2002/07/owl#someValuesFrom>
+                                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                                    <http://www.w3.org/2002/07/owl#Class> ;
+                                      <http://www.w3.org/2002/07/owl#unionOf>
+                                                    (<http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthorityElectoralDivision> <http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthorityWard>)
+                                    ]
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#minQualifiedCardinality>
+                                    1 ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://www.w3.org/2004/02/skos/core#altLabel>
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasCensusCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                    [ <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                                    <http://www.w3.org/2002/07/owl#Restriction> ;
+                      <http://www.w3.org/2002/07/owl#onDataRange>
+                                    <http://www.w3.org/2001/XMLSchema#string> ;
+                      <http://www.w3.org/2002/07/owl#onProperty>
+                                    <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasAreaCode> ;
+                      <http://www.w3.org/2002/07/owl#qualifiedCardinality>
+                                    1
+                    ] .

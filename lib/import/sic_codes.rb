@@ -3,7 +3,7 @@ module Import
 
 # create concept scheme for enterprise sizes
     def self.create_data
-      output_file = File.join(Rails.root, 'data', 'output-data', 'sic_codes.nt')
+      output_file = File.join(Rails.root, 'public', 'dumps', 'sic_codes.nt')
       input_file = input_file = File.join(Rails.root, 'data', 'input-data', 'sic2007.xlsx')
 
       excel = Roo::Excelx.new(input_file)

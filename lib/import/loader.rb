@@ -8,10 +8,10 @@ module Import
     def self.prepare_project_data(input_filename)
 
       input_file = File.join(Rails.root, 'data', 'input-data', input_filename)
-      output_file = File.join(Rails.root, 'data', 'output-data', 'project_data.nt')
+      output_file = File.join(Rails.root, 'public', 'dumps', 'project_data.nt')
       sic_hash_file = File.join(Rails.root, 'data', 'sic', 'sic.json')
 
-      excel = Roo::Excelx.new(input_file) 
+      excel = Roo::Excelx.new(input_file)
 
       # take a copy of the header row for easy reference
       headers = excel.row(1)

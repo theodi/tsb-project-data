@@ -228,7 +228,7 @@
       <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
                     <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;
       <http://www.w3.org/2000/01/rdf-schema#label>
-                    "The administrative geography and civil voting area ontology"@en ;
+                    "Administrative Geography"@en ;
       <http://purl.org/dc/elements/1.1/creator>
                     "Ordnance Survey"@en ;
       <http://www.w3.org/2002/07/owl#imports>
@@ -1334,18 +1334,18 @@
       <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
                     <http://www.w3.org/2002/07/owl#DatatypeProperty> ;
       <http://www.w3.org/2000/01/rdf-schema#comment>
-                    """Office for National Statistics (ONS) have reconfigured their GSS coding structure 
+                    """Office for National Statistics (ONS) have reconfigured their GSS coding structure
 (providing a unique system of referencing for administrative units) to a new 9 character
 alpha numeric format,replacing the current alpha numeric format (up to 6 characters).This
-change has now been implemented in this October 2010 release of Boundary-Line. 
+change has now been implemented in this October 2010 release of Boundary-Line.
 
-However,the new GSS Coding and Naming policy for some statistical geographies will be implemented 
+However,the new GSS Coding and Naming policy for some statistical geographies will be implemented
 on 1 January 2011. From this date, where new codes have been allocated they should be used in all
 exchanges of statistics and published outputs that normally include codes.
 
-The following types of unit are coded where they have been made available by ONS: 
+The following types of unit are coded where they have been made available by ONS:
 Counties, Districts, Wards/Electoral Divisions, London Boroughs, Unitary Authorities, GLA's,
-Parish/Communities, Euro Regions, Welsh Assembly Const and Electoral Regions, 
+Parish/Communities, Euro Regions, Welsh Assembly Const and Electoral Regions,
 Scottish Parliamentary Const and Electoral Regions, Westminster Const."""^^<http://www.w3.org/2001/XMLSchema#string> ;
       <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>
                     <http://www.ordnancesurvey.co.uk/ontology/admingeo.owl> ;

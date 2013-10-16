@@ -14,6 +14,5 @@
     OWL_ONTOLOGY_GRAPH = "http://#{PublishMyData.local_domain}/graph/ontology/owl"
     SKOS_ONTOLOGY_GRAPH = "http://#{PublishMyData.local_domain}/graph/ontology/skos"
     TIMELINE_ONTOLOGY_GRAPH = "http://#{PublishMyData.local_domain}/graph/ontology/timeline"
-      
-    
+
   end

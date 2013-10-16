@@ -1,19 +1,19 @@
 module Import
   module CostCategories
-    
+
 
 # create concept scheme for enterprise sizes
     def self.create_data
-      output_file = File.join(Rails.root, 'data', 'output-data', 'cost_categories.nt')
+      output_file = File.join(Rails.root, 'public', 'dumps', 'cost_categories.nt')
 
       graph = RDF::Graph.new
-      
-      
+
+
       options = {
         "Industrial" => "A cost category for industry-led projects.",
         "Academic" => "A cost category for academic-led projects."
       }
-      
+
       options.each_pair do |label,desc|
         e = CostCategory.new(Vocabulary::TSBDEF["concept/cost-category/#{Urlify::urlify(label)}"])
         e.label = label
@@ -21,8 +21,8 @@ module Import
         e.repository.each_statement {|s| graph << s}
 
       end
-      
- 
+
+
       # write graph to file
       File.open(output_file,'w') {|f| f << graph.dump(:ntriples)}
 

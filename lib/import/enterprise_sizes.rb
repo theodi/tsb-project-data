@@ -3,7 +3,7 @@ module Import
 
 # create concept scheme for enterprise sizes
     def self.create_data
-      output_file = File.join(Rails.root, 'data', 'output-data', 'enterprise_sizes.nt')
+      output_file = File.join(Rails.root, 'public', 'dumps', 'enterprise_sizes.nt')
 
       graph = RDF::Graph.new
       # concept scheme

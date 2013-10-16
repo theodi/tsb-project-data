@@ -23,4 +23,5 @@ config/deploy/*.rb
 Capfile
 
 /data/*/~*.xlsx
-/data/output-data/*.nt
+/data/output-data/*.*
+/public/dumps/*.*

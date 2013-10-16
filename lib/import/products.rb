@@ -5,7 +5,7 @@ module Import
     def self.create_data
 
       input_file = File.join(Rails.root, 'data', 'input-data', 'data-definitions.xlsx')
-      output_file = File.join(Rails.root, 'data', 'output-data', 'products.nt')
+      output_file = File.join(Rails.root, 'public', 'dumps', 'products.nt')
 
       excel = Roo::Excelx.new(input_file)
       excel.default_sheet = "Reference Data"

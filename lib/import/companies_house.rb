@@ -1,21 +1,21 @@
 module Import
-  
+
   class CompaniesHouse
-    
+
     extend RowToRdf
-    
+
     # takes the company number (as a string), looks up the Companies House linked data URI for that company
     # and returns an array of SIC codes (as strings). If the company URI is not found, returns an empty array
     def self.sicCodes(company_number)
       codes = []
       ch_uri = "http://data.companieshouse.gov.uk/doc/company/" + company_number + ".json"
       begin
-        response = RestClient.get ch_uri  
+        response = RestClient.get ch_uri
         j = JSON.parse(response.body)
         # get an array of strings, where each string is something like
         # '62012 - Business and domestic software development'
         if j["primaryTopic"] && j["primaryTopic"]["SICCodes"]
-          result = j["primaryTopic"]["SICCodes"]["SicText"] 
+          result = j["primaryTopic"]["SICCodes"]["SicText"]
           # retrieve just the numerical part at the start of the string - always 5 digits
           result.each do |code|
             codes << code.split(' ').first
@@ -23,13 +23,13 @@ module Import
         end
       rescue => e
         puts e.to_s
-      end      
-      
+      end
+
       return codes
-      
-      
+
+
     end
-    
+
     # it takes time to look up every company via Companies House linked data
     # do it once and store the results in a json file
     # as a hash, with company number as key, and array of SIC codes as values
@@ -52,17 +52,17 @@ module Import
             code_hash[org_number] = codes
           end
         end
-        
+
       end
-      
+
       # write result to file
-      output_file = File.join(Rails.root, 'data', 'output-data', 'company_to_sic_code.json')
+      output_file = File.join(Rails.root, 'public', 'dumps', 'company_to_sic_code.json')
       f = File.new(output_file,'w')
       f << code_hash.to_json
       f.close
-      
+
     end
-    
+
   end
-  
+
 end

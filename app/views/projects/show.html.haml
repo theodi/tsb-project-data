@@ -47,8 +47,11 @@
         #project-description
           %div Description
           %div
-            = project.description.truncate(300)
-            %a{ href: '#' } Read more
+            .description.read-more-content
+              = project.description
+              .read-more-overlay
+            %a.read-more{ href: '#' } Read more
+            
 
     %section#project-grant-summary.project-grant-details
       %h3 Grant summary (all participants)

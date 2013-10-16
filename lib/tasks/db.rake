@@ -121,6 +121,23 @@ Nulla facilisi. Nam metus purus, aliquam at cursus vel, mattis in leo. Etiam vit
 
     # TODO: add some ontology metadata
     replace_graph(TsbProjectData::ONTOLOGY_GRAPH, 'ontology.nt')
+    
+    # load external ontologies
+    replace_graph(TsbProjectData::ORG_ONTOLOGY_GRAPH, 'org.ttl')
+    replace_graph(TsbProjectData::DCTERMS_ONTOLOGY_GRAPH,'dcterms.rdf')
+    replace_graph(TsbProjectData::VCARD_ONTOLOGY_GRAPH,'vcard.ttl')
+    replace_graph(TsbProjectData::FOAF_ONTOLOGY_GRAPH,'foaf.rdf')
+    replace_graph(TsbProjectData::PC_ONTOLOGY_GRAPH,'postcode.owl')
+    replace_graph(TsbProjectData::GEO_ONTOLOGY_GRAPH,'wgs84_pos.rdf')
+    replace_graph(TsbProjectData::ADMINGEO_ONTOLOGY_GRAPH,'admingeo.ttl')
+    replace_graph(TsbProjectData::RDF_ONTOLOGY_GRAPH,'rdf.rdf')
+    replace_graph(TsbProjectData::RDFS_ONTOLOGY_GRAPH,'rdfs.rdf')
+    replace_graph(TsbProjectData::OWL_ONTOLOGY_GRAPH,'owl.rdf')
+    replace_graph(TsbProjectData::SKOS_ONTOLOGY_GRAPH,'skos.rdf')
+    replace_graph(TsbProjectData::TIMELINE_ONTOLOGY_GRAPH,'timeline.ttl')
+    
+    
+    
   end
 
   desc 'replace project dataset data.'

@@ -9,4 +9,8 @@ class SicClass
   linked_to :sic_division, Vocabulary::TSBDEF.sicDivision, class_name: 'SicClass'
   linked_to :sic_group, Vocabulary::TSBDEF.sicGroup, class_name: 'SicClass'
   linked_to :sic_class, Vocabulary::TSBDEF.sicClass, class_name: 'SicClass'
+
+  def is_section?
+    sic_section.nil?
+  end
 end

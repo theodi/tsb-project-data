@@ -33,8 +33,9 @@
 
   = render 'publish_my_data/resources/resource_data', resource: resource
 
-  :markdown
-    This resource is in dataset #{link_to resource.dataset.label, dataset_path(resource.dataset)}.
+  - if resource.respond_to? :dataset
+    :markdown
+      This resource is in dataset #{link_to resource.dataset.label, dataset_path(resource.dataset)}.
 
   %a.button(href="/sparql") Run a SPARQL Query
 

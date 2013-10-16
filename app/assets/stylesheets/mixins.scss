@@ -38,3 +38,23 @@
     }
   }
 }
+
+@mixin grant-figure {
+  font-size: 20px;
+  @include clearfix();
+
+  .pounds, .pence {
+    float: left;
+  }
+
+  .pounds {
+    font-weight: bold;
+    //letter-spacing: -1px;
+  }
+
+  .pence {
+    font-size: 14px;
+    margin-left: 1px;
+    padding-top: 8px;
+  }
+}

@@ -28,7 +28,8 @@ vcard:ns
     dc:description "This ontology models and represents vCards in RDF using current best practices." ;
     dc:title "An Ontology for vCards" ;
     a owl:Ontology ;
-    rdfs:seeAlso "http://tools.ietf.org/html/rfc2426", "http://www.w3.org/Submission/vcard-rdf/" .
+    rdfs:seeAlso "http://tools.ietf.org/html/rfc2426", "http://www.w3.org/Submission/vcard-rdf/" ;
+    rdfs:label "An Ontology for vCards" .
 
 :Address
     a owl:Class ;

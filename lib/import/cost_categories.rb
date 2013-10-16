@@ -19,13 +19,10 @@ module Import
         e.label = label
         e.definition = desc
         e.repository.each_statement {|s| graph << s}
-
       end
-
 
       # write graph to file
       File.open(output_file,'w') {|f| f << graph.dump(:ntriples)}
-
 
     end
   end

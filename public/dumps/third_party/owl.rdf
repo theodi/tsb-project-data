@@ -40,6 +40,7 @@
     <grddl:namespaceTransformation rdf:resource="http://dev.w3.org/cvsweb/2009/owl-grddl/owx2rdf.xsl"/>
 
     <dc:title>The OWL 2 Schema vocabulary (OWL 2)</dc:title>
+    <rdfs:label>OWL 2 Schema vocabulary</rdfs:label>
 
     <owl:versionIRI rdf:resource="&location;"/>
 
@@ -652,7 +653,7 @@
         <rdfs:label>versionInfo</rdfs:label>
         <rdfs:range rdf:resource="&rdfs;Resource"/>
     </owl:AnnotationProperty>
-    
+
     <owl:OntologyProperty rdf:about="&owl;versionIRI">
         <rdfs:comment>The property that identifies the version IRI of an ontology.</rdfs:comment>
         <rdfs:domain rdf:resource="&owl;Ontology"/>

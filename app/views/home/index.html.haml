@@ -34,7 +34,7 @@
 
     %script{src: "//cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"}
     %script{src: "//api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.standalone.js"}
-    
+
     = javascript_include_tag :application
 
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
@@ -67,8 +67,7 @@
             .container
               #home-header-title
                 %h1
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit tempor incididunt
 
               #home-header-actions
                 #home-header-search
@@ -88,9 +87,9 @@
 
               #home-intro
                 :markdown
-                  Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam quis risus eget urna mollis ornare vel eu leo.
+                  Main intro to the site and what it's about. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
 
-                  Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas sed diam eget risus varius blandit sit amet non magna. 
+                  Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas sed diam eget risus varius blandit sit amet non magna.
 
                   Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta gravida at eget metus. Donec sed odio dui.
 
@@ -99,23 +98,23 @@
               #home-panels
                 .home-panel
                   :markdown
-                    ### This is a header
+                    ### About the Data
 
-                    Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Donec sed odio dui. Cras mattis consectetur purus sit amet fermentum. 
+                    Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Donec sed odio dui. Cras mattis consectetur purus sit amet fermentum.
 
-                    [Go somewhere &raquo;](#)
+                    [Read More &raquo;](/about)
 
                 .home-panel
                   :markdown
-                    ### This is a header
+                    ### Developers
 
-                    Nulla vitae elit libero, a pharetra augue. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam quis risus eget urna mollis ornare vel eu leo. 
+                    Nulla vitae elit libero, a pharetra augue. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam quis risus eget urna mollis ornare vel eu leo.
 
-                    [Go somewhere &raquo;](#)
+                    [Explore the Linked Data &raquo;](/data)
 
 
     = render "application/footer"
-        
+
 
 
     =# render 'publish_my_data/shared/google_analytics'

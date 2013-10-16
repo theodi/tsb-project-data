@@ -1,8 +1,36 @@
 - content_for :header do
   %h1
-    Linked Data
+    Datasets
 
-%ul#datasets-list
-  - @datasets.each do |dataset|
-    = render 'publish_my_data/datasets/index/dataset', dataset: dataset
+#data-page
 
+  .datasets
+    .datasets-header
+      Introductory text. Mauris ut quam commodo, laoreet arcu et, molestie massa. Aliquam venenatis nisi lorem, et tincidunt eros ultrices quis. In hac habitasse platea dictumst.
+
+    %ul#datasets-list
+      = render 'publish_my_data/datasets/index/dataset', dataset: PublishMyData::Dataset.find_by_slug(TsbProjectData::DATASET_SLUG)
+      = render 'publish_my_data/datasets/index/dataset', dataset: PublishMyData::Dataset.find_by_slug(Region::DATASET_SLUG)
+      = render 'publish_my_data/datasets/index/dataset', dataset: PublishMyData::Dataset.find_by_slug(BudgetArea::DATASET_SLUG)
+
+  .supporting-data
+    %h3 Supporting Data
+
+    %h4 Ontologies
+
+    %ul.ontologies
+      %li.internal
+        %a{href: '#'}
+          Ontology
+      - for i in 1..10
+        %li.external
+          %a{href: '#'}
+            3rd party Ontology #{i}
+
+    %h4 Concept Schemes
+
+    %ul.concept-schemes
+      - for i in 1..6
+        %li.internal
+          %a{href: '#'}
+            Concept Scheme #{i}

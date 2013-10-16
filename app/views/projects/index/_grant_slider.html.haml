@@ -37,17 +37,15 @@
 
     function getRoundValue(range) {
       if ( range < 1000 ) {
-        return 10;2
+        return 5;
       } else if ( range >= 1000 && range < 10000 ) {
-        return 100;
-      } else if (range >= 10000 && range <= 100000 ) {
-        return 1000;
-      } else if (range >= 100000 && range <= 1000000) {
-        return 10000;
-      } else if (range >= 1000000 && range <= 10000000) {
-        return 1000000;
-      } else if (range >= 10000000 && range <= 100000000) {
-        return 10000000;
+        return 50;
+      } else if (range >= 10000 && range < 100000 ) {
+        return 500;
+      } else if (range >= 100000 && range < 1000000) {
+        return 5000;
+      } else if (range >= 1000000) {
+        return 500000;
       }
     }
 
@@ -67,6 +65,11 @@
     }
 
     function setOfferGrantTextFields(from, to, roundValue) {
+
+      if (!roundValue) {
+        roundValue = 1;
+      }
+
       from = roundToNearest( from.toFixed(2), roundValue, false );
       to = roundToNearest( to.toFixed(2), roundValue, true );
 
@@ -103,7 +106,7 @@
 
     setSliderValues(grantFrom, grantTo);
 
-    // initialise the text fields with the initial slider values.
+    //
     setOfferGrantTextFields(
       $( "#offer-grant-slider" ).slider("values", 0),
       $( "#offer-grant-slider" ).slider("values", 1),

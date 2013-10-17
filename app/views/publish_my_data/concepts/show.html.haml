@@ -138,7 +138,7 @@
       %h3 All #{concept_scheme_label}
 
       %ul
-        - concept_scheme.concepts.each do |c|
+        - concept_scheme.concepts.sort {|a,b| a.label <=> b.label }.each do |c|
           - if c.uri == concept.uri
             %li.current
               = (c.label || c.uri)

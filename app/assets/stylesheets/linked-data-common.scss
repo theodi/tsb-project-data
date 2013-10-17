@@ -1,0 +1,40 @@
+article#dataset, article#ontology, article#concept-scheme {
+  @include make-row();
+  @include make-md-column(12);
+
+  & > header {
+    h1, h2 {
+      margin-top: 0;
+      word-break:break-all;
+    }
+  }
+
+  & > footer {
+    ul {
+    }
+  }
+
+  & > section.metadata {
+    @include make-row();
+
+    h3 {
+      font-weight:normal;
+      color: #888;
+      font-size: 16px;
+      margin-bottom:0;
+    }
+
+    .primary {
+      @include make-md-column(8);
+    }
+
+    .secondary {
+      @include make-md-column(4);
+    }
+  }
+
+  ul.tab-links {
+    @extend .nav;
+    @extend .nav-tabs;
+  }
+}

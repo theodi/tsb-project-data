@@ -1,0 +1,141 @@
+article#dataset {
+
+  #further-information {
+    background: white;
+    overflow:hidden;
+    position:relative;
+
+    .fade-out {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%;
+      text-align: center;
+      margin: 0;
+      height:52px; /* dont fade over the whole thing - start half way up */
+
+      background: transparent; /* Old browsers */
+      /* css3 (not many browsers yet!) */
+      background-image: linear-gradient( to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
+      background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, rgba(255,255,255,0)),
+        color-stop(1, rgba(255,255,255,1)));
+      background-image: -moz-linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,1));
+      background-image: -ms-linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,1)); /* ie10*/
+      background-image: -o-linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,1));
+    }
+
+    &.truncated {
+      height:105px;
+    }
+  }
+
+  section#grid-view {
+
+    .grid-intro {
+      margin-top:20px;
+    }
+
+    .controls-wrapper {
+      @include clearfix();
+
+      #dimensions-controls {
+        .rows-and-columns {
+          @include make-md-column(6);
+        }
+        .other-options {
+          @include make-md-column(6);
+        }
+      }
+    }
+  }
+
+  section#example-data {
+    font-size:16px;
+
+    ul {
+      @extend .list-unstyled;
+    }
+
+    table {
+      border: 1px solid #eee;
+      font-size:14px;
+
+      @extend .table;
+      // @extend .table-bordered;
+
+      thead tr th {
+        border: 0;
+      }
+
+      h3, h5 {
+        margin: 2px 0;
+        a {
+          word-break:break-all;
+        }
+      }
+
+      ul {
+        @extend .list-unstyled;
+        margin-bottom: 0;
+        li a {
+          word-break:break-all;
+        }
+      }
+
+      a, h3, h4, icon {
+        transition: color 0.3s;
+      }
+
+      &.lowlight tbody {
+        h3, h4, a, icon {
+          color: $gray-lighter;
+        }
+        .highlight, .highlight a {
+          color: $link-color;
+        }
+        h4.highlight {
+          color: $gray-dark;
+        }
+      }
+    }
+  }
+
+  section#vocabularies {
+    font-size:14px;
+
+    ul {
+      @extend .list-unstyled;
+
+      li {
+        margin-bottom: 3px;
+      }
+
+      a:hover {
+        text-decoration: none;
+      }
+
+      .ontology-label {
+        @extend .label;
+        @extend .label-primary;
+      }
+      .concept-scheme-label {
+        @extend .label;
+        @extend .label-info;
+      }
+    }
+  }
+
+
+  section#linked-data {
+    a.button {
+      @include tsb-bootstrap-btn(#fff, #1b1b1b);
+
+      margin-top: 20px;
+    }
+  }
+
+
+}

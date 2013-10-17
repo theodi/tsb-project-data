@@ -1,0 +1,14 @@
+.tab-content > section {
+  @extend .tab-pane;
+  @include make-row();
+
+  .primary {
+    @include make-md-column(8);
+  }
+  .secondary {
+    @include make-md-column(4);
+  }
+  .content {
+    @include make-md-column(12);
+  }
+}

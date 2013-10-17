@@ -64,7 +64,7 @@ module ProjectCsv
     ?company_number
     ?company_type
     ?company_size
-    ?sic_code
+    (GROUP_CONCAT(?sic_code) as ?sic_codes)
     ((?leader_id = ?org_id) as ?isLead)
     ?company_lat
     ?company_long
@@ -128,6 +128,38 @@ module ProjectCsv
            tsb:paymentsToDate ?payments_to_date .
 
     }
+    GROUP BY
+    ?project_id
+    ?project_name
+    ?start_date
+    ?end_date
+    ?cost_category
+    ?project_status
+    ?offer_grant
+    ?offer_cost
+    ?offer_percentage
+    ?payments_to_date
+    ?activity_code
+    ?competition_code
+    ?competition_year
+    ?product
+    ?budget_area
+    ?org_id
+    ?org_name
+    ?company_number
+    ?company_type
+    ?company_size
+    ?leader_id
+    ?company_lat
+    ?company_long
+    ?region_id
+    ?region
+    ?district
+    ?street
+    ?town
+    ?county
+    ?postcode
+    ?project_desc
     "
 
   end

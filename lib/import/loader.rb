@@ -9,7 +9,8 @@ module Import
 
       input_file = File.join(Rails.root, 'data', 'input-data', input_filename)
       output_file = File.join(Rails.root, 'public', 'dumps', 'project_data.nt')
-      sic_hash_file = File.join(Rails.root, 'data', 'sic', 'sic.json')
+      #sic_hash_file = File.join(Rails.root, 'data', 'sic', 'sic.json')
+      org_sic_hash_file = File.join(Rails.root, 'data', 'sic', 'company_to_sic_code.json')
 
       excel = Roo::Excelx.new(input_file)
 
@@ -19,14 +20,17 @@ module Import
       # hash of all resources - will build it up gradually from spreadsheet then serialize them at the end
       # the key is the URI of the resource
       resources = {}
-      sic_hash = JSON.parse(File.read(sic_hash_file))
+      
+      #sic_hash = JSON.parse(File.read(sic_hash_file))
+      # each entry has company number as key and an array of sic codes as value
+      org_sic_hash = JSON.parse(File.read(org_sic_hash_file))
 
       for i in 2..excel.last_row
         puts "starting row #{i}"
         # make a hash of header names to cell contents for this row
         row = {}
         excel.row(i).each_with_index{|item,index| row[headers[index].strip] = item}
-        row2rdf(resources,row,sic_hash)
+        row2rdf(resources,row,org_sic_hash)
       end
 
       # write out output

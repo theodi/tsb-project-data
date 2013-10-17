@@ -18,7 +18,7 @@ module Import
       "Wales" => "http://statistics.data.gov.uk/id/statistical-geography/W92000004"
     }
 
-    def row2rdf(resources,row,sic_hash)
+    def row2rdf(resources,row,org_sic_hash)
 
       modified_datetime = DateTime.now
 
@@ -180,6 +180,16 @@ module Import
 
         # retrieve SIC codes from Companies House
         if org_number
+          # TODO - enhance this so that if there is no sic code for an org, look it up at Companies House
+          # and if anything found, save it back to the cache
+                  
+          codes = org_sic_hash[org_number]
+          if codes && codes.length > 0
+            codes.each do |code|
+              sic_uri = Vocabulary::TSBDEF["concept/sic/#{code}"]
+              o.sic_classes_uris = o.sic_classes_uris.push(sic_uri)
+            end
+          end
           # codes = Import::CompaniesHouse.sicCodes(org_number)
           # codes.each do |code|
           #   sic_uri = Vocabulary::TSBDEF["concept/sic/#{code}"]
@@ -209,7 +219,8 @@ module Import
 
       product = row["Product"].strip
       area = row["AreaBudgetHolder"].strip
-      team = row["TeamBudgetHolder"].strip
+  #    team = row["TeamBudgetHolder"].strip
+      subarea = row["AreaName"]
 
       # use Activity Code as the unique identifier for a Competition
 
@@ -229,14 +240,15 @@ module Import
 
         # check we are not missing any codes
         puts product unless Product::PRODUCT_CODES[product]
-        puts team unless Team::TEAM_CODES[team]
+  #      puts team unless Team::TEAM_CODES[team]
         puts area unless BudgetArea::BUDGET_AREA_CODES[area]
 
-        team_code = Team::TEAM_CODES[team]
-        if team_code && team_code != "null"
-          t_uri = Vocabulary::TSB["team/#{team_code}"]
-          comp.team_uri = t_uri
-        end
+        # Don't use team
+        # team_code = Team::TEAM_CODES[team]
+        #    if team_code && team_code != "null"
+        #      t_uri = Vocabulary::TSB["team/#{team_code}"]
+        #      comp.team_uri = t_uri
+        #         end
         budget_area_code = BudgetArea::BUDGET_AREA_CODES[area]
         if budget_area_code && budget_area_code != "null"
           budg_uri = Vocabulary::TSB["budget-area/#{budget_area_code}"]

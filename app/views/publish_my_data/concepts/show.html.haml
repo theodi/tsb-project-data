@@ -1,21 +1,22 @@
 :ruby
-  Rails.logger.debug "*" * 50
-
   cs_scheme_facets = {
     "http://tsb-projects.labs.theodi.org/def/concept-scheme/project-statuses" => "status_label",
     "http://tsb-projects.labs.theodi.org/def/concept-scheme/enterprise-sizes" => "participant_size_labels"
+
   }
 
-  if (search_attr = cs_scheme_facets[concept.in_scheme.to_s])
-    projects = Search.new({
-      search_attr => { concept.label => true }
-    }).results
+  search_attr = cs_scheme_facets[concept.in_scheme.to_s]
+  search_params = { search_attr => { concept.label => true } }
+
+  if (search_attr)
+    projects = Search.new(search_params).results
   end
 
+  concept_scheme_singular_label = PublishMyData::ConceptScheme.find(concept.in_scheme).label.singularize rescue "Concept Scheme"
 
 - content_for :header do
   %h3
-    = PublishMyData::ConceptScheme.find(concept.in_scheme).label rescue "Concept Scheme"
+    = concept_scheme_singular_label
   %h1
     = concept.label.humanize
 
@@ -68,9 +69,8 @@
 
         #concept-search
           #concept-search-button
-            - cs_label = PublishMyData::ConceptScheme.find(concept.in_scheme).label rescue "concept scheme"
-            = link_to "View all projects in this #{cs_label} (#{projects.total})"
-
+            = link_to "View all projects with this #{concept_scheme_singular_label.downcase}", main_app.projects_path(search_params)
 
 
   #concept-sidebar
+

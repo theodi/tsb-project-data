@@ -27,6 +27,7 @@
       }
     }
 
+
     #concept-project-count {
       > div:last-child {
         font-size: 24px;
@@ -121,9 +122,13 @@
     @include make-md-column-offset(1);
 
     ul{
+      font-size:14px;
       @extend .list-unstyled;
       li {
+        line-height:1.1;
+        padding-bottom: 8px;
         &.current {
+
           font-weight:bold;
         }
       }

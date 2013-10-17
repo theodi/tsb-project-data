@@ -4,25 +4,38 @@
     "http://tsb-projects.labs.theodi.org/def/concept-scheme/enterprise-sizes" => "participant_size_labels",
     "http://tsb-projects.labs.theodi.org/def/concept-scheme/legal-entity-forms" => "legal_entity_form_labels",
     "http://tsb-projects.labs.theodi.org/def/concept-scheme/legal-entity-forms" => "legal_entity_form_labels",
-    "http://tsb-projects.labs.theodi.org/def/concept-scheme/products" => "product_label"
+    "http://tsb-projects.labs.theodi.org/def/concept-scheme/products" => "product_label",
+    "http://tsb-projects.labs.theodi.org/def/concept-scheme/sic" => "participant_sic_section_labels"
   }
 
   search_attr = cs_scheme_facets[concept.in_scheme.to_s]
   search_params = { search_attr => { concept.label => true } }
 
-  if (search_attr)
-    projects = Search.new(search_params).results
-  end
-
   concept_scheme = PublishMyData::ConceptScheme.find(concept.in_scheme)
   concept_scheme_label = concept_scheme.label rescue "Concept Scheme"
   concept_scheme_singular_label = concept_scheme_label.singularize
+  concept_scheme_button_text = concept_scheme_label.singularize
+
+  # for SIC classes:
+  if (concept_scheme.uri == SicClass.resource_concept_scheme_uri)
+    sic_class = SicClass.find(concept.uri)
+    concept_scheme_singular_label = sic_class.singular_label
+    concept_scheme_button_text = "SIC Section"
+
+    unless sic_class.is_section?
+      search_params = { search_attr => { sic_class.sic_section.label => true } }
+    end
+  end
+
+  if (search_attr)
+    projects = Search.new(search_params).results
+  end
 
 - content_for :header do
   %h3
     = concept_scheme_singular_label
   %h1
-    = concept.label.humanize
+    = concept.label
 
 - content_for :advanced do
   = render 'application/advanced_resource_details', resource: concept
@@ -37,11 +50,44 @@
             - concept.read_predicate(RDF::SKOS.definition).each do |obj|
               = resource_uri_or_label(concept, obj)
 
+      - if sic_class
+        #sic-code
+          %div Code
+          %div
+            = sic_class.code.to_s
+
+        - if sic_class.sic_section
+          #sic-section
+            %div Section
+            %div
+              = link_to sic_class.sic_section.label, resource_path_from_uri(sic_class.sic_section_uri)
+
+        - if sic_class.sic_division
+          #sic-division
+            %div Division
+            %div
+              = link_to sic_class.sic_division.label, resource_path_from_uri(sic_class.sic_division_uri)
+
+        - if sic_class.sic_group
+          #sic-group
+            %div Group
+            %div
+              = link_to sic_class.sic_group.label, resource_path_from_uri(sic_class.sic_group_uri)
+
+        - if sic_class.sic_class
+          #sic-class
+            %div Class
+            %div
+              = link_to sic_class.sic_class.label, resource_path_from_uri(sic_class.sic_class_uri)
+
+
     - if search_attr
 
       #concept-secondary
         #concept-project-count
-          %div Number of projects
+          %div
+            Number of projects
+            = "(in section: <strong>#{sic_class.sic_section.label}</strong>)".html_safe if sic_class
           %div
             %span= projects.total
             projects
@@ -74,18 +120,29 @@
 
         #concept-search
           #concept-search-button
-            = link_to "View all projects for this #{concept_scheme_singular_label.downcase}", main_app.projects_path(search_params)
+            = link_to "View all projects for this #{concept_scheme_button_text}", main_app.projects_path(search_params)
 
 
-  #concept-sidebar
-    %h3 All #{concept_scheme_label}
+  - if sic_class
+    - if sic_class.direct_subclasses.any?
+      #concept-sidebar
+        %h3
+          = sic_class.subclass_list_label
+        %ul
+          - sic_class.direct_subclasses.each do |sic|
+            %li
+              = link_to sic.label, resource_path_from_uri(sic.uri)
 
-    %ul
-      - concept_scheme.concepts.each do |c|
-        - if c.uri == concept.uri
-          %li.current
-            = (c.label || c.uri)
-        - else
-          %li
-            = link_to (c.label || c.uri), resource_path_from_uri(c.uri)
+  - else
+    #concept-sidebar
+      %h3 All #{concept_scheme_label}
+
+      %ul
+        - concept_scheme.concepts.each do |c|
+          - if c.uri == concept.uri
+            %li.current
+              = (c.label || c.uri)
+          - else
+            %li
+              = link_to (c.label || c.uri), resource_path_from_uri(c.uri)
 

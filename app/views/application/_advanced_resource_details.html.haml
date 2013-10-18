@@ -16,28 +16,33 @@
 
   .reveal
     %a{href:'#'}
-      Linked Data details
+      More Linked Data details
       %span.glyphicon.glyphicon-expand
 
     %a{href:'#', style:'display:none'}
-      Linked Data details
+      Less Linked Data details
       %span.glyphicon.glyphicon-collapse-up
 
 .full
-  %p
-    URI:
-    %code.click-to-select= resource.uri
 
-  %p
-    Data we hold about this resource:
+  .intro
+    .primary
 
-  = render 'publish_my_data/resources/resource_data', resource: resource
+      %h3 URI
+      %code.uri.click-to-select= resource.uri
 
-  - if resource.respond_to? :dataset
-    :markdown
-      This resource is in dataset #{link_to resource.dataset.label, dataset_path(resource.dataset)}.
+      - if resource.respond_to? :dataset
+        %h3 In Dataset
+        = link_to resource.dataset.label, dataset_path(resource.dataset)
 
-  %a.button(href="/sparql") Run a SPARQL Query
+    .secondary
+      %a.sparql-button(href="/sparql")
+        %span.glyphicon.glyphicon-chevron-right
+        Run a SPARQL Query
+
+  .resource-data
+
+    = render 'publish_my_data/resources/resource_data', resource: resource
 
 :javascript
   $('footer.advanced .reveal a').click( function(e) {

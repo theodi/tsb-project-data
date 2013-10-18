@@ -1,21 +1,9 @@
 article#dataset, article#ontology, article#concept-scheme {
-  @include make-row();
-  @include make-md-column(12);
-
-  & > header {
-    h1, h2 {
-      margin-top: 0;
-      word-break:break-all;
-    }
-  }
-
-  & > footer {
-    ul {
-    }
-  }
 
   & > section.metadata {
     @include make-row();
+
+    background: #eee;
 
     h3 {
       font-weight:normal;
@@ -37,4 +25,22 @@ article#dataset, article#ontology, article#concept-scheme {
     @extend .nav;
     @extend .nav-tabs;
   }
+}
+
+code.uri {
+  @include hardwrap();
+  font-size:16px;
+  color: #333;
+  display:block;
+  background: none;
+  padding:0;
+  white-space:normal;
+}
+
+a.sparql-button {
+  @include tsb-bootstrap-btn(#fff, $data-accent-color);
+  span {
+    font-weight:normal;
+  }
+  color: #fff !important;
 }

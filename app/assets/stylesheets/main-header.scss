@@ -3,29 +3,49 @@ main > header {
   margin-top:-10px;
 
   background: $header-color;
+
   color: #fff;
-  .header-content {
+
+  .header-container {
+
     padding-top: 20px;
     padding-bottom: 20px;
+    margin-bottom:20px;
+
     @extend .container;
-  }
-  h1 {
-    margin: 0;
-    padding: 0;
-    font-size: 36px;
-    letter-spacing: -1px;
-  }
-  h3 {
-    margin: 0; padding: 0;
-    font-weight: lighter;
-  }
 
-  a {
-    color: #fff;
+    .header-row {
 
-    &:hover {
-      color: #fff;
+      @include make-row();
+
+      .contents {
+        @include make-md-column(12);
+      }
+
+      h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 36px;
+        letter-spacing: -1px;
+      }
+      h3 {
+        margin: 0; padding: 0;
+        font-weight: lighter;
+      }
+
+      a {
+        color: #fff;
+
+        &:hover {
+          color: #fff;
+        }
+      }
     }
+
   }
-  margin-bottom:20px;
+
+}
+
+main.advanced > header {
+  background: $data-header-color;
 }

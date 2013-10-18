@@ -31,18 +31,18 @@
               = submit_tag 'Search'
               = text_field_tag :search_string, nil, :placeholder => 'Search projects...'
 
-
-
-          -# probably just leave crumbs off - there's only 1 dataset
-          =# yield :crumbs
-
-      %main
+      %main{class: (@advanced_section ? 'advanced' : '') }
         = render 'application/nav'
 
         - if content_for? :header
           %header
-            .header-content
-              = yield :header
+            .header-container
+              .header-row
+                - if @multi_column_header
+                  = yield :header
+                - else
+                  .contents
+                    = yield :header
 
         .container
           = yield

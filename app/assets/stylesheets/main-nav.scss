@@ -18,10 +18,10 @@ main > nav {
       a {
         padding: 20px;
         font-size: 18px;
-        color: $gray-dark;
+        color: $gray-dark !important;
         text-align: center;
         &:hover {
-          color: $accent-color;
+          color: $accent-color !important;
         }
       }
 
@@ -36,14 +36,14 @@ main > nav {
 
             &.secondary {
               font-size: 12px;
-              color: #888;
+              color: $data-accent-color !important;
               margin-top: -2px;
               line-height: 1;
             }
           }
 
           &:hover span {
-            color: $accent-color;
+            color: $data-accent-color;
           }
         }
 
@@ -58,6 +58,7 @@ main > nav {
         border-top: 8px solid #fff;
         border-right: 8px solid transparent;
         border-left: 8px solid transparent;
+        @extend .hidden-xs;
       }
     }
 

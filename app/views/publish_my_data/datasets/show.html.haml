@@ -1,11 +1,22 @@
+- @advanced_section = true
+- @multi_column_header = true
 - page_title "Dataset: #{dataset.title}"
 - page_description dataset.description
 
 - content_for :header do
-  %h3
-    Dataset
-  %h1
-    = dataset.title
+  .primary
+    %h3
+      Dataset
+    %h1
+      = dataset.title
+
+  .secondary
+    = link_to dataset.data_dump.to_s, class: 'dataset-download-btn' do
+      %span.glyphicon.glyphicon-download
+      .content
+        Download
+        .format
+          as N-triples
 
 - content_for :advanced do
   .minimal
@@ -21,29 +32,17 @@
   %section.metadata
     .primary
       %h3 URI
-      %code.click-to-select= dataset.uri
+      %code.uri.click-to-select= dataset.uri
 
       - if dataset.comment.present?
         %h3 Description
         %p= auto_link dataset.comment.to_s
-      - if dataset.publisher.present?
-        %h3 Publisher
-        %p= resource_uri_or_label(dataset, dataset.publisher)
-      - if dataset.license.present?
-        %h3 Licence
-        %p= resource_uri_or_label(dataset, dataset.license)
-      - if dataset.contact_email.present?
-        %h3 Contact
-        %p= auto_link dataset.contact_email.to_s.gsub('mailto:','')
       - if dataset.description.present?
         %h3 Further Information
         .js-only
-          #further-information.truncated
+          #further-information
             :markdown
               #{dataset.description.to_s}
-            .fade-out
-        %p
-          %a#read-more(href="#") Read more
         %noscript
           :markdown
             #{dataset.description.to_s}
@@ -57,6 +56,15 @@
             $("a#read-more").closest('p').hide();
           });
     .secondary
+      - if dataset.publisher.present?
+        %h3 Publisher
+        %p= resource_uri_or_label(dataset, dataset.publisher)
+      - if dataset.license.present?
+        %h3 Licence
+        %p= resource_uri_or_label(dataset, dataset.license)
+      - if dataset.contact_email.present?
+        %h3 Contact
+        %p= auto_link dataset.contact_email.to_s.gsub('mailto:','')
       - if dataset.issued.present?
         %h3 Issued
         %p= formatted_date(dataset.issued.to_s)
@@ -67,114 +75,31 @@
         %h3 Tags
         %p= dataset.tags.join(', ')
 
-  %ul.tab-links
-    - if dataset.is_cube?
-      %li.active
-        %a(href="#grid-view" data-toggle="tab") Grid view
-      %li
-        %a(href="#example-data" data-toggle="tab") Example Data
-    - else
-      %li.active
-        %a(href="#example-data" data-toggle="tab") Example Data
-    %li
-      %a(href="#linked-data" data-toggle="tab") Linked Data &amp; SPARQL
+  %section#linked-data
+    %section#api
+      %h3 API
+      :markdown
+        The data contained in this Dataset is stored in a named graph, which can be used in SPARQL queries to restrict results to this Dataset.
+      .named-graph
+        = content_tag :code, dataset.data_graph_uri, class: 'uri namedgraph click-to-select'
 
-  .tab-content
-    - if dataset.is_cube?
-      %section#grid-view.active
-        = render 'publish_my_data/data_cube/grid', dataset: dataset
+      %a.sparql-button(href="/sparql")
+        %span.glyphicon.glyphicon-chevron-right
+        Run a SPARQL Query
 
-    %section#example-data(class="#{ 'active' unless dataset.is_cube? }")
-      .primary
-        %header
-          %h3 Example resources from this dataset
-        #example-data-container
-          %p
-            = image_tag 'publish_my_data/small-spinner.gif', alt: 'busy'
-          %em Loading&hellip;
-        :javascript
-          $.get('#{ publish_my_data.example_resources_path(dataset) }');
+      %p
+        Full details of how to programatically access the data in this site can be found in the #{ link_to 'Developer Documentation', publish_my_data.developer_docs_path }.
 
-      %section#vocabularies.sticky.secondary
-        %header
-          %h3 Supporting Data
-          :markdown
-            **Mouse-over the boxes below** to reveal which terms in the example are from these Ontologies and Concept Schemes.
-        %ul
-          - dataset.ontologies.each_with_index do |ontology, index|
-            = content_tag(:li, id: "ontology_#{index}") do
-              = link_to resource_path_from_uri(ontology.uri) do
-                %span.ontology-label Ontology
-                %span.name.hardwrap= (ontology.label || ontology.uri)
-          - dataset.concept_schemes.each_with_index do |concept_scheme, index|
-            = content_tag(:li, id: "concept_scheme_#{index}") do
-              = link_to resource_path_from_uri(concept_scheme.uri) do
-                %span.concept-scheme-label Concept Scheme
-                %span.name.hardwrap= (concept_scheme.label || concept_scheme.uri)
-        %aside
-          %p
-            %i.icon-circled-help
-            An
-            %em ontology
-            is a set of
-            %em classes
-            and
-            %em properties
-            about a certain topic area. These are used for a resource's types and predicates respectively.
-          %p
-            %i.icon-circled-help
-            A
-            %em concept scheme
-            is a collection of
-            %em concepts
-            about a topic. Concepts act as a list of possible values for a certain property (i.e. predicate) of a resource.
-        :javascript
-          $('#vocabularies ul li').mouseover(function(el) {
-            var ontology_id = el.currentTarget.id;
-            $('.'+ontology_id).addClass('highlight');
-            $('#example-data table').addClass('lowlight');
-          }).mouseout(function(el) {
-            var ontology_id = el.currentTarget.id;
-            $('.'+ontology_id).removeClass('highlight');
-            $('#example-data table').removeClass('lowlight');
-          });
+    %section#resource-types
+      %h2 Types of resource in this dataset
+      %ul
+        - dataset.types.each do |type|
+          %li
+            .wrapper
+              .primary
+                %h3= resource_uri_or_label(type, type.uri)
+                %code.uri.click-to-select= type.uri
+                %section= type.comment
+              .links
+                = link_to "View all #{pluralize(dataset.type_count(type.uri), type.label)}", list_resources_path(dataset: dataset.slug, type_uri: type.uri)
 
-    - #TODO: partialize the sparql section up a bit? (it's also used by ConceptSchemes and Ontols)
-    - resource_class_name = "dataset"
-    - resource = dataset
-    %section#linked-data
-      .primary
-        %h3 SPARQL
-
-        :markdown
-          The data contained in this #{resource_class_name} is stored in a named graph, which can be used in SPARQL queries to restrict results to this #{resource_class_name}.
-        = content_tag :code, resource.data_graph_uri, class: 'namedgraph click-to-select'
-
-        - if resource.data_dump.present?
-          %h3 Download
-          %p
-            = link_to resource.data_dump.to_s do
-              %i.icon-download
-              Complete dump of all triples in this #{resource_class_name}.
-            (zipped n-triples file)
-
-        %h3 Linked Data Resources
-        %p Browse the resources in this dataset by type:
-        %table.resources-summary
-          %thead
-            %tr
-              %th= pluralize dataset.types.length, 'type'
-          %tbody
-            - dataset.types.each do |type|
-              %tr
-                %td
-                  %h3= resource_uri_or_label(type, type.uri)
-                  %h4.click-to-select= type.uri
-                  %section= type.comment
-                  %section
-                    = link_to "View all #{pluralize(dataset.type_count(type.uri), 'resource')} of this type", list_resources_path(dataset: dataset.slug, type_uri: type.uri)
-
-      .secondary
-        %a.button(href="/sparql") Run a SPARQL Query
-        %h3 API Docs
-        %p Full details of how to programatically access the data in this site can be found in the #{ link_to 'Developer Documentation', publish_my_data.developer_docs_path }.

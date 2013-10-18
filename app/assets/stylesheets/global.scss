@@ -28,8 +28,17 @@ h1, h2, h3 {
   }
 }
 
-a {
+
+a, a:hover, a:visited {
   color: $accent-color;
+}
+
+main.advanced {
+  div.container {
+    a, a:hover, a:visited {
+      color: $data-accent-color;
+    }
+  }
 }
 
 // // alternative h1 stripe

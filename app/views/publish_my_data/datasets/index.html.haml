@@ -1,14 +1,19 @@
+- @advanced_section = true
 - content_for :header do
+  %h3
+    Linked Data
   %h1
     Datasets
 
 #data-page
   .datasets
     .intro
-      %a.sparql{href: '/sparql'}
-        Run a Sparql Query
       :markdown
         Introductory text. Mauris ut quam commodo, laoreet arcu et, molestie massa. Aliquam venenatis nisi lorem, et tincidunt eros ultrices quis. [Link to Developer Docs](/docs).
+
+      %a.sparql-button{href: '/sparql'}
+        %span.glyphicon.glyphicon-chevron-right
+        Run a Sparql Query
 
     %ul#datasets-list
       = render 'publish_my_data/datasets/index/dataset', dataset: PublishMyData::Dataset.find_by_slug(TsbProjectData::DATASET_SLUG)

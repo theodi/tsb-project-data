@@ -73,7 +73,7 @@
                 #home-header-search
                   = form_tag '/projects', method: 'get' do
                     = text_field_tag :search_string, nil, :placeholder => 'Enter a project search term...', :autocomplete => :off
-                    = submit_tag 'Search'
+                    = submit_tag 'Go'
 
                   %p.help
                     Try searching by name, organisation, region or competition.

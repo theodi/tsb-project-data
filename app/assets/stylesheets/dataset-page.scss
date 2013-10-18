@@ -1,56 +1,104 @@
-article#dataset {
-
-  #further-information {
-    background: white;
-    overflow:hidden;
-    position:relative;
-
-    .fade-out {
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 100%;
-      text-align: center;
-      margin: 0;
-      height:52px; /* dont fade over the whole thing - start half way up */
-
-      background: transparent; /* Old browsers */
-      /* css3 (not many browsers yet!) */
-      background-image: linear-gradient( to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
-      background-image: -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, rgba(255,255,255,0)),
-        color-stop(1, rgba(255,255,255,1)));
-      background-image: -moz-linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,1));
-      background-image: -ms-linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,1)); /* ie10*/
-      background-image: -o-linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,1));
-    }
-
-    &.truncated {
-      height:105px;
-    }
+main.advanced header {
+  .primary {
+    @include make-md-column(8);
   }
+  .secondary {
+    @extend .hidden-xs;
+    @extend .hidden-sm;
+    @include make-md-column(4);
 
-  section#grid-view {
-
-    .grid-intro {
-      margin-top:20px;
-    }
-
-    .controls-wrapper {
-      @include clearfix();
-
-      #dimensions-controls {
-        .rows-and-columns {
-          @include make-md-column(6);
-        }
-        .other-options {
-          @include make-md-column(6);
+    a.dataset-download-btn {
+      float:right;
+      width: 263px;
+      margin-top:7px;
+      @include tsb-bootstrap-btn($data-accent-color, #fff);
+      span { float:left; margin-top:4px; margin-right:10px; font-size:26px; }
+      .content {
+        text-align:left;
+        float:left;
+        .format {
+          font-size:12px;
+          font-weight:normal;
         }
       }
     }
   }
+}
+
+article#dataset {
+
+  section.metadata {
+    background: #eee;
+  }
+
+  #further-information {
+  }
+
+  section#linked-data {
+    @include make-row();
+
+    section#api {
+      margin-top:20px;
+      padding-top:20px;
+      padding-bottom:20px;
+      @include make-md-column(3);
+      background: #f9f9f9;
+
+      h3 {
+        margin-top:0;
+      }
+      .named-graph {
+        code.uri {
+          font-size:14px;
+        }
+      }
+
+      a.sparql-button {
+        margin-top:16px;
+        margin-bottom:16px;
+      }
+    }
+
+    section#resource-types {
+
+      @include make-md-column(9);
+
+      h3 {
+        margin-top:0px;
+        margin-bottom:5px;
+      }
+
+      ul {
+        @extend .list-unstyled;
+        li {
+          padding-bottom:36px;
+          margin-top:30px;
+          background: transparent url(image-path('divider.png')) repeat-x bottom;
+          &:last-child {
+            background: none;
+          }
+
+          .wrapper {
+            @include make-row();
+
+            .primary {
+              @include make-md-column(8);
+              @extend .list-unstyled;
+              code.uri {
+                margin-bottom:5px;
+              }
+            }
+            .links {
+              font-size:14px;
+              @include make-md-column(4);
+            }
+          }
+        }
+      }
+    }
+  }
+
+
 
   section#example-data {
     font-size:16px;
@@ -127,15 +175,5 @@ article#dataset {
       }
     }
   }
-
-
-  section#linked-data {
-    a.button {
-      @include tsb-bootstrap-btn(#fff, #1b1b1b);
-
-      margin-top: 20px;
-    }
-  }
-
 
 }

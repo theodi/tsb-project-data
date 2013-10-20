@@ -1,0 +1,148 @@
+:ruby
+  cs_scheme_facets = {
+    "http://tsb-projects.labs.theodi.org/def/concept-scheme/project-statuses" => "status_label",
+    "http://tsb-projects.labs.theodi.org/def/concept-scheme/enterprise-sizes" => "participant_size_labels",
+    "http://tsb-projects.labs.theodi.org/def/concept-scheme/legal-entity-forms" => "legal_entity_form_labels",
+    "http://tsb-projects.labs.theodi.org/def/concept-scheme/legal-entity-forms" => "legal_entity_form_labels",
+    "http://tsb-projects.labs.theodi.org/def/concept-scheme/products" => "product_label",
+    "http://tsb-projects.labs.theodi.org/def/concept-scheme/sic" => "participant_sic_section_labels"
+  }
+
+  search_attr = cs_scheme_facets[concept.in_scheme.to_s]
+  search_params = { search_attr => { concept.label => true } }
+
+  concept_scheme = PublishMyData::ConceptScheme.find(concept.in_scheme)
+  concept_scheme_label = concept_scheme.label rescue "Concept Scheme"
+  concept_scheme_singular_label = concept_scheme_label.singularize
+  concept_scheme_button_text = concept_scheme_label.singularize
+
+  # for SIC classes:
+  if (concept_scheme.uri == SicClass.resource_concept_scheme_uri)
+    sic_class = SicClass.find(concept.uri)
+    concept_scheme_singular_label = sic_class.singular_label
+    concept_scheme_button_text = "SIC Section"
+
+    unless sic_class.is_section?
+      search_params = { search_attr => { sic_class.sic_section.label => true } }
+    end
+  end
+
+  if (search_attr)
+    projects = Search.new(search_params).results
+  end
+
+- content_for :header do
+  %h3
+    = concept_scheme_singular_label
+  %h1
+    = concept.label
+
+- content_for :advanced do
+  = render 'application/advanced_resource_details', resource: concept
+
+#concept-page
+  #concept-main
+    #concept-primary
+      - if concept.read_predicate(RDF::SKOS.definition).any?
+        #concept-description
+          %div Definition
+          %div
+            - concept.read_predicate(RDF::SKOS.definition).each do |obj|
+              = resource_uri_or_label(concept, obj)
+
+      - if sic_class
+        #sic-code
+          %div Code
+          %div
+            = sic_class.code.to_s
+
+        - if sic_class.sic_section
+          #sic-section
+            %div Section
+            %div
+              = link_to sic_class.sic_section.label, resource_path_from_uri(sic_class.sic_section_uri)
+
+        - if sic_class.sic_division
+          #sic-division
+            %div Division
+            %div
+              = link_to sic_class.sic_division.label, resource_path_from_uri(sic_class.sic_division_uri)
+
+        - if sic_class.sic_group
+          #sic-group
+            %div Group
+            %div
+              = link_to sic_class.sic_group.label, resource_path_from_uri(sic_class.sic_group_uri)
+
+        - if sic_class.sic_class
+          #sic-class
+            %div Class
+            %div
+              = link_to sic_class.sic_class.label, resource_path_from_uri(sic_class.sic_class_uri)
+
+
+    - if search_attr
+
+      #concept-secondary
+        #concept-project-count
+          %div
+            Number of projects
+            = "(in section: <strong>#{sic_class.sic_section.label}</strong>)".html_safe if sic_class
+          %div
+            %span= projects.total
+            projects
+
+      - if projects.total > 0
+        #concept-figures
+          #concept-total-grant
+            %div Total grant
+            .figure
+              .pounds &pound;#{number_with_delimiter projects.facets["offer_grant_stats"]["total"].to_i}
+              .pence .#{"%.2d" % (projects.facets["offer_grant_stats"]["total"].modulo(1).round(2) * 100).to_i}
+
+          #concept-average-grant
+            %div Average grant
+            .figure
+              .pounds &pound;#{number_with_delimiter projects.facets["offer_grant_stats"]["mean"].to_i}
+              .pence .#{"%.2d" % (projects.facets["offer_grant_stats"]["mean"].modulo(1).round(2) * 100).to_i}
+
+        #concept-progress
+          #concept-progress-bar
+            .prog-bar-background
+              .prog-bar-fill{ style: "width: #{((projects.facets["offer_grant_stats"]["total"].to_f / projects.facets["offer_cost_stats"]["total"]) * 100).round}%;"}
+
+        #concept-total-cost
+          %div
+            Total grant is
+            %span.percent #{((projects.facets["offer_grant_stats"]["total"].to_f / projects.facets["offer_cost_stats"]["total"]) * 100).round(1)}%
+            of total cost
+            (<span class='total-cost'>#{number_to_currency projects.facets["offer_cost_stats"]["total"].to_f, unit: '&pound;'}</span>)
+
+        #concept-search
+          #concept-search-button
+            = link_to "View all projects for this #{concept_scheme_button_text}", main_app.projects_path(search_params)
+
+
+  - if sic_class
+    - if sic_class.direct_subclasses.any?
+      #concept-sidebar
+        %h3
+          = sic_class.subclass_list_label
+        %ul
+          - sic_class.direct_subclasses.each do |sic|
+            %li
+              = link_to sic.label, resource_path_from_uri(sic.uri)
+
+  - else
+    #concept-sidebar
+      %h3 All #{concept_scheme_label}
+
+      %ul
+        - concept_scheme.concepts.sort {|a,b| a.label <=> b.label }.each do |c|
+          - if c.uri == concept.uri
+            %li.current
+              = (c.label || c.uri)
+          - else
+            %li
+              = link_to (c.label || c.uri), resource_path_from_uri(c.uri)
+

@@ -67,13 +67,13 @@
             .container
               #home-header-title
                 %h1
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit tempor incididunt
+                  Explore projects funded by the Technology Strategy Board
 
               #home-header-actions
                 #home-header-search
                   = form_tag '/projects', method: 'get' do
                     = text_field_tag :search_string, nil, :placeholder => 'Enter a project search term...', :autocomplete => :off
-                    = submit_tag 'Search'
+                    = submit_tag 'Go'
 
                   %p.help
                     Try searching by name, organisation, region or competition.
@@ -87,20 +87,20 @@
 
               #home-intro
                 :markdown
-                  Main intro to the site and what it's about. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                  The Technology Strategy Board funds innovative projects to invest in the growth of businesses, technologies and sectors.
 
-                  Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas sed diam eget risus varius blandit sit amet non magna.
+                  This site aims to provide greater understanding of which projects, businesses, regions and sectors receive grants.
 
-                  Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta gravida at eget metus. Donec sed odio dui.
+                  All the data that underpins this site is available [for download](/projects.csv) so that other people can present or analyse it in other ways.
 
-                  Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+                  This is an alpha site. Please [send us feedback](mailto:Nic.Jefferis@tsb.gov.uk) about how the site could be improved to make it more useful to you.
 
               #home-panels
                 .home-panel
                   :markdown
                     ### About the Data
 
-                    Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Donec sed odio dui. Cras mattis consectetur purus sit amet fermentum.
+                    The projects covered on this site date between 2003 and the present day, and are updated each month.
 
                     [Read More &raquo;](/about)
 
@@ -108,7 +108,7 @@
                   :markdown
                     ### Developers
 
-                    Nulla vitae elit libero, a pharetra augue. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam quis risus eget urna mollis ornare vel eu leo.
+                    This is a linked data site: each project and organisation has its own page and its own URL. You can access CSV and Atom feeds of new projects from the [search page](/search) and can access data about projects and organisations in JSON and RDF formats.
 
                     [Explore the Linked Data &raquo;](/data)
 

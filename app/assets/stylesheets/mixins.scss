@@ -1,5 +1,11 @@
 @mixin hardwrap() {
-  word-wrap: break-word; -ms-word-break: break-all; word-break: break-all; word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none;hyphens: none;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  hyphens: none;
 }
 
 @mixin constrain() {
@@ -44,11 +50,12 @@
 
 }
 
-
 @mixin tsb-bootstrap-btn($color, $background) {
   @extend .btn;
   @include button-variant($color, $background, $background);
   @include border-radius(0);
+  font-size:16px;
+  font-weight:bold;
 }
 
 @mixin read-more-content {
@@ -74,3 +81,24 @@
     }
   }
 }
+
+@mixin grant-figure {
+  font-size: 20px;
+  @include clearfix();
+
+  .pounds, .pence {
+    float: left;
+  }
+
+  .pounds {
+    font-weight: bold;
+    //letter-spacing: -1px;
+  }
+
+  .pence {
+    font-size: 14px;
+    margin-left: 1px;
+    padding-top: 8px;
+  }
+}
+

@@ -88,7 +88,7 @@
         padding: 15px;
 
         a {
-          @include tsb-button(#fff,$green);
+          @include tsb-button(#fff,$search-color);
           font-size: 30px;
           padding: 15px 30px;
         }

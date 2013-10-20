@@ -1,7 +1,10 @@
 // advanced LD details
 main {
-
   footer.advanced {
+    a, a:hover, a:visited {
+      color: $data-accent-color;
+    }
+
     margin-top:20px;
     background-color: $gray-lighter;
     padding-top: 5px;
@@ -9,6 +12,7 @@ main {
 
     .minimal {
       @include make-row();
+      font-size: 14px;
 
       div.formats {
         @include make-md-column(6);
@@ -24,7 +28,7 @@ main {
 
       .reveal {
         @include make-md-column(6);
-        a, a:hover {
+        a, a:hover, a:visited {
           float:right;
           color:black;
           text-decoration:none;
@@ -33,39 +37,74 @@ main {
     }
 
     .full {
-       display: none;
-       padding-top: 10px;
-       padding-bottom: 20px;
+      display: none;
+      padding-top: 10px;
+      padding-bottom: 20px;
 
-       a.button {
-        @extend .btn;
-        @extend .btn-primary;
+      .intro {
+        @include make-row();
+
+        .primary {
+          @include make-md-column(8);
+        }
+
+        .secondary {
+          @include make-md-column(3);
+          @include make-md-column-offset(1);
+
+          a.sparql-button {
+            margin-top: 20px;
+          }
+        }
       }
 
-      code {
-        @include hardwrap();
+      h3 {
+        font-weight: normal;
+        color: #888;
+        font-size: 14px;
+        margin-bottom: 0;
+        // text-transform: uppercase;
       }
 
       table {
+        margin-top:20px;
+        font-size:14px;
         margin-bottom:10px;
         width: 100%;
-        border: 1px solid $gray-medium-light;
-        background: #fff;
 
         thead {
+          color: #888;
+          font-weight: normal;
+          font-size: 14px;
+          text-transform: uppercase;
+
           tr, tr:last-child {
-             border-bottom: 1px solid $gray-medium-light;
+            td {
+              &:first-child {
+                border-right: none;
+              }
+            }
+            border-bottom: 2px solid #fff;
           }
+
         }
         tr {
-          border-bottom: 1px solid $gray-medium-light;
+          &:nth-child(even) {
+            background-color: #f5f5f5;
+          }
+
           &:last-child {
             border-bottom:0;
           }
           th, td {
+
             @include hardwrap();
             padding: 5px 10px;
-            border-right: 1px solid $gray-medium-light;
+            font-weight:normal;
+
+            &:first-child {
+              border-right: 2px solid white;
+            }
 
             &:last-child {
               @include constrain();
@@ -75,6 +114,5 @@ main {
         }
       }
     }
-
   }
 }

@@ -32,7 +32,10 @@ class Search
       'competition_label' => [],
       'budget_area_label' => [],
       'team_label' => [],
-      'participant_sic_section_labels' => []
+      'participant_sic_section_labels' => [],
+      'cost_category_label' => [],
+      'product_label' => [],
+      'participant_legal_entity_form_labels' => []
     }
     self.terms_filters = []
 

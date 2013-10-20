@@ -23,12 +23,11 @@
         font-size:14px;
         @extend .list-unstyled;
         li {
-          line-height: 1.1;
-          @include hardwrap();
           &.internal {
             font-weight:bold;
           }
           padding-bottom: 8px;
+          line-height: 1.1;
         }
         margin-bottom:0;
       }
@@ -45,15 +44,12 @@
         color: #888;
         font-size:16px;
       }
-      a.sparql {
-        @include tsb-bootstrap-btn(#fff, #1b1b1b);
-        margin-top:18px;
-        margin-left:10px;
-        float:right;
+
+      a.sparql-button {
+        margin-top: -10px;
+        margin-bottom: 20px;
       }
-
     }
-
 
     ul#datasets-list {
 

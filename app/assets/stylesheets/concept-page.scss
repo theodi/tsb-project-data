@@ -1,0 +1,139 @@
+#concept-page {
+  @include make-row();
+
+  #concept-main {
+    @include make-md-column(8);
+    @extend .container;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    > div {
+      @include make-row();
+
+      > div {
+        @include make-md-column(12);
+        padding: 15px;
+
+        > div:first-child {
+          font-size: 16px;
+          color: $grey-label;
+        }
+      }
+    }
+
+    #concept-description {
+      > div:last-child {
+        font-size: 24px;
+      }
+    }
+
+
+    #concept-project-count {
+      > div:last-child {
+        font-size: 24px;
+
+        span {
+          font-weight: bold;
+        }
+      }
+    }
+
+    #concept-figures {
+
+      > div {
+        @include make-md-column(5);
+
+        > div:first-child {
+          color: $grey-label;
+          font-size: 16px;
+        }
+
+        .figure {
+          font-size: 28px;
+          @include clearfix();
+
+          .pounds, .pence {
+            float: left;
+          }
+
+          .pounds {
+            font-weight: bold;
+            letter-spacing: -1px;
+          }
+
+          .pence {
+            font-size: 16px;
+            margin-left: 1px;
+            padding-top: 13px;
+          }
+
+        }
+      }
+    }
+
+    #concept-progress {
+      #concept-progress-bar {
+        @include make-md-column(12);
+        padding-top: 0;
+        padding-bottom: 0;
+
+        .prog-bar-background {
+          position: relative;
+          height: 18px;
+          background: #ddd;
+          width: 100%;
+
+          .prog-bar-fill {
+            height: 18px;
+            background: $accent-color;
+          }
+        }
+      }
+    }
+
+    #concept-total-cost {
+      > div {
+        @include make-md-column(12);
+        padding-bottom: 15px;
+        color: $grey-label;
+
+        span {
+          font-weight: bold;
+        }
+      }
+    }
+
+    #concept-search-button {
+      @include make-md-column(12);
+
+      a {
+        @include tsb-button(#fff, $search-color);
+        display: inline-block;
+        padding: 25px 30px;
+      }
+    }
+
+  }
+
+
+  #concept-sidebar {
+    background:#eee;
+    @include make-md-column(3);
+    @include make-md-column-offset(1);
+
+    ul{
+      font-size:14px;
+      @extend .list-unstyled;
+      li {
+        line-height:1.1;
+        padding-bottom: 8px;
+        &.current {
+
+          font-weight:bold;
+        }
+      }
+    }
+
+  }
+
+}

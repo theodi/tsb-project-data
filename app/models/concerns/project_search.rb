@@ -16,6 +16,7 @@ module ProjectSearch
       indexes :status_uri, type: 'string', analyzer: 'keyword'
       indexes :status_label, type: 'string', analyzer: 'keyword'
       indexes :modified, type: 'date'
+      indexes :cost_category_label, type: 'string'
 
       indexes :description, type: 'string', analyzer: 'snowball'
 
@@ -31,6 +32,8 @@ module ProjectSearch
       indexes :participant_uris, type: 'string', analyzer: 'keyword'
       indexes :participant_labels, type: 'string', analyzer: 'snowball'
       indexes :participant_company_numbers, type: 'string', analyzer: 'keyword'
+      indexes :participant_legal_entity_form_labels, type: 'string', analyzer: 'keyword'
+
 
       indexes :participant_size_uris, type: 'string', analyzer: 'keyword'
       indexes :participant_size_labels, type: 'string', analyzer: 'keyword'
@@ -50,6 +53,10 @@ module ProjectSearch
       # competition's budget
       indexes :budget_area_uri, type: 'string', analyzer: 'keyword'
       indexes :budget_area_label, type: 'string', analyzer: 'keyword'
+
+      # competition's product
+      indexes :product_uri, type: 'string', analyzer: 'keyword'
+      indexes :product_label, type: 'string', analyzer: 'keyword'
 
     end
   end
@@ -84,9 +91,11 @@ module ProjectSearch
       .merge(participant_size_index_fields)
       .merge(participant_sic_class_index_fields)
       .merge(participant_site_index_fields)
+      .merge( participant_legal_entity_form_index_fields)
       .merge(participant_region_index_fields)
       .merge(competition_index_fields)
       .merge(budget_area_index_fields)
+      .merge(product_index_fields)
   end
 
   private
@@ -97,7 +106,8 @@ module ProjectSearch
       label: label,
       status_uri: project_status_uri.to_s,
       status_label: project_status.label, # needs a lookup, but after first few will be cached.
-      description: description
+      description: description,
+      cost_category_label: (cost_category.label.to_s rescue nil),
     }
   end
 
@@ -135,6 +145,13 @@ module ProjectSearch
       participant_uris: @participant_objects.map { |p| p.uri.to_s },
       participant_labels: @participant_objects.map { |p| p.label },
       participant_company_numbers: @participant_objects.map { |p| p.company_number },
+    }
+  end
+
+  def participant_legal_entity_form_index_fields
+    @participant_objects ||= self.participants
+    {
+      participant_legal_entity_form_labels: @participant_objects.map { |p| p.legal_entity_form.label rescue nil }
     }
   end
 
@@ -189,6 +206,20 @@ module ProjectSearch
       {
         budget_area_uri: @competition_object.budget_area_uri.to_s,
         budget_area_label: (@budget_area_object.label rescue nil)
+      }
+    else
+      {}
+    end
+  end
+
+  def product_index_fields
+    @competition_object ||= self.competition
+
+    if @competition_object
+      @product_object ||= @competition_object.product
+      {
+        product_uri: @competition_object.product_uri.to_s,
+        product_label: (@product_object.label rescue nil)
       }
     else
       {}

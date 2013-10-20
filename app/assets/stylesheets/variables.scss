@@ -1,5 +1,6 @@
 $accent-color: #0099CC;
-$green: #61cc66;
+$data-accent-color: #e843a9;
+$search-color: #61cc66;
 
 $global-header-bg-color: #1b1b1b;
 $global-header-color: white;
@@ -8,8 +9,11 @@ $global-footer-bg-color: #1b1b1b;;
 $global-footer-color: #eee;
 
 $header-color: $accent-color;
+$data-header-color: $data-accent-color;
 
 $gray-medium-light: lighten(#000, 80%);
+
+$grey-label: lighten(#000, 66%);
 
 // uncomment for sticky footer
 // $global-footer-height: 60px;

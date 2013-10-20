@@ -1,0 +1,35 @@
+:ruby
+  @advanced_section = true
+  page_title "Concept Scheme: #{concept_scheme.title}"
+
+- content_for :header do
+  .contents
+    %h3
+      Concept Scheme
+    %h1
+      = concept_scheme.label
+
+- content_for :advanced_footer do
+  .minimal
+    .formats
+      %span Get this concept scheme as
+      %ul.formats
+        %li= link_to("JSON", show_resource_path(:uri => concept_scheme.uri, format: 'json'))
+        %li= link_to("RDF/XML", show_resource_path(:uri => concept_scheme.uri, format: 'rdf'))
+        %li= link_to("Turtle", show_resource_path(:uri => concept_scheme.uri, format: 'ttl'))
+        %li= link_to("N-triples", show_resource_path(:uri => concept_scheme.uri, format: 'nt'))
+
+%article#concept-scheme
+  = render 'application/metadata', resource: concept_scheme
+
+  %section#linked-data
+    = render 'application/api_section', resource: concept_scheme, type_label: "Concept Scheme"
+
+    %section#concepts
+      %h2 Concepts in this Scheme
+      %ul
+        - concept_scheme.concepts.sort{|x,y| x.label <=> y.label }.each do |concept|
+          %li
+            %h3= resource_uri_or_label(concept, concept.uri)
+            %code.uri.click-to-select= concept.uri
+            %section= concept.comment

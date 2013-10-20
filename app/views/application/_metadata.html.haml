@@ -1,0 +1,31 @@
+%section.metadata
+  .primary
+    %h3 URI
+    %code.uri.click-to-select= resource.uri
+
+    - if resource.comment.present?
+      %h3 Description
+      %p= auto_link resource.comment.to_s
+    - if resource.description.present?
+      %h3 Further Information
+      :markdown
+        #{resource.description.to_s}
+  .secondary
+    - if resource.publisher.present?
+      %h3 Publisher
+      %p= resource_uri_or_label(resource, resource.publisher)
+    - if resource.license.present?
+      %h3 Licence
+      %p= resource_uri_or_label(resource, resource.license)
+    - if resource.contact_email.present?
+      %h3 Contact
+      %p= auto_link resource.contact_email.to_s.gsub('mailto:','')
+    - if resource.issued.present?
+      %h3 Issued
+      %p= formatted_date(resource.issued.to_s)
+    - if resource.modified.present?
+      %h3 Modified
+      %p= formatted_date(resource.modified.to_s)
+    - if resource.tags.try(:any?)
+      %h3 Tags
+      %p= resource.tags.join(', ')

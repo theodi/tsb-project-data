@@ -29,66 +29,10 @@
         %li= link_to("N-triples", show_resource_path(:uri => dataset.uri, format: 'nt'))
 
 %article#dataset
-  %section.metadata
-    .primary
-      %h3 URI
-      %code.uri.click-to-select= dataset.uri
-
-      - if dataset.comment.present?
-        %h3 Description
-        %p= auto_link dataset.comment.to_s
-      - if dataset.description.present?
-        %h3 Further Information
-        .js-only
-          #further-information
-            :markdown
-              #{dataset.description.to_s}
-        %noscript
-          :markdown
-            #{dataset.description.to_s}
-          :css
-            .js-only { display: none; }
-        :javascript
-          $("a#read-more").click(function(e) {
-            e.preventDefault();
-            $("#further-information").removeClass("truncated");
-            $("#further-information .fade-out").hide();
-            $("a#read-more").closest('p').hide();
-          });
-    .secondary
-      - if dataset.publisher.present?
-        %h3 Publisher
-        %p= resource_uri_or_label(dataset, dataset.publisher)
-      - if dataset.license.present?
-        %h3 Licence
-        %p= resource_uri_or_label(dataset, dataset.license)
-      - if dataset.contact_email.present?
-        %h3 Contact
-        %p= auto_link dataset.contact_email.to_s.gsub('mailto:','')
-      - if dataset.issued.present?
-        %h3 Issued
-        %p= formatted_date(dataset.issued.to_s)
-      - if dataset.modified.present?
-        %h3 Modified
-        %p= formatted_date(dataset.modified.to_s)
-      - if dataset.tags.try(:any?)
-        %h3 Tags
-        %p= dataset.tags.join(', ')
+  = render 'application/metadata', resource: dataset
 
   %section#linked-data
-    %section#api
-      %h3 API
-      :markdown
-        The data contained in this Dataset is stored in a named graph, which can be used in SPARQL queries to restrict results to this Dataset.
-      .named-graph
-        = content_tag :code, dataset.data_graph_uri, class: 'uri namedgraph click-to-select'
-
-      %a.sparql-button(href="/sparql")
-        %span.glyphicon.glyphicon-chevron-right
-        Run a SPARQL Query
-
-      %p
-        Full details of how to programatically access the data in this site can be found in the #{ link_to 'Developer Documentation', publish_my_data.developer_docs_path }.
+    = render 'application/api_section', resource: dataset, type_label: "Dataset"
 
     %section#resource-types
       %h2 Types of resource in this dataset
@@ -102,4 +46,3 @@
                 %section= type.comment
               .links
                 = link_to "View all #{pluralize(dataset.type_count(type.uri), 'resource')} in this dataset", list_resources_path(dataset: dataset.slug, type_uri: type.uri)
-

@@ -1,0 +1,13 @@
+%section#api
+  %h3 API
+  :markdown
+    The data for this #{type_label} is stored in a named graph, which can be used in SPARQL queries to restrict results to this #{type_label}
+  .named-graph
+    = content_tag :code, resource.data_graph_uri, class: 'uri namedgraph click-to-select'
+
+  %a.sparql-button(href="/sparql")
+    %span.glyphicon.glyphicon-chevron-right
+    Run a SPARQL Query
+
+  %p
+    Full details of how to programatically access the data in this site can be found in the #{ link_to 'Developer Documentation', publish_my_data.developer_docs_path }.

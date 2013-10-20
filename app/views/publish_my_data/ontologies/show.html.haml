@@ -1,0 +1,43 @@
+:ruby
+  @advanced_section = true
+  page_title "Ontology: #{ontology.title}"
+
+- content_for :header do
+  .contents
+    %h3
+      Ontology
+    %h1
+      = ontology.label
+
+- content_for :advanced_footer do
+  .minimal
+    .formats
+      %span Get this ontology as
+      %ul.formats
+        %li= link_to("JSON", show_resource_path(:uri => ontology.uri, format: 'json'))
+        %li= link_to("RDF/XML", show_resource_path(:uri => ontology.uri, format: 'rdf'))
+        %li= link_to("Turtle", show_resource_path(:uri => ontology.uri, format: 'ttl'))
+        %li= link_to("N-triples", show_resource_path(:uri => ontology.uri, format: 'nt'))
+
+%article#concept-scheme
+  = render 'application/metadata', resource: ontology
+
+  %section#linked-data
+    = render 'application/api_section', resource: ontology, type_label: "Ontology"
+
+    %section#classes-and-properties
+      %h2 Classes
+      %ul
+        - ontology.classes.sort{|x,y| x.label <=> y.label }.each do |oc|
+          %li
+            %h3= resource_uri_or_label(oc, oc.uri)
+            %code.uri.click-to-select= oc.uri
+            %section= oc.comment
+
+      %h2 Properties
+      %ul
+        - ontology.properties.sort{|x,y| x.label <=> y.label }.each do |p|
+          %li
+            %h3= resource_uri_or_label(p, p.uri)
+            %code.uri.click-to-select= p.uri
+            %section= p.comment

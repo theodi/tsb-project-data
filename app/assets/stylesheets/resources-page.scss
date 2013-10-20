@@ -6,8 +6,8 @@ section#resources-list {
   .primary {
     @include make-md-column(8);
     ul {
-      margin-top:20px;
       @extend .list-unstyled;
+      margin-top:20px;
       padding-top:10px;
       background: transparent url(image-path('divider.png')) repeat-x top;
       li {

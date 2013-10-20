@@ -43,6 +43,10 @@ module Import
             p.broader = parent.uri
             parent.narrower = parent.narrower.push(p.uri)
           end
+          if parent_label == "All Product"
+            # top level product
+            p.top_concept_of = p.resource_concept_scheme_uri
+          end
 
         end
       end

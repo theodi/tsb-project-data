@@ -35,8 +35,9 @@ module Import
         # add to resources hash
         resources[project_uri] = p
         p.label = project_title
-        description = row["PublicDescription"]
+        description = row["Project Description"].to_s
         # clean up description - replace double line breaks with space chars.
+        description = "No description available" unless description && description.length > 0
         description.gsub!(/\n\n/,' ')
         p.description = description
         p.project_number = proj_num
@@ -155,12 +156,17 @@ module Import
           query_url = "http://opendatacommunities.org/sparql.json?query=" + encoded_query + "&api_key=346ead3fc7282de4827f2a5cf408b089"
           response = JSON.parse(RestClient.get query_url)
           result = response["results"]["bindings"][0]
-          lat = result["lat"]["value"] if result && result["lat"]
-          long = result["long"]["value"] if result && result["long"]
-          district = result["district_gss"]["value"] if result && result["district_gss"]
-          s.lat = lat if lat
-          s.long = long if long
-          s.district = district if district
+          if result
+            lat = result["lat"]["value"] if result["lat"]
+            long = result["long"]["value"] if result["long"]
+            district = result["district_gss"]["value"] if result["district_gss"]
+            s.lat = lat if lat
+            s.long = long if long
+            s.district = district if district
+          else
+            # postcode not found - try looking it up from ONSPD - could be Northern Irish
+          
+          end
         end
 
         # legal entity form and enterprise size
@@ -239,9 +245,9 @@ module Import
 
 
         # check we are not missing any codes
-        puts product unless Product::PRODUCT_CODES[product]
+        puts "unknown product value #{product}" unless Product::PRODUCT_CODES[product]
   #      puts team unless Team::TEAM_CODES[team]
-        puts area unless BudgetArea::BUDGET_AREA_CODES[area]
+        puts "unknown area value #{area}" unless BudgetArea::BUDGET_AREA_CODES[area]
 
         # Don't use team
         # team_code = Team::TEAM_CODES[team]

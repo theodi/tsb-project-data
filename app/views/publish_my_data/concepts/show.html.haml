@@ -32,10 +32,11 @@
   end
 
 - content_for :header do
-  %h3
-    = concept_scheme_singular_label
-  %h1
-    = concept.label
+  .contents
+    %h3
+      = concept_scheme_singular_label
+    %h1
+      = concept.label
 
 - content_for :advanced do
   = render 'application/advanced_resource_details', resource: concept

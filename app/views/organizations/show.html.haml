@@ -1,11 +1,12 @@
 - content_for :header do
-  %h3
-    Organization
-  %h1
-    = organization.label
+  .contents
+    %h3
+      Organization
+    %h1
+      = organization.label
 
-- content_for :advanced do
-  = render 'application/advanced_resource_details', resource: organization
+- content_for :advanced_footer do
+  = render 'application/advanced_footer', resource: organization
 
 - content_for :head do
   %link{rel:"stylesheet", href:"//cdn.leafletjs.com/leaflet-0.6.4/leaflet.css"}

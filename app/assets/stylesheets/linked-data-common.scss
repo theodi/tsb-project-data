@@ -2,7 +2,6 @@ article#dataset, article#ontology, article#concept-scheme {
 
   & > section.metadata {
     @include make-row();
-
     background: #eee;
 
     h3 {

@@ -1,0 +1,20 @@
+:ruby
+  page_title("Resource: #{resource.label || resource.uri}")
+  rdf_type_label = PublishMyData::RdfType.find(resource.rdf_type.first.to_s).label rescue nil
+  @advanced_section = true
+
+- content_for :header do
+  .contents
+    %h3
+      = rdf_type_label
+    %h1
+      = resource.label || resource.uri
+
+- content_for :advanced_footer do
+  = render 'application/advanced_footer', resource: resource, always_expand: true
+
+%article#resource
+  :markdown
+    No friendly details available about this resource.
+
+    This resource view is in intended for advanced users only. Return to the [project search](/projects).

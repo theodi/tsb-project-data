@@ -1,0 +1,25 @@
+section#resources-list {
+  .resources-row {
+    @include make-row();
+  }
+
+  .primary {
+    @include make-md-column(8);
+    ul {
+      margin-top:20px;
+      @extend .list-unstyled;
+      padding-top:10px;
+      background: transparent url(image-path('divider.png')) repeat-x top;
+      li {
+        padding-bottom:36px;
+        margin-top:30px;
+        background: transparent url(image-path('divider.png')) repeat-x bottom;
+      }
+    }
+  }
+
+  .pagination {
+    @include make-md-column(12);
+  }
+
+}

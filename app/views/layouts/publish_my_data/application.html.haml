@@ -38,11 +38,7 @@
           %header
             .header-container
               .header-row
-                - if @multi_column_header
-                  = yield :header
-                - else
-                  .contents
-                    = yield :header
+                = yield :header
 
         .container
           = yield
@@ -52,17 +48,15 @@
             .container
               = yield :formats
 
-        - if content_for? :advanced
+        - if content_for? :advanced_footer
           %footer.advanced
             .container
-              = yield :advanced
+              = yield :advanced_footer
 
         / uncomment for sticky footer
         / #push
 
     -# note: intentionally not in #wrap
     = render "application/footer"
-
-
 
     =# render 'publish_my_data/shared/google_analytics'

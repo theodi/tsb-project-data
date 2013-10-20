@@ -23,8 +23,8 @@ $gray-even-lighter:  lighten(#000, 97%);
 @import "main-header"; // nav inside main element
 @import "main-nav"; // header inside main element
 
-@import "advanced-footer"; // advanced LD details
-@import "tabs";
+@import "advanced-footer";
+@import "advanced-resource-details";
 
 // pages
 @import "projects-page";

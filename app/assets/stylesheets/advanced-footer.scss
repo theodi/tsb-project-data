@@ -1,5 +1,6 @@
 // advanced LD details
 main {
+
   footer.advanced {
     a, a:hover, a:visited {
       color: $data-accent-color;
@@ -8,7 +9,7 @@ main {
     margin-top:20px;
     background-color: $gray-lighter;
     padding-top: 5px;
-    padding-bottom: 5px;
+    padding-bottom: 3px;
 
     .minimal {
       @include make-row();
@@ -40,78 +41,16 @@ main {
       display: none;
       padding-top: 10px;
       padding-bottom: 20px;
+    }
 
-      .intro {
-        @include make-row();
-
-        .primary {
-          @include make-md-column(8);
-        }
-
-        .secondary {
-          @include make-md-column(3);
-          @include make-md-column-offset(1);
-
-          a.sparql-button {
-            margin-top: 20px;
-          }
+    .always-expand {
+      .minimal {
+        .reveal {
+          display:none;
         }
       }
-
-      h3 {
-        font-weight: normal;
-        color: #888;
-        font-size: 14px;
-        margin-bottom: 0;
-        // text-transform: uppercase;
-      }
-
-      table {
-        margin-top:20px;
-        font-size:14px;
-        margin-bottom:10px;
-        width: 100%;
-
-        thead {
-          color: #888;
-          font-weight: normal;
-          font-size: 14px;
-          text-transform: uppercase;
-
-          tr, tr:last-child {
-            td {
-              &:first-child {
-                border-right: none;
-              }
-            }
-            border-bottom: 2px solid #fff;
-          }
-
-        }
-        tr {
-          &:nth-child(even) {
-            background-color: #f5f5f5;
-          }
-
-          &:last-child {
-            border-bottom:0;
-          }
-          th, td {
-
-            @include hardwrap();
-            padding: 5px 10px;
-            font-weight:normal;
-
-            &:first-child {
-              border-right: 2px solid white;
-            }
-
-            &:last-child {
-              @include constrain();
-              border-right:none;
-            }
-          }
-        }
+      .full {
+        display:block;
       }
     }
   }

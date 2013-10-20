@@ -1,0 +1,16 @@
+.formats
+  %span Get as:
+  %ul.formats
+    %li= link_to("JSON", show_resource_path(:uri => resource.uri, :format => 'json'))
+    %li= link_to("RDF/XML", show_resource_path(:uri => resource.uri, :format => 'rdf'))
+    %li= link_to("Turtle", show_resource_path(:uri => resource.uri, :format => 'ttl'))
+    %li= link_to("N-triples", show_resource_path(:uri => resource.uri, :format => 'nt'))
+
+.reveal
+  %a{href:'#'}
+    More Linked Data details
+    %span.glyphicon.glyphicon-expand
+
+  %a{href:'#', style:'display:none'}
+    Less Linked Data details
+    %span.glyphicon.glyphicon-collapse-up

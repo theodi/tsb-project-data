@@ -1,0 +1,22 @@
+%noscript
+  :scss
+    footer.advanced {
+      .reveal a { display:none !important; }
+      .full { display:block !important; }
+    }
+
+%div{class: "#{'always-expand' if defined?(always_expand) && always_expand}" }
+  .minimal
+    = render 'application/formats_footer', resource:resource
+
+  .full
+    = render 'application/advanced_resource_details', resource:resource
+
+:javascript
+  $(function() {
+    $('footer.advanced .reveal a').click( function(e) {
+      e.preventDefault();
+      $('footer.advanced .full').toggle();
+      $('footer.advanced .reveal a').toggle();
+    });
+  });

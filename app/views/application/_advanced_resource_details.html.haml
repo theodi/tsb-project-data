@@ -1,30 +1,4 @@
-%noscript
-  :scss
-    footer.advanced {
-      .reveal a { display:none !important; }
-      .full { display:block !important; }
-    }
-
-.minimal
-  .formats
-    %span Get as:
-    %ul.formats
-      %li= link_to("JSON", show_resource_path(:uri => resource.uri, :format => 'json'))
-      %li= link_to("RDF/XML", show_resource_path(:uri => resource.uri, :format => 'rdf'))
-      %li= link_to("Turtle", show_resource_path(:uri => resource.uri, :format => 'ttl'))
-      %li= link_to("N-triples", show_resource_path(:uri => resource.uri, :format => 'nt'))
-
-  .reveal
-    %a{href:'#'}
-      More Linked Data details
-      %span.glyphicon.glyphicon-expand
-
-    %a{href:'#', style:'display:none'}
-      Less Linked Data details
-      %span.glyphicon.glyphicon-collapse-up
-
-.full
-
+.advanced-resource-details
   .intro
     .primary
 
@@ -41,12 +15,4 @@
         Run a SPARQL Query
 
   .resource-data
-
     = render 'publish_my_data/resources/resource_data', resource: resource
-
-:javascript
-  $('footer.advanced .reveal a').click( function(e) {
-    e.preventDefault();
-    $('footer.advanced .full').toggle();
-    $('footer.advanced .reveal a').toggle();
-  });

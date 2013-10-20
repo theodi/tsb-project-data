@@ -1,11 +1,12 @@
 - content_for :header do
-  %h3
-    Project
-  %h1
-    = project.label
+  .contents
+    %h3
+      Project
+    %h1
+      = project.label
 
-- content_for :advanced do
-  = render 'application/advanced_resource_details', resource: project
+- content_for :advanced_footer do
+  = render 'application/advanced_footer', resource: project
 
 - content_for :head do
   %link{rel:"stylesheet", href:"//cdn.leafletjs.com/leaflet-0.6.4/leaflet.css"}
@@ -51,7 +52,7 @@
               = project.description
               .read-more-overlay
             %a.read-more{ href: '#' } Read more
-            
+
 
     %section#project-grant-summary.project-grant-details
       %h3 Grant summary (all participants)

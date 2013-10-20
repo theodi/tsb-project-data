@@ -1,7 +1,7 @@
-- @advanced_section = true
-- @multi_column_header = true
-- page_title "Dataset: #{dataset.title}"
-- page_description dataset.description
+:ruby
+  @advanced_section = true
+  page_title "Dataset: #{dataset.title}"
+  page_description dataset.description
 
 - content_for :header do
   .primary
@@ -18,7 +18,7 @@
         .format
           as N-triples
 
-- content_for :advanced do
+- content_for :advanced_footer do
   .minimal
     .formats
       %span Get this dataset metadata as
@@ -101,5 +101,5 @@
                 %code.uri.click-to-select= type.uri
                 %section= type.comment
               .links
-                = link_to "View all #{pluralize(dataset.type_count(type.uri), type.label)}", list_resources_path(dataset: dataset.slug, type_uri: type.uri)
+                = link_to "View all #{pluralize(dataset.type_count(type.uri), 'resource')} in this dataset", list_resources_path(dataset: dataset.slug, type_uri: type.uri)
 

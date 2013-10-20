@@ -36,7 +36,7 @@ module Import
       excel.default_sheet = "Properties"
       for i in 2..excel.last_row
         property_uri = Vocabulary::TSBDEF[excel.cell(i,1)]
-        graph << [property_uri, RDF.type, RDF::RDFS, RDF.Property]
+        graph << [property_uri, RDF.type, RDF.Property]
         graph << [property_uri, RDF::RDFS.label, RDF::Literal.new(excel.cell(i,2))]
         graph << [property_uri, RDF::RDFS.isDefinedBy, ontology_uri]
         graph << [property_uri, RDF::RDFS.comment, RDF::Literal.new(excel.cell(i,3))]

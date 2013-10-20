@@ -41,9 +41,9 @@ namespace :db do
     #dataset.publisher = "TBC"
 
     ds.data_dump = "http://#{PublishMyData.local_domain}/dumps/#{dump_filename}"
+    ds.data_graph_uri = data_graph
     ds.write_predicate(Vocabulary::DCTERMS.references, "http://#{PublishMyData.local_domain}/docs")
     ds.write_predicate("http://rdfs.org/ns/void#sparqlEndpoint", "http://#{PublishMyData.local_domain}/sparql")
-    ds.write_predicate("http://publishmydata.com/def/dataset#graph", data_graph)
     ds.save!
   end
 
@@ -53,7 +53,7 @@ namespace :db do
 
     cs = PublishMyData::ConceptScheme.new(
       uri,
-      "#{data_graph.to_s}/metadata",
+      "#{data_graph.to_s}/metadata"
     )
 
     cs.title = title
@@ -65,9 +65,9 @@ namespace :db do
     #dataset.publisher = "TBC"
 
     cs.data_dump = "http://#{PublishMyData.local_domain}/dumps/#{dump_filename}"
+    cs.data_graph_uri = data_graph
     cs.write_predicate(Vocabulary::DCTERMS.references, "http://#{PublishMyData.local_domain}/docs")
     cs.write_predicate("http://rdfs.org/ns/void#sparqlEndpoint", "http://#{PublishMyData.local_domain}/sparql")
-    cs.write_predicate("http://publishmydata.com/def/dataset#graph", data_graph)
     cs.save!
   end
 
@@ -77,7 +77,7 @@ namespace :db do
 
     ont = PublishMyData::Ontology.new(
       uri,
-      "#{data_graph.to_s}/metadata",
+      "#{data_graph.to_s}/metadata"
     )
 
     ont.title = title
@@ -89,12 +89,31 @@ namespace :db do
     #dataset.publisher = "TBC"
 
     ont.data_dump = "http://#{PublishMyData.local_domain}/dumps/#{dump_filename}"
+    ont.data_graph_uri = data_graph
     ont.write_predicate(Vocabulary::DCTERMS.references, "http://#{PublishMyData.local_domain}/docs")
     ont.write_predicate("http://rdfs.org/ns/void#sparqlEndpoint", "http://#{PublishMyData.local_domain}/sparql")
-    ont.write_predicate("http://publishmydata.com/def/dataset#graph", data_graph)
     ont.save!
   end
 
+  def replace_third_party_ontology_metadata(uri, label, data_graph, dump_filename)
+    delete_graph("#{data_graph.to_s}/metadata") rescue puts "*** no metadata graph for #{data_graph.to_s} ***"
+
+    puts "creating third party metadata for #{uri}"
+
+    # use generic resource to avoid problems with saving the publisher (where it's not a uri)
+    o = PublishMyData::ThirdParty::Ontology.new(
+      uri,
+      "#{data_graph.to_s}/metadata"
+    )
+
+    puts "GRAPH: #{data_graph.to_s}/metadata"
+
+    o.label = label
+    o.data_dump = "http://#{PublishMyData.local_domain}/dumps/#{dump_filename}"
+    o.data_graph_uri = data_graph
+
+    o.save! rescue puts o.errors.inspect
+  end
 
   desc 'Clean Tripod data'
   task clean: :environment do
@@ -151,6 +170,91 @@ namespace :db do
       "description", #desc markdown
       "ontology.nt"
     )
+
+    replace_third_party_ontology_metadata(
+      "http://data.ordnancesurvey.co.uk/ontology/admingeo/",
+      "Administrative Geography",
+      TsbProjectData::ADMINGEO_ONTOLOGY_GRAPH,
+      'third_party/admingeo.ttl'
+    )
+
+    replace_third_party_ontology_metadata(
+      "http://www.w3.org/2006/vcard/ns",
+      "An Ontology For vcards",
+      TsbProjectData::VCARD_ONTOLOGY_GRAPH,
+      'third_party/vcard.ttl'
+    )
+
+    # replace_third_party_ontology_metadata(
+    #   "http://purl.org/dc/terms/",
+    #   "Dublin Core Terms",
+    #   TsbProjectData::DCTERMS_ONTOLOGY_GRAPH,
+    #   'third_party/dcterms.rdf'
+    # )
+
+    replace_third_party_ontology_metadata(
+      "http://xmlns.com/foaf/0.1/",
+      "Friend of a Friend (FOAF)",
+      TsbProjectData::FOAF_ONTOLOGY_GRAPH,
+      'third_party/foaf.rdf'
+    )
+
+    replace_third_party_ontology_metadata(
+      "http://www.w3.org/2003/01/geo/wgs84_pos#",
+      "WGS84 Geo Positioning",
+      TsbProjectData::GEO_ONTOLOGY_GRAPH,
+      'third_party/wgs84_pos.rdf'
+    )
+
+    replace_third_party_ontology_metadata(
+      "http://www.w3.org/2002/07/owl",
+      "The OWL 2 Schema vocabulary (OWL 2)",
+      TsbProjectData::OWL_ONTOLOGY_GRAPH,
+      'third_party/owl.rdf'
+    )
+
+    replace_third_party_ontology_metadata(
+      "http://www.w3.org/ns/org#",
+      "Core Organization Ontology",
+      TsbProjectData::ORG_ONTOLOGY_GRAPH,
+      'third_party/org.ttl'
+    )
+
+    replace_third_party_ontology_metadata(
+      "http://data.ordnancesurvey.co.uk/ontology/postcode/",
+      "Postcode Ontology",
+      TsbProjectData::POSTCODE_ONTOLOGY_GRAPH,
+      'third_party/postcode.owl'
+    )
+
+    replace_third_party_ontology_metadata(
+      "http://www.w3.org/2004/02/skos/core",
+      "SKOS Vocabulary",
+      TsbProjectData::SKOS_ONTOLOGY_GRAPH,
+      'third_party/skos.rdf'
+    )
+
+    replace_third_party_ontology_metadata(
+      "http://www.w3.org/2000/01/rdf-schema#",
+      "The RDF Schema vocabulary (RDFS)",
+      TsbProjectData::RDFS_ONTOLOGY_GRAPH,
+      'third_party/rdfs.rdf'
+    )
+
+    replace_third_party_ontology_metadata(
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "The RDF Vocabulary (RDF)",
+      TsbProjectData::RDF_ONTOLOGY_GRAPH,
+      'third_party/rdf.rdf'
+    )
+
+    replace_third_party_ontology_metadata(
+      "http://purl.org/NET/c4dm/timeline.owl",
+      "The Timeline ontology",
+      TsbProjectData::TIMELINE_ONTOLOGY_GRAPH,
+      'third_party/timeline.ttl'
+    )
+
   end
 
   task replace_concept_scheme_metadata: :environment do

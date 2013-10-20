@@ -6,7 +6,7 @@
 - content_for :header do
   .contents
     %h3
-      = rdf_type_label
+      = rdf_type_label || "Resource"
     %h1
       = resource.label || resource.uri
 

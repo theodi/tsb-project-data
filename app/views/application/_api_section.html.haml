@@ -3,7 +3,17 @@
   :markdown
     The data for this #{type_label} is stored in a named graph, which can be used in SPARQL queries to restrict results to this #{type_label}
   .named-graph
-    = content_tag :code, resource.data_graph_uri, class: 'uri namedgraph click-to-select'
+    - if resource.class == PublishMyData::Dataset || resource.local?
+      = content_tag :code, resource.data_graph_uri, class: 'uri namedgraph click-to-select'
+    - else
+      - # hack to force it to load the right resource
+      - if resource.data_graph_uri
+        - r = resource
+      - else
+        - r = resource.class.find(resource.uri, resource.graph_uri.to_s + '/metadata')
+
+      = content_tag :code, r.data_graph_uri, class: 'uri namedgraph click-to-select' rescue nil
+
 
   %a.sparql-button(href="/sparql")
     %span.glyphicon.glyphicon-chevron-right

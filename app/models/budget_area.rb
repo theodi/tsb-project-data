@@ -30,6 +30,6 @@ class BudgetArea
     "Sustainability" => "A TSB Programme underpinning other programmes  and with a focus on built environment, agriculture and food",
     "Technology" => "A TSB Programme underpinning other programmes  and with a focus on enabling technologies",
     "Transport" => "A TSB Programme with a focus on integrated transport systems, low carbon vehicles, rail systems, marine vessel efficiency, aerospace  and supporting the implementation of the Government's strategies for the automotive and aerospace industries, including the delivery of the Aerospace Technology Institute",
-    "TSB Programmes" => "All TSB Programmes - a category for those competitions that have not been assigned a specific budgety area"
+    "TSB Programmes" => "All TSB Programmes - a category for those competitions that have not been assigned a specific budget area"
   }
 end

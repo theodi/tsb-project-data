@@ -5,15 +5,20 @@ class Product
   
   concept_scheme_uri Vocabulary::TSBDEF["concept-scheme/products"]
   
+  field :top_concept_of, RDF::SKOS.topConceptOf, is_uri: true
+  
   PRODUCT_CODES = {
     "Competition" => "CMP",
     "Centre of Excellence" => "COE",
+    "Centres" => "COE",
+    "Centre" => "COE",
     "Community" => "COM",
     "Legacy" => "LGC",
     "Thematic Competition" => "TCMP",
     "Responsive Competition" => "RCMP",
     "Catalyst" => "CATL",
     "Collaborative Research and Development" => "CRD",
+    "CRD" => "CRD",
     "European" => "EU",
     "Fast Track" => "FT",
     "Feasibility Study" => "FS",
@@ -21,10 +26,12 @@ class Product
     "Innovation Voucher" => "IV",
     "Knowledge Transfer Partnership" => "KTP",
     "Large Scale Demonstrator" => "Large",
+    "Large" => "Large",
     "Launchpad" => "LP",
     "Procurement" => "PROC",
     "Small Business Research Initiative" => "SBRI",
     "SMART" => "GRD",
+    "Smart" => "GRD",
     "Catapult" => "CATP",
     "Event" => "EVENT",
     "Knowledge Transfer Network" => "KTN",
@@ -37,7 +44,8 @@ class Product
     "Future Cities Demonstrator" => "FCD",
     "Proof of Market" => "POM",
     "Proof of Concept" => "POC",
-    "Development of Prototype" => "DOP"
+    "Development of Prototype" => "DOP",
+    "SBRI" => "SBRI"
   }
 
 end

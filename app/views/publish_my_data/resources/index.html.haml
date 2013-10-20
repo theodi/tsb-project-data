@@ -1,0 +1,34 @@
+:ruby
+  @advanced_section = true
+  page_title 'Resources'
+  rdf_type_label = PublishMyData::RdfType.find(@type_filter).label rescue nil
+
+- content_for :header do
+  .contents
+    %h3
+      Dataset: #{link_to @dataset.label, @dataset}
+    %h1
+      Resources of Type: #{rdf_type_label || @type_filter}
+
+- content_for :advanced_footer do
+  .minimal
+    .formats
+      %span Get this page of resources as
+      %ul.formats
+        %li= link_to 'N-triples', format: 'nt', page: @pagination_params.page, per_page: @pagination_params.per_page
+        %li= link_to "Turtle", format: 'ttl', page: @pagination_params.page, per_page: @pagination_params.per_page
+        %li= link_to "RDF/XML", format: 'rdf', page: @pagination_params.page, per_page: @pagination_params.per_page
+        %li= link_to "JSON", format: 'json', page: @pagination_params.page, per_page: @pagination_params.per_page
+
+%section#resources-list
+  %h2= resources_list_table_title
+  .resources-row
+    .primary
+      %ul
+        - @resources.each do |r|
+          %li
+            %h3= link_to((r.label || r.uri.to_s), resource_path_from_uri(r.uri))
+            %code.uri.click-to-select= r.uri.to_s
+  .resources-row
+    - if pagination_required?(@resources, @pagination_params)
+      = paginate @resources

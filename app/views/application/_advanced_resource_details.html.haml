@@ -5,7 +5,7 @@
       %h3 URI
       %code.uri.click-to-select= resource.uri
 
-      - if resource.respond_to? :dataset
+      - if resource.respond_to?(:dataset) && resource.dataset
         %h3 In Dataset
         = link_to resource.dataset.label, dataset_path(resource.dataset)
 

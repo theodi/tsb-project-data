@@ -1,0 +1,22 @@
+:ruby
+  page_title "Property #{property.label || property.uri}"
+  @advanced_section = true
+
+- content_for :header do
+  .contents
+    %h3
+      Property
+      - if property.defined_by_ontology
+        defined by:
+        = link_to "#{property.defined_by_ontology.label || property.defined_by_ontology.uri}", resource_path_from_uri(property.defined_by_ontology.uri)
+    %h1
+      = property.label || property.uri
+
+- content_for :advanced_footer do
+  = render 'application/advanced_footer', resource: property, always_expand: true
+
+%article#resource
+  :markdown
+    This page provides details for advanced users about an RDF property defined by an ontology.
+
+    Return to the [project search](/projects).

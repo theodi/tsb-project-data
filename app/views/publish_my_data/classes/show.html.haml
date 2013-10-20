@@ -1,0 +1,22 @@
+:ruby
+  page_title "Class: #{ontology_class.label || ontology_class.uri}"
+  @advanced_section = true
+
+- content_for :header do
+  .contents
+    %h3
+      Class
+      - if ontology_class.defined_by_ontology
+        defined by:
+        = link_to "#{ontology_class.defined_by_ontology.label || ontology_class.defined_by_ontology.uri}", resource_path_from_uri(ontology_class.defined_by_ontology.uri)
+    %h1
+      = ontology_class.label || ontology_class.uri
+
+- content_for :advanced_footer do
+  = render 'application/advanced_footer', resource: ontology_class, always_expand: true
+
+%article#resource
+  :markdown
+    This page provides details for advanced users about an RDF class defined by an ontology.
+
+    Return to the [project search](/projects).

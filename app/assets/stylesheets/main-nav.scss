@@ -58,7 +58,24 @@ main > nav {
         border-top: 8px solid #fff;
         border-right: 8px solid transparent;
         border-left: 8px solid transparent;
-        @extend .hidden-xs;
+        //@extend .hidden-xs;
+      }
+    }
+
+    @media (max-width: $grid-float-breakpoint) {
+      float: right;
+      margin: 0;
+
+      > li {
+        float: left;
+        > a {
+          padding: 20px;
+        }
+
+        &.advanced a {
+          padding: 20px;
+          padding-bottom: 10px;
+        }
       }
     }
 

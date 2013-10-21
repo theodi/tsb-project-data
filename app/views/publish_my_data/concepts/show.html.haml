@@ -40,9 +40,9 @@
 - content_for :header do
   .contents
     %h3
-      = concept_scheme_singular_label
+      = concept_scheme_singular_label.humanize
     %h1
-      = concept.label
+      = concept.label.humanize
 
 - content_for :advanced_footer do
   = render 'application/advanced_footer', resource: concept
@@ -127,18 +127,18 @@
 
         #concept-search
           #concept-search-button
-            = link_to "View all projects for this #{concept_scheme_button_text}", main_app.projects_path(search_params)
+            = link_to "View all projects for this #{concept_scheme_button_text.downcase}", main_app.projects_path(search_params)
 
 
   - if sic_class
     - if sic_class.direct_subclasses.any?
       #concept-sidebar
         %h3
-          = sic_class.subclass_list_label
+          = sic_class.subclass_list_label.humanize
         %ul
           - sic_class.direct_subclasses.each do |sic|
             %li
-              = link_to sic.label, resource_path_from_uri(sic.uri)
+              = link_to sic.label.humanize, resource_path_from_uri(sic.uri)
 
   - else
     #concept-sidebar
@@ -148,8 +148,8 @@
         - concept_scheme.concepts.sort {|a,b| a.label <=> b.label }.each do |c|
           - if c.uri == concept.uri
             %li.current
-              = (c.label || c.uri)
+              = (c.label.humanize || c.uri)
           - else
             %li
-              = link_to (c.label || c.uri), resource_path_from_uri(c.uri)
+              = link_to (c.label.humanize || c.uri), resource_path_from_uri(c.uri)
 

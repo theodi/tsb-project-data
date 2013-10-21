@@ -1,0 +1,32 @@
+:ruby
+  search_params = { "region_labels" => { region.label => true } }
+  projects = Search.new(search_params).results
+
+- content_for :header do
+  .contents
+    %h3
+      Region
+    %h1
+      = region.label
+
+- content_for :advanced_footer do
+  = render 'application/advanced_footer', resource: region
+
+- content_for :head do
+  = render "application/leaflet_assets"
+
+#region-page
+  #region-main
+    = render "publish_my_data/resources/show/primary", resource: region, projects: projects
+
+    #region-map-container
+      #region-map
+        #region-map-canvas
+    = render "regions/show/map_js"
+
+    = render "publish_my_data/resources/show/secondary", resource: region, projects: projects
+    = render "publish_my_data/resources/show/grant_summary", resource: region, projects: projects
+    = render "publish_my_data/resources/show/search", resource: region, search_params: search_params
+    
+  = render "publish_my_data/resources/show/sidebar", resource: region
+

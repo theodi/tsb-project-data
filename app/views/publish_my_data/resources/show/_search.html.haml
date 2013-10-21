@@ -1,0 +1,5 @@
+- resource_id = resource.class.to_s.parameterize
+
+%div{ id: "#{resource_id}-search"}
+  %div{ id: "#{resource_id}-search-button"}
+    = link_to "View all projects for this #{resource.class.to_s.humanize.downcase}", main_app.projects_path(search_params)

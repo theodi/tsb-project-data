@@ -3,6 +3,8 @@ PublishMyData::ResourcesController.class_eval do
   private
 
   def template_for_resource(resource)
+    Rails.logger.debug resource.class
+
     {
       PublishMyData::Dataset       => 'publish_my_data/datasets/show',
       PublishMyData::Ontology      => 'publish_my_data/ontologies/show',
@@ -17,7 +19,8 @@ PublishMyData::ResourcesController.class_eval do
       # extras for this project
       # TODO: allow this to be configured in PMD?
       Project => 'projects/show',
-      Organization => 'organizations/show'
+      Organization => 'organizations/show',
+      Region => 'regions/show'
     }[resource.class]
   end
 end

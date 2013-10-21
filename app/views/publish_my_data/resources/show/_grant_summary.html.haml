@@ -1,0 +1,27 @@
+- resource_id = resource.class.to_s.parameterize
+
+- if projects.total > 0
+  %div{ id: "#{resource_id}-grant-figures"}
+    %div{ id: "#{resource_id}-total-grant"}
+      %div Total grant
+      .figure
+        .pounds &pound;#{number_with_delimiter projects.facets["offer_grant_stats"]["total"].to_i}
+        .pence .#{"%.2d" % (projects.facets["offer_grant_stats"]["total"].modulo(1).round(2) * 100).to_i}
+
+    %div{ id: "#{resource_id}-average-grant"}
+      %div Average grant
+      .figure
+        .pounds &pound;#{number_with_delimiter projects.facets["offer_grant_stats"]["mean"].to_i}
+        .pence .#{"%.2d" % (projects.facets["offer_grant_stats"]["mean"].modulo(1).round(2) * 100).to_i}
+
+  %div{ id: "#{resource_id}-grant-progress"}
+    %div{ id: "#{resource_id}-grant-progress-bar"}
+      .prog-bar-background
+        .prog-bar-fill{ style: "width: #{((projects.facets["offer_grant_stats"]["total"].to_f / projects.facets["offer_cost_stats"]["total"]) * 100).round}%;"}
+
+  %div{ id: "#{resource_id}-total-cost"}
+    %div
+      Total grant is
+      %span.percent #{((projects.facets["offer_grant_stats"]["total"].to_f / projects.facets["offer_cost_stats"]["total"]) * 100).round(1)}%
+      of total cost
+      (<span class='total-cost'>#{number_to_currency projects.facets["offer_cost_stats"]["total"].to_f, unit: '&pound;'}</span>)

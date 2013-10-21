@@ -1,0 +1,11 @@
+- resource_id = resource.class.to_s.parameterize
+
+%div{ id: "#{resource_id}-sidebar"}
+  %h3 All #{resource.class.to_s.humanize.downcase.pluralize}
+
+  %ul
+    - resource.class.all.resources.sort {|a,b| a.label <=> b.label }.each do |x|
+      - if x.uri == resource.uri
+        %li.current= (x.label || x.uri)
+      - else
+        %li= link_to (x.label || x.uri), resource_path_from_uri(x.uri)

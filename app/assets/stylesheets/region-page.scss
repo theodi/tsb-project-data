@@ -1,0 +1,27 @@
+#region-page {
+  @extend .resource-page;
+
+  #region-project-count {
+    @extend .resource-project-count;
+  }
+
+  #region-grant-figures {
+    @extend .resource-grant-figures; 
+  }
+
+  #region-grant-progress {
+    @extend .resource-grant-progress;
+  }
+
+  #region-total-cost {
+    @extend .resource-total-cost;
+  }
+
+  #region-search-button {
+    @extend .resource-search-button;
+  }
+
+  #region-map-container {
+    @extend .resource-map-container;
+  }
+}

@@ -1,0 +1,9 @@
+- resource_id = resource.class.to_s.parameterize
+
+%div{ id: "#{resource_id}-secondary"}
+  %div{ id: "#{resource_id}-project-count"}
+    %div
+      Number of projects
+    %div
+      %span= projects.total
+      projects

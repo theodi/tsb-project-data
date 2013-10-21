@@ -1,0 +1,6 @@
+- resource_id = resource.class.to_s.parameterize
+
+%div{ id: "#{resource_id}-primary"}
+  %div{ id: "#{resource_id}-name"}
+    %div Name
+    %div= resource.label

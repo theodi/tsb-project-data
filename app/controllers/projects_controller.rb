@@ -36,6 +36,11 @@ class ProjectsController < ApplicationController
 
         render csv: @output_csv
       end
+
+      format.json do
+        @projects = @search.results
+        render :json => { :page => @search.page, :per_page => @search.per_page, :page_of_results => @projects, :total => @projects.total, :grant_stats => @projects.facets["offer_grant_stats"]}
+      end
     end
   end
 

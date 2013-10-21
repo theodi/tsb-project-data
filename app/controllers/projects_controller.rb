@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
 
+  helper_method :remove_paging_params
+
   # list of projects
   def index
     @search = Search.new( params )
@@ -19,8 +21,14 @@ class ProjectsController < ApplicationController
       end
 
       format.csv do
-        @output_csv = Project.generate_csv(@search.results(unpaginated: true))
-        render csv: @output_csv
+
+        if blank_search?
+          # if there are no params, redirect to pre canned version.
+          redirect_to '/dumps/projects.csv'
+        else
+          @output_csv = Project.generate_csv(@search.results(unpaginated: true))
+          render csv: @output_csv
+        end
       end
 
       format.json do
@@ -37,6 +45,20 @@ class ProjectsController < ApplicationController
         render :json => Tire::Configuration.client.get("#{Tire::Configuration.url}/projects/_search", params[:query] ).body
       }
     end
+  end
+
+  protected
+
+  def blank_search?
+    non_blank_params = remove_paging_params(@search.params)
+      .tap{ |h| h.delete_if { |k,v| v.blank? } } # remove blank params
+
+    blank_search = !non_blank_params.any?
+    blank_search
+  end
+
+  def remove_paging_params(hash)
+    hash.tap { |h| h.delete(:page); h.delete(:per_page) }
   end
 
 end

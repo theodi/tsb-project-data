@@ -1,5 +1,5 @@
 atom_feed(schema_date: '2013-10-01') do |feed|
-  feed.tag!(:link, rel: "alternate", type: "text/csv", href: url_for(request.params.merge(format: 'csv', host: request.host)))
+  feed.tag!(:link, rel: "alternate", type: "text/csv", href: url_for(csv_params(request.host)))
   feed.title("TSB Projects Open Data")
   feed.updated(DateTime.now)
   feed.author do |author|

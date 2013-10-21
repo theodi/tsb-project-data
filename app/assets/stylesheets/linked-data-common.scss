@@ -44,6 +44,10 @@ article#dataset, article#ontology, article#concept-scheme {
 
     .secondary {
       @include make-md-column(4);
+
+      a {
+        @include hardwrap;
+      }
     }
   }
 
@@ -80,6 +84,10 @@ article#dataset, article#ontology, article#concept-scheme {
     section#resource-types, section#concepts, section#classes-and-properties {
 
       @include make-md-column(9);
+
+      &.third-party {
+        display:none;
+      }
 
       h3 {
         margin-top:0px;

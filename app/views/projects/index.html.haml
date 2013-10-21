@@ -5,13 +5,14 @@
     %h1
       Projects
 
-- content_for :advanced do
+- content_for :advanced_footer do
   .minimal
     .formats
       %span Get these results as:
       %ul.formats
         %li= link_to("CSV", projects_path( params.merge(format: 'csv').tap { |h| h.delete(:page); h.delete(:per_page)}))
         %li= link_to("Atom", projects_path( params.merge(format: 'atom', page: 1, per_page: 20 )))
+        %li= link_to("JSON", projects_path( params.merge(format: 'json', page: 1, per_page: 20 )))
 
 #projects-page
   #search

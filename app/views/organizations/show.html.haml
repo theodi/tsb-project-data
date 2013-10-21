@@ -33,19 +33,28 @@
       #organization-about-secondary
         #organization-size
           %div Organization size
-          %div= organization.enterprise_size.label.humanize
+          %div= link_to organization.enterprise_size.label.humanize, resource_path_from_uri(organization.enterprise_size.uri)
         #organization-sic
           %div SIC classes
           %div
             - if organization.sic_classes.any?
-              = organization.sic_classes.map { |s| "#{link_to s.label, '#'}" }.join(',').html_safe
+              = organization.sic_classes.map { |s| "#{link_to s.label, '#'}" }.join(', ').html_safe
             - else
               \-
 
       #organization-about-tertiary
+        #organization-legal
+          %div Legal entity form
+          %div= organization.legal_entity_form.label
+
+        #organization-region
+          %div Region
+          %div= link_to organization.site.region.label, resource_path_from_uri(organization.site.region.uri)
+
+      #organization-about-location
         #organization-address
           %div Address
-          %div= organization.site.address.label.gsub(', ', ',<br>').html_safe
+          %div= organization.site.address.label
 
       - if organization.has_lat_long?
         #map-container

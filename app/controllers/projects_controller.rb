@@ -19,21 +19,7 @@ class ProjectsController < ApplicationController
       end
 
       format.csv do
-
-        unpaginated_results = @search.results(unpaginated: true)
-
-        @output_csv = CSV.generate(:row_sep => "\r\n") do |csv|
-
-          #headers
-          csv << Project.csv_headers
-
-          #data
-          unpaginated_results.each do |result|
-            Project.csv_data(result.uri).each { |row| csv << row }
-          end
-
-        end
-
+        @output_csv = Project.generate_csv(@search.results(unpaginated: true))
         render csv: @output_csv
       end
 

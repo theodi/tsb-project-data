@@ -46,6 +46,9 @@ article#sparql {
     h3, .form-group, legend {
       @include make-md-column(12);
     }
+    h3 {
+      margin-top:10px;
+    }
     legend {
       border-bottom: none;
       margin-bottom:5px;

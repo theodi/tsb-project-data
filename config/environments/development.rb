@@ -39,7 +39,7 @@ TsbProjectData::Application.configure do
     config.sparql_endpoint = 'http://localhost:3030/tsb_project_data_dev/sparql'
     config.local_domain = 'tsb-projects.labs.theodi.org'
     # uncomment to enable caching.
-    config.tripod_cache_store = nil #Tripod::CacheStores::MemcachedCacheStore.new('localhost:11211') #nil
+    config.tripod_cache_store = Tripod::CacheStores::MemcachedCacheStore.new('localhost:11211') #nil
     config.sparql_timeout_seconds = 7
   end
 

@@ -23,9 +23,10 @@
   = render 'application/metadata', resource: ontology
 
   %section#linked-data
-    = render 'application/api_section', resource: ontology, type_label: "Ontology"
+    - if ontology.local?
+      = render 'application/api_section', resource: ontology, type_label: "Ontology"
 
-    %section#classes-and-properties
+    %section#classes-and-properties{class: "#{'third-party' unless ontology.local?}"}
       %h2 Classes
       %ul
         - ontology.classes.sort{|x,y| x.label <=> y.label }.each do |oc|

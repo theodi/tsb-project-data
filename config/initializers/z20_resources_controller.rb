@@ -3,8 +3,6 @@ PublishMyData::ResourcesController.class_eval do
   private
 
   def template_for_resource(resource)
-    Rails.logger.debug resource.class
-
     {
       PublishMyData::Dataset       => 'publish_my_data/datasets/show',
       PublishMyData::Ontology      => 'publish_my_data/ontologies/show',

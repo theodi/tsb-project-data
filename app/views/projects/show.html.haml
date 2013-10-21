@@ -1,3 +1,5 @@
+- @active_tab = "Browse"
+
 - content_for :header do
   .contents
     %h3
@@ -34,15 +36,15 @@
         #project-status
           %div Status
           #project-status-label{ class: "project-status-#{project.project_status.label.parameterize}" }
-            %span= project.project_status.label
+            %span= link_to project.project_status.label, resource_path_from_uri(project.project_status.uri)
 
       #project-about-secondary
         #project-number
-          %div Cost Category
-          %div= (project.cost_category.label rescue nil ) || "-"
+          %div Product
+          %div= (link_to(project.competition.product.label, resource_path_from_uri(project.competition.product.uri)) rescue nil ) || "-"
         #project-budget-area
           %div Budget area
-          %div= (project.competition.budget_area.label rescue nil) || "-"
+          %div= (link_to(project.competition.budget_area.label, resource_path_from_uri(project.competition.budget_area.uri)) rescue nil) || "-"
 
       #project-about-tertiary
         #project-description

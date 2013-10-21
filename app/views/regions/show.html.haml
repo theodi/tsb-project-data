@@ -1,6 +1,11 @@
+- @active_tab = "Browse"
+
 :ruby
   search_params = { "region_labels" => { region.label => true } }
   projects = Search.new(search_params).results
+
+- content_for :nav do
+  = render "application/nav", active_tab: 'Browse'
 
 - content_for :header do
   .contents

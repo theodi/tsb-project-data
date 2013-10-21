@@ -171,89 +171,19 @@ namespace :db do
       "ontology.nt"
     )
 
-    replace_third_party_ontology_metadata(
-      "http://data.ordnancesurvey.co.uk/ontology/admingeo/",
-      "Administrative Geography",
-      TsbProjectData::ADMINGEO_ONTOLOGY_GRAPH,
-      'third_party/admingeo.ttl'
-    )
-
-    replace_third_party_ontology_metadata(
-      "http://www.w3.org/2006/vcard/ns",
-      "An Ontology For vcards",
-      TsbProjectData::VCARD_ONTOLOGY_GRAPH,
-      'third_party/vcard.ttl'
-    )
-
-    # replace_third_party_ontology_metadata(
-    #   "http://purl.org/dc/terms/",
-    #   "Dublin Core Terms",
-    #   TsbProjectData::DCTERMS_ONTOLOGY_GRAPH,
-    #   'third_party/dcterms.rdf'
-    # )
-
-    replace_third_party_ontology_metadata(
-      "http://xmlns.com/foaf/0.1/",
-      "Friend of a Friend (FOAF)",
-      TsbProjectData::FOAF_ONTOLOGY_GRAPH,
-      'third_party/foaf.rdf'
-    )
-
-    replace_third_party_ontology_metadata(
-      "http://www.w3.org/2003/01/geo/wgs84_pos#",
-      "WGS84 Geo Positioning",
-      TsbProjectData::GEO_ONTOLOGY_GRAPH,
-      'third_party/wgs84_pos.rdf'
-    )
-
-    replace_third_party_ontology_metadata(
-      "http://www.w3.org/2002/07/owl",
-      "The OWL 2 Schema vocabulary (OWL 2)",
-      TsbProjectData::OWL_ONTOLOGY_GRAPH,
-      'third_party/owl.rdf'
-    )
-
-    replace_third_party_ontology_metadata(
-      "http://www.w3.org/ns/org#",
-      "Core Organization Ontology",
-      TsbProjectData::ORG_ONTOLOGY_GRAPH,
-      'third_party/org.ttl'
-    )
-
-    replace_third_party_ontology_metadata(
-      "http://data.ordnancesurvey.co.uk/ontology/postcode/",
-      "Postcode Ontology",
-      TsbProjectData::POSTCODE_ONTOLOGY_GRAPH,
-      'third_party/postcode.owl'
-    )
-
-    replace_third_party_ontology_metadata(
-      "http://www.w3.org/2004/02/skos/core",
-      "SKOS Vocabulary",
-      TsbProjectData::SKOS_ONTOLOGY_GRAPH,
-      'third_party/skos.rdf'
-    )
-
-    replace_third_party_ontology_metadata(
-      "http://www.w3.org/2000/01/rdf-schema#",
-      "The RDF Schema vocabulary (RDFS)",
-      TsbProjectData::RDFS_ONTOLOGY_GRAPH,
-      'third_party/rdfs.rdf'
-    )
-
-    replace_third_party_ontology_metadata(
-      "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-      "The RDF Vocabulary (RDF)",
-      TsbProjectData::RDF_ONTOLOGY_GRAPH,
-      'third_party/rdf.rdf'
-    )
-
-    replace_third_party_ontology_metadata(
-      "http://purl.org/NET/c4dm/timeline.owl",
-      "The Timeline ontology",
-      TsbProjectData::TIMELINE_ONTOLOGY_GRAPH,
-      'third_party/timeline.ttl'
-    )
+    # make sure all the third party ones are deleted.
+    delete_graph("#{TsbProjectData::ADMINGEO_ONTOLOGY_GRAPH.to_s}/metadata") rescue nil
+    delete_graph("#{TsbProjectData::VCARD_ONTOLOGY_GRAPH.to_s}/metadata") rescue nil
+    delete_graph("#{TsbProjectData::DCTERMS_ONTOLOGY_GRAPH.to_s}/metadata") rescue nil
+    delete_graph("#{TsbProjectData::FOAF_ONTOLOGY_GRAPH.to_s}/metadata") rescue nil
+    delete_graph("#{TsbProjectData::GEO_ONTOLOGY_GRAPH.to_s}/metadata") rescue nil
+    delete_graph("#{TsbProjectData::OWL_ONTOLOGY_GRAPH.to_s}/metadata") rescue nil
+    delete_graph("#{TsbProjectData::ORG_ONTOLOGY_GRAPH.to_s}/metadata") rescue nil
+    delete_graph("#{TsbProjectData::POSTCODE_ONTOLOGY_GRAPH.to_s}/metadata") rescue nil
+    delete_graph("#{TsbProjectData::SKOS_ONTOLOGY_GRAPH.to_s}/metadata") rescue nil
+    delete_graph("#{TsbProjectData::RDFS_ONTOLOGY_GRAPH.to_s}/metadata") rescue nil
+    delete_graph("#{TsbProjectData::RDF_ONTOLOGY_GRAPH.to_s}/metadata") rescue nil
+    delete_graph("#{TsbProjectData::TIMELINE_ONTOLOGY_GRAPH.to_s}/metadata") rescue nil
 
   end
 

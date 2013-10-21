@@ -2,17 +2,17 @@
   %ul
     %li
       %a{href:'/about'} About
-      - if controller_name == 'home' && action_name == 'about'
+      - if @active_tab == 'About'
         .arrow-down
 
     %li
       %a{href:'/projects'} Browse
-      - if ['projects', 'resources'].include? controller_name
+      - if @active_tab == 'Browse'
         .arrow-down
 
     %li.advanced
       %a{href:"/data"}
         %span.primary Linked Data
         %span.secondary Advanced users
-      - if ['information_resources', 'datasets'].include? controller_name
+      - if @active_tab.nil? || @active_tab == 'Linked Data'
         .arrow-down

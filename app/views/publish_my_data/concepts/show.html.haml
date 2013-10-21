@@ -1,3 +1,5 @@
+- @active_tab = "Browse"
+
 :ruby
   # This is hacky. TODO: tidy up
 
@@ -31,6 +33,9 @@
   if (search_attr)
     projects = Search.new(search_params).results
   end
+
+- content_for :nav do
+  = render "application/nav", active_tab: 'Browse'
 
 - content_for :header do
   .contents

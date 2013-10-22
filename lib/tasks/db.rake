@@ -198,6 +198,15 @@ namespace :db do
     )
 
     replace_concept_scheme_metadata(
+      BudgetArea.get_graph_uri.to_s.gsub("/graph/", "/def/"),
+      BudgetArea.get_graph_uri,
+      "Budget Areas", #title
+      "comment", #comment
+      "description", #desc markdown
+      "budget_areas.nt"
+    )
+
+    replace_concept_scheme_metadata(
       EnterpriseSize.get_graph_uri.to_s.gsub("/graph/", "/def/"),
       EnterpriseSize.get_graph_uri,
       "Enterprise Sizes", #title
@@ -268,6 +277,7 @@ namespace :db do
 
     # TODO: budget areas and regions need their own dataset metadata.
     replace_graph(Region.get_graph_uri, 'regions.nt')
+    delete_graph("http://#{PublishMyData.local_domain}/graph/budget-areas") rescue nil
     replace_graph(BudgetArea.get_graph_uri, 'budget_areas.nt')
 
     # TODO: add some ontology metadata

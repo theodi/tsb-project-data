@@ -8,12 +8,12 @@ class BudgetArea
 
   #graph_uri "http://#{PublishMyData.local_domain}/graph/#{BudgetArea::DATASET_SLUG}"
   
-  def initialize(uri, graph_uri=nil)
-    super(uri,graph_uri)
-    self.rdf_type = self.rdf_type.push(Vocabulary::TSBDEF["BudgetArea"])
-    self.in_scheme = self.class.resource_concept_scheme_uri
+  # def initialize(uri, graph_uri=nil)
+  #   super(uri,graph_uri)
+  #   self.rdf_type = self.rdf_type.push(Vocabulary::TSBDEF["BudgetArea"])
+  #   self.in_scheme = self.class.resource_concept_scheme_uri
   
-  end
+  # end
 
 
   BUDGET_AREA_CODES = {

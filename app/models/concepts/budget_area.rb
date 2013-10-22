@@ -2,30 +2,28 @@ class BudgetArea
   include Concept
   
   concept_scheme_uri Vocabulary::TSBDEF["concept-scheme/budget-areas"]
-#  rdf_type Vocabulary::TSBDEF["BudgetArea"]
-
-  #DATASET_SLUG = "budget-areas"
-
-  #graph_uri "http://#{PublishMyData.local_domain}/graph/#{BudgetArea::DATASET_SLUG}"
+  
+  field :top_concept_of, RDF::SKOS.topConceptOf, is_uri: true
   
   def initialize(uri, graph_uri=nil)
     super(uri,graph_uri)
     self.rdf_type = self.rdf_type.push(Vocabulary::TSBDEF["BudgetArea"])
     self.in_scheme = self.class.resource_concept_scheme_uri
+    self.top_concept_of = self.class.resource_concept_scheme_uri
   
   end
 
 
   BUDGET_AREA_CODES = {
-    "Development" => "DEVL",
+    "Development" => "DEV",
     "Digital" => "DIGS",
     "Energy" => "ENRG",
     "Healthcare" => "HLTHCR",
     "Manufacturing" => "MANF",
     "Space" => "SPAC",
-    "Sustainability" => "SUST",
+    "Sustainability" => "ENV_SUS",
     "Technology" => "TECH",
-    "Transport" => "TRAN",
+    "Transport" => "TRANSPO",
     "TSB Programmes" => 'tsb-programmes'
   }
 

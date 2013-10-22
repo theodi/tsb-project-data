@@ -11,5 +11,6 @@ class Competition
   linked_to :team, Vocabulary::TSBDEF.team
   linked_to :budget_area, Vocabulary::TSBDEF.budgetArea
   linked_to :product,  Vocabulary::TSBDEF.product
+  linked_to :budget_sub_area, Vocabulary::TSBDEF.budgetSubArea
 
 end

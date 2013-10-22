@@ -71,7 +71,7 @@ namespace :loader do
     puts ">>> time elasped #{Time.now - start_time}s"
 
     puts ">>> generating data dump (and warming cache)"
-    Rake::Task['db:create_csv_dump']
+    Rake::Task['db:create_csv_dump'].invoke
 
     puts ">>> rendering static visualisations"
     Rake::Task['viz:render_static'].invoke('tsb-projects.labs.theodi.org')

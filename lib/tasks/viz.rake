@@ -2,6 +2,9 @@ namespace :viz do
 
   desc 'renders static versions of the visualisations for IE8 and below'
   task :render_static, [:domain] => :environment do |task, args|
+
+    `mkdir -p #{Rails.root.join('public', 'viz')}`
+
     capture_js_path = Rails.root.join('vendor', 'assets', 'javascripts', 'capture.js')
 
     viz_ary = [

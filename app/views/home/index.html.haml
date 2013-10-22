@@ -1,27 +1,8 @@
-
-
-/ = stylesheet_link_tag "viz/tsb.viz.css"
-
-/ = javascript_include_tag 'd3.v3.min.js'
-/ = javascript_include_tag 'sparql.js'
-/ = javascript_include_tag 'q.min.js'
-
-/ = javascript_include_tag 'viz/DataSet.js'
-/ = javascript_include_tag 'viz/SPARQLDataSource.js'
-/ = javascript_include_tag 'viz/tsb.viz.project.js'
-
-
-
-/ :javascript
-/   window.onload = function() {
-/     //TSB.Viz.Config.bgColor = 'transparent'; //remove bg color
-/     var projectId = 'http://tsb-projects.labs.theodi.org/id/project/730004';
-/     var container = document.getElementById('project-chart');
-/     TSB.Viz.Project(projectId, container, 570, 400);
-/   }
-
 !!! 5
-%html
+/[if lte IE 8] <html class="ie ie8" lang="en">
+<!--[if gt IE 8]><!-->
+%html{:lang => 'en'}<>
+  <!--<![endif]-->
   %head
     %title
       = render 'publish_my_data/shared/meta_title'
@@ -45,6 +26,10 @@
     #home-viz
       = render "home/temp_map"
       #home-message Visualisation will appear here
+    
+    /[if lte IE 8]
+      #home-viz-ie
+        = image_tag "/viz/home.png"
 
 
     -# for sticky footer

@@ -1,5 +1,8 @@
 !!! 5
-%html
+/[if lte IE 8] <html class="ie ie8" lang="en">
+<!--[if gt IE 8]><!-->
+%html{:lang => 'en'}<>
+  <!--<![endif]-->
   %head
     %title
       = render 'publish_my_data/shared/meta_title'
@@ -12,6 +15,7 @@
     = javascript_include_tag :application
 
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+  
   %body
     /[if lt IE 8]
       = render 'publish_my_data/shared/browser_warning'

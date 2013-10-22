@@ -19,7 +19,6 @@
     %ul#datasets-list
       = render 'publish_my_data/datasets/index/dataset', dataset: PublishMyData::Dataset.find_by_slug(TsbProjectData::DATASET_SLUG)
       = render 'publish_my_data/datasets/index/dataset', dataset: PublishMyData::Dataset.find_by_slug(Region::DATASET_SLUG)
-      = render 'publish_my_data/datasets/index/dataset', dataset: PublishMyData::Dataset.find_by_slug(BudgetArea::DATASET_SLUG)
 
   .supporting-data
     .ontologies

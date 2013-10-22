@@ -22,9 +22,7 @@ class Search
   attr_accessor :date_range_filter # just the date range filters
 
   def initialize(params={})
-    self.params = params.tap { |h| h.delete(:controller); h.delete(:action); h.delete(:format) } # store the raw params minus rails's params
-
-    Rails.logger.debug self.params
+    self.params = params.tap { |h| h.delete(:controller); h.delete(:action); h.delete(:format); h.delete(:utf8); h.delete(:commit) } # store the raw params minus rails's params
 
     # hash of field => filter
     self.facets = {

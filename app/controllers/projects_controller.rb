@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
         @search_unfiltered = Search.new()
         @projects_unfiltered = @search_unfiltered.results
         @min_index = (@search.page - 1) * @search.per_page + 1
-        @max_index = (@search.page - 1) * @search.per_page + @projects.total
+        @max_index = (@search.page - 1) * @search.per_page + @projects.length
       end
 
       format.atom do

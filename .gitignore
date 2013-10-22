@@ -25,5 +25,4 @@ Capfile
 /data/*/~*.xlsx
 /data/output-data/*.*
 /public/dumps/*.*
-/public/dumps/third_party/*.*
 /public/viz/*.*

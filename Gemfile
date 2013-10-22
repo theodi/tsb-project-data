@@ -7,9 +7,9 @@ gem 'roo'
 gem 'tire'
 
 #gem 'publish_my_data', '1.0.3'
-#gem 'publish_my_data', :git => "https://github.com/Swirrl/publish_my_data.git", :branch => 'master'
+gem 'publish_my_data', :git => "https://github.com/Swirrl/publish_my_data.git", :branch => 'master'
 #uncomment to use local pmd (and comment out line above)
-gem 'publish_my_data', :path => '/Users/edwardf/Documents/code/publish_my_data'
+#gem 'publish_my_data', :path => '/Users/edwardf/Documents/code/publish_my_data'
 
 gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git", :branch => 'ead49c'
 

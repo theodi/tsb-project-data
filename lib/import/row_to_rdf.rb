@@ -257,7 +257,7 @@ module Import
         #         end
         budget_area_code = BudgetArea::BUDGET_AREA_CODES[area]
         if budget_area_code && budget_area_code != "null"
-          budg_uri = Vocabulary::TSB["budget-area/#{budget_area_code}"]
+          budg_uri = Vocabulary::TSBDEF["concept/budget-area/#{budget_area_code}"]
           comp.budget_area_uri = budg_uri
         end
         # NB use '_uri' setter methods as linking to a URI, not a Tripod Resource

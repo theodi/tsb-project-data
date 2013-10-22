@@ -1,22 +1,4 @@
 GIT
-  remote: https://github.com/Swirrl/publish_my_data.git
-  revision: 4eeea483694fdb3e5399e85190c01ff12d674394
-  branch: master
-  specs:
-    publish_my_data (1.0.3)
-      aws-sdk
-      entypo-rails
-      haml-rails
-      jquery-rails
-      kaminari
-      rails (~> 3.2)
-      rails_autolink
-      rdf (~> 1.0)
-      rdiscount
-      sass-rails
-      tripod (~> 0.7.22)
-
-GIT
   remote: https://github.com/Swirrl/tripod.git
   revision: d76b3385867f18cdf0080b11abdcb8f936a43e3f
   branch: links
@@ -44,6 +26,22 @@ GIT
       hashie
       multi_json (~> 1.0)
       uuidtools
+
+PATH
+  remote: /Users/edwardf/Documents/code/publish_my_data
+  specs:
+    publish_my_data (1.0.3)
+      aws-sdk
+      entypo-rails
+      haml-rails
+      jquery-rails
+      kaminari
+      rails (~> 3.2)
+      rails_autolink
+      rdf (~> 1.0)
+      rdiscount
+      sass-rails
+      tripod (~> 0.7.22)
 
 GEM
   remote: https://rubygems.org/

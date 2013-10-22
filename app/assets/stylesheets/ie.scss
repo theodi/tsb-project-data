@@ -1,0 +1,39 @@
+html.ie {
+
+  &.ie8 {
+    #home-viz {
+      display: none;
+    }
+
+    #home-viz-ie {
+      background: #fff;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    #projects-page #results ul#results-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    main > nav ul li {
+
+      .arrow-down {
+        margin: -10px 0 0 -8px;
+      }
+
+      &.advanced .arrow-down {
+        margin: 0 0 0 -8px;
+      }
+
+    }
+  
+  }
+  
+  #home-header-search form input[type="text"] {
+    border: 3px solid white !important;
+  }
+
+}

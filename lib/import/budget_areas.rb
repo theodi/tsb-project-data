@@ -8,12 +8,13 @@ module Import
 
       graph = RDF::Graph.new
 
-      # URI should be /id/budget-area/{code}
+      # URI is  /def/concept/budget-area/{code}
       BudgetArea::BUDGET_AREA_CODES.each_pair do |label,code|
-        uri = Vocabulary::TSB["budget-area/#{code}"]
+        uri = Vocabulary::TSBDEF["concept/budget-area/#{code}"]
         b = BudgetArea.new(uri)
         b.label = label
-        b.comment = BudgetArea::BUDGET_AREA_COMMENTS[label]
+        b.definition = BudgetArea::BUDGET_AREA_COMMENTS[label]
+        b.notation = code
         b.repository.each_statement {|s| graph << s}
 
       end

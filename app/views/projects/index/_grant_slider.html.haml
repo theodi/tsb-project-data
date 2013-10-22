@@ -17,45 +17,28 @@
 :javascript
   $(function() {
 
-    var minExtent = #{@projects_unfiltered.facets["offer_grant_stats_unfiltered"]["min"]};
-    var maxExtent = #{@projects_unfiltered.facets["offer_grant_stats_unfiltered"]["max"]};
-    var grantFrom =  #{@search.offer_grant_from || @projects_unfiltered.facets["offer_grant_stats_unfiltered"]["min"]};
-    var grantTo =  #{@search.offer_grant_to || @projects_unfiltered.facets["offer_grant_stats_unfiltered"]["max"]};
-    var range = maxExtent - minExtent;
-    var roundValue = getRoundValue( range );
+    var minExtent = 0; //#{@projects_unfiltered.facets["offer_grant_stats_unfiltered"]["min"]};
+    var maxExtent = 5000000; // #{@projects_unfiltered.facets["offer_grant_stats_unfiltered"]["max"]};
 
-    function roundToNearest(val, nearest, up) {
-      multiplier = 1/nearest;
+    var grantFrom =  #{@search.offer_grant_from || 'null'};
+    var grantTo =  #{@search.offer_grant_to || 'null'};
 
-      if(up) {
-        return Math.ceil(val * multiplier) / multiplier;
-      }
-      else {
-        return Math.floor(val * multiplier) / multiplier;
-      }
-    }
+    if(grantFrom == null) {grantFrom = minExtent;}
+    if(grantTo == null) {grantTo = maxExtent;}
 
-    function getRoundValue(range) {
-      if ( range < 1000 ) {
-        return 5;
-      } else if ( range >= 1000 && range < 10000 ) {
-        return 50;
-      } else if (range >= 10000 && range < 100000 ) {
-        return 500;
-      } else if (range >= 100000 && range < 1000000) {
-        return 5000;
-      } else if (range >= 1000000) {
-        return 500000;
-      }
+    var step = 25000;
+
+    function formatCurrency(num) {
+      return formatNumber(num,0,',','','£','','','');
     }
 
     function setSliderValues(from, to) {
 
-      if(!from || from < minExtent) { from = minExtent }
-      if(!to || to > maxExtent) { to = maxExtent }
+      if(from < minExtent) { from = minExtent }
+      if(to > maxExtent) { to = maxExtent }
 
-      if( from > maxExtent ) { from = maxExtent }
-      if( to < minExtent ) { to = minExtent }
+      if(from > maxExtent ) { from = maxExtent }
+      if(to < minExtent ) { to = minExtent }
 
       if (to <= from ) {
         to = from;
@@ -64,25 +47,35 @@
       $( "#offer-grant-slider" ).slider( "values", [ from, to ] );
     }
 
-    function setOfferGrantTextFields(from, to, roundValue) {
+    function setOfferGrantTextFields(from, to) {
 
-      if (!roundValue) {
-        roundValue = 1;
-      }
+      var fromTextVal = from;
+      var toTextVal = to;
 
-      from = roundToNearest( from.toFixed(2), roundValue, false );
-      to = roundToNearest( to.toFixed(2), roundValue, true );
+      if( from <= minExtent ) { fromTextVal = ""; }
+      if( to >= maxExtent ) { toTextVal = ""; }
 
-      $("#offer_grant_from").val( from );
-      $("#offer_grant_to").val( to );
+      $("#offer_grant_from").val( fromTextVal );
+      $("#offer_grant_to").val( toTextVal );
     }
 
     function updateGrantRangeDesc() {
-      var str = '&pound;' + $("#offer_grant_from").val() + ' - &pound;' + $("#offer_grant_to").val();
+
+      var from = $("#offer_grant_from").val();
+      var to = $("#offer_grant_to").val();
+
+      from = formatCurrency(from);
+
+      if (parseInt(to) == maxExtent || to == "") {
+        to = formatCurrency(maxExtent) + "+";
+      } else {
+        to = formatCurrency(to);
+      }
+
+      var str = 'Projects with total grant amount: <br/>' + from + ' to ' + to;
       $("#grant-range-desc").html( str );
     }
 
-    step = (range / 200);
 
     $( "#offer-grant-slider" ).slider({
       range: true,
@@ -90,7 +83,7 @@
       max: maxExtent,
       step: step,
       slide: function( event, ui ) {
-        setOfferGrantTextFields(ui.values[0], ui.values[1], roundValue );
+        setOfferGrantTextFields(ui.values[0], ui.values[1]);
         updateGrantRangeDesc();
       },
       stop: function( event, ui ) {
@@ -100,7 +93,7 @@
 
     $("#reset-grants").click( function() {
       setSliderValues(minExtent, maxExtent);
-      setOfferGrantTextFields(minExtent, maxExtent, roundValue);
+      setOfferGrantTextFields(minExtent, maxExtent);
       $("form#faceted-search").submit();
     });
 
@@ -109,8 +102,7 @@
     //
     setOfferGrantTextFields(
       $( "#offer-grant-slider" ).slider("values", 0),
-      $( "#offer-grant-slider" ).slider("values", 1),
-      roundValue
+      $( "#offer-grant-slider" ).slider("values", 1)
     );
 
     updateGrantRangeDesc();

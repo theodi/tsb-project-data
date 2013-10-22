@@ -54,7 +54,19 @@
     }
 
     function updateDescription() {
-      var str = moment.utc($("#date_from").val()).format("MMM YYYY") + ' - ' + moment.utc($("#date_to").val()).format("MMM YYYY")
+
+      var fromStr = $("#date_from").val();
+      var toStr = $("#date_to").val();
+
+      if (fromStr == "") {
+        fromStr = moment.utc(minExtentDate).format("MMM YYYY");
+      }
+
+      if(toStr == "") {
+        toStr = moment.utc(maxExtentDate).format("MMM YYYY");
+      }
+
+      var str = 'Projects whose duration overlaps: <br/>' + moment.utc(fromStr).format("MMM YYYY") + ' - ' + moment.utc(toStr).format("MMM YYYY");
       $("#date-range-desc").html( str );
     }
 
@@ -62,9 +74,21 @@
       return minExtentMoment.clone().add('months', noOfMonths).format("YYYY-MM-DD");
     }
 
-    function setDateTextFields(monthsFrom, monthsTto) {
-      $("#date_from").val( monthsToISODateString(monthsFrom) );
-      $("#date_to").val( monthsToISODateString(monthsTto) );
+    function setDateTextFields(monthsFrom, monthsTo) {
+
+      if( monthsFrom <= 0 ) {
+        $("#date_from").val("");
+      }
+      else {
+        $("#date_from").val( monthsToISODateString(monthsFrom) );
+      }
+
+      if( monthsTo >= extentInMonths ) {
+        $("#date_to").val("");
+      }
+      else {
+        $("#date_to").val( monthsToISODateString(monthsTo) );
+      }
     }
 
     $( "#date-slider" ).slider({

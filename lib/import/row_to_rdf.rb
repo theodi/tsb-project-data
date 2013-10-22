@@ -266,6 +266,11 @@ module Import
           prod_uri = Vocabulary::TSBDEF["concept/product/#{product_code}"]
           comp.product_uri = prod_uri
         end
+        budget_sub_area_code = BudgetSubArea::BUDGET_SUB_AREA_CODES[subarea]
+        if budget_sub_area_code
+          sub_area_uri = Vocabulary::TSBDEF["concept/budget-area/#{budget_sub_area_code}"]
+          comp.budget_sub_area_uri = sub_area_uri
+        end
 
 
       end

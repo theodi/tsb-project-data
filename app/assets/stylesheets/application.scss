@@ -27,6 +27,7 @@ $gray-even-lighter:  lighten(#000, 97%);
 @import "advanced-resource-details";
 
 // pages
+@import "home-page";
 @import "projects-page";
 @import "project-page";
 @import "organizations-page";
@@ -34,7 +35,7 @@ $gray-even-lighter:  lighten(#000, 97%);
 @import "data-page";
 @import "error-page";
 @import "sparql-page";
-@import "home-page";
+
 @import "resources-page";
 @import "concept-page";
 @import "region-page";

@@ -1,6 +1,7 @@
 !!! 5
 /[if lte IE 8] <html class="ie ie8" lang="en">
-<!--[if gt IE 8]><!-->
+/[if IE 9] <html class="ie ie9" lang="en">
+<!--[if gt IE 9]><!-->
 %html{:lang => 'en'}<>
   <!--<![endif]-->
   %head
@@ -12,7 +13,14 @@
 
     = yield :head
 
+    /[if lte IE 8]
+      %script{src: "http://html5shiv.googlecode.com/svn/trunk/html5.js"}
+      = javascript_include_tag "respond.min.js"
+
     = javascript_include_tag :application
+
+    /[if lte IE 8]
+      = javascript_include_tag "respond.min.js"
 
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
   

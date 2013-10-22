@@ -1,6 +1,7 @@
 !!! 5
 /[if lte IE 8] <html class="ie ie8" lang="en">
-<!--[if gt IE 8]><!-->
+/[if IE 9] <html class="ie ie9" lang="en">
+<!--[if gt IE 9]><!-->
 %html{:lang => 'en'}<>
   <!--<![endif]-->
   %head
@@ -10,13 +11,13 @@
 
     = stylesheet_link_tag :application
 
-    %link{rel:"stylesheet", href:"//cdn.leafletjs.com/leaflet-0.6.4/leaflet.css"}
-    %link{rel:"stylesheet", href:"//api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.standalone.css"}
-
-    %script{src: "//cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"}
-    %script{src: "//api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.standalone.js"}
+    /[if lte IE 8]
+      %script{src: "http://html5shiv.googlecode.com/svn/trunk/html5.js"}
+      = javascript_include_tag "respond.min.js"
 
     = javascript_include_tag :application
+
+    = render "application/leaflet_assets"
 
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
   %body

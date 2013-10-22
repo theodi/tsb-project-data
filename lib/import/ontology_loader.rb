@@ -3,7 +3,7 @@ module Import
 
     def self.prepare_ontology
       input_file = File.join(Rails.root, 'data', 'input-data', 'ontology.xlsx')
-      output_file = File.join(Rails.root, 'public', 'dumps', 'ontology.nt')
+      output_file = File.join(TsbProjectData::DUMP_OUTPUT_PATH, 'ontology.nt')
 
       excel = Roo::Excelx.new(input_file)
       graph = RDF::Graph.new

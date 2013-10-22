@@ -76,7 +76,7 @@ TsbProjectData::Application.configure do
   end
 
   TsbProjectData::DATA_ENDPOINT = 'http://sparql.tsb.swirrl.com/tsb/data'
-
+  TsbProjectData::DUMP_OUTPUT_PATH = File.join(Rails.root, '../', 'shared', 'dumps')
   Tripod.configure do |config|
     config.update_endpoint = 'http://sparql.tsb.swirrl.com/tsb/update'
   end

@@ -255,7 +255,7 @@ namespace :db do
   desc 'create csv dump. This also warms up the cache'
   task create_csv_dump: :environment do
     output_csv = Project.generate_csv(Search.new().results(unpaginated: true))
-    File.open(File.join(Rails.root, 'public', 'dumps', 'projects.csv'), 'w') do |f|
+    File.open(File.join(TsbProjectData::DUMP_OUTPUT_PATH, 'projects.csv'), 'w') do |f|
       f.write(output_csv)
     end
   end

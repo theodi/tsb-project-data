@@ -3,7 +3,7 @@ module Import
 
 # create concept scheme for enterprise sizes
     def self.create_data
-      output_file = File.join(Rails.root, 'public', 'dumps', 'legal_entity_forms.nt')
+      output_file = File.join(TsbProjectData::DUMP_OUTPUT_PATH, 'legal_entity_forms.nt')
 
       graph = RDF::Graph.new
       # concept scheme

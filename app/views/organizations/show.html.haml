@@ -40,7 +40,7 @@
           %div SIC classes
           %div
             - if organization.sic_classes.any?
-              = organization.sic_classes.map { |s| "#{link_to s.label, '#'}" }.join(', ').html_safe
+              = organization.sic_classes.map { |s| "#{link_to s.label, resource_path_from_uri(s.uri)}" }.join(', ').html_safe
             - else
               \-
 

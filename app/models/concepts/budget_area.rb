@@ -1,10 +1,19 @@
 class BudgetArea
-  include TsbResource
-  rdf_type Vocabulary::TSBDEF["BudgetArea"]
+  include Concept
+  
+  concept_scheme_uri Vocabulary::TSBDEF["concept-scheme/budget-areas"]
+#  rdf_type Vocabulary::TSBDEF["BudgetArea"]
 
-  DATASET_SLUG = "budget-areas"
+  #DATASET_SLUG = "budget-areas"
 
-  graph_uri "http://#{PublishMyData.local_domain}/graph/#{BudgetArea::DATASET_SLUG}"
+  #graph_uri "http://#{PublishMyData.local_domain}/graph/#{BudgetArea::DATASET_SLUG}"
+  
+  def initialize(uri, graph_uri=nil)
+    super(uri,graph_uri)
+    self.rdf_type = self.rdf_type.push(Vocabulary::TSBDEF["BudgetArea"])
+    self.in_scheme = self.class.resource_concept_scheme_uri
+  
+  end
 
 
   BUDGET_AREA_CODES = {

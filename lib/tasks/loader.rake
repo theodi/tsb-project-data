@@ -20,6 +20,7 @@ namespace :loader do
     Import::OntologyLoader.prepare_ontology
   end
 
+
   # params:
   #  * INPUT_FILENAME: file to load
   #  * REPLACE_SUPPORTING: load supporting data? default false.
@@ -68,6 +69,12 @@ namespace :loader do
     puts ">>> clearing cache..."
     `echo 'flush_all' | nc localhost 11211`
     puts ">>> time elasped #{Time.now - start_time}s"
+
+    puts ">>> generating data dump (and warming cache)"
+    Rake::Task['db:create_csv_dump']
+
+    puts ">>> time elasped #{Time.now - start_time}s"
+    puts "FINISHED."
 
   end
 end

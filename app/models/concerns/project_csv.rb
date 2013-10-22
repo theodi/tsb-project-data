@@ -29,9 +29,19 @@ module ProjectCsv
     results_array
   end
 
-  def all_project_data_query(uri)
+  def generate_csv(unpaginated_results)
+    CSV.generate(:row_sep => "\r\n") do |csv|
+      #headers
+      csv << Project.csv_headers
 
-    Rails.logger.debug(" getting all project data for #{uri.to_s}")
+      #data
+      unpaginated_results.each do |result|
+        Project.csv_data(result.uri).each { |row| csv << row }
+      end
+    end
+  end
+
+  def all_project_data_query(uri)
 
     "
     PREFIX tsb: <http://tsb-projects.labs.theodi.org/def/>

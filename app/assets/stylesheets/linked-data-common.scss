@@ -11,7 +11,7 @@ main.advanced header {
       float:right;
       width: 263px;
       margin-top:7px;
-      @include tsb-bootstrap-btn($data-accent-color, #fff);
+      @include tsb-bootstrap-btn($data-accent-color, #fff); // reversed
       span { float:left; margin-top:4px; margin-right:10px; font-size:26px; }
       .content {
         text-align:left;

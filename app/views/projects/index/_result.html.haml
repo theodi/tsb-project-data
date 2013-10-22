@@ -33,4 +33,4 @@
     .result-participants-links
       %div.lbl Participants
       %div
-        = (0...project.participant_uris.length).collect { |i| link_to project.participant_labels[i], resource_path_from_uri(project.participant_uris[i]) }.join(', ').html_safe
+        = project_participants_from_search_result(project)

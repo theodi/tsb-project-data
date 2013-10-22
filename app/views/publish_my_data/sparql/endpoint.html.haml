@@ -1,0 +1,121 @@
+:ruby
+  @advanced_section = true
+  page_title "SPARQL Endpoint"
+
+- content_for :header do
+  .contents
+    %h3
+      SPARQL
+    - if @sparql_query
+      %h1 Query Results
+    - else
+      %h1 Run a Query
+
+- content_for :advanced_footer do
+  .minimal
+    .formats
+      - if @error_message || (!@sparql_query) || @sparql_query.query_type == :unknown
+        &nbsp;
+
+      - else
+        %span Get these results as:
+        -if @sparql_query.query_type == :select
+          %ul.formats
+            %li= link_to_sparql_results_format("XML", "xml", @sparql_query.query)
+            %li= link_to_sparql_results_format("JSON", "json", @sparql_query.query)
+            %li= link_to_sparql_results_format("CSV", "csv", @sparql_query.query)
+            %li= link_to_sparql_results_format("Text", "text", @sparql_query.query)
+
+        -elsif @sparql_query.query_type == :construct || @sparql_query.query_type == :describe
+          %ul.formats
+            %li= link_to_sparql_results_format( "N-triples", "nt", @sparql_query.query )
+            %li= link_to_sparql_results_format( "Turtle", "ttl", @sparql_query.query )
+            %li= link_to_sparql_results_format( "RDF/XML", "rdf", @sparql_query.query )
+
+        -elsif @sparql_query.query_type == :ask
+          %ul.formats
+            %li= link_to_sparql_results_format( "JSON", "json", @sparql_query.query )
+            %li= link_to_sparql_results_format( "XML", "xml", @sparql_query.query )
+            %li= link_to_sparql_results_format( "Text", "text", @sparql_query.query )
+
+%article#sparql
+  - if @sparql_query || @error_message
+    %section.results
+      - if @error_message
+        #error-message
+          %h3 Sorry, your query failed to run.
+          %p= @error_message
+
+      - else
+        - unless @sparql_query.query_type == :select
+          - # not a select
+          #results.ascii
+            %pre~ @sparql_query_result.to_s
+
+        - else
+          - #selects
+          - #no script fallback is just the ascii-art version (paginated)
+          %noscript
+            :scss
+              #js-grid-results {
+                display:none;
+              }
+
+            %h3.results Results
+            #results.ascii.select
+              %pre~ @sparql_query_result.to_s
+            .pagination
+              = link_to("Previous #{@pagination_params.per_page} results".html_safe, params.merge({:page => (@pagination_params.page-1)}), class: 'previous' ) if @pagination_params.page > 1
+              = link_to("Next #{@pagination_params.per_page} results".html_safe, params.merge({:page => (@pagination_params.page+1)}), class: 'next' ) if @more_pages
+
+          - #js version here:
+          #js-grid-results
+            .grid-status
+              .status-value
+              = image_tag("publish_my_data/small-spinner.gif", alt: "busy", style: "display:none", class: "busy")
+
+            #results-grid.data-grid
+              - # results go in here.
+            .grid-footer
+              .footer-content
+                %a.download-csv{href: sparql_endpoint_url(format: 'csv', query: @sparql_query.query)}
+                  %i.icon-download
+                  Download Results as CSV
+
+            :javascript
+              // use this instead of $(function(){}) to fix slick grid stylesheet load issues.
+              $(window).load(function() {
+                var encodedQuery = "#{CGI.escape(@sparql_query.query)}"; // note that we encode on the server so we don't hit the multiline JS prob
+                new Swirrl.SparqlResultsGrid(encodedQuery);
+              });
+
+  %section.query
+
+    - if @sparql_query
+      %h3 Edit the query
+    - else
+      %h3 Enter a query
+
+    = render 'publish_my_data/sparql/form'
+
+  %footer.api
+    - query_params = { :query => params[:query] }.merge(@interpolations||{})
+    %h3 Permalink
+    %code.click-to-select.permalink
+      = sparql_endpoint_url(query_params)
+
+    - if @sparql_query && !@error_message
+
+      %h3 API
+      %div.api-links
+        %p
+          %span
+            Request this
+            %strong complete set
+            of results as
+          = render 'publish_my_data/sparql/formats_dropdown', :query_params => query_params
+          %span
+            by issuing an HTTP GET request to the following URL:
+
+        %code.click-to-select
+          = sparql_endpoint_url(query_params.merge(:format => 'format'))

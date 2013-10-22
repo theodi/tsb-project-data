@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/Swirrl/publish_my_data.git
-  revision: 3ddafb315f40dbaf36cb52ddd6d6904354f9465a
+  revision: 4eeea483694fdb3e5399e85190c01ff12d674394
   branch: master
   specs:
     publish_my_data (1.0.3)

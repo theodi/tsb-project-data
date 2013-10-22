@@ -95,7 +95,6 @@ class Search
 
       Rails.logger.debug search.to_json
     end
-    Rails.logger.debug(r.inspect)
     r
   end
 
@@ -162,7 +161,8 @@ class Search
 
   def add_facet_with_filter(search, field)
     search.facet(field) do |facet|
-      facet.terms field # add a facet term for this field
+      facet.terms(field, size: 100)
+       # add a facet term for this field
       add_facet_filter(field, facet) # add a facet filter
     end
   end

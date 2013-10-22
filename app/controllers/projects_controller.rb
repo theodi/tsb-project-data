@@ -9,11 +9,13 @@ class ProjectsController < ApplicationController
     respond_to do |format|
 
       format.html do
+        Rails.logger.debug "FILTERED SEARCH"
         @projects = @search.results
+        Rails.logger.debug "UNFILTERED SEARCH"
         @search_unfiltered = Search.new()
         @projects_unfiltered = @search_unfiltered.results
         @min_index = (@search.page - 1) * @search.per_page + 1
-        @max_index = (@search.page - 1) * @search.per_page + @search.results.length
+        @max_index = (@search.page - 1) * @search.per_page + @projects.total
       end
 
       format.atom do

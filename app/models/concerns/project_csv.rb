@@ -8,9 +8,6 @@ module ProjectCsv
   # this is a class method, so can be called on Tire search results without instantiating a tripod project.
   def csv_data(uri)
     results = Tripod::SparqlClient::Query.select( Project.all_project_data_query(uri) )
-
-    Rails.logger.debug("no of rows: #{results.length}")
-
     results_array = results.collect do |result|
 
       row = []

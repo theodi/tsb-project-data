@@ -3,7 +3,7 @@
 
   > div:first-child {
     @include make-md-column(8);
-    @extend .container;
+ //   @extend .container;
     padding-top: 15px;
     padding-bottom: 15px;
 

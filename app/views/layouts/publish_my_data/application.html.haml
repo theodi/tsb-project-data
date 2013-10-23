@@ -19,11 +19,8 @@
 
     = javascript_include_tag :application
 
-    /[if lte IE 8]
-      = javascript_include_tag "respond.min.js"
-
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
-  
+
   %body
     /[if lt IE 8]
       = render 'publish_my_data/shared/browser_warning'
@@ -41,7 +38,7 @@
           = form_tag '/projects', method: 'get' do
             .form-group
               = submit_tag 'Search'
-              = text_field_tag :search_string, nil, :placeholder => 'Search projects...'
+              = text_field_tag :search_string, nil, :placeholder => 'Search projects...', id: 'top-nav-search-string'
 
       %main{class: (@advanced_section ? 'advanced' : '') }
         = render 'application/nav'

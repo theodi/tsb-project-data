@@ -4,7 +4,7 @@
 
   #project-main {
     @include make-md-column(9);
-    @extend .container;
+//    @extend .container;
 
     section {
       padding: 18px 0 24px;
@@ -89,9 +89,16 @@
 
     #project-grant-summary {
       > div {
-        > div {
-          @include make-md-column(6);
-        }
+        @include make-row();
+      }
+
+      .project-participant-grant-summary {
+        @include make-md-column(12);
+      }
+
+      .project-participant-grant-figures {
+        @include make-md-column(12);
+        padding: 0;
       }
     }
 
@@ -174,23 +181,29 @@
             @include make-md-column(6);
           }
         }
+
+        .project-participant-grant-summary {
+          @include make-md-column(12);
+        }
+        
       }
     }
 
     .project-grant-details {
+      @include clearfix();
+
       .fixed {
-        font-size: 28px;
+        font-size: 24px;
         @include clearfix();
-        margin-bottom: 6px;
 
         .pounds, .pence {
           float: left;
         }
 
         .pence {
-          font-size: 16px;
+          font-size: 14px;
           margin-left: 1px;
-          padding-top: 13px;
+          padding-top: 12px;
         }
 
       }
@@ -221,6 +234,64 @@
         }
       }
 
+    }
+
+    .project-participant-grant-summary {
+      @include make-md-column(12);
+
+      .stacked-progress-bar-cost {
+        position: relative;
+        height: 30px;
+        background: #ddd;
+        overflow: hidden;
+        width: 100%;
+        margin: 6px 0;
+        padding: 0;
+
+        .stacked-progress-bar-grant {
+          height: 100%;
+          background: $light-accent-color;
+
+          .stacked-progress-bar-payments {
+            height: 100%;
+            background: $accent-color;
+          }
+        }
+      }
+    }
+
+    .project-participant-grant-figures {
+      > div {
+        @include make-md-column(3);
+        padding-left: 0;
+
+        @include grant-figure();
+        font-size: 24px;
+
+        &.project-participant-payments-figure {
+          color: $accent-color;
+        }
+
+        &.project-participant-grant-figure {
+          color: $light-accent-color;
+        }
+
+        &.project-participant-cost-figure {
+          color: $grey-label; 
+        }
+
+        .pence {
+          padding-top: 12px;
+        }
+
+        .fixed {
+          @include clearfix();
+        }
+
+        p {
+          font-size: 14px;
+        }
+      }
     }
 
   }

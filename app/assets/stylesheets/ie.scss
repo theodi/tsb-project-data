@@ -13,7 +13,7 @@ html.ie {
       }
     }
 
-    #projects-page #results ul#results-list {
+    ul#results-list, ul#datasets-list, #concept-sidebar ul, #region-sidebar ul, .supporting-data ul {
       list-style-type: none;
       padding: 0;
     }

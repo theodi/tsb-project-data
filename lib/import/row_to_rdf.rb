@@ -38,6 +38,7 @@ module Import
         description = row["Project Description"].to_s
         # clean up description - replace double line breaks with space chars.
         description = "No description available" unless description && description.length > 0
+        description = "No description available" if description.strip == "Awaiting Public Summary"
         description.gsub!(/\n\n/,' ')
         p.description = description
         p.project_number = proj_num

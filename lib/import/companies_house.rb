@@ -56,7 +56,7 @@ module Import
       end
 
       # write result to file
-      output_file = File.join(Rails.root, 'public', 'dumps', 'company_to_sic_code.json')
+      output_file = File.join(TsbProjectData::DUMP_OUTPUT_PATH, 'company_to_sic_code.json')
       f = File.new(output_file,'w')
       f << code_hash.to_json
       f.close

@@ -4,7 +4,7 @@ module Import
 
 # create concept scheme for enterprise sizes
     def self.create_data
-      output_file = File.join(Rails.root, 'public', 'dumps', 'cost_categories.nt')
+      output_file = File.join(TsbProjectData::DUMP_OUTPUT_PATH, 'cost_categories.nt')
 
       graph = RDF::Graph.new
 

@@ -4,7 +4,7 @@ module Import
 
 # create concept scheme for project status values
     def self.create_data
-      output_file = File.join(Rails.root, 'public', 'dumps', 'project_statuses.nt')
+      output_file = File.join(TsbProjectData::DUMP_OUTPUT_PATH, 'project_statuses.nt')
 
       graph = RDF::Graph.new
 

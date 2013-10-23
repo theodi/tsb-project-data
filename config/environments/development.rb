@@ -44,6 +44,7 @@ TsbProjectData::Application.configure do
   end
 
   TsbProjectData::DATA_ENDPOINT = 'http://localhost:3030/tsb_project_data_dev/data'
+  TsbProjectData::DUMP_OUTPUT_PATH = File.join(Rails.root, 'public', 'dumps')
 
   Tripod.configure do |config|
     config.update_endpoint = 'http://127.0.0.1:3030/tsb_project_data_dev/update'

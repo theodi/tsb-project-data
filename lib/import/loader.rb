@@ -8,7 +8,7 @@ module Import
     def self.prepare_project_data(input_filename)
 
       input_file = File.join(Rails.root, 'data', 'input-data', input_filename)
-      output_file = File.join(Rails.root, 'public', 'dumps', 'project_data.nt')
+      output_file = File.join(TsbProjectData::DUMP_OUTPUT_PATH, 'project_data.nt')
       #sic_hash_file = File.join(Rails.root, 'data', 'sic', 'sic.json')
       org_sic_hash_file = File.join(Rails.root, 'data', 'sic', 'company_to_sic_code.json')
 
@@ -20,7 +20,7 @@ module Import
       # hash of all resources - will build it up gradually from spreadsheet then serialize them at the end
       # the key is the URI of the resource
       resources = {}
-      
+
       #sic_hash = JSON.parse(File.read(sic_hash_file))
       # each entry has company number as key and an array of sic codes as value
       org_sic_hash = JSON.parse(File.read(org_sic_hash_file))

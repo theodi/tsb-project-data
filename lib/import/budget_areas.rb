@@ -4,15 +4,15 @@ module Import
 
 # create concept scheme for budget areas
     def self.create_data
-      
+
       input_file = File.join(Rails.root, 'data', 'input-data', 'data-definitions.xlsx')
-      output_file = File.join(Rails.root, 'public', 'dumps', 'budget_areas.nt')
+      output_file = File.join(TsbProjectData::DUMP_OUTPUT_PATH, 'budget_areas.nt')
 
       excel = Roo::Excelx.new(input_file)
       excel.default_sheet = "Reference Data"
-      
+
       graph = RDF::Graph.new
-      
+
       code2uri = {}
 
       # URI is  /def/concept/budget-area/{code}
@@ -24,10 +24,10 @@ module Import
         b.notation = code
         code2uri[code] = b
       end
-      
+
       for i in 66..90
   # do subareas from spreadsheet
-    
+
         code = excel.cell(i,2).strip
         label = excel.cell(i,3).strip
         definition = excel.cell(i,4)
@@ -41,23 +41,23 @@ module Import
           # broader/narrower links
           parentlabel = excel.cell(i,5).strip
           parentcode = BudgetArea::BUDGET_AREA_CODES[parentlabel]
-      
+
           parent = code2uri[parentcode]
           p.broader = parent.uri
           parent.narrower = parent.narrower.push(p.uri)
-        
+
         end
 
 
 
 
       end
-      
+
       # output the data
       code2uri.each_value do |p|
         p.repository.each_statement {|s| graph << s}
       end
-  
+
 
       # write graph to file
       File.open(output_file,'w') {|f| f << graph.dump(:ntriples)}

@@ -24,14 +24,15 @@
   #region-main
     = render "publish_my_data/resources/show/primary", resource: region, projects: projects
 
-    #region-map-container
-      #region-map
-        #region-map-canvas
-    = render "regions/show/map_js"
+    / map excluded for now until we can get regions GeoJSON
+    / #region-map-container
+    /   #region-map
+    /     #region-map-canvas
+    / = render "regions/show/map_js"
 
     = render "publish_my_data/resources/show/secondary", resource: region, projects: projects
     = render "publish_my_data/resources/show/grant_summary", resource: region, projects: projects
     = render "publish_my_data/resources/show/search", resource: region, search_params: search_params
-    
+
   = render "publish_my_data/resources/show/sidebar", resource: region
 

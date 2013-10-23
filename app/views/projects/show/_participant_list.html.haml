@@ -1,25 +1,7 @@
 %ul#project-participants-list
-  - project.participants.each do |participant|
-    %li
-      .project-participant-header
-        .project-participant-name
-          %div
-            - if participant.uri == project.leader.uri
-              Lead organisation
-            - else
-              Participant organisation
-          %div
-            = link_to resource_path_from_uri(participant.uri) do
-              = participant.label
+  - if project.leader
+    = render "projects/show/participant_list_item", project: project, participant: project.leader
 
-
-      .project-participant-grant.project-grant-details
-
-        .project-participant-offer-grant
-          %div Grant
-          = render "projects/show/grant/offer_grant", offer_grant: project.offer_grant_sum_for_organization(participant), offer_cost: project.offer_cost_sum_for_organization(participant)
-          
-        .project-participant-payments
-          %div Payments to date
-          = render "projects/show/grant/payments_to_date", payments_to_date: project.payments_to_date_sum_for_organization(participant), offer_grant: project.offer_grant_sum_for_organization(participant)
-          
+  - project.participants.sort{ |a, b| project.offer_grant_sum_for_organization(b) <=> project.offer_grant_sum_for_organization(a) }.each do |participant|
+    - if project.leader.uri != participant.uri
+      = render "projects/show/participant_list_item", project: project, participant: participant    

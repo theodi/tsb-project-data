@@ -29,7 +29,12 @@
     var step = 25000;
 
     function formatCurrency(num) {
-      return formatNumber(num,0,',','','£','','','');
+      if(num) {
+        return '£' + addCommas(num).toString();
+      }
+      else {
+        return '£0';
+      }
     }
 
     function setSliderValues(from, to) {

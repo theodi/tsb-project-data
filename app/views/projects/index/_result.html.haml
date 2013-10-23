@@ -25,9 +25,9 @@
     .duration
       .lbl Duration
       %div
-        #project-start-date= DateTime.parse(project.start_date).strftime("%-d %b %Y") if project.start_date.present?
+        .project-start-date= DateTime.parse(project.start_date).strftime("%-d %b %Y") if project.start_date.present?
         \-
-        #project-end-date= DateTime.parse(project.end_date).strftime("%-d %b %Y") if project.start_date.present?
+        .project-end-date= DateTime.parse(project.end_date).strftime("%-d %b %Y") if project.start_date.present?
 
   .result-participants
     .result-participants-links

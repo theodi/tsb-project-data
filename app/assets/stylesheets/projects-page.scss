@@ -288,7 +288,7 @@
 
           .duration {
             @include make-md-column(9);
-            #project-start-date, #project-end-date {
+            .project-start-date, .project-end-date {
               display: inline-block;
               font-size: 16px;
             }

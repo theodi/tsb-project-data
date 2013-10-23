@@ -347,7 +347,7 @@ module Import
           org_number = raw_number.strip
         end
 
-        if ["0","","Exempt Charity","NHS Hospital", "N/A", "null"].include?(org_number)
+        if ["0","","Exempt Charity","NHS Hospital", "N/A", "null","Null"].include?(org_number)
           org_number = nil
         else
           # normalise the format

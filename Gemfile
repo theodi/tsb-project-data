@@ -14,6 +14,7 @@ gem 'publish_my_data', :git => "https://github.com/Swirrl/publish_my_data.git", 
 gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git", :branch => 'ead49c'
 
 group :assets do
+  gem 'therubyracer', platforms: :ruby
   gem 'uglifier'
   gem 'yui-compressor' #note:requires java
 end

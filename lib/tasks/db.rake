@@ -9,7 +9,14 @@ namespace :db do
     )
   end
 
-  def replace_graph(graph_uri, filename, content_type='text/plain')
+  def replace_graph(graph_uri, filename, third_party=false, content_type='text/plain')
+
+    if third_party
+      path = File.join(Rails.root, 'public', 'dumps', 'third_party', filename)
+    else
+      path = File.read(File.join(TsbProjectData::DUMP_OUTPUT_PATH, filename))
+    end
+
 
     puts "loading #{filename} -> #{graph_uri}"
     url = "#{TsbProjectData::DATA_ENDPOINT}?graph=#{graph_uri}"
@@ -17,7 +24,7 @@ namespace :db do
     RestClient::Request.execute(
       :method => :put,
       :url => url,
-      :payload => File.read(File.join(Rails.root, 'public', 'dumps', filename)),
+      :payload => File.read(path),
       :headers => {content_type: content_type},
       :timeout => 300
     )
@@ -284,18 +291,18 @@ namespace :db do
     replace_graph(TsbProjectData::ONTOLOGY_GRAPH, 'ontology.nt')
 
     # load external ontologies
-    replace_graph(TsbProjectData::ORG_ONTOLOGY_GRAPH, 'third_party/org.ttl', 'text/turtle')
-    replace_graph(TsbProjectData::DCTERMS_ONTOLOGY_GRAPH,'third_party/dcterms.rdf', 'application/rdf+xml')
-    replace_graph(TsbProjectData::VCARD_ONTOLOGY_GRAPH,'third_party/vcard.ttl', 'text/turtle')
-    replace_graph(TsbProjectData::FOAF_ONTOLOGY_GRAPH,'third_party/foaf.rdf', 'application/rdf+xml')
-    replace_graph(TsbProjectData::POSTCODE_ONTOLOGY_GRAPH,'third_party/postcode.owl', 'application/rdf+xml')
-    replace_graph(TsbProjectData::GEO_ONTOLOGY_GRAPH,'third_party/wgs84_pos.rdf', 'application/rdf+xml')
-    replace_graph(TsbProjectData::ADMINGEO_ONTOLOGY_GRAPH,'third_party/admingeo.ttl', 'text/turtle')
-    replace_graph(TsbProjectData::RDF_ONTOLOGY_GRAPH,'third_party/rdf.rdf', 'application/rdf+xml')
-    replace_graph(TsbProjectData::RDFS_ONTOLOGY_GRAPH,'third_party/rdfs.rdf', 'application/rdf+xml')
-    replace_graph(TsbProjectData::OWL_ONTOLOGY_GRAPH,'third_party/owl.rdf', 'application/rdf+xml')
-    replace_graph(TsbProjectData::SKOS_ONTOLOGY_GRAPH,'third_party/skos.rdf', 'application/rdf+xml')
-    replace_graph(TsbProjectData::TIMELINE_ONTOLOGY_GRAPH,'third_party/timeline.ttl', 'text/turtle')
+    replace_graph(TsbProjectData::ORG_ONTOLOGY_GRAPH, 'org.ttl', true, 'text/turtle')
+    replace_graph(TsbProjectData::DCTERMS_ONTOLOGY_GRAPH,'dcterms.rdf',true, 'application/rdf+xml')
+    replace_graph(TsbProjectData::VCARD_ONTOLOGY_GRAPH,'vcard.ttl', true,  'text/turtle')
+    replace_graph(TsbProjectData::FOAF_ONTOLOGY_GRAPH,'foaf.rdf', true, 'application/rdf+xml')
+    replace_graph(TsbProjectData::POSTCODE_ONTOLOGY_GRAPH,'postcode.owl', true, 'application/rdf+xml')
+    replace_graph(TsbProjectData::GEO_ONTOLOGY_GRAPH,'wgs84_pos.rdf', true, 'application/rdf+xml')
+    replace_graph(TsbProjectData::ADMINGEO_ONTOLOGY_GRAPH, 'admingeo.ttl', true, 'text/turtle')
+    replace_graph(TsbProjectData::RDF_ONTOLOGY_GRAPH,'rdf.rdf', true, 'application/rdf+xml')
+    replace_graph(TsbProjectData::RDFS_ONTOLOGY_GRAPH,'rdfs.rdf', true, 'application/rdf+xml')
+    replace_graph(TsbProjectData::OWL_ONTOLOGY_GRAPH,'owl.rdf', true, 'application/rdf+xml')
+    replace_graph(TsbProjectData::SKOS_ONTOLOGY_GRAPH,'skos.rdf', true, 'application/rdf+xml')
+    replace_graph(TsbProjectData::TIMELINE_ONTOLOGY_GRAPH, 'timeline.ttl', true, 'text/turtle')
 
   end
 

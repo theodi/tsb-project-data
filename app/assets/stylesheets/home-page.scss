@@ -1,6 +1,10 @@
 #home-viz {
   height: 480px;
   background: #222222;
+
+  @media (max-width: $home-viz-max-width) {
+    display: none;
+  }
 }
 
 #home {

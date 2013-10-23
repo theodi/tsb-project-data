@@ -19,4 +19,3 @@
     .project-participant-payments
       %div Payments to date
       = render "projects/show/grant/payments_to_date", payments_to_date: project.payments_to_date_sum_for_organization(participant), offer_grant: project.offer_grant_sum_for_organization(participant)
-      

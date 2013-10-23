@@ -10,13 +10,33 @@
         = link_to resource_path_from_uri(participant.uri) do
           = participant.label
 
-  .project-participant-grant.project-grant-details
+  / .project-participant-grant.project-grant-details
 
-    .project-participant-offer-grant
-      %div Grant
-      = render "projects/show/grant/offer_grant", offer_grant: project.offer_grant_sum_for_organization(participant), offer_cost: project.offer_cost_sum_for_organization(participant)
+  /   .project-participant-offer-grant
+  /     %div Grant
+  /     = render "projects/show/grant/offer_grant", offer_grant: project.offer_grant_sum_for_organization(participant), offer_cost: project.offer_cost_sum_for_organization(participant)
       
-    .project-participant-payments
-      %div Payments to date
-      = render "projects/show/grant/payments_to_date", payments_to_date: project.payments_to_date_sum_for_organization(participant), offer_grant: project.offer_grant_sum_for_organization(participant)
-      
+  /   .project-participant-payments
+  /     %div Payments to date
+  /     = render "projects/show/grant/payments_to_date", payments_to_date: project.payments_to_date_sum_for_organization(participant), offer_grant: project.offer_grant_sum_for_organization(participant)
+
+  .project-participant-main
+    .project-participant-grant-summary
+      %div Grant summary
+      // #{((offer_grant.to_f / offer_cost) * 100).round}%
+      .stacked-progress-bar-cost{ style: "width: #{ ((project.offer_cost_sum_for_organization(participant).to_f / project.max_offer_cost) * 100).round(3) }%;" }
+        .stacked-progress-bar-grant{ style: "width: #{ ((project.offer_grant_sum_for_organization(participant).to_f / project.offer_cost_sum_for_organization(participant)) * 100).round(3) }%;" }
+          .stacked-progress-bar-payments{ style: "width: #{ ((project.payments_to_date_sum_for_organization(participant).to_f / project.offer_grant_sum_for_organization(participant)) * 100).round(3) }%;" }
+
+      .project-participant-grant-figures
+        .project-participant-payments-figure
+          = render "projects/show/grant/fixed_figure", figure: project.payments_to_date_sum_for_organization(participant)
+          %p Payments to date
+
+        .project-participant-grant-figure
+          = render "projects/show/grant/fixed_figure", figure: project.offer_grant_sum_for_organization(participant)
+          %p Grant amount
+
+        .project-participant-cost-figure
+          = render "projects/show/grant/fixed_figure", figure: project.offer_cost_sum_for_organization(participant)
+          %p Offer cost

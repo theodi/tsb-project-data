@@ -1,88 +1,62 @@
 #wrap > header {
+  #header {
+    padding: 8px 0 10px 0;
 
-  @extend .navbar;
-  @extend .navbar-static-top;
+    background-color: $global-header-bg-color;
+    color: $global-header-color;
 
-  background-color: $global-header-bg-color;
-  color: $global-header-color;
-
-  margin-bottom:0;
-
-  nav {
-    @extend .container;
-
-    a.home-link {
-      @extend .navbar-brand;
-      font-size: 32px;
-      color: white;
-      text-shadow: none;
-      &:hover {
-        color: white;
-        text-shadow: none;
-      }
+    &.home {
+      background-color: #222; // To match viz
     }
 
-    .label {
-      padding-top: 10px;
-      background-color: $accent-color;
-      position: relative;
-      left: 200px;
-    }
+    .header-container {
+      @extend .container;
 
-    form {
-      @extend .hidden-xs;
+      .header-row {
+        @include make-row();
 
-      @extend .navbar-form;
-      @extend .navbar-right;
+        #masthead {
+          float:left; padding-left:15px;
+        }
 
-      padding: 0;
-      margin-right: 0 !important;
+        form * { border:0; }
 
-      input {
-        font-size: 18px;
-        line-height: 1;
-      }
+        form {
+          float:left;
+          padding: 8px 15px 0 15px;
 
-
-      .form-group {
-        width: 300px;
-        float:right;
-
-        input[type="text"] {
-          @extend .form-control;
-          @include border-radius(0);
-          width: 180px;
-          float:right;
-          overflow: hidden;
-          border:0;
-          outline:0;
-          &:active {
-            border:0;
-            outline:0;
+          @media (min-width: 660px) {
+            float: right !important;
           }
-        }
 
-        input[type="submit"] {
-          @include tsb-button(#fff, $search-color);
-          float:right;
-          font-size: 16px;
-          padding-top:9px;
-          padding-bottom:9px;
+          button {
+            @include tsb-bootstrap-btn(#fff, $search-color);
+            padding-top:5px;
+            padding-bottom:5px;
+          }
+
+          .form-group {
+            display: inline-block;
+            margin-bottom: 0;
+            vertical-align: middle;
+
+            input[type="text"] {
+              @extend .form-control;
+              @include border-radius(0);
+              width: 180px;
+              float:right;
+              overflow: hidden;
+              border:0;
+              outline:0;
+              &:active {
+                border:0;
+                outline:0;
+              }
+            }
+          }
+
         }
       }
-
-      margin-right: 10px;
     }
-
-    .branding {
-      @extend .navbar-left;
-      // TODO: change size to match logo height;
-      @include navbar-vertical-align(48px);
-      margin: 12px 0 10px;
-    }
-  }
-
-  &.home {
-    background-color: #222; // To match viz
   }
 }

@@ -1,33 +1,42 @@
+/* element styling */
+html * {
+  border-radius: 0 !important
+}
+
 html, body {
   overflow-x: hidden;
   height: 100%;
-  background-color: $global-footer-bg-color;
   font-size: 18px;
 }
-
-
 
 h1, h2, h3 {
   //font-weight: lighter;
 }
 
-#wrap {
-
-  // uncomment for sticky footer
-  //
-  // min-height: 100%;
-  // height: auto !important;
-  // height: 100%;
-  // /* Negative indent footer by it's height */
-  // margin: 0 auto -60px;
-
-  // set the bg colour to white;
-  background-color: #fff;
-
-  main {
+.colouredbox {
+  div {
+    padding: 1px 15px 15px 15px ; background: #eee;
   }
+
+  @media (max-width: 1199px) {
+    div  {
+      padding:0;
+    }
+    padding: 1px 15px;
+    background: #eee;
+  }
+
 }
 
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -60px;       /* negative indent by footer height */
+  padding: 0 0 60px;        /* pad bottom by footer height */
+}
+
+footer  {   height: 60px; }
 
 a, a:hover, a:visited {
   color: $accent-color;
@@ -41,12 +50,4 @@ main.advanced {
   }
 }
 
-// // alternative h1 stripe
-// h1 {
-//   margin: 0 -9999px;
-//   padding: 20px 9999px;
-//   background: $header-color;
-//   color: white;
-//   margin-bottom: 20px;
-// }
 

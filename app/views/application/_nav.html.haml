@@ -1,18 +1,19 @@
 %nav
-  %ul
-    %li
-      %a{href:'/about'} About
-      - if @active_tab == 'About'
-        .arrow-down
+  .nav-container
+    %ul
+      %li
+        %a{href:'/about'} About
+        - if @active_tab == 'About'
+          .arrow-down
 
-    %li
-      %a{href:'/projects'} Browse
-      - if @active_tab == 'Browse'
-        .arrow-down
+      %li
+        %a{href:'/projects'} Browse
+        - if @active_tab == 'Browse'
+          .arrow-down
 
-    %li.advanced
-      %a{href:"/data"}
-        %span.primary Linked Data
-        %span.secondary Advanced users
-      - if @active_tab.nil? || @active_tab == 'Linked Data'
-        .arrow-down
+      %li.advanced
+        %a{href:"/data"}
+          %span.primary Linked Data
+          %span.secondary Advanced users
+        - if @active_tab.nil? || @active_tab == 'Linked Data'
+          .arrow-down

@@ -51,7 +51,6 @@
 
 @mixin tsb-bootstrap-btn($color, $background) {
   @extend .btn;
-  
   @include button-variant($color, $background, $background);
   @include border-radius(0);
   font-size:16px;

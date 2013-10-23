@@ -1,5 +1,8 @@
 main > nav {
-  @extend .container;
+  .nav-container {
+    @extend .container;
+  }
+
   @extend .navbar;
   @extend .navbar-default;
 

@@ -1,3 +1,4 @@
+
 #home-viz {
   height: 480px;
   background: #222222;
@@ -6,6 +7,7 @@
     display: none;
   }
 }
+
 
 #home {
 
@@ -71,7 +73,7 @@
         padding: 15px;
 
         a {
-          @include tsb-button(#fff,$search-color);
+          @include tsb-button(#fff, $search-color);
           font-size: 30px;
           padding: 15px 30px;
         }
@@ -128,4 +130,5 @@
       }
     }
   }
+
 }

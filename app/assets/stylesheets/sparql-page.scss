@@ -102,11 +102,11 @@ article#sparql {
       font-family: Monaco, Menlo, Consolas, 'Courier New', monospace;
     }
 
-    input[type=text] {
+    input[type="text"] {
       @extend .form-control;
     }
 
-    input[type=submit] {
+    input[type="submit"] {
       @include tsb-bootstrap-btn(#fff, $data-accent-color);
     }
   }

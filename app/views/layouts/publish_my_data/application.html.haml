@@ -6,9 +6,10 @@
   <!--<![endif]-->
   %head
     = render 'application/head'
-  %body{class: body_class}
+  %body{class: (@advanced_section ? 'advanced ' : '')}
     /[if lt IE 8]
       = render 'publish_my_data/shared/browser_warning'
+
     %article#wrap
       %header
         = render 'application/masthead', search: true

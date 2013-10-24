@@ -65,7 +65,7 @@
           border-right: 2px solid white;
         }
 
-        &:last-child {
+        &.resource-object {
           @include constrain();
           border-right:none;
         }

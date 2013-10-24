@@ -6,9 +6,9 @@
 @media (min-width: 480px) {
   #banner           {display:block;}
   #banner           {background:#1b1b1b;}
-    #banner img         {max-width: 100%;}
-    #banner .container      {padding-left: 0; padding-right: 0;} /* relies on generated image being  1,170px wide */
-  }
+  #banner img         {max-width: 100%;}
+  #banner .container      {padding-left: 0; padding-right: 0;} /* relies on generated image being  1,170px wide */
+}
 
 /* for desktop, on qualified browsers, show visualisation (requires modernizr svg) */
 @media (min-width: 960px) {

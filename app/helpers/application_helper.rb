@@ -15,11 +15,4 @@ module ApplicationHelper
     p
   end
 
-  def body_class
-    str = ""
-    str += (@advanced_section ? 'advanced ' : '')
-    str += 'home ' if params[:controller] == 'home' && params[:action] == 'index'
-    str
-  end
-
 end

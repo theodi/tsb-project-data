@@ -54,4 +54,8 @@ class Project
       .where("?uri <#{Vocabulary::TSBDEF.paidTo}> <#{organization.uri}>")
   end
 
+  def max_offer_cost
+    supported_by.collect(&:offer_cost).max
+  end
+
 end

@@ -1,0 +1,3 @@
+.fixed
+  .pounds &pound;#{number_with_delimiter figure.to_i}
+  .pence .#{"%.2d" % (figure.modulo(1).round(2) * 100).to_i}

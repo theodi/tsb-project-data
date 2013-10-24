@@ -98,8 +98,8 @@ module ProjectCsv
     ?stat rdfs:label ?project_status .
     ?d time:start ?start_date .
     ?d time:end ?end_date .
-    ?org_id rdfs:label ?org_name ;
-            tsb:companyNumber ?company_number .
+    ?org_id rdfs:label ?org_name .
+    OPTIONAL {?org_id tsb:companyNumber ?company_number} .
     OPTIONAL {
       ?org_id tsb:legalEntityForm ?legal_entity_form .
       ?legal_entity_form rdfs:label ?company_type .}
@@ -125,7 +125,7 @@ module ProjectCsv
     ?comp tsb:competitionCode ?competition_code .
     ?comp tsb:competitionYear ?competition_year .
     ?comp tsb:product ?prod .
-    ?prod rdfs:label ?product .
+    OPTIONAL {?prod rdfs:label ?product .}
     OPTIONAL {
       ?comp tsb:budgetArea ?budg_id .
       ?budg_id rdfs:label ?budget_area .}

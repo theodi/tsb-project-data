@@ -47,7 +47,11 @@
       #organization-about-tertiary
         #organization-legal
           %div Legal entity form
-          %div= link_to organization.legal_entity_form.label, resource_path_from_uri(organization.legal_entity_form.uri)
+          %div
+          - if organization.legal_entity_form
+            = link_to organization.legal_entity_form.label, resource_path_from_uri(organization.legal_entity_form.uri)
+          - else
+            \-
 
         #organization-region
           %div Region

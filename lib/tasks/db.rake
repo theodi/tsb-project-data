@@ -14,7 +14,7 @@ namespace :db do
     if third_party
       path = File.join(Rails.root, 'public', 'dumps', 'third_party', filename)
     else
-      path = File.read(File.join(TsbProjectData::DUMP_OUTPUT_PATH, filename))
+      path = File.join(TsbProjectData::DUMP_OUTPUT_PATH, filename)
     end
 
 

@@ -32,23 +32,23 @@
 
     :javascript
       $(function() {
-        function reloadVisualisation(){
-          var vis = document.getElementById("visualisation");
-          if ($(vis).is(':visible')) {
-            // $(vis).contentDocument.location.reload(true); // same domain version
-            vis.src = vis.src; // hack for cross-domain
+
+        if( $('html.ie9').length == 0 ) {
+          function reloadVisualisation(){
+            var vis = document.getElementById("visualisation");
+            if ($(vis).is(':visible')) {
+              // $(vis).contentDocument.location.reload(true); // same domain version
+              vis.src = vis.src; // hack for cross-domain
+            }
           }
+
+          $( window ).resize(
+            $.debounce( 500, function() {
+              reloadVisualisation();
+            })
+          );
         }
       });
-
-    /[if gt IE 9]
-      :javascript
-        // ie9 doens't like this (and IE8 doesn't show it)
-        $( window ).resize(
-          $.debounce( 500, function() {
-            reloadVisualisation();
-          })
-        );
 
     = render 'publish_my_data/shared/google_analytics'
 

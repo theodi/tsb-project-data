@@ -1,4 +1,4 @@
-main.advanced header {
+body.advanced #titlebar {
   .primary {
     @include make-md-column(8);
   }
@@ -26,8 +26,9 @@ main.advanced header {
 }
 
 article#dataset, article#ontology, article#concept-scheme {
-
   section.metadata {
+
+
     @include make-row();
     background: #eee;
 

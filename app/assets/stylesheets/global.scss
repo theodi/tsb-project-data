@@ -15,7 +15,7 @@ h1, h2, h3 {
 
 .colouredbox {
   div {
-    padding: 1px 15px 15px 15px ; background: #eee;
+    padding: 1px 15px 15px 15px ;
   }
 
   @media (max-width: 1199px) {
@@ -42,7 +42,7 @@ a, a:hover, a:visited {
   color: $accent-color;
 }
 
-main.advanced {
+body.advanced {
   div.container {
     a, a:hover, a:visited {
       color: $data-accent-color;

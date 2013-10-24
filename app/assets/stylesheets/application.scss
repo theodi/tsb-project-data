@@ -4,7 +4,7 @@
 
 // override some bootstrap defaults
 $icon-font-path: "/assets/bootstrap/";
-$navbar-height: 70px;
+$navbar-height: 60px;
 $gray-even-lighter:  lighten(#000, 97%);
 
 @import "bootstrap/bootstrap"; // bootstrap3 from pmd

@@ -27,10 +27,9 @@ body.advanced #titlebar {
 
 article#dataset, article#ontology, article#concept-scheme {
   section.metadata {
-
+    background:#eee;
 
     @include make-row();
-    background: #eee;
 
     h3 {
       font-weight:normal;

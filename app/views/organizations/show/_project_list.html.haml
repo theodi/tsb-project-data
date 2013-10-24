@@ -10,12 +10,4 @@
               = project.label
 
       .organization-project-grant.organization-grant-details
-
-        .organization-project-offer-grant
-          %div Grant
-          = render "projects/show/grant/offer_grant", offer_grant: project.offer_grant_sum_for_organization(organization), offer_cost: project.offer_cost_sum_for_organization(organization)
-          
-        .organization-project-payments
-          %div Payments to date
-          = render "projects/show/grant/payments_to_date", payments_to_date: project.payments_to_date_sum_for_organization(organization), offer_grant: project.offer_grant_sum_for_organization(organization)
-          
+        = render 'application/grant_summary_stack', cost: project.offer_cost_sum_for_organization(organization), max_cost: organization.offer_cost_sum, grant: project.offer_grant_sum_for_organization(organization), payments: project.payments_to_date_sum_for_organization(organization)

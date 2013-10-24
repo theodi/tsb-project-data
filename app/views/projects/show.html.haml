@@ -58,25 +58,7 @@
 
     %section#project-grant-summary.project-grant-details
       %h3 Grant summary (all participants)
-
-      .project-participant-grant-summary
-        .stacked-progress-bar-cost{ style: "width: 100%;" }
-          .stacked-progress-bar-grant{ style: "width: #{ ((project.offer_grant_sum.to_f / project.offer_cost_sum) * 100).round(3) }%;" }
-            .stacked-progress-bar-payments{ style: "width: #{ ((project.payments_to_date_sum.to_f / project.offer_grant_sum) * 100).round(3) }%;" }
-
-        .project-participant-grant-figures
-          .project-participant-payments-figure
-            = render "projects/show/grant/fixed_figure", figure: project.payments_to_date_sum
-            %p Payments to date
-
-          .project-participant-grant-figure
-            = render "projects/show/grant/fixed_figure", figure: project.offer_grant_sum
-            %p Grant amount
-
-          .project-participant-cost-figure
-            = render "projects/show/grant/fixed_figure", figure: project.offer_cost_sum
-            %p Offer cost
-
+      = render 'application/grant_summary_stack', cost: project.offer_cost_sum, max_cost: project.offer_cost_sum, grant: project.offer_grant_sum, payments: project.payments_to_date_sum
 
     %section#project-participants
       %h3 Participants

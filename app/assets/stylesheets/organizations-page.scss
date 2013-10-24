@@ -6,7 +6,6 @@
 
   #organization-main {
     @include make-md-column(9);
- //   @extend .container;
 
     section {
       padding: 18px 0 24px;
@@ -78,9 +77,16 @@
 
     #organization-grant-summary {
       > div {
-        > div {
-          @include make-md-column(6);
-        }
+        @include make-row();
+      }
+
+      .grant-summary {
+        @include make-md-column(12);
+      }
+
+      .grant-figures {
+        @include make-md-column(12);
+        padding: 0;
       }
     }
 
@@ -103,7 +109,6 @@
           @include make-row();
 
           > div {
-            @include make-md-column(3);
             padding-top: 18px;
             padding-bottom: 18px;
 
@@ -123,60 +128,17 @@
             font-weight: bold;
           }
         }
-
-        .organization-project-grant {
-          > div {
-            @include make-md-column(6);
-          }
-        }
       }
     }
 
     .organization-grant-details {
-      .fixed {
-        font-size: 28px;
-        @include clearfix();
-        margin-bottom: 6px;
+      @include clearfix();
 
-        .pounds, .pence {
-          float: left;
-        }
-
-        .pence {
-          font-size: 16px;
-          margin-left: 1px;
-          padding-top: 13px;
-        }
-
+      .grant-summary {
+        @include grant-summary();
       }
-
-      .prog-bar {
-        margin-bottom: 6px;
-
-        .prog-bar-background {
-          position: relative;
-          height: 16px;
-          background: #ddd;
-          width: 80%;
-          overflow: hidden;
-
-          .prog-bar-fill {
-            height: 16px;
-            background: $accent-color;
-          }
-        }
-      }
-
-      .percent {
-        color: #888;
-        font-size: 16px;
-
-        span {
-          font-weight: bold;
-        }
-      }
-
     }
+
 
   }
 

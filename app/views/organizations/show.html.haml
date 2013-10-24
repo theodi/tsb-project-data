@@ -70,17 +70,8 @@
 
 
     %section#organization-grant-summary.organization-grant-details
-      %h3 Grant summary
-
-      #organization-grant-summary-figures
-
-        #organization-total-offer-grant
-          %div Total grant
-          = render "projects/show/grant/offer_grant", offer_grant: organization.offer_grant_sum, offer_cost: organization.offer_cost_sum
-
-        #organization-total-payments
-          %div Total payments to date
-          = render "projects/show/grant/payments_to_date", payments_to_date: organization.payments_to_date_sum, offer_grant: organization.offer_grant_sum
+      %h3 Grant summary for #{organization.label}
+      = render 'application/grant_summary_stack', cost: organization.offer_cost_sum, max_cost: organization.offer_cost_sum, grant: organization.offer_grant_sum, payments: organization.payments_to_date_sum
 
 
     %section#organization-projects

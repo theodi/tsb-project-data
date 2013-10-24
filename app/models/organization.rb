@@ -25,7 +25,7 @@ class Organization
   end
 
   def payments_to_date_sum
-    grants.resources.sum(&:payments_to_date).to_f
+    grants.resources.sum{ |p| p.payments_to_date || 0 ).to_f
   end
 
   def grants

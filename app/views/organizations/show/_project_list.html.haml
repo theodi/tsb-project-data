@@ -1,5 +1,5 @@
 %ul#organization-project-list
-  - organization.participates_in_projects.each do |project|
+  - organization.participates_in_projects.sort{ |a, b| a.offer_cost_sum <=> b.offer_cost_sum }.each do |project|
     %li
       .organization-project-header
         .organization-project-name

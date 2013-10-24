@@ -28,6 +28,17 @@ h1, h2, h3 {
 
 }
 
+.colouredrow  {
+  background: #ddd;
+}
+
+@media (min-width: 1200px) {
+  .colouredrow  { /* slightly off grid, but close enough to be worth rewriting the whole grid */
+    margin-left:0px;
+    margin-right:0px;
+  }
+}
+
 #wrap {
   min-height: 100%;
   height: auto !important;

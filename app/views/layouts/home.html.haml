@@ -1,0 +1,47 @@
+!!! 5
+/[if lte IE 8] <html class="ie ie8" lang="en">
+/[if IE 9] <html class="ie ie9" lang="en">
+<!--[if gt IE 9]><!-->
+%html{:lang => 'en'}<>
+  <!--<![endif]-->
+  %head
+    = render 'application/head'
+
+    :javascript
+      function reloadVisualisation(){
+        var vis = document.getElementById("visualisation");
+        if ($(vis).is(':visible')) {
+          // $(vis).contentDocument.location.reload(true); // same domain version
+          vis.src = vis.src; // hack for cross-domain
+        }
+      }
+
+      $( window ).resize(function() {
+         reloadVisualisation(); // optionally, debounce.
+      });
+
+  %body.home
+    /[if lt IE 8]
+      = render 'publish_my_data/shared/browser_warning'
+
+    #banner
+      .container
+        = image_tag "/viz/home.png", alt: 'projects funded by the TSB'
+        / scrolling atribute invalid html5 but pragmatic
+        %iframe{ id: 'visualisation', src: "http://theodi.github.io/tsb-project-data-viz/13_bigviz/embed.html", width: '100%', height: '480px', style: 'border: 0;', scrolling:'no' }
+
+    %article#wrap
+      %header
+        = render 'application/masthead', search: false
+
+      %main
+        #home
+          #home-header
+            = yield :home_header
+
+          #home-main
+            = yield
+
+    = render "application/footer"
+    = render 'publish_my_data/shared/google_analytics'
+

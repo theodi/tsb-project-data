@@ -5,42 +5,13 @@
 %html{:lang => 'en'}<>
   <!--<![endif]-->
   %head
-    %title
-      = render 'publish_my_data/shared/meta_title'
-    = yield :page_description
-
-    = stylesheet_link_tag :application
-
-    = yield :head
-
-    /[if lte IE 8]
-      %script{src: "http://html5shiv.googlecode.com/svn/trunk/html5.js"}
-      = javascript_include_tag "respond.min.js"
-
-    = javascript_include_tag :application
-
-    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
-
-  %body{class: (@advanced_section ? 'advanced' : '') }
+    = render 'application/head'
+  %body{class: body_class}
     /[if lt IE 8]
       = render 'publish_my_data/shared/browser_warning'
-
     %article#wrap
-
       %header
-        #header
-          .header-container
-            .header-row
-              #masthead
-                = link_to "/" do
-                  = image_tag "tsb-logo.png", alt: "Technology Strategy Board Projects Open Data"
-              %div
-                = form_tag '/projects', method: 'get' do
-                  .form-group
-                    = text_field_tag :search_string, nil, :placeholder => 'Search projects...', id: 'top-nav-search-string'
-                  %button{name:'commit', type:'submit'}
-                    Search
-
+        = render 'application/masthead', search: true
         = render 'application/nav'
 
         - if content_for? :header
@@ -50,7 +21,6 @@
                 = yield :header
 
       %main
-
         .container
           = yield
 
@@ -64,6 +34,5 @@
             .container
               = yield :advanced_footer
 
-    = render "application/footer" # note: intentionally not in #wrap
-
+    = render "application/footer"
     = render 'publish_my_data/shared/google_analytics'

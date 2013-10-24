@@ -1,102 +1,48 @@
-!!! 5
-/[if lte IE 8] <html class="ie ie8" lang="en">
-/[if IE 9] <html class="ie ie9" lang="en">
-<!--[if gt IE 9]><!-->
-%html{:lang => 'en'}<>
-  <!--<![endif]-->
-  %head
-    %title
-      = render 'publish_my_data/shared/meta_title'
-    = yield :page_description
+- content_for :home_header do
+  .container
+    #home-header-title
+      %h1
+        Explore projects funded by the Technology Strategy Board
 
-    = stylesheet_link_tag :application
+    #home-header-actions
+      #home-header-search
+        = form_tag '/projects', method: 'get' do
+          = text_field_tag :search_string, nil, :placeholder => 'Enter a project search term...', :autocomplete => :off
+          = submit_tag 'Go'
 
-    /[if lte IE 8]
-      %script{src: "http://html5shiv.googlecode.com/svn/trunk/html5.js"}
-      = javascript_include_tag "respond.min.js"
-
-    = javascript_include_tag :application
-
-    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
-  %body
-    /[if lt IE 8]
-      = render 'publish_my_data/shared/browser_warning'
-
-    #home-viz
-      %iframe{ src: "http://theodi.github.io/tsb-project-data-viz/13_bigviz/embed.html", width: '100%', height: '480', style: 'border: 0;' }
-
-    /[if lte IE 8]
-      #home-viz-ie
-        = image_tag "/viz/home.png"
+        %p.help
+          Try searching by name, organisation, region or competition.
 
 
-    -# for sticky footer
-    #wrap
-      %header.home
-        %nav
-          .branding
-            = link_to "/" do
-              = image_tag "tsb-logo.png", alt: "TSB logo"
+      #home-header-browse
+        %a{ href: '/projects' } Browse the data
 
-      %main
-        - if content_for? :header
-          %header
-            .header-content
-              = yield :header
+.container
+  #home-main
 
-        #home
-          #home-header
-            .container
-              #home-header-title
-                %h1
-                  Explore projects funded by the Technology Strategy Board
+    #home-intro
+      :markdown
+        The Technology Strategy Board funds innovative projects to invest in the growth of businesses, technologies and sectors.
 
-              #home-header-actions
-                #home-header-search
-                  = form_tag '/projects', method: 'get' do
-                    = text_field_tag :search_string, nil, :placeholder => 'Enter a project search term...', :autocomplete => :off
-                    = submit_tag 'Go'
+        This site aims to provide greater understanding of which projects, businesses, regions and sectors receive grants.
 
-                  %p.help
-                    Try searching by name, organisation, region or competition.
+        All the data that underpins this site is available [for download](/dumps/projects.csv) (15MB CSV) so that other people can present or analyse it in other ways.
 
+        This is an alpha site. Please [send us feedback](mailto:Nic.Jefferis@tsb.gov.uk) about how the site could be improved to make it more useful to you.
 
-                #home-header-browse
-                  %a{ href: '/projects' } Browse the data
+    #home-panels
+      .home-panel
+        :markdown
+          ### About the Data
 
-          .container
-            #home-main
+          The projects covered on this site date between 2003 and the present day, and are updated each month.
 
-              #home-intro
-                :markdown
-                  The Technology Strategy Board funds innovative projects to invest in the growth of businesses, technologies and sectors.
+          [Read More &raquo;](/about)
 
-                  This site aims to provide greater understanding of which projects, businesses, regions and sectors receive grants.
+      .home-panel
+        :markdown
+          ### Developers
 
-                  All the data that underpins this site is available [for download](/dumps/projects.csv) (15MB CSV) so that other people can present or analyse it in other ways.
+          This is a linked data site: each project and organisation has its own page and its own URL. You can access CSV, JSON and Atom feeds of new projects from the [search page](/search) and can access data about projects and organisations in JSON and RDF formats.
 
-                  This is an alpha site. Please [send us feedback](mailto:Nic.Jefferis@tsb.gov.uk) about how the site could be improved to make it more useful to you.
-
-              #home-panels
-                .home-panel
-                  :markdown
-                    ### About the Data
-
-                    The projects covered on this site date between 2003 and the present day, and are updated each month.
-
-                    [Read More &raquo;](/about)
-
-                .home-panel
-                  :markdown
-                    ### Developers
-
-                    This is a linked data site: each project and organisation has its own page and its own URL. You can access CSV, JSON and Atom feeds of new projects from the [search page](/search) and can access data about projects and organisations in JSON and RDF formats.
-
-                    [Explore the Linked Data &raquo;](/data)
-
-
-    = render "application/footer"
-
-
-
-    =# render 'publish_my_data/shared/google_analytics'
+          [Explore the Linked Data &raquo;](/data)

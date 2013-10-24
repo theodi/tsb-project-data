@@ -20,8 +20,8 @@ $gray-even-lighter:  lighten(#000, 97%);
 @import "global-header";
 @import "global-footer";
 
-@import "main-header"; // nav inside main element
-@import "main-nav"; // header inside main element
+@import "titlebar"; // the coloured bar
+@import "main-nav";
 
 @import "advanced-footer";
 @import "advanced-resource-details";

@@ -21,7 +21,7 @@
 
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
 
-  %body
+  %body{class: (@advanced_section ? 'advanced' : '') }
     /[if lt IE 8]
       = render 'publish_my_data/shared/browser_warning'
 
@@ -41,15 +41,15 @@
                   %button{name:'commit', type:'submit'}
                     Search
 
-
-      %main{class: (@advanced_section ? 'advanced' : '') }
         = render 'application/nav'
 
         - if content_for? :header
-          %header
-            .header-container
-              .header-row
+          #titlebar
+            .titlebar-container
+              .titlebar-row
                 = yield :header
+
+      %main
 
         .container
           = yield

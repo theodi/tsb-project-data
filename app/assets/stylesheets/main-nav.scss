@@ -1,4 +1,4 @@
-main > nav {
+header > nav {
   .nav-container {
     @extend .container;
   }
@@ -53,6 +53,7 @@ main > nav {
       }
 
       .arrow-down {
+        bottom: -18px;
         position: absolute;
         left: 50%;
         width: 0;

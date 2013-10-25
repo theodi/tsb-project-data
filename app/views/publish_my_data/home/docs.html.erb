@@ -16,23 +16,26 @@
 	</style>
 	<style>
 		.docs  					{font-size:14px;} /* inconsistent, yes, but restores heierarchy to headings nad we need that, because it's a text-heavy page*/
+		.docs aside  			{color:#999;font-style:italic;}
 		.docs code 				{background:#ffe; color:#263F3F; display:block; font-size:0.9em; margin:10px 0; padding:10px; white-space:normal; word-break:normal; word-wrap:normal;}
 		.docs p code 			{background:inherit; display:inline; margin:0; padding:0;}
 		.docs pre 				{background:none; border:none; color:inherit; font-size:inherit; font-family:inherit;}
+		.docs ul				{list-style-type:none;}
 	</style>
 <% end %>
 
-<section>
-	<h2>Introduction</h2>
+<div class="docs"><!-- clunky wrapping class - better on body -->
+
+<aside>
 	<p>This page describes the current version of our production API, which was deployed on 26th of June 2013. This release included only backward-compatible changes. See our <a href="/changelog">Change Log</a> for more details of what changed.</p>
-</section>
+</aside>
 
 <nav class='contents'>
 	<h2>Contents</h2>
-	<h3>
+	<h4>
 		1 -
 		<strong>Linked Data API</strong>
-	</h3>
+	</h4>
 	<ul>
 		<li>
 			<a href='#uri-dereferencing'>
@@ -59,10 +62,10 @@
 			</a>
 		</li>
 	</ul>
-	<h3>
+	<h4>
 		2 -
 		<strong>Other Resource APIs</strong>
-	</h3>
+	</h4>
 	<ul>
 		<li>
 			<a href='#individual-datasets'>
@@ -119,10 +122,10 @@
 			</a>
 		</li>
 	</ul>
-	<h3>
+	<h4>
 		3 -
 		<strong>SPARQL</strong>
-	</h3>
+	</h4>
 	<ul>
 		<li>
 			<a href='#sparql-introduction'>
@@ -179,10 +182,10 @@
 			</a>
 		</li>
 	</ul>
-	<h3>
+	<h4>
 		4 -
 		<strong>General</strong>
-	</h3>
+	</h4>
 	<ul>
 		<li>
 			<a href='#response-size-limits'>
@@ -217,7 +220,7 @@
 	</ul>
 </nav>
 
-<section class="docs inprogress">
+<section>
 	<h2>1 - Linked Data API</h2>
 	<div class='subsection' id='uri-dereferencing'>
 		<h3>
@@ -326,10 +329,7 @@
 	</div>
 </section>
 
-
-
-
-<section>
+<section class='inprogress'>
 <h2>2 - Other Resource APIs</h2>
 <p>Alongside the URI dereferencing we offer the following additional ways of accessing data in the system. Please be sure to read the <a href="#resource-options-and-limits">Options and Limits</a> section, for some background information which applies to all these APIs, such as details on data formats and pagination.</p>
 
@@ -339,14 +339,13 @@
 2.1
 <strong>Individual Datasets</strong>
 </h3>
-<p>Dataset identifiers take the form <code>http://THE_DOMAIN
-/data/{dataset-short-name}</code>, where <code>{dataset-short-name}</code> is a URI section that uniquely identifies the dataset. The short name can contain lower-case letters, numbers, slashes, and hyphens.</p>
+<p>Dataset identifiers take the form <code>http://THE_DOMAIN/data/{dataset-short-name}</code>, where <code>{dataset-short-name}</code> is a URI section that uniquely identifies the dataset. The short name can contain lower-case letters, numbers, slashes, and hyphens.</p>
 
 <p>Dereferencing a dataset identifier responds with HTTP status code 200 and provides metadata about the dataset, including a link to where the dataset contents can be downloaded.</p>
 
 <p>e.g.
-<code>http://THE_DOMAIN
-/data/homelessness-decisions</code></p>
+<code>http://THE_DOMAIN/
+data/homelessness-decisions</code></p>
 
 <p>Please also see the <a href="#named-graphs">Use of Named Graphs</a> section, for how the dataset data and metadata is stored in the database.</p>
 </div>
@@ -355,13 +354,13 @@
 2.2
 <strong>Themes</strong>
 </h3>
-<p>Datasets are grouped into Themes. A list of all themes is available at: <code>http://THE_DOMAIN
-/themes</code>.</p>
+<p>Datasets are grouped into Themes. A list of all themes is available at: <code>http://THE_DOMAIN/
+themes</code>.</p>
 
 <p>Information about a particular theme can be accessed by <a href="#uri-dereferencing">dereferencing</a> the theme's URI. e.g.</p>
 
-<p><code>http://THE_DOMAIN
-/def/concept/themes/homelessness</code></p>
+<p><code>http://THE_DOMAIN/
+def/concept/themes/homelessness</code></p>
 </div>
 <div class='subsection' id='dataset-collections'>
 <h3>
@@ -369,11 +368,11 @@
 <strong>Collections of Datasets</strong>
 </h3>
 <p>A list of all datasets is available at:
-<code>http://THE_DOMAIN
-/data</code>, <a href="#resource-options-and-limits">paginatable</a> with <code>page</code> and <code>per_page</code>.</p>
+<code>http://THE_DOMAIN/
+data</code>, <a href="#resource-options-and-limits">paginatable</a> with <code>page</code> and <code>per_page</code>.</p>
 
-<p>Lists of datasets in a single theme are available at: <code>http://THE_DOMAIN
-/themes/{theme-slug}</code>, where <code>{theme-slug}</code> is the part of the theme URI after the final slash. e.g. <code>homelessness</code></p>
+<p>Lists of datasets in a single theme are available at: <code>http://THE_DOMAIN/
+themes/{theme-slug}</code>, where <code>{theme-slug}</code> is the part of the theme URI after the final slash. e.g. <code>homelessness</code></p>
 </div>
 <div class='subsection' id='individual-resources'>
 <h3>
@@ -382,20 +381,20 @@
 </h3>
 <p>As well as using <a href="#uri-dereferencing">URI dereferencing</a> to access information about individual resources, you can use the following URL pattern:</p>
 
-<p><code>http://THE_DOMAIN
-/resource?uri={resource-uri}</code></p>
+<p><code>http://THE_DOMAIN/
+resource?uri={resource-uri}</code></p>
 
 <p>This is especially useful for resources for which we have information in our database, but which aren't in the <strong>THE_DOMAIN
 </strong> domain (i.e. so you can't dereference them in our site).</p>
 
 <p>e.g.
-<code>http://THE_DOMAIN
-/resource?uri=http://data.ordnancesurvey.co.uk/id/postcodeunit/SW1A1AA</code></p>
+<code>http://THE_DOMAIN/
+resource?uri=http://data.ordnancesurvey.co.uk/id/postcodeunit/SW1A1AA</code></p>
 
 <p>If using a format extension to request a particular format for the resource, the extension is added immediately after '/resource', for example to get a JSON-LD version of the above postcode</p>
 
-<p><code>http://THE_DOMAIN
-/resource.json?uri=http://data.ordnancesurvey.co.uk/id/postcodeunit/SW1A1AA</code></p>
+<p><code>http://THE_DOMAIN/
+resource.json?uri=http://data.ordnancesurvey.co.uk/id/postcodeunit/SW1A1AA</code></p>
 </div>
 <div class='subsection' id='resource-collections'>
 <h3>
@@ -426,8 +425,8 @@
 </table>
 <br>
 <p>e.g.
-<code>http://THE_DOMAIN
-/resources?dataset=local-authorities&amp;type_uri=http%3A%2F%2FTHE_DOMAIN
+<code>http://THE_DOMAIN/
+resources?dataset=local-authorities&amp;type_uri=http%3A%2F%2FTHE_DOMAIN
 %2Fdef%2Flocal-government%2FLondonBoroughCouncil</code></p>
 </div>
 <div class='subsection' id='resource-options-and-limits'>
@@ -461,21 +460,21 @@
 2.7.1
 <strong>Basic Example</strong>
 </h4>
-<p>Here we use Ruby to retrieve a list of all the <strong>observation</strong> resources in the <a href="http://THE_DOMAIN
-/data/homelessness-decisions">Homelessness Descisions dataset</a> as N-triples.</p>
+<p>Here we use Ruby to retrieve a list of all the <strong>observation</strong> resources in the <a href="http://THE_DOMAIN/
+data/homelessness-decisions">Homelessness Descisions dataset</a> as N-triples.</p>
 
 <p>The short name for that dataset is <code>homelessness-decisions</code>, and the URI for the observation type is <code>http://purl.org/linked-data/cube#Observation</code>, so the URL we need to call is as follows. (See <a href="#resource-collections">the Collections of Resources section</a>).</p>
 
-<p><code>http://THE_DOMAIN
-/resources?dataset=homelessness-decisions&amp;type_uri=http%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23Observation</code></p>
+<p><code>http://THE_DOMAIN/
+resources?dataset=homelessness-decisions&amp;type_uri=http%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23Observation</code></p>
 
 <p>If you visit that URL in your browser, you'll see a paginated list of the resources. We want to get it in N-triples format, so we'll add the .nt extension. (See the <a href="#resource-formats">Formats section</a>).</p>
 
 <p>The following Ruby code assigns a string of N-triples into the <code>ntriples_data</code> variable. Note that as the <a href="#resource-options-and-limits">maximum page size</a> is 1000, and there are over 1000 resoures of that type in the dataset, we'll need to make multiple requests.</p>
 
 <p>We use the <a href="http://rubydoc.info/gems/rest-client">RestClient</a> here, which you can install with <code>$ gem install rest-client</code>.</p>
-<code class='prettyprint lang-ruby'>require 'rest-client'&#x000A;&#x000A;url = &quot;http://THE_DOMAIN
-/resources.nt&quot;&#x000A;&#x000A;ntriples_data = &quot;&quot;&#x000A;page = 1&#x000A;done = false&#x000A;&#x000A;while !done&#x000A;  puts &quot;requesting page #{page}...&quot;&#x000A;  response = RestClient.get url, {:params =&gt;&#x000A;    {&#x000A;      :page =&gt; page,&#x000A;      :per_page =&gt; 1000,&#x000A;      :dataset =&gt; &quot;homelessness-decisions&quot;,&#x000A;      :type_uri =&gt; &quot;http://purl.org/linked-data/cube#Observation&quot;&#x000A;    }&#x000A;  }&#x000A;&#x000A;  if response.length &gt; 0&#x000A;    ntriples_data += response&#x000A;    page += 1&#x000A;  else&#x000A;    puts &quot;no more data&quot;&#x000A;    done = true&#x000A;  end&#x000A;end&#x000A;&#x000A;puts &quot;data:&quot;&#x000A;puts ntriples_data&#x000A;&#x000A;</code>
+<code class='prettyprint lang-ruby'>require 'rest-client'&#x000A;&#x000A;url = &quot;http://THE_DOMAIN/
+resources.nt&quot;&#x000A;&#x000A;ntriples_data = &quot;&quot;&#x000A;page = 1&#x000A;done = false&#x000A;&#x000A;while !done&#x000A;  puts &quot;requesting page #{page}...&quot;&#x000A;  response = RestClient.get url, {:params =&gt;&#x000A;    {&#x000A;      :page =&gt; page,&#x000A;      :per_page =&gt; 1000,&#x000A;      :dataset =&gt; &quot;homelessness-decisions&quot;,&#x000A;      :type_uri =&gt; &quot;http://purl.org/linked-data/cube#Observation&quot;&#x000A;    }&#x000A;  }&#x000A;&#x000A;  if response.length &gt; 0&#x000A;    ntriples_data += response&#x000A;    page += 1&#x000A;  else&#x000A;    puts &quot;no more data&quot;&#x000A;    done = true&#x000A;  end&#x000A;end&#x000A;&#x000A;puts &quot;data:&quot;&#x000A;puts ntriples_data&#x000A;&#x000A;</code>
 <h4>
 2.7.2
 <strong>Extension: parsing the n-triples into an array of statements.</strong>
@@ -489,19 +488,19 @@
 2.8
 <strong>Example: Using JavaScript to get a filtered list of resources</strong>
 </h3>
-<p>Here we use jQuery to retrieve a list of all the <strong>observation</strong> resources in the <a href="http://THE_DOMAIN
-/data/homelessness-decisions">Homelessness Descisions dataset</a> as JSON-LD.</p>
+<p>Here we use jQuery to retrieve a list of all the <strong>observation</strong> resources in the <a href="http://THE_DOMAIN/
+data/homelessness-decisions">Homelessness Descisions dataset</a> as JSON-LD.</p>
 
 <p>The short name for that dataset is <code>homelessness-decisions</code>, and the URI for the observation type is <code>http://purl.org/linked-data/cube#Observation</code>, so the URL we need to call is as follows. (See <a href="#resource-collections">the Collections of Resources section</a>).</p>
 
-<p><code>http://THE_DOMAIN
-/resources?dataset=homelessness-decisions&amp;type_uri=http%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23Observation</code></p>
+<p><code>http://THE_DOMAIN/
+resources?dataset=homelessness-decisions&amp;type_uri=http%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23Observation</code></p>
 
 <p>If you visit that URL in your browser, you'll see a paginated list of the resources. We want to get it in JSON format, so we'll add the .json extension. (See the <a href="#resource-formats">Formats section</a>).</p>
 
 <p>The following HTML page uses JavaScript to request the data as JSON and add it to the <code>results</code> array. Note that as the <a href="#resource-options-and-limits">maximum page size</a> is 1000, and there are over 1000 resoures of that type in the dataset, we'll need to make multiple requests.</p>
-<code class='prettyprint lang-js'>&lt;!DOCTYPE html&gt;&#x000A;&lt;html&gt;&#x000A;  &lt;head&gt;&#x000A;    &lt;script src=&quot;http://code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;&#x000A;  &lt;/head&gt;&#x000A;  &lt;body&gt;&#x000A;    &lt;script type=&quot;text/javascript&quot;&gt;&#x000A;      var perPage = 100;&#x000A;      var typeUri = &quot;http://purl.org/linked-data/cube#Observation&quot;;&#x000A;      var dataset = &quot;homelessness-decisions&quot;;&#x000A;&#x000A;      var baseUrl = &quot;http://THE_DOMAIN
-/resources.json?&quot;&#x000A;      baseUrl += &quot;per_page=&quot; + perPage.toString();&#x000A;      baseUrl += &quot;&amp;dataset=&quot; + dataset;&#x000A;      baseUrl += &quot;&amp;type_uri=&quot; + encodeURIComponent(typeUri);&#x000A;&#x000A;      var page = 1;&#x000A;      var results = [];&#x000A;&#x000A;      function callAjaxPaging() {&#x000A;        console.log(&quot;trying page: &quot; + page.toString());&#x000A;        url = baseUrl + &quot;&amp;page=&quot; + page.toString();&#x000A;&#x000A;        $.ajax({&#x000A;          dataType: 'json',&#x000A;          url: url,&#x000A;          success: function(pageOfData) {&#x000A;            results = results.concat(pageOfData);&#x000A;            console.log(&quot;got &quot; + results.length.toString() + &quot; so far&quot;);&#x000A;&#x000A;            if (pageOfData.length == perPage) {&#x000A;              // this page was full. There might be more.&#x000A;              page += 1;&#x000A;              console.log(&quot;trying next page&quot;);&#x000A;              callAjaxPaging();&#x000A;            } else {&#x000A;              // no more pages.&#x000A;              alert('finished with ' + results.length.toString() + &quot; results&quot;);&#x000A;            }&#x000A;          }&#x000A;        });&#x000A;      }&#x000A;&#x000A;      alert('press OK to begin');&#x000A;      callAjaxPaging();&#x000A;    &lt;/script&gt;&#x000A;  &lt;/body&gt;&#x000A;&lt;/html&gt;</code>
+<code class='prettyprint lang-js'>&lt;!DOCTYPE html&gt;&#x000A;&lt;html&gt;&#x000A;  &lt;head&gt;&#x000A;    &lt;script src=&quot;http://code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;&#x000A;  &lt;/head&gt;&#x000A;  &lt;body&gt;&#x000A;    &lt;script type=&quot;text/javascript&quot;&gt;&#x000A;      var perPage = 100;&#x000A;      var typeUri = &quot;http://purl.org/linked-data/cube#Observation&quot;;&#x000A;      var dataset = &quot;homelessness-decisions&quot;;&#x000A;&#x000A;      var baseUrl = &quot;http://THE_DOMAIN/
+resources.json?&quot;&#x000A;      baseUrl += &quot;per_page=&quot; + perPage.toString();&#x000A;      baseUrl += &quot;&amp;dataset=&quot; + dataset;&#x000A;      baseUrl += &quot;&amp;type_uri=&quot; + encodeURIComponent(typeUri);&#x000A;&#x000A;      var page = 1;&#x000A;      var results = [];&#x000A;&#x000A;      function callAjaxPaging() {&#x000A;        console.log(&quot;trying page: &quot; + page.toString());&#x000A;        url = baseUrl + &quot;&amp;page=&quot; + page.toString();&#x000A;&#x000A;        $.ajax({&#x000A;          dataType: 'json',&#x000A;          url: url,&#x000A;          success: function(pageOfData) {&#x000A;            results = results.concat(pageOfData);&#x000A;            console.log(&quot;got &quot; + results.length.toString() + &quot; so far&quot;);&#x000A;&#x000A;            if (pageOfData.length == perPage) {&#x000A;              // this page was full. There might be more.&#x000A;              page += 1;&#x000A;              console.log(&quot;trying next page&quot;);&#x000A;              callAjaxPaging();&#x000A;            } else {&#x000A;              // no more pages.&#x000A;              alert('finished with ' + results.length.toString() + &quot; results&quot;);&#x000A;            }&#x000A;          }&#x000A;        });&#x000A;      }&#x000A;&#x000A;      alert('press OK to begin');&#x000A;      callAjaxPaging();&#x000A;    &lt;/script&gt;&#x000A;  &lt;/body&gt;&#x000A;&lt;/html&gt;</code>
 </div>
 <div class='subsection' id='curl-resources-example'>
 <h3>
@@ -512,14 +511,36 @@
 
 <p>The slug for the housing theme is <code>housing</code>, so the URL we need to call is as follows. (See the <a href="#dataset-collections">Collections of Datasets section</a>).</p>
 
-<p><code>http://THE_DOMAIN
-/themes/homelessness</code></p>
+<p><code>http://THE_DOMAIN/
+themes/homelessness</code></p>
 
 <p>We'll use the Accept header to tell the server we want the response as JSON.</p>
-<code class='prettyprint'>curl -H "Accept: application/json" http://THE_DOMAIN
-/themes/homelessness</code>
+<code class='prettyprint'>curl -H "Accept: application/json" http://THE_DOMAIN/
+themes/homelessness</code>
 </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <section>
 <h2>3 - SPARQL</h2>
 <div class='subsection' id='sparql-introduction'>
@@ -530,14 +551,14 @@
 <p>The most flexible way to access the data is by using SPARQL. Pronounced "sparkle", SPARQL stands for <strong>S</strong>parql <strong>P</strong>rotocol and <strong>R</strong>DF <strong>Q</strong>uery <strong>L</strong>anguage. It's a query language, analagous to SQL for relational databases, for retrieving and manipulating data from triple-stores like ours. We support <a href="http://www.w3.org/TR/2013/REC-sparql11-query-20130321/">SPARQL 1.1</a> query syntax.</p>
 
 <p>To submit a SPARQL query from your code, issue an HTTP GET request to our <strong>endpoint</strong>:</p>
-<code>http://THE_DOMAIN
-/sparql?query={URL-encoded query}</code>
+<code>http://THE_DOMAIN/
+sparql?query={URL-encoded query}</code>
 <p>For example, to run this simple query...</p>
-<code class='prettyprint lang-sparql'>SELECT * WHERE {&lt;http://THE_DOMAIN
-/id/unitary-authority/cheshire-east&gt; ?p ?o}</code>
+<code class='prettyprint lang-sparql'>SELECT * WHERE {&lt;http://THE_DOMAIN/
+id/unitary-authority/cheshire-east&gt; ?p ?o}</code>
 <p>...and get the results as JSON, you could GET the following URL (note the <code>.json</code> extension):</p>
-<code>http://THE_DOMAIN
-/sparql.json?query=SELECT+%2A+WHERE+%7B%3Chttp%3A%2F%2FTHE_DOMAIN
+<code>http://THE_DOMAIN/
+sparql.json?query=SELECT+%2A+WHERE+%7B%3Chttp%3A%2F%2FTHE_DOMAIN
 %2Fid%2Funitary-authority%2Fcheshire-east%3E+%3Fp+%3Fo%7D</code>
 <p>See below for <a href="#sparql-results-formats">details of SPARQL Results Formats</a> and examples in a variety of languages (at the end of this section).</p>
 </div>
@@ -681,12 +702,12 @@ application/n-triples
 <p>If you're requesting SPARQL results as JSON, you can additionally pass a <code>callback</code> parameter and the results will be wrapped in that function. This is useful for getting around cross-domain issues if you're running JavaScript on older browsers. (Please also see the <a href="#cors">Cross-Origin Resource Sharing</a> section).</p>
 
 <p>For example:</p>
-<code>http://THE_DOMAIN
-/sparql.json?callback=myCallbackFunction&query=SELECT+%2A+WHERE+%7B%3Chttp%3A%2F%2FTHE_DOMAIN
+<code>http://THE_DOMAIN/
+sparql.json?callback=myCallbackFunction&query=SELECT+%2A+WHERE+%7B%3Chttp%3A%2F%2FTHE_DOMAIN
 %2Fid%2Funitary-authority%2Fcheshire-east%3E+%3Fp+%3Fo%7D</code>
 <p>Or to make a JSON-P request with jQuery, you can omit the callback parameter from the url and just set the dataType to <code>jsonp</code>.</p>
-<code class='prettyprint lang-js'>queryUrl = 'http://THE_DOMAIN
-/sparql.json?query=SELECT+%2A+WHERE+%7B%3Chttp%3A%2F%2FTHE_DOMAIN
+<code class='prettyprint lang-js'>queryUrl = 'http://THE_DOMAIN/
+sparql.json?query=SELECT+%2A+WHERE+%7B%3Chttp%3A%2F%2FTHE_DOMAIN
 %2Fid%2Funitary-authority%2Fcheshire-east%3E+%3Fp+%3Fo%7D'&#x000A;&#x000A;$.ajax({&#x000A;  dataType: 'jsonp',&#x000A;  url: queryUrl,&#x000A;  success: function(data) {&#x000A;    // callback code here&#x000A;    alert('success!');&#x000A;  }&#x000A;});</code>
 </div>
 <div class='subsection' id='named-graphs'>
@@ -699,21 +720,21 @@ application/n-triples
 <strong>Dataset Data</strong>
 </h4>
 <p>The data for each dataset is contained within a separate named graph. The dataset itself has a URI, for example</p>
-<code>http://THE_DOMAIN
-/data/local-authorities</code>
+<code>http://THE_DOMAIN/
+data/local-authorities</code>
 <p>The web page for the dataset lists the named graph that contains the dataset, in this case</p>
-<code>http://THE_DOMAIN
-/graph/local-authorities</code>
+<code>http://THE_DOMAIN/
+graph/local-authorities</code>
 <p>The graph name for the dataset is contained in the dataset metadata, using a predicate called <code>http://publishmydata.com/def/dataset#graph</code> and can be obtained by a query like this:</p>
-<code class='prettyprint lang-sparql'>SELECT ?graph&#x000A;  WHERE {&#x000A;    &lt;http://THE_DOMAIN
-/data/local-authorities&gt; &lt;http://publishmydata.com/def/dataset#graph&gt; ?graph&#x000A;  }</code>
+<code class='prettyprint lang-sparql'>SELECT ?graph&#x000A;  WHERE {&#x000A;    &lt;http://THE_DOMAIN/
+data/local-authorities&gt; &lt;http://publishmydata.com/def/dataset#graph&gt; ?graph&#x000A;  }</code>
 <h4>
 3.6.2
 <strong>Dataset Metadata</strong>
 </h4>
 <p>The metadata we store about the <a href="#individual-datasets">dataset</a> itself (that is returned by dereferencing its URI), is stored its own separate graph, for example:</p>
-<code>http://THE_DOMAIN
-/data/local-authorities/metadata</code>
+<code>http://THE_DOMAIN/
+data/local-authorities/metadata</code>
 <p>We also use named graphs for each concept scheme and ontology.</p>
 </div>
 <div class='subsection' id='parameter-interpolation'>
@@ -722,8 +743,8 @@ application/n-triples
 <strong>Parameter Substitution</strong>
 </h3>
 <p>You can parameterize your SPARQL by including %{tokens} in your queries, and providing values for the tokens on the url query string.</p>
-<code>http://THE_DOMAIN
-/sparql?query=URL-encoded-SPARQL-query?token1=value-for-token1&token2=value-for-token2</code>
+<code>http://THE_DOMAIN/
+sparql?query=URL-encoded-SPARQL-query?token1=value-for-token1&token2=value-for-token2</code>
 <p>Note that the following tokens are reserved and cannot be used as parameters for substitution.</p>
 
 <ul>
@@ -743,9 +764,9 @@ application/n-triples
 <strong>Example: Using Ruby to request data from the SPARQL Endpoint</strong>
 </h3>
 <p>This sample Ruby makes a request to our SPARQL endpoint for all resources of type Unitary Authority (as JSON) and then puts the result in a Hash.</p>
-<code class='prettyprint lang-ruby'>require 'rest-client'&#x000A;require 'json'&#x000A;&#x000A;query = 'SELECT * WHERE {?s a &lt;http://THE_DOMAIN
-/def/local-government/UnitaryAuthority&gt;}'&#x000A;&#x000A;url = &quot;http://THE_DOMAIN
-/sparql.json&quot;&#x000A;&#x000A;results_str = RestClient.get url, {:params =&gt; {:query =&gt; query}}&#x000A;results_hash = JSON.parse results_str&#x000A;results_array = results_hash[&quot;results&quot;][&quot;bindings&quot;]&#x000A;&#x000A;puts &quot;total number of results: #{results_array.length}&quot;&#x000A;&#x000A;</code>
+<code class='prettyprint lang-ruby'>require 'rest-client'&#x000A;require 'json'&#x000A;&#x000A;query = 'SELECT * WHERE {?s a &lt;http://THE_DOMAIN/
+def/local-government/UnitaryAuthority&gt;}'&#x000A;&#x000A;url = &quot;http://THE_DOMAIN/
+sparql.json&quot;&#x000A;&#x000A;results_str = RestClient.get url, {:params =&gt; {:query =&gt; query}}&#x000A;results_hash = JSON.parse results_str&#x000A;results_array = results_hash[&quot;results&quot;][&quot;bindings&quot;]&#x000A;&#x000A;puts &quot;total number of results: #{results_array.length}&quot;&#x000A;&#x000A;</code>
 <p><strong>Note</strong>: If you're doing a lot of work with RDF in Ruby, you might want to look at using <a href="http://swirrl.com">Swirrl</a>'s open-source SPARQL ORM for Ruby, <a href="http://github.com/swirrl/tripod">Tripod</a>.</p>
 </div>
 <div class='subsection' id='js-sparql-example'>
@@ -754,9 +775,9 @@ application/n-triples
 <strong>Example: Using JavaScript to request data from the SPARQL Endpoint</strong>
 </h3>
 <p>This example HTML page uses jQuery to make a request to our SPARQL endpoint for all resources of type Unitary Authority (as JSON) and log the results.</p>
-<code class='prettyprint lang-html'>&lt;!DOCTYPE html&gt;&#x000A;&lt;html&gt;&#x000A;  &lt;head&gt;&#x000A;    &lt;script src=&quot;http://code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;&#x000A;  &lt;/head&gt;&#x000A;  &lt;body&gt;&#x000A;    &lt;script type=&quot;text/javascript&quot;&gt;&#x000A;      var query = &quot;SELECT * WHERE {?s a &lt;http://THE_DOMAIN
-/def/local-government/UnitaryAuthority&gt;}&quot;;&#x000A;      var url = &quot;http://THE_DOMAIN
-/sparql.json?query=&quot;;&#x000A;      url += encodeURIComponent(query);&#x000A;      $.ajax({&#x000A;        dataType: 'json',&#x000A;        url: url,&#x000A;        success: function(data) {&#x000A;          alert('success: ' + data.results.bindings.length + ' results');&#x000A;          console.log(data);&#x000A;        }&#x000A;      });&#x000A;    &lt;/script&gt;&#x000A;  &lt;/body&gt;&#x000A;&lt;/html&gt;</code>
+<code class='prettyprint lang-html'>&lt;!DOCTYPE html&gt;&#x000A;&lt;html&gt;&#x000A;  &lt;head&gt;&#x000A;    &lt;script src=&quot;http://code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;&#x000A;  &lt;/head&gt;&#x000A;  &lt;body&gt;&#x000A;    &lt;script type=&quot;text/javascript&quot;&gt;&#x000A;      var query = &quot;SELECT * WHERE {?s a &lt;http://THE_DOMAIN/
+def/local-government/UnitaryAuthority&gt;}&quot;;&#x000A;      var url = &quot;http://THE_DOMAIN/
+sparql.json?query=&quot;;&#x000A;      url += encodeURIComponent(query);&#x000A;      $.ajax({&#x000A;        dataType: 'json',&#x000A;        url: url,&#x000A;        success: function(data) {&#x000A;          alert('success: ' + data.results.bindings.length + ' results');&#x000A;          console.log(data);&#x000A;        }&#x000A;      });&#x000A;    &lt;/script&gt;&#x000A;  &lt;/body&gt;&#x000A;&lt;/html&gt;</code>
 <p><strong>Note</strong>: See the <a href="#cors">Cross-Origin Resource Sharing</a> section for a note about accessing data from from other domains.</p>
 </div>
 </section>
@@ -872,17 +893,19 @@ application/n-triples
 <p>For example, using the cURL command line tool to supply the API key in an HTTP header.</p>
 <code class='prettyprint'>curl -H &quot;X-PublishMyData-APIKey: &lt;your-api-key-here&gt;&quot; &lt;request-url&gt;</code>
 <p>Replace &lt;your-api-key-here&gt; with your actual API key. e.g.</p>
-<code class='prettyprint'>curl -H &quot;X-PublishMyData-APIKey: 1a3e2562d2466ecb9462ddfd723a4597&quot; http://THE_DOMAIN
-/data/additional-affordable-dwellings.json</code>
+<code class='prettyprint'>curl -H &quot;X-PublishMyData-APIKey: 1a3e2562d2466ecb9462ddfd723a4597&quot; http://THE_DOMAIN/
+data/additional-affordable-dwellings.json</code>
 <h4>
 4.5.4
 <string>Supplying the API key in a query string parameter</string>
 </h4>
 <p>For example, using the cURL command line tool to supply the API key in the custom HTTP header.</p>
-<code class='prettyprint'>curl http://THE_DOMAIN
-/data/affordable-housing?api_key=&lt;your-api-key-here&gt;</code>
+<code class='prettyprint'>curl http://THE_DOMAIN/
+data/affordable-housing?api_key=&lt;your-api-key-here&gt;</code>
 <p>Replace &lt;your-api-key-here&gt; with your actual API key. For example:</p>
-<code class='prettyprint'>curl http://THE_DOMAIN
-/data/additional-affordable-dwellings.json?api_key=1a3e2562d2466ecb9462ddfd723a4597</code>
+<code class='prettyprint'>curl http://THE_DOMAIN/
+data/additional-affordable-dwellings.json?api_key=1a3e2562d2466ecb9462ddfd723a4597</code>
 </div>
 </section>
+
+</div>

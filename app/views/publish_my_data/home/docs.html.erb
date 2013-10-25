@@ -421,7 +421,7 @@
 			</tbody>
 		</table>
 		<p>For Example:</p>
-		<code>http://THE_DOMAIN/resources?dataset=local-authorities&amp;type_uri=http%3A%2F%2FTHE_DOMAIN%2Fdef%2Flocal-government%2FLondonBoroughCouncil</code></p>
+		<code>http://THE_DOMAIN/resources?dataset=local-authorities&amp;type_uri=http%3A%2F%2FTHE_DOMAIN%2Fdef%2Flocal-government%2FLondonBoroughCouncil</code>
 	</div>
 	<div class='subsection' id='resource-options-and-limits'>
 		<h3>
@@ -803,9 +803,7 @@
 			4.5.2
 			<strong>Using the API Key</strong>
 		</h4>
-		<p>To use the API key, supply it in your requests to our API (including for SPARQL queries) via <strong>either</strong> the <code class='click-to-select'>X-PublishMyData-APIKey</code> HTTP header, <strong>or</strong> the <code class='click-to-select'>api_key</code> query string parameter</li>
-		</ul>
-		<br>
+		<p>To use the API key, supply it in your requests to our API (including for SPARQL queries) via <strong>either</strong> the <code class='click-to-select'>X-PublishMyData-APIKey</code> HTTP header, <strong>or</strong> the <code class='click-to-select'>api_key</code> query string parameter</p>
 		<p>Note that some corporate or goverment networks may strip non-standard HTTP headers, so in these situations we recommend using the query string parameter instead.</p>
 		<h4>
 			4.5.3
@@ -817,7 +815,7 @@
 		<code class='prettyprint'>curl -H &quot;X-PublishMyData-APIKey: 1a3e2562d2466ecb9462ddfd723a4597&quot; http://THE_DOMAIN/data/additional-affordable-dwellings.json</code>
 		<h4>
 			4.5.4
-			<string>Supplying the API key in a query string parameter</string>
+			<strong>Supplying the API key in a query string parameter</strong>
 		</h4>
 		<p>For example, using the cURL command line tool to supply the API key in the custom HTTP header.</p>
 		<code class='prettyprint'>curl http://THE_DOMAIN/data/affordable-housing?api_key=&lt;your-api-key-here&gt;</code>

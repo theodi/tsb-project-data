@@ -1,0 +1,17 @@
+.grant-summary
+  .stacked-progress-bar-cost{ style: "width: #{ ((cost / max_cost) * 100).round(3) }%;" }
+    .stacked-progress-bar-grant{ style: "width: #{ ((grant / cost) * 100).round(3) }%;" }
+      .stacked-progress-bar-payments{ style: "width: #{ ((payments / grant) * 100).round(3) }%;" }
+
+  .grant-figures
+    .payments-figure
+      = render "projects/show/grant/fixed_figure", figure: payments #project.payments_to_date_sum_for_organization(participant)
+      %p Payments to date
+
+    .grant-figure
+      = render "projects/show/grant/fixed_figure", figure: grant #project.offer_grant_sum_for_organization(participant)
+      %p Grant amount
+
+    .cost-figure
+      = render "projects/show/grant/fixed_figure", figure: cost #project.offer_cost_sum_for_organization(participant)
+      %p Offer cost

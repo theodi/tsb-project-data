@@ -50,10 +50,23 @@
 }
 
 @mixin tsb-bootstrap-btn($color, $background) {
-  @extend .btn;
-  
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  line-height: 1.42857;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+
   @include button-variant($color, $background, $background);
-  @include border-radius(0);
   font-size:16px;
   font-weight:bold;
 }
@@ -78,6 +91,65 @@
 
     .read-more-overlay {
       display: none;
+    }
+  }
+}
+
+@mixin grant-summary {
+
+  @include make-md-column(12);
+
+  .stacked-progress-bar-cost {
+    position: relative;
+    height: 30px;
+    background: #ddd;
+    overflow: hidden;
+    width: 100%;
+    margin: 6px 0;
+    padding: 0;
+
+    .stacked-progress-bar-grant {
+      height: 100%;
+      background: $light-accent-color;
+
+      .stacked-progress-bar-payments {
+        height: 100%;
+        background: $accent-color;
+      }
+    }
+  }
+
+  .grant-figures {
+    > div {
+      @include make-md-column(3);
+      padding-left: 0;
+
+      @include grant-figure();
+      font-size: 24px;
+
+      &.payments-figure {
+        color: $accent-color;
+      }
+
+      &.grant-figure {
+        color: $light-accent-color;
+      }
+
+      &.cost-figure {
+        color: $grey-label;
+      }
+
+      .pence {
+        padding-top: 12px;
+      }
+
+      .fixed {
+        @include clearfix();
+      }
+
+      p {
+        font-size: 14px;
+      }
     }
   }
 }

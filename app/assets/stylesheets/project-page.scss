@@ -4,7 +4,6 @@
 
   #project-main {
     @include make-md-column(9);
-//    @extend .container;
 
     section {
       padding: 18px 0 24px;
@@ -92,11 +91,11 @@
         @include make-row();
       }
 
-      .project-participant-grant-summary {
+      .grant-summary {
         @include make-md-column(12);
       }
 
-      .project-participant-grant-figures {
+      .grant-figures {
         @include make-md-column(12);
         padding: 0;
       }
@@ -145,6 +144,7 @@
 
       li {
         padding: 18px 0;
+        padding-right:30px;
         border-bottom: 2px solid #eee;
 
         &:last-child {
@@ -176,122 +176,19 @@
           }
         }
 
-        .project-participant-grant {
-          > div {
-            @include make-md-column(6);
-          }
-        }
-
-        .project-participant-grant-summary {
+        .grant-summary {
           @include make-md-column(12);
         }
-        
+
       }
     }
 
     .project-grant-details {
       @include clearfix();
-
-      .fixed {
-        font-size: 24px;
-        @include clearfix();
-
-        .pounds, .pence {
-          float: left;
-        }
-
-        .pence {
-          font-size: 14px;
-          margin-left: 1px;
-          padding-top: 12px;
-        }
-
-      }
-
-      .prog-bar {
-        margin-bottom: 6px;
-
-        .prog-bar-background {
-          position: relative;
-          height: 16px;
-          background: #ddd;
-          width: 80%;
-          overflow: hidden;
-
-          .prog-bar-fill {
-            height: 16px;
-            background: $accent-color;
-          }
-        }
-      }
-
-      .percent {
-        color: #888;
-        font-size: 16px;
-
-        span {
-          font-weight: bold;
-        }
-      }
-
     }
 
-    .project-participant-grant-summary {
-      @include make-md-column(12);
-
-      .stacked-progress-bar-cost {
-        position: relative;
-        height: 30px;
-        background: #ddd;
-        overflow: hidden;
-        width: 100%;
-        margin: 6px 0;
-        padding: 0;
-
-        .stacked-progress-bar-grant {
-          height: 100%;
-          background: $light-accent-color;
-
-          .stacked-progress-bar-payments {
-            height: 100%;
-            background: $accent-color;
-          }
-        }
-      }
-    }
-
-    .project-participant-grant-figures {
-      > div {
-        @include make-md-column(3);
-        padding-left: 0;
-
-        @include grant-figure();
-        font-size: 24px;
-
-        &.project-participant-payments-figure {
-          color: $accent-color;
-        }
-
-        &.project-participant-grant-figure {
-          color: $light-accent-color;
-        }
-
-        &.project-participant-cost-figure {
-          color: $grey-label; 
-        }
-
-        .pence {
-          padding-top: 12px;
-        }
-
-        .fixed {
-          @include clearfix();
-        }
-
-        p {
-          font-size: 14px;
-        }
-      }
+    .grant-summary {
+      @include grant-summary();
     }
 
   }

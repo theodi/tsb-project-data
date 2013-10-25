@@ -1,12 +1,8 @@
-// header-bar inside <main>
-main > header {
-  margin-top:-10px;
-
-  background: $header-color;
-
+header #titlebar {
+  background: #0099CC;
   color: #fff;
 
-  .header-container {
+  .titlebar-container {
 
     padding-top: 20px;
     padding-bottom: 20px;
@@ -14,7 +10,7 @@ main > header {
 
     @extend .container;
 
-    .header-row {
+    .titlebar-row {
 
       @include make-row();
 
@@ -47,6 +43,6 @@ main > header {
 
 }
 
-main.advanced > header {
+body.advanced  #titlebar {
   background: $data-header-color;
 }

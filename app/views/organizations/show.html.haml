@@ -3,7 +3,7 @@
 - content_for :header do
   .contents
     %h3
-      Organization
+      Organisation
     %h1
       = organization.label
 
@@ -24,18 +24,28 @@
     %section#organization-about
 
       #organization-about-primary
-        #organization-name
-          %div Organisation name
-          %div= organization.label
         #organization-number
           %div Company number
           %div= organization.company_number
-
+        #organization-size
+          %div Enterprise size
+          %div= link_to organization.enterprise_size.label, resource_path_from_uri(organization.enterprise_size.uri)
 
       #organization-about-secondary
-        #organization-size
-          %div Organization size
-          %div= link_to organization.enterprise_size.label, resource_path_from_uri(organization.enterprise_size.uri)
+        #organization-legal
+          %div Legal entity form
+          %div
+          - if organization.legal_entity_form
+            = link_to organization.legal_entity_form.label, resource_path_from_uri(organization.legal_entity_form.uri)
+          - else
+            \-
+
+        #organization-region
+          %div Region
+          %div= link_to organization.site.region.label, resource_path_from_uri(organization.site.region.uri)
+
+
+      #organization-about-tertiary
         #organization-sic
           %div SIC classes
           %div
@@ -44,14 +54,6 @@
             - else
               \-
 
-      #organization-about-tertiary
-        #organization-legal
-          %div Legal entity form
-          %div= link_to organization.legal_entity_form.label, resource_path_from_uri(organization.legal_entity_form.uri)
-
-        #organization-region
-          %div Region
-          %div= link_to organization.site.region.label, resource_path_from_uri(organization.site.region.uri)
 
       #organization-about-location
         #organization-address
@@ -66,17 +68,8 @@
 
 
     %section#organization-grant-summary.organization-grant-details
-      %h3 Grant summary
-
-      #organization-grant-summary-figures
-
-        #organization-total-offer-grant
-          %div Total grant
-          = render "projects/show/grant/offer_grant", offer_grant: organization.offer_grant_sum, offer_cost: organization.offer_cost_sum
-
-        #organization-total-payments
-          %div Total payments to date
-          = render "projects/show/grant/payments_to_date", payments_to_date: organization.payments_to_date_sum, offer_grant: organization.offer_grant_sum
+      %h3 Grant summary for #{organization.label}
+      = render 'application/grant_summary_stack', cost: organization.offer_cost_sum, max_cost: organization.offer_cost_sum, grant: organization.offer_grant_sum, payments: organization.payments_to_date_sum
 
 
     %section#organization-projects

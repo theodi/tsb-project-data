@@ -14,28 +14,22 @@ h1, h2, h3 {
 }
 
 .colouredbox {
-  div {
-    padding: 1px 15px 15px 15px ;
+  > div {
+    padding: 1px 15px 15px 15px;
   }
 
   @media (max-width: 1199px) {
-    div  {
-      padding:0;
+    > div  {
+      padding:0 !important;
     }
-    padding: 1px 15px;
-    background: #eee;
+    padding: 1px 15px !important;
   }
-
 }
 
-.colouredrow  {
-  background: #ddd;
-}
-
-@media (min-width: 1200px) {
-  .colouredrow  { /* slightly off grid, but close enough to be worth rewriting the whole grid */
-    margin-left:0px;
-    margin-right:0px;
+.colouredrow  { /* slightly off grid, but close enough to be worth rewriting the whole grid */
+  @media (min-width: 1200px) {
+    margin-left:0px !important;
+    margin-right:0px !important;
   }
 }
 

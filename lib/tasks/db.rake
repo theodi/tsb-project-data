@@ -43,9 +43,9 @@ namespace :db do
     ds.label = ds.title
     ds.comment = comment
     ds.description = description_markdown
-    ds.contact_email = "mailto:hello@swirrl.com"
-    #dataset.license = "TBC"
-    #dataset.publisher = "TBC"
+    ds.contact_email = "mailto:lee.mullin@tsb.gov.uk"
+    ds.license = "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/"
+    ds.publisher = "http://innovateuk.org"
 
     ds.data_dump = "http://#{PublishMyData.local_domain}/dumps/#{dump_filename}"
     ds.data_graph_uri = data_graph
@@ -67,9 +67,9 @@ namespace :db do
     cs.label = cs.title
     cs.comment = comment
     cs.description = description_markdown
-    cs.contact_email = "mailto:hello@swirrl.com"
-    #cs.license = "TBC"
-    #cs.publisher = "TBC"
+    cs.contact_email = "mailto:lee.mullin@tsb.gov.uk"
+    cs.license = "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/"
+    cs.publisher = "http://innovateuk.org"
 
     cs.data_dump = "http://#{PublishMyData.local_domain}/dumps/#{dump_filename}"
     cs.data_graph_uri = data_graph
@@ -91,9 +91,9 @@ namespace :db do
     ont.label = ont.title
     ont.comment = comment
     ont.description = description_markdown
-    ont.contact_email = "mailto:hello@swirrl.com"
-    #dataset.license = "TBC"
-    #dataset.publisher = "TBC"
+    ont.contact_email = "mailto:lee.mullin@tsb.gov.uk"
+    ont.license = "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/"
+    ont.publisher = "http://innovateuk.org"
 
     ont.data_dump = "http://#{PublishMyData.local_domain}/dumps/#{dump_filename}"
     ont.data_graph_uri = data_graph

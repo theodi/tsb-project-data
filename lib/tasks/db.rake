@@ -68,8 +68,8 @@ namespace :db do
     cs.comment = comment
     cs.description = description_markdown
     cs.contact_email = "mailto:hello@swirrl.com"
-    #dataset.license = "TBC"
-    #dataset.publisher = "TBC"
+    #cs.license = "TBC"
+    #cs.publisher = "TBC"
 
     cs.data_dump = "http://#{PublishMyData.local_domain}/dumps/#{dump_filename}"
     cs.data_graph_uri = data_graph
@@ -140,8 +140,8 @@ namespace :db do
       "http://#{PublishMyData.local_domain}/data/#{TsbProjectData::DATASET_SLUG}",
       TsbProjectData::DATA_GRAPH,
       "TSB Projects Data", # title,
-      "comment", #comment
-      "description", #desc markdown
+      "Data about projects funded by the TSB, and the participating organisations.", #comment
+      "More information coming soon...", #desc markdown
       "project_data.nt"
     )
 
@@ -150,21 +150,10 @@ namespace :db do
       Region.get_graph_uri.to_s.gsub("/graph/", "/data/"),
       Region.get_graph_uri,
       "TSB Regions", # title,
-      "comment", #comment
-      "description", #desc markdown
+      "A set of ONS regions used by projects in this site.", #comment
+      "More information coming soon...", #desc markdown
       "regions.nt"
     )
-
-    # budget areas
-    replace_dataset_metadata(
-      BudgetArea.get_graph_uri.to_s.gsub("/graph/", "/data/"),
-      BudgetArea.get_graph_uri,
-      "TSB Budget Areas", # title,
-      "comment", #comment
-      "description", #desc markdown
-      "budget_areas.nt"
-    )
-
   end
 
   desc 'replace ontology metadata'
@@ -173,8 +162,8 @@ namespace :db do
       TsbProjectData::ONTOLOGY_GRAPH.to_s.gsub("/graph/", "/def/"),
       TsbProjectData::ONTOLOGY_GRAPH,
       "TSB Projects Ontology", #title
-      "comment", #comment
-      "description", #desc markdown
+      "Terms used to describe projects funded by the TSB, the participating organisations and other related entities", #comment
+      "More information coming soon...", #desc markdown
       "ontology.nt"
     )
 
@@ -199,8 +188,8 @@ namespace :db do
       Product.get_graph_uri.to_s.gsub("/graph/", "/def/"),
       Product.get_graph_uri,
       "Products", #title
-      "comment", #comment
-      "description", #desc markdown
+      "The set of possible products for TSB project competitions", #comment
+      nil, #   "More information coming soon...", #desc markdown
       "regions.nt"
     )
 
@@ -208,8 +197,8 @@ namespace :db do
       BudgetArea.get_graph_uri.to_s.gsub("/graph/", "/def/"),
       BudgetArea.get_graph_uri,
       "Budget Areas", #title
-      "comment", #comment
-      "description", #desc markdown
+      "The set of possible budget areas for TSB project competitions", #comment
+      nil, #   "More information coming soon...", #desc markdown
       "budget_areas.nt"
     )
 
@@ -217,8 +206,8 @@ namespace :db do
       EnterpriseSize.get_graph_uri.to_s.gsub("/graph/", "/def/"),
       EnterpriseSize.get_graph_uri,
       "Enterprise Sizes", #title
-      "comment", #comment
-      "description", #desc markdown
+      "The set of possible Enterprises sizes of organisations on TSB projects", #comment
+     nil, #   "More information coming soon...", #desc markdown
       "regions.nt"
     )
 
@@ -226,8 +215,8 @@ namespace :db do
       LegalEntityForm.get_graph_uri.to_s.gsub("/graph/", "/def/"),
       LegalEntityForm.get_graph_uri,
       "Legal Entity Forms", #title
-      "comment", #comment
-      "description", #desc markdown
+      "The set of possible Legal entiry forms of organisations on TSB projects", #comment
+      nil, #   "More information coming soon...", #desc markdown
       "legal_entity_forms.nt"
     )
 
@@ -235,8 +224,8 @@ namespace :db do
       ProjectStatus.get_graph_uri.to_s.gsub("/graph/", "/def/"),
       ProjectStatus.get_graph_uri,
       "Project statuses", #title
-      "comment", #comment
-      "description", #desc markdown
+      "The set of possible statuses for TSB projects", #comment
+      nil, #   "More information coming soon...", #desc markdown
       "project_statuses.nt"
     )
 
@@ -244,17 +233,17 @@ namespace :db do
       CostCategory.get_graph_uri.to_s.gsub("/graph/", "/def/"),
       CostCategory.get_graph_uri,
       "Cost Categories", #title
-      "comment", #comment
-      "description", #desc markdown
+      "The set of possible cost categories for TSB projects", #comment
+      nil, #   "More information coming soon...", #desc markdown
       "cost_categories.nt"
     )
 
     replace_concept_scheme_metadata(
       SicClass.get_graph_uri.to_s.gsub("/graph/", "/def/"),
       SicClass.get_graph_uri,
-      "SIC Classes", #title
+      "The set of possible SIC classes for organisations funded by TSB projects", #comment
       "comment", #comment
-      "description", #desc markdown
+      nil, #   "More information coming soon...", #desc markdown
       "sic_codes.nt"
     )
   end

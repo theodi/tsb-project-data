@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   end
 
   def viz
-    render layout: 'home'
+    render layout: nil
   end
 
   def about

@@ -1,18 +1,5 @@
 !!! 5
 %html
   %head
-    = render "application/leaflet_assets"
-
-    :css
-      #map .leaflet-control {
-        display: none;
-      }
   %body{ style: 'margin: 0;' }
-    #map{ style: 'width: 1170px; height: 480px;'}
-
-    :javascript
-      var map = L.mapbox.map('map', "swirrl.map-gowc8qqk", {
-        scrollWheelZoom: false,
-        zoom: 4,
-        center: [30, 50]
-      });
+    %iframe{ id: 'visualisation', src: "http://theodi.github.io/tsb-project-data-viz/13_bigviz/embed.html?static=true", width: '1170px', height: '485px', style: 'border: 0;', scrolling:'no' }

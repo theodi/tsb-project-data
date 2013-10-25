@@ -10,13 +10,46 @@
 
 <% content_for :head do %>
 	<style>
-		.docs  					{font-size:14px;} /* inconsistent, yes, but restores heierarchy to headings nad we need that, because it's a text-heavy page*/
+		.docs  					{font-size:14px;} /* inconsistent, yes, but restores heierarchy to headings, which we need, because it's a text-heavy page*/
 		.docs  					{margin-bottom: 60px;} /* hack to make bottom of the page  pretty */
 		.docs aside  			{color:#999;font-style:italic;}
-		.docs code 				{background:#ffe; color:#263F3F; display:block; font-size:0.9em; margin:10px 0; padding:10px; white-space:normal; word-break:normal; word-wrap:normal;}
+		.docs code,
+		.docs pre 				{
+									background:#ffe;
+									border:0;
+									color:#263F3F;
+									display:block;
+									font-size:0.9em;
+									margin:10px 0;
+									padding:10px;
+								}
+		.docs code 				{
+									white-space:normal;
+									word-break:normal;
+									word-wrap:normal;
+								}
 		.docs p code 			{background:inherit; display:inline; margin:0; padding:0;}
-		.docs pre 				{background:none; border:none; color:inherit; font-size:inherit; font-family:inherit;}
 		.docs ul				{list-style-type:none;}
+
+		/* Pretty printing styles. Used with prettify.js. */
+
+		/* SPAN elements with the classes below are added by prettyprint. */
+		.pln { color: #000 }  /* plain text */
+
+	@media screen {
+  		.str { color: #080 }  /* string content */
+  		.kwd { color: #008 }  /* a keyword */
+  		.com { color: #800 }  /* a comment */
+  		.typ { color: #606 }  /* a type name */
+  		.lit { color: #066 }  /* a literal value */
+  		.pun, .opn, .clo { color: #660 } /* punctuation, lisp open bracket, lisp close bracket */
+  		.tag { color: #008 }  /* a markup tag name */
+  		.atn { color: #606 }  /* a markup attribute name */
+  		.atv { color: #080 }  /* a markup attribute value */
+  		.dec, .var { color: #606 }  /* a declaration; a variable name */
+  		.fun { color: red }  /* a function name */
+  	}
+
 	</style>
 <% end %>
 
@@ -440,13 +473,13 @@
 		<p>If you visit that URL in your browser, you'll see a paginated list of the resources. We want to get it in N-triples format, so we'll add the .nt extension. (See the <a href="#resource-formats">Formats section</a>).</p>
 		<p>The following Ruby code assigns a string of N-triples into the <code>ntriples_data</code> variable. Note that as the <a href="#resource-options-and-limits">maximum page size</a> is 1000, and there are over 1000 resoures of that type in the dataset, we'll need to make multiple requests.</p>
 		<p>We use the <a href="http://rubydoc.info/gems/rest-client">RestClient</a> here, which you can install with <code>$ gem install rest-client</code>.</p>
-		<code class='prettyprint lang-ruby'><pre>require 'rest-client'&#x000A;&#x000A;url = &quot;http://THE_DOMAIN/resources.nt&quot;&#x000A;&#x000A;ntriples_data = &quot;&quot;&#x000A;page = 1&#x000A;done = false&#x000A;&#x000A;while !done&#x000A;  puts &quot;requesting page #{page}...&quot;&#x000A;  response = RestClient.get url, {:params =&gt;&#x000A;    {&#x000A;      :page =&gt; page,&#x000A;      :per_page =&gt; 1000,&#x000A;      :dataset =&gt; &quot;homelessness-decisions&quot;,&#x000A;      :type_uri =&gt; &quot;http://purl.org/linked-data/cube#Observation&quot;&#x000A;    }&#x000A;  }&#x000A;&#x000A;  if response.length &gt; 0&#x000A;    ntriples_data += response&#x000A;    page += 1&#x000A;  else&#x000A;    puts &quot;no more data&quot;&#x000A;    done = true&#x000A;  end&#x000A;end&#x000A;&#x000A;puts &quot;data:&quot;&#x000A;puts ntriples_data&#x000A;&#x000A;</pre></code>
+		<pre class='prettyprint lang-ruby'>require 'rest-client'&#x000A;&#x000A;url = &quot;http://THE_DOMAIN/resources.nt&quot;&#x000A;&#x000A;ntriples_data = &quot;&quot;&#x000A;page = 1&#x000A;done = false&#x000A;&#x000A;while !done&#x000A;  puts &quot;requesting page #{page}...&quot;&#x000A;  response = RestClient.get url, {:params =&gt;&#x000A;    {&#x000A;      :page =&gt; page,&#x000A;      :per_page =&gt; 1000,&#x000A;      :dataset =&gt; &quot;homelessness-decisions&quot;,&#x000A;      :type_uri =&gt; &quot;http://purl.org/linked-data/cube#Observation&quot;&#x000A;    }&#x000A;  }&#x000A;&#x000A;  if response.length &gt; 0&#x000A;    ntriples_data += response&#x000A;    page += 1&#x000A;  else&#x000A;    puts &quot;no more data&quot;&#x000A;    done = true&#x000A;  end&#x000A;end&#x000A;&#x000A;puts &quot;data:&quot;&#x000A;puts ntriples_data&#x000A;&#x000A;</pre>
 		<h4>
 			2.7.2
 			<strong>Extension: parsing the n-triples into an array of statements.</strong>
 		</h4>
 		<p>The <a href="http://rubydoc.info/github/ruby-rdf/rdf/master/">ruby-rdf</a> library is useful for parsing various rdf formats. Install it with <code>$ gem install rdf</code>. The following code reads our string of ntriples data into an array of <code>RDF::Statement</code>s.</p>
-		<code class='prettyprint lang-ruby'><pre>require 'rdf'&#x000A;&#x000A;statements = []&#x000A;RDF::Reader.for(:ntriples).new(ntriples_data) {|r| r.each {|s| statements &lt;&lt; s}}&#x000A;&#x000A;puts &quot;parsed #{statements.length} triples&quot;&#x000A;&#x000A;</pre></code>
+		<pre class='prettyprint lang-ruby'>require 'rdf'&#x000A;&#x000A;statements = []&#x000A;RDF::Reader.for(:ntriples).new(ntriples_data) {|r| r.each {|s| statements &lt;&lt; s}}&#x000A;&#x000A;puts &quot;parsed #{statements.length} triples&quot;&#x000A;&#x000A;</pre>
 		<p><strong>Note</strong>: If you're doing a lot of work with RDF in Ruby, you might want to look at using <a href="http://swirrl.com">Swirrl</a>'s open-source SPARQL ORM for Ruby, <a href="http://github.com/swirrl/tripod">Tripod</a>.</p>
 	</div>
 	<div class='subsection' id='js-resources-example'>
@@ -459,7 +492,7 @@
 		<code>http://THE_DOMAIN/resources?dataset=homelessness-decisions&amp;type_uri=http%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23Observation</code>
 		<p>If you visit that URL in your browser, you'll see a paginated list of the resources. We want to get it in JSON format, so we'll add the .json extension. (See the <a href="#resource-formats">Formats section</a>).</p>
 		<p>The following HTML page uses JavaScript to request the data as JSON and add it to the <code>results</code> array. Note that as the <a href="#resource-options-and-limits">maximum page size</a> is 1000, and there are over 1000 resoures of that type in the dataset, we'll need to make multiple requests.</p>
-		<code class='prettyprint lang-js'><pre>&lt;!DOCTYPE html&gt;&#x000A;&lt;html&gt;&#x000A;  &lt;head&gt;&#x000A;    &lt;script src=&quot;http://code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;&#x000A;  &lt;/head&gt;&#x000A;  &lt;body&gt;&#x000A;    &lt;script type=&quot;text/javascript&quot;&gt;&#x000A;      var perPage = 100;&#x000A;      var typeUri = &quot;http://purl.org/linked-data/cube#Observation&quot;;&#x000A;      var dataset = &quot;homelessness-decisions&quot;;&#x000A;&#x000A;      var baseUrl = &quot;http://THE_DOMAIN/resources.json?&quot;&#x000A;      baseUrl += &quot;per_page=&quot; + perPage.toString();&#x000A;      baseUrl += &quot;&amp;dataset=&quot; + dataset;&#x000A;      baseUrl += &quot;&amp;type_uri=&quot; + encodeURIComponent(typeUri);&#x000A;&#x000A;      var page = 1;&#x000A;      var results = [];&#x000A;&#x000A;      function callAjaxPaging() {&#x000A;        console.log(&quot;trying page: &quot; + page.toString());&#x000A;        url = baseUrl + &quot;&amp;page=&quot; + page.toString();&#x000A;&#x000A;        $.ajax({&#x000A;          dataType: 'json',&#x000A;          url: url,&#x000A;          success: function(pageOfData) {&#x000A;            results = results.concat(pageOfData);&#x000A;            console.log(&quot;got &quot; + results.length.toString() + &quot; so far&quot;);&#x000A;&#x000A;            if (pageOfData.length == perPage) {&#x000A;              // this page was full. There might be more.&#x000A;              page += 1;&#x000A;              console.log(&quot;trying next page&quot;);&#x000A;              callAjaxPaging();&#x000A;            } else {&#x000A;              // no more pages.&#x000A;              alert('finished with ' + results.length.toString() + &quot; results&quot;);&#x000A;            }&#x000A;          }&#x000A;        });&#x000A;      }&#x000A;&#x000A;      alert('press OK to begin');&#x000A;      callAjaxPaging();&#x000A;    &lt;/script&gt;&#x000A;  &lt;/body&gt;&#x000A;&lt;/html&gt;</pre></code>
+		<pre class='prettyprint lang-js'>&lt;!DOCTYPE html&gt;&#x000A;&lt;html&gt;&#x000A;  &lt;head&gt;&#x000A;    &lt;script src=&quot;http://code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;&#x000A;  &lt;/head&gt;&#x000A;  &lt;body&gt;&#x000A;    &lt;script type=&quot;text/javascript&quot;&gt;&#x000A;      var perPage = 100;&#x000A;      var typeUri = &quot;http://purl.org/linked-data/cube#Observation&quot;;&#x000A;      var dataset = &quot;homelessness-decisions&quot;;&#x000A;&#x000A;      var baseUrl = &quot;http://THE_DOMAIN/resources.json?&quot;&#x000A;      baseUrl += &quot;per_page=&quot; + perPage.toString();&#x000A;      baseUrl += &quot;&amp;dataset=&quot; + dataset;&#x000A;      baseUrl += &quot;&amp;type_uri=&quot; + encodeURIComponent(typeUri);&#x000A;&#x000A;      var page = 1;&#x000A;      var results = [];&#x000A;&#x000A;      function callAjaxPaging() {&#x000A;        console.log(&quot;trying page: &quot; + page.toString());&#x000A;        url = baseUrl + &quot;&amp;page=&quot; + page.toString();&#x000A;&#x000A;        $.ajax({&#x000A;          dataType: 'json',&#x000A;          url: url,&#x000A;          success: function(pageOfData) {&#x000A;            results = results.concat(pageOfData);&#x000A;            console.log(&quot;got &quot; + results.length.toString() + &quot; so far&quot;);&#x000A;&#x000A;            if (pageOfData.length == perPage) {&#x000A;              // this page was full. There might be more.&#x000A;              page += 1;&#x000A;              console.log(&quot;trying next page&quot;);&#x000A;              callAjaxPaging();&#x000A;            } else {&#x000A;              // no more pages.&#x000A;              alert('finished with ' + results.length.toString() + &quot; results&quot;);&#x000A;            }&#x000A;          }&#x000A;        });&#x000A;      }&#x000A;&#x000A;      alert('press OK to begin');&#x000A;      callAjaxPaging();&#x000A;    &lt;/script&gt;&#x000A;  &lt;/body&gt;&#x000A;&lt;/html&gt;</pre>
 	</div>
 	<div class='subsection' id='curl-resources-example'>
 		<h3>
@@ -626,7 +659,7 @@
 		<p>For example:</p>
 		<code>http://THE_DOMAIN/sparql.json?callback=myCallbackFunction&query=SELECT+%2A+WHERE+%7B%3Chttp%3A%2F%2FTHE_DOMAIN%2Fid%2Funitary-authority%2Fcheshire-east%3E+%3Fp+%3Fo%7D</code>
 		<p>Or to make a JSON-P request with jQuery, you can omit the callback parameter from the url and just set the dataType to <code>jsonp</code>.</p>
-		<code class='prettyprint lang-js'>queryUrl = 'http://THE_DOMAIN/sparql.json?query=SELECT+%2A+WHERE+%7B%3Chttp%3A%2F%2FTHE_DOMAIN%2Fid%2Funitary-authority%2Fcheshire-east%3E+%3Fp+%3Fo%7D'&#x000A;&#x000A;$.ajax({&#x000A;  dataType: 'jsonp',&#x000A;  url: queryUrl,&#x000A;  success: function(data) {&#x000A;    // callback code here&#x000A;    alert('success!');&#x000A;  }&#x000A;});</code>
+		<pre class='prettyprint lang-js'>queryUrl = 'http://THE_DOMAIN/sparql.json?query=SELECT+%2A+WHERE+%7B%3Chttp%3A%2F%2FTHE_DOMAIN%2Fid%2Funitary-authority%2Fcheshire-east%3E+%3Fp+%3Fo%7D'&#x000A;&#x000A;$.ajax({&#x000A;  dataType: 'jsonp',&#x000A;  url: queryUrl,&#x000A;  success: function(data) {&#x000A;    // callback code here&#x000A;    alert('success!');&#x000A;  }&#x000A;});</pre>
 	</div>
 	<div class='subsection' id='named-graphs'>
 		<h3>
@@ -642,7 +675,7 @@
 		<p>The web page for the dataset lists the named graph that contains the dataset, in this case</p>
 		<code>http://THE_DOMAIN/graph/local-authorities</code>
 		<p>The graph name for the dataset is contained in the dataset metadata, using a predicate called <code>http://publishmydata.com/def/dataset#graph</code> and can be obtained by a query like this:</p>
-		<code class='prettyprint lang-sparql'><pre>SELECT ?graph&#x000A;  WHERE {&#x000A;    &lt;http://THE_DOMAIN/data/local-authorities&gt; &lt;http://publishmydata.com/def/dataset#graph&gt; ?graph&#x000A;  }</pre></code>
+		<pre class='prettyprint lang-sparql'>SELECT ?graph&#x000A;  WHERE {&#x000A;    &lt;http://THE_DOMAIN/data/local-authorities&gt; &lt;http://publishmydata.com/def/dataset#graph&gt; ?graph&#x000A;  }</pre>
 		<h4>
 			3.6.2
 			<strong>Dataset Metadata</strong>
@@ -676,7 +709,7 @@
 			<strong>Example: Using Ruby to request data from the SPARQL Endpoint</strong>
 		</h3>
 		<p>This sample Ruby makes a request to our SPARQL endpoint for all resources of type Unitary Authority (as JSON) and then puts the result in a Hash.</p>
-		<code class='prettyprint lang-ruby'><pre>require 'rest-client'&#x000A;require 'json'&#x000A;&#x000A;query = 'SELECT * WHERE {?s a &lt;http://THE_DOMAIN/def/local-government/UnitaryAuthority&gt;}'&#x000A;&#x000A;url = &quot;http://THE_DOMAIN/sparql.json&quot;&#x000A;&#x000A;results_str = RestClient.get url, {:params =&gt; {:query =&gt; query}}&#x000A;results_hash = JSON.parse results_str&#x000A;results_array = results_hash[&quot;results&quot;][&quot;bindings&quot;]&#x000A;&#x000A;puts &quot;total number of results: #{results_array.length}&quot;&#x000A;&#x000A;</pre></code>
+		<pre class='prettyprint lang-ruby'>require 'rest-client'&#x000A;require 'json'&#x000A;&#x000A;query = 'SELECT * WHERE {?s a &lt;http://THE_DOMAIN/def/local-government/UnitaryAuthority&gt;}'&#x000A;&#x000A;url = &quot;http://THE_DOMAIN/sparql.json&quot;&#x000A;&#x000A;results_str = RestClient.get url, {:params =&gt; {:query =&gt; query}}&#x000A;results_hash = JSON.parse results_str&#x000A;results_array = results_hash[&quot;results&quot;][&quot;bindings&quot;]&#x000A;&#x000A;puts &quot;total number of results: #{results_array.length}&quot;&#x000A;&#x000A;</pre>
 		<p><strong>Note</strong>: If you're doing a lot of work with RDF in Ruby, you might want to look at using <a href="http://swirrl.com">Swirrl</a>'s open-source SPARQL ORM for Ruby, <a href="http://github.com/swirrl/tripod">Tripod</a>.</p>
 	</div>
 	<div class='subsection' id='js-sparql-example'>
@@ -685,7 +718,7 @@
 			<strong>Example: Using JavaScript to request data from the SPARQL Endpoint</strong>
 		</h3>
 		<p>This example HTML page uses jQuery to make a request to our SPARQL endpoint for all resources of type Unitary Authority (as JSON) and log the results.</p>
-		<code class='prettyprint lang-html'><pre>&lt;!DOCTYPE html&gt;&#x000A;&lt;html&gt;&#x000A;  &lt;head&gt;&#x000A;    &lt;script src=&quot;http://code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;&#x000A;  &lt;/head&gt;&#x000A;  &lt;body&gt;&#x000A;    &lt;script type=&quot;text/javascript&quot;&gt;&#x000A;      var query = &quot;SELECT * WHERE {?s a &lt;http://THE_DOMAIN/def/local-government/UnitaryAuthority&gt;}&quot;;&#x000A;      var url = &quot;http://THE_DOMAIN/sparql.json?query=&quot;;&#x000A;      url += encodeURIComponent(query);&#x000A;      $.ajax({&#x000A;        dataType: 'json',&#x000A;        url: url,&#x000A;        success: function(data) {&#x000A;          alert('success: ' + data.results.bindings.length + ' results');&#x000A;          console.log(data);&#x000A;        }&#x000A;      });&#x000A;    &lt;/script&gt;&#x000A;  &lt;/body&gt;&#x000A;&lt;/html&gt;</pre></code>
+		<pre class='prettyprint lang-html'>&lt;!DOCTYPE html&gt;&#x000A;&lt;html&gt;&#x000A;  &lt;head&gt;&#x000A;    &lt;script src=&quot;http://code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;&#x000A;  &lt;/head&gt;&#x000A;  &lt;body&gt;&#x000A;    &lt;script type=&quot;text/javascript&quot;&gt;&#x000A;      var query = &quot;SELECT * WHERE {?s a &lt;http://THE_DOMAIN/def/local-government/UnitaryAuthority&gt;}&quot;;&#x000A;      var url = &quot;http://THE_DOMAIN/sparql.json?query=&quot;;&#x000A;      url += encodeURIComponent(query);&#x000A;      $.ajax({&#x000A;        dataType: 'json',&#x000A;        url: url,&#x000A;        success: function(data) {&#x000A;          alert('success: ' + data.results.bindings.length + ' results');&#x000A;          console.log(data);&#x000A;        }&#x000A;      });&#x000A;    &lt;/script&gt;&#x000A;  &lt;/body&gt;&#x000A;&lt;/html&gt;</pre>
 		<p><strong>Note</strong>: See the <a href="#cors">Cross-Origin Resource Sharing</a> section for a note about accessing data from from other domains.</p>
 	</div>
 </section>
@@ -809,5 +842,7 @@
 		<code class='prettyprint'>curl http://THE_DOMAIN/data/additional-affordable-dwellings.json?api_key=1a3e2562d2466ecb9462ddfd723a4597</code>
 	</div>
 </section>
-
+<script>
+ prettyPrint();
+</script>
 </div>

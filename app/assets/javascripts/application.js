@@ -16,4 +16,5 @@
 //= require moment.js
 //= require debounce.js
 //= require format_number.js
+//= require prettify.js
 //= require_tree .

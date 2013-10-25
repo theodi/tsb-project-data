@@ -5,8 +5,9 @@ html * {
 
 html, body {
   overflow-x: hidden;
-  height: 100%;
+//  height: 100%;
   font-size: 18px;
+  background-color:#1b1b1b;
 }
 
 h1, h2, h3 {
@@ -34,11 +35,12 @@ h1, h2, h3 {
 }
 
 #wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -260px;       /* negative indent by footer height */
-  padding: 0 0 260px;        /* pad bottom by footer height */
+  background-color:white;
+  // min-height: 100%;
+  // height: auto !important;
+  // height: 100%;
+  // margin: 0 auto -260px;       /* negative indent by footer height */
+  // padding: 0 0 260px;        /* pad bottom by footer height */
 }
 
 body > footer {   height: 260px; }

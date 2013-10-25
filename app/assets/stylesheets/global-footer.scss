@@ -42,6 +42,7 @@ body > footer {
 
       }
     }
+
   }
 
   #footer-info {
@@ -52,5 +53,14 @@ body > footer {
     @include make-md-column(9);
     padding-top: 15px;
     padding-bottom: 15px;
+  }
+}
+
+// even in advanced mode, make links in footer blue
+body.advanced {
+  > footer {
+    a, a:hover, a:visited {
+      color: $accent-color !important;
+    }
   }
 }

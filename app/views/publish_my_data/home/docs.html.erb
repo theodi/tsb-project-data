@@ -10,12 +10,8 @@
 
 <% content_for :head do %>
 	<style>
-		/* remove this style block in production - just to keep page a manageable length */
-		section, nav.contents 	{display:none;}
-		.inprogress 			{display:block;}
-	</style>
-	<style>
 		.docs  					{font-size:14px;} /* inconsistent, yes, but restores heierarchy to headings nad we need that, because it's a text-heavy page*/
+		.docs  					{margin-bottom: 60px;} /* hack to make bottom of the page  pretty */
 		.docs aside  			{color:#999;font-style:italic;}
 		.docs code 				{background:#ffe; color:#263F3F; display:block; font-size:0.9em; margin:10px 0; padding:10px; white-space:normal; word-break:normal; word-wrap:normal;}
 		.docs p code 			{background:inherit; display:inline; margin:0; padding:0;}
@@ -478,7 +474,7 @@
 	</div>
 </section>
 
-<section class='inprogress'>
+<section>
 	<h2>3 - SPARQL</h2>
 	<div class='subsection' id='sparql-introduction'>
 		<h3>
@@ -694,144 +690,124 @@
 	</div>
 </section>
 
+<section class='inprogress'>
+	<h2>4 - General</h2>
+	<div class='subsection' id='response-size-limits'>
+		<h3>
+			4.1
+			<strong>Response Size Limits</strong>
+		</h3>
+		<p>For all requests to our API, if the request issues a request to the database which causes more than 5MB of data to be returned, we will respond with HTTP status code 400, with the a message in the response body including the phrase <code>Response too large</code>. Note that full pre-canned dumps of all datasets will be available (in zipped n-triples format) at URLs defined in the <a href="#individual-datasets">dataset metadata</a>.</p>
+	</div>
+	<div class='subsection' id='errors'>
+		<h3>
+			4.2
+			<strong>Errors</strong>
+		</h3>
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Error type</th>
+					<th>HTTP status code</th>
+					<th>Notes</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Response too large</td>
+					<td>400</td>
+					<td>We will include a text message in the response body including the phrase "Response too large."</td>
+				</tr>
+				<tr>
+					<td>SPARQL Syntax Error</td>
+					<td>400</td>
+					<td>We will include a text message in the response body with details of the error.</td>
+				</tr>
+				<tr>
+					<td>Resource Not Found</td>
+					<td>404</td>
+					<td>Returned if you request a resource or URL that doesn't exist</td>
+				</tr>
+				<tr>
+					<td>Not Acceptable</td>
+					<td>406</td>
+					<td>Returned if you request a non-supported data format</td>
+				</tr>
+				<tr>
+					<td>Unexpected Errors</td>
+					<td>500</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Query Timeouts</td>
+					<td>503</td>
+					<td>The timeout for requesting data from our database will initially be set to 10 seconds.</td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+	</div>
+	<div class='subsection' id='cors'>
+		<h3>
+			4.3
+			<strong>Cross-Origin Resource Sharing (CORS)</strong>
+		</h3>
+		<p>Our web server is configured to allow access from all domains (by adding the following line to our nginx configuration):</p>
+		<code>add_header Access-Control-Allow-Origin "*";</code>
+		<p>This means that if you're writing JavaScript to request data from our server in to a web page hosted on another domain, your browser should check this header and allow it.</p>
+		<p><strong>A Note about Browser Support for CORS:</strong> Modern browsers (such as recent versions of Internet Explorer Firefox, Chrome and Safari) have full CORS support. It is not supported in Internet Explorer 6 and 7. Versions 8 &amp; 9 of Internet Explorer offer limited support. If you need to support older browsers, consider making requests for data via SPARQL, with <a href="#sparql-json-p">JSON-P</a>.</p>
+	</div>
+	<div class='subsection' id='discontinued-datasets'>
+		<h3>
+			4.4
+			<strong>Discontinued Datasets</strong>
+		</h3>
+		<p>A dataset can be marked as 'discontinued'. This approach is most often used in cases where a dataset uses an outdated vocabulary or outdated naming convention for URIs. This is similar to the concept of deprecation (in computer software).</p>
 
+		<p>A discontinued dataset is assigned a type of <code>http://publishmydata.com/def/dataset#DeprecatedDataset</code> as well as the usual <code>http://publishmydata.com/def/dataset#Dataset</code>. The discontinued-status is indicated on the list of datasets in the user interface and on the individual dataset page.</p>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section>
-<h2>4 - General</h2>
-<div class='subsection' id='response-size-limits'>
-<h3>
-4.1
-<strong>Response Size Limits</strong>
-</h3>
-<p>For all requests to our API, if the request issues a request to the database which causes more than 5MB of data to be returned, we will respond with HTTP status code 400, with the a message in the response body including the phrase <code>Response too large</code>. Note that full pre-canned dumps of all datasets will be available (in zipped n-triples format) at URLs defined in the <a href="#individual-datasets">dataset metadata</a>.</p>
-</div>
-<div class='subsection' id='errors'>
-<h3>
-4.2
-<strong>Errors</strong>
-</h3>
-<table class="table table-striped table-bordered table-hover">
-<thead>
-<tr>
-<th>Error type</th>
-<th>HTTP status code</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Response too large</td>
-<td>400</td>
-<td>We will include a text message in the response body including the phrase "Response too large."</td>
-</tr>
-<tr>
-<td>SPARQL Syntax Error</td>
-<td>400</td>
-<td>We will include a text message in the response body with details of the error.</td>
-</tr>
-<tr>
-<td>Resource Not Found</td>
-<td>404</td>
-<td>Returned if you request a resource or URL that doesn't exist</td>
-</tr>
-<tr>
-<td>Not Acceptable</td>
-<td>406</td>
-<td>Returned if you request a non-supported data format</td>
-</tr>
-<tr>
-<td>Unexpected Errors</td>
-<td>500</td>
-<td></td>
-</tr>
-<tr>
-<td>Query Timeouts</td>
-<td>503</td>
-<td>The timeout for requesting data from our database will initially be set to 10 seconds.</td>
-</tr>
-</tbody>
-</table>
-<br>
-</div>
-<div class='subsection' id='cors'>
-<h3>
-4.3
-<strong>Cross-Origin Resource Sharing (CORS)</strong>
-</h3>
-<p>Our web server is configured to allow access from all domains (by adding the following line to our nginx configuration):</p>
-<code>add_header Access-Control-Allow-Origin "*";</code>
-<p>This means that if you're writing JavaScript to request data from our server in to a web page hosted on another domain, your browser should check this header and allow it.</p>
-
-<h4><strong>A Note about Browser Support for CORS:</strong></h4>
-
-<p>Modern browsers (such as recent versions of Internet Explorer Firefox, Chrome and Safari) have full CORS support. It is not supported in Internet Explorer 6 and 7. Versions 8 &amp; 9 of Internet Explorer offer limited support. If you need to support older browsers, consider making requests for data via SPARQL, with <a href="#sparql-json-p">JSON-P</a>.</p>
-</div>
-<div class='subsection' id='discontinued-datasets'>
-<h3>
-4.4
-<strong>Discontinued Datasets</strong>
-</h3>
-<p>A dataset can be marked as 'discontinued'. This approach is most often used in cases where a dataset uses an outdated vocabulary or outdated naming convention for URIs. This is similar to the concept of deprecation (in computer software).</p>
-
-<p>A discontinued dataset is assigned a type of <code>http://publishmydata.com/def/dataset#DeprecatedDataset</code> as well as the usual <code>http://publishmydata.com/def/dataset#Dataset</code>. The discontinued-status is indicated on the list of datasets in the user interface and on the individual dataset page.</p>
-
-<p>Optionally, a discontinued dataset may be replaced by another dataset. In this case a link to the new dataset appears on the dataset web page and the dataset metadata contains the triple:</p>
-<code>&lt;{discontinued dataset URI}&gt; &lt;http://purl.org/dc/terms/isReplacedBy&gt; &lt;{new dataset URI}&gt; .</code>
-<p>The contents of discontinued datasets are still available via SPARQL queries and other APIs. This allows us to update the way that data is represented without breaking external applications that use it. Discontinued datasets will generally be removed completely after some period of time. Information about planned deletion will be provided in the 'Further Information' section on the dataset web page.</p>
-</div>
-<div class='subsection' id='api-keys'>
-<h3>
-4.5
-<strong>API Keys</strong>
-</h3>
-<h4>
-4.5.1
-<strong>Obtaining an API key</strong>
-</h4>
-<p>You can <a href="/users/sign_up">register for an API key</a> to obtain unthrottled access to our API, analytics, and announcements about upcoming API changes. Upon registering you will be logged in and taken to your profile page which displays your unique key. You should then use the API key with all requests to our API.</p>
-
-<h4>
-4.5.2
-<strong>Using the API Key</strong>
-</h4>
-<p>To use the API key, supply it in your requests to our API (including for SPARQL queries) via either:</p>
-<ul>
-<li>the <code class='click-to-select'>X-PublishMyData-APIKey</code> HTTP header, or</li>
-<li>the <code class='click-to-select'>api_key</code> query string parameter</li>
-</ul>
-<br>
-<p>Note that some corporate or goverment networks may strip non-standard HTTP headers, so in these situations we recommend using the query string parameter instead.</p>
-<h4>
-4.5.3
-<strong>Supplying the API Key in an HTTP header</strong>
-</h4>
-<p>For example, using the cURL command line tool to supply the API key in an HTTP header.</p>
-<code class='prettyprint'>curl -H &quot;X-PublishMyData-APIKey: &lt;your-api-key-here&gt;&quot; &lt;request-url&gt;</code>
-<p>Replace &lt;your-api-key-here&gt; with your actual API key. e.g.</p>
-<code class='prettyprint'>curl -H &quot;X-PublishMyData-APIKey: 1a3e2562d2466ecb9462ddfd723a4597&quot; http://THE_DOMAIN/data/additional-affordable-dwellings.json</code>
-<h4>
-4.5.4
-<string>Supplying the API key in a query string parameter</string>
-</h4>
-<p>For example, using the cURL command line tool to supply the API key in the custom HTTP header.</p>
-<code class='prettyprint'>curl http://THE_DOMAIN/data/affordable-housing?api_key=&lt;your-api-key-here&gt;</code>
-<p>Replace &lt;your-api-key-here&gt; with your actual API key. For example:</p>
-<code class='prettyprint'>curl http://THE_DOMAIN/data/additional-affordable-dwellings.json?api_key=1a3e2562d2466ecb9462ddfd723a4597</code>
-</div>
+		<p>Optionally, a discontinued dataset may be replaced by another dataset. In this case a link to the new dataset appears on the dataset web page and the dataset metadata contains the triple:</p>
+		<code>&lt;{discontinued dataset URI}&gt; &lt;http://purl.org/dc/terms/isReplacedBy&gt; &lt;{new dataset URI}&gt; .</code>
+		<p>The contents of discontinued datasets are still available via SPARQL queries and other APIs. This allows us to update the way that data is represented without breaking external applications that use it. Discontinued datasets will generally be removed completely after some period of time. Information about planned deletion will be provided in the 'Further Information' section on the dataset web page.</p>
+	</div>
+	<div class='subsection' id='api-keys'>
+		<h3>
+			4.5
+			<strong>API Keys</strong>
+		</h3>
+		<h4>
+			4.5.1
+			<strong>Obtaining an API key</strong>
+		</h4>
+		<p>You can <a href="/users/sign_up">register for an API key</a> to obtain unthrottled access to our API, analytics, and announcements about upcoming API changes. Upon registering you will be logged in and taken to your profile page which displays your unique key. You should then use the API key with all requests to our API.</p>
+		<h4>
+			4.5.2
+			<strong>Using the API Key</strong>
+		</h4>
+		<p>To use the API key, supply it in your requests to our API (including for SPARQL queries) via either:</p>
+		<ul>
+			<li>the <code class='click-to-select'>X-PublishMyData-APIKey</code> HTTP header, or</li>
+			<li>the <code class='click-to-select'>api_key</code> query string parameter</li>
+		</ul>
+		<br>
+		<p>Note that some corporate or goverment networks may strip non-standard HTTP headers, so in these situations we recommend using the query string parameter instead.</p>
+		<h4>
+			4.5.3
+			<strong>Supplying the API Key in an HTTP header</strong>
+		</h4>
+		<p>For example, using the cURL command line tool to supply the API key in an HTTP header.</p>
+		<code class='prettyprint'>curl -H &quot;X-PublishMyData-APIKey: &lt;your-api-key-here&gt;&quot; &lt;request-url&gt;</code>
+		<p>Replace &lt;your-api-key-here&gt; with your actual API key. e.g.</p>
+		<code class='prettyprint'>curl -H &quot;X-PublishMyData-APIKey: 1a3e2562d2466ecb9462ddfd723a4597&quot; http://THE_DOMAIN/data/additional-affordable-dwellings.json</code>
+		<h4>
+			4.5.4
+			<string>Supplying the API key in a query string parameter</string>
+		</h4>
+		<p>For example, using the cURL command line tool to supply the API key in the custom HTTP header.</p>
+		<code class='prettyprint'>curl http://THE_DOMAIN/data/affordable-housing?api_key=&lt;your-api-key-here&gt;</code>
+		<p>Replace &lt;your-api-key-here&gt; with your actual API key. For example:</p>
+		<code class='prettyprint'>curl http://THE_DOMAIN/data/additional-affordable-dwellings.json?api_key=1a3e2562d2466ecb9462ddfd723a4597</code>
+	</div>
 </section>
 
 </div>

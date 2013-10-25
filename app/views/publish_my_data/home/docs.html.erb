@@ -15,7 +15,7 @@
 		.docs aside  			{color:#999;font-style:italic;}
 		.docs code,.docs pre 	{background:#ffe; border:0; color:#263F3F; display:block; font-size:0.9em; margin:10px 0; padding:10px;}
 		.docs code 				{white-space:normal; word-break:normal; word-wrap:normal;}
-		.docs p code 			{background:inherit; display:inline; margin:0; padding:0;}
+		.docs p code 			{background:inherit; display:inline; font-weight:bold; margin:0; padding:0;}
 		.docs ul				{list-style-type:none;}
 
 		/* Pretty printing styles. Used with prettify.js. SPAN elements with the classes below are added by prettyprint. */
@@ -803,10 +803,7 @@
 			4.5.2
 			<strong>Using the API Key</strong>
 		</h4>
-		<p>To use the API key, supply it in your requests to our API (including for SPARQL queries) via either:</p>
-		<ul>
-			<li>the <code class='click-to-select'>X-PublishMyData-APIKey</code> HTTP header, or</li>
-			<li>the <code class='click-to-select'>api_key</code> query string parameter</li>
+		<p>To use the API key, supply it in your requests to our API (including for SPARQL queries) via <strong>either</strong> the <code class='click-to-select'>X-PublishMyData-APIKey</code> HTTP header, <strong>or</strong> the <code class='click-to-select'>api_key</code> query string parameter</li>
 		</ul>
 		<br>
 		<p>Note that some corporate or goverment networks may strip non-standard HTTP headers, so in these situations we recommend using the query string parameter instead.</p>

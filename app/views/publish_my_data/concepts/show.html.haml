@@ -95,7 +95,7 @@
         #concept-project-count
           %div
             Number of projects
-            = "(in section: <strong>#{sic_class.sic_section.label}</strong>)".html_safe if sic_class
+            = "(in section: <strong>#{sic_class.sic_section.label}</strong>)".html_safe if sic_class && sic_class.sic_section
           %div
             %span= projects.total
             projects

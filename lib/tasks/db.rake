@@ -241,8 +241,8 @@ namespace :db do
     replace_concept_scheme_metadata(
       SicClass.get_graph_uri.to_s.gsub("/graph/", "/def/"),
       SicClass.get_graph_uri,
+      "SIC Classes",
       "The set of possible SIC classes for organisations funded by TSB projects", #comment
-      "comment", #comment
       nil, #   "More information coming soon...", #desc markdown
       "sic_codes.nt"
     )

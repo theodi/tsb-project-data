@@ -32,11 +32,21 @@
     }
 
     #organization-about {
-      > div {
+
+      div#organization-about-primary,
+      div#organization-about-secondary, {
         > div {
           @include make-md-column(6);
         }
       }
+
+      div#organization-about-tertiary {
+         > div {
+         @include make-md-column(12);
+        }
+      }
+
+
 
       #organization-address {
         @include make-md-column(12);

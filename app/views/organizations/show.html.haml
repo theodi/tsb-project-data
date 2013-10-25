@@ -3,7 +3,7 @@
 - content_for :header do
   .contents
     %h3
-      Organization
+      Organisation
     %h1
       = organization.label
 
@@ -24,27 +24,14 @@
     %section#organization-about
 
       #organization-about-primary
-        #organization-name
-          %div Organisation name
-          %div= organization.label
         #organization-number
           %div Company number
           %div= organization.company_number
-
+        #organization-size
+          %div Enterprise size
+          %div= link_to organization.enterprise_size.label, resource_path_from_uri(organization.enterprise_size.uri)
 
       #organization-about-secondary
-        #organization-size
-          %div Organization size
-          %div= link_to organization.enterprise_size.label, resource_path_from_uri(organization.enterprise_size.uri)
-        #organization-sic
-          %div SIC classes
-          %div
-            - if organization.sic_classes.any?
-              = organization.sic_classes.map { |s| "#{link_to s.label, resource_path_from_uri(s.uri)}" }.join(', ').html_safe
-            - else
-              \-
-
-      #organization-about-tertiary
         #organization-legal
           %div Legal entity form
           %div
@@ -56,6 +43,17 @@
         #organization-region
           %div Region
           %div= link_to organization.site.region.label, resource_path_from_uri(organization.site.region.uri)
+
+
+      #organization-about-tertiary
+        #organization-sic
+          %div SIC classes
+          %div
+            - if organization.sic_classes.any?
+              = organization.sic_classes.map { |s| "#{link_to s.label, resource_path_from_uri(s.uri)}" }.join(', ').html_safe
+            - else
+              \-
+
 
       #organization-about-location
         #organization-address

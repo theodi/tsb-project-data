@@ -26,7 +26,15 @@
       #organization-about-primary
         #organization-number
           %div Company number
-          %div= organization.company_number
+          - if organization.same_as && organization.same_as.any?
+            %div
+              = link_to resource_path_from_uri(organization.same_as.first.to_s) do
+                = organization.company_number
+                %span.glyphicon.glyphicon-share
+
+          - else
+            %div= organization.company_number
+
         #organization-size
           %div Enterprise size
           %div= link_to organization.enterprise_size.label, resource_path_from_uri(organization.enterprise_size.uri)

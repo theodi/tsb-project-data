@@ -9,327 +9,326 @@
 <% end %>
 
 <% content_for :head do %>
-  <style>
-
-
-  </style>
+	<style>
+		/* remove this style block in production - just to keep page a manageable length */
+		section, nav.contents 	{display:none;}
+		.inprogress 			{display:block;}
+	</style>
+	<style>
+		.docs  					{font-size:14px;} /* inconsistent, yes, but restores heierarchy to headings nad we need that, because it's a text-heavy page*/
+		.docs code 				{background:#ffe; color:#263F3F; display:block; font-size:0.9em; margin:10px 0; padding:10px; white-space:normal; word-break:normal; word-wrap:normal;}
+		.docs p code 			{background:inherit; display:inline; margin:0; padding:0;}
+		.docs pre 				{background:none; border:none; color:inherit; font-size:inherit; font-family:inherit;}
+	</style>
 <% end %>
 
 <section>
-<h2>Introduction</h2>
-<p>This page describes the current version of our production API, which was deployed on 26th of June 2013. This release included only backward-compatible changes. See our <a href="/changelog">Change Log</a> for more details of what changed.</p>
+	<h2>Introduction</h2>
+	<p>This page describes the current version of our production API, which was deployed on 26th of June 2013. This release included only backward-compatible changes. See our <a href="/changelog">Change Log</a> for more details of what changed.</p>
 </section>
+
 <nav class='contents'>
-<h2>Contents</h2>
-<h3>
-1 -
-<strong>Linked Data API</strong>
-</h3>
-<ul>
-<li>
-<a href='#uri-dereferencing'>
-1.1
-<strong>URI Dereferencing</strong>
-</a>
-</li>
-<li>
-<a href='#resource-formats'>
-1.2
-<strong>Resource Formats</strong>
-</a>
-</li>
-<li>
-<a href='#ruby-dereferencing'>
-1.2
-<strong>Example: Dereferencing URIs with Ruby</strong>
-</a>
-</li>
-<li>
-<a href='#curl-dereferencing'>
-1.2
-<strong>Example: Dereferencing URIs with cURL</strong>
-</a>
-</li>
-</ul>
-<h3>
-2 -
-<strong>Other Resource APIs</strong>
-</h3>
-<ul>
-<li>
-<a href='#individual-datasets'>
-2.1
-<strong>Individual Datasets</strong>
-</a>
-</li>
-<li>
-<a href='#themes'>
-2.2
-<strong>Themes</strong>
-</a>
-</li>
-<li>
-<a href='#dataset-collections'>
-2.3
-<strong>Collections of Datasets</strong>
-</a>
-</li>
-<li>
-<a href='#individual-resources'>
-2.4
-<strong>Individual Resources</strong>
-</a>
-</li>
-<li>
-<a href='#resource-collections'>
-2.5
-<strong>Collections of Resources</strong>
-</a>
-</li>
-<li>
-<a href='#resource-options-and-limits'>
-2.6
-<strong>Options and Limits</strong>
-</a>
-</li>
-<li>
-<a href='#ruby-resources-example'>
-2.7
-<strong>Example: Using Ruby to get a filtered list of resources</strong>
-</a>
-</li>
-<li>
-<a href='#js-resources-example'>
-2.9
-<strong>Example: Using JavaScript to get a filtered list of resources</strong>
-</a>
-</li>
-<li>
-<a href='#curl-resources-example'>
-2.9
-<strong>Example: Using cURL to get the list of datasets in a theme</strong>
-</a>
-</li>
-</ul>
-<h3>
-3 -
-<strong>SPARQL</strong>
-</h3>
-<ul>
-<li>
-<a href='#sparql-introduction'>
-3.1
-<strong>Introduction to SPARQL</strong>
-</a>
-</li>
-<li>
-<a href='#sparql-results-formats'>
-3.2
-<strong>SPARQL Results Formats</strong>
-</a>
-</li>
-<li>
-<a href='#sparql-results-pagination'>
-3.3
-<strong>SPARQL Results Pagination</strong>
-</a>
-</li>
-<li>
-<a href='#sparql-errors'>
-3.4
-<strong>SPARQL Errors</strong>
-</a>
-</li>
-<li>
-<a href='#sparql-json-p'>
-3.5
-<strong>JSON-P</strong>
-</a>
-</li>
-<li>
-<a href='#named-graphs'>
-3.6
-<strong>Use of Named Graphs</strong>
-</a>
-</li>
-<li>
-<a href='#parameter-interpolation'>
-3.7
-<strong>Parameter Substitution</strong>
-</a>
-</li>
-<li>
-<a href='#ruby-sparql-example'>
-3.8
-<strong>Example: Using Ruby to request data from the SPARQL Endpoint</strong>
-</a>
-</li>
-<li>
-<a href='#js-sparql-example'>
-3.9
-<strong>Example: Using JavaScript to request data from the SPARQL Endpoint</strong>
-</a>
-</li>
-</ul>
-<h3>
-4 -
-<strong>General</strong>
-</h3>
-<ul>
-<li>
-<a href='#response-size-limits'>
-4.1
-<strong>Response Size Limits</strong>
-</a>
-</li>
-<li>
-<a href='#errors'>
-4.2
-<strong>Errors</strong>
-</a>
-</li>
-<li>
-<a href='#cors'>
-4.3
-<strong>CORS</strong>
-</a>
-</li>
-<li>
-<a href='#discontinued-datasets'>
-4.4
-<strong>Discontinued Datasets</strong>
-</a>
-</li>
-<li>
-<a href='#api-keys'>
-4.5
-<strong>API Keys</strong>
-</a>
-</li>
-</ul>
+	<h2>Contents</h2>
+	<h3>
+		1 -
+		<strong>Linked Data API</strong>
+	</h3>
+	<ul>
+		<li>
+			<a href='#uri-dereferencing'>
+				1.1
+				<strong>URI Dereferencing</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#resource-formats'>
+				1.2
+				<strong>Resource Formats</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#ruby-dereferencing'>
+				1.2
+				<strong>Example: Dereferencing URIs with Ruby</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#curl-dereferencing'>
+				1.2
+				<strong>Example: Dereferencing URIs with cURL</strong>
+			</a>
+		</li>
+	</ul>
+	<h3>
+		2 -
+		<strong>Other Resource APIs</strong>
+	</h3>
+	<ul>
+		<li>
+			<a href='#individual-datasets'>
+				2.1
+				<strong>Individual Datasets</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#themes'>
+				2.2
+				<strong>Themes</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#dataset-collections'>
+				2.3
+				<strong>Collections of Datasets</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#individual-resources'>
+				2.4
+				<strong>Individual Resources</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#resource-collections'>
+				2.5
+				<strong>Collections of Resources</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#resource-options-and-limits'>
+				2.6
+				<strong>Options and Limits</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#ruby-resources-example'>
+				2.7
+				<strong>Example: Using Ruby to get a filtered list of resources</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#js-resources-example'>
+				2.9
+				<strong>Example: Using JavaScript to get a filtered list of resources</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#curl-resources-example'>
+				2.9
+				<strong>Example: Using cURL to get the list of datasets in a theme</strong>
+			</a>
+		</li>
+	</ul>
+	<h3>
+		3 -
+		<strong>SPARQL</strong>
+	</h3>
+	<ul>
+		<li>
+			<a href='#sparql-introduction'>
+				3.1
+				<strong>Introduction to SPARQL</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#sparql-results-formats'>
+				3.2
+				<strong>SPARQL Results Formats</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#sparql-results-pagination'>
+				3.3
+				<strong>SPARQL Results Pagination</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#sparql-errors'>
+				3.4
+				<strong>SPARQL Errors</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#sparql-json-p'>
+				3.5
+				<strong>JSON-P</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#named-graphs'>
+				3.6
+				<strong>Use of Named Graphs</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#parameter-interpolation'>
+				3.7
+				<strong>Parameter Substitution</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#ruby-sparql-example'>
+				3.8
+				<strong>Example: Using Ruby to request data from the SPARQL Endpoint</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#js-sparql-example'>
+				3.9
+				<strong>Example: Using JavaScript to request data from the SPARQL Endpoint</strong>
+			</a>
+		</li>
+	</ul>
+	<h3>
+		4 -
+		<strong>General</strong>
+	</h3>
+	<ul>
+		<li>
+			<a href='#response-size-limits'>
+				4.1
+				<strong>Response Size Limits</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#errors'>
+				4.2
+				<strong>Errors</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#cors'>
+				4.3
+				<strong>CORS</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#discontinued-datasets'>
+				4.4
+				<strong>Discontinued Datasets</strong>
+			</a>
+		</li>
+		<li>
+			<a href='#api-keys'>
+				4.5
+				<strong>API Keys</strong>
+			</a>
+		</li>
+	</ul>
 </nav>
-<section>
-<h2>1 - Linked Data API</h2>
-<div class='subsection' id='uri-dereferencing'>
-<h3>
-1.1
-<strong>URI Dereferencing</strong>
-</h3>
-<p>Following the standard practices for Linked Data, we distinguish between a 'real-world' resource and documents about that resource. <strong>Identifiers (URIs)</strong> for the resources follow the pattern:</p>
-<code>http://THE_DOMAIN
-/<strong>id</strong>/{...}</code>
-<p>When you look them up you get redirected to the corresponding document about that thing. The <strong>document URLs</strong> follow the pattern:</p>
-<code>http://THE_DOMAIN
-/<strong>doc</strong>/{...}</code>
-<p>For example, in our Local Authorities Dataset, the URI for Cheshire East Unitary Authority is</p>
-<code>http://THE_DOMAIN
-/<strong>id</strong>/unitary-authority/cheshire-east</code>
-<p>If you put this into your browser you get redirected, with an HTTP status code of 303 ("See Other"), to an HTML page about Cheshire East</p>
-<code>http://THE_DOMAIN
-/<strong>doc</strong>/unitary-authority/cheshire-east</code>
-<p>In cases where a URI identifies something that is essentially a document (an 'information resource') then we respond with a 200, as their URI and document page URL are one and the same.  This includes <a href="#individual-datasets">Datasets</a> as well as ontology terms and concept schemes.</p>
-</div>
-<div class='subsection' id='resource-formats'>
-<h3>
-1.2
-<strong>Resource Formats</strong>
-</h3>
-<p>You can specify what format you want the resulting document to be in.  By default you get HTML in a human-readable form, but you can also ask for the document in one of several RDF formats: <strong>RDF/XML</strong>, <strong>N-triples</strong>, <strong>Turtle</strong> or <strong>JSON-LD</strong>.</p>
-<p>There are two ways to specify which format you want: you can append a <strong>format extension</strong> to the document page's URL or you can use an <Strong>HTTP Accept header</strong> with the resource's URI or document page's URL.</p>
-<table>
-<thead>
-<tr>
-<th>Format</th>
-<th>Extensions</th>
-<th>Accept Headers</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class='details'>RDF/XML</td>
-<td>.rdf</td>
-<td class='hardwrap'>application/rdf+xml</td>
-</tr>
-<tr>
-<td class='details'>n-triples</td>
-<td>.nt, .txt, .text</td>
-<td class='hardwrap'>
-application/n-triples,
-text/plain
-</td>
-</tr>
-<tr>
-<td class='details'>Turtle</td>
-<td>.ttl</td>
-<td class='hardwrap'>text/turtle</td>
-</tr>
-<tr>
-<td class='details'>JSON-LD</td>
-<td>.json</td>
-<td class='hardwrap'>
-application/ld+json,
-application/json
-</td>
-</tr>
-</tbody>
-</table>
-<br>
-</div>
-<div class='subsection' id='ruby-dereferencing'>
-<h3>
-1.3
-<strong>Example: Dereferencing URIs with Ruby</strong>
-</h3>
-<p>Here's an example of dereferencing a URI using the <a href="http://rubydoc.info/gems/rest-client">RestClient</a> library. Similar approaches can be taken in other languages.  This assumes you already have Ruby set up on your system. Also, if you don't already have it, you'll need to install the gem:</p>
 
-<p><code>$ gem install rest-client</code>.</p>
-
-<p>... and require it in your script.</p>
-
-<p><code>require 'rest-client'</code>.</p>
-<h4>
-1.3.1
-<strong>Specifying the format in an accept header - in this case RDF/XML</strong>
-</h4>
-<p>If you're using the accept header, you can directly request the URI. This involves two requests, because doing an HTTP GET on the resource identifier gives you a 303 redirect to the appropriate document page. RestClient looks after that for you.</p>
-<code class='prettyprint lang-ruby'>RestClient.get 'http://THE_DOMAIN
-/id/unitary-authority/cheshire-east', :accept=>'application/rdf+xml'&#x000A;</code>
-<p>You can also request the document page directly:</p>
-<code class='prettyprint lang-ruby'>RestClient.get 'http://THE_DOMAIN
-/doc/unitary-authority/cheshire-east', :accept=>'application/rdf+xml'&#x000A;</code>
-<h4>
-1.3.2
-<strong>Specifing the format as an extension - in this case JSON</strong>
-</h4>
-<p>If using an extension, you must request the document page directly (as '.json' is not part of the URI)</p>
-<code class='prettyprint lang-ruby'>RestClient.get 'http://THE_DOMAIN
-/doc/unitary-authority/cheshire-east.json'</code>
-</div>
-<div class='subsection' id='curl-dereferencing'>
-<h3>
-1.4
-<strong>Example: Dereferencing URIs with cURL</strong>
-</h3>
-<p>Here's an example of dereferencing a URI using the widely available <a href="http://curl.haxx.se">cURL</a> command line program.</p>
-<h4>
-1.4.1
-<strong>Specifying the format in an accept header - in this case Turtle</strong>
-</h4>
-<p>If you're using the accept header, you can directly request the URI. This involves two requests, because doing an HTTP GET on the resource identifier gives you a 303 redirect to the appropriate document page. cURL looks after that for you if you use the <code>-L</code> option.</p>
-<code class='prettyprint'>curl -L -H "Accept: text/turtle" http://THE_DOMAIN
-/id/unitary-authority/cheshire-east&#x000A;</code>
-<p>You can also request the document page directly</p>
-<code class='prettyprint'>curl -H "Accept: text/turtle" http://THE_DOMAIN
-/doc/unitary-authority/cheshire-east</code>
-<h4>
-1.4.2
-<strong>Specifing the format as an extension - in this case N-triples</strong>
-</h4>
-<p>If using an extension, you must request the document page directly (as '.nt' is not part of the URI)</p>
-<code class='prettyprint lang-ruby'>curl http://THE_DOMAIN
-/doc/unitary-authority/cheshire-east.nt</code>
-</div>
+<section class="docs inprogress">
+	<h2>1 - Linked Data API</h2>
+	<div class='subsection' id='uri-dereferencing'>
+		<h3>
+			1.1
+			<strong>URI Dereferencing</strong>
+		</h3>
+		<p>Following the standard practices for Linked Data, we distinguish between a 'real-world' resource and documents about that resource. <strong>Identifiers (URIs)</strong> for the resources follow the pattern:</p>
+		<code>http://THE_DOMAIN/<strong>id</strong>/{...}</code>
+		<p>When you look them up you get redirected to the corresponding document about that thing. The <strong>document URLs</strong> follow the pattern:</p>
+		<code>http://THE_DOMAIN/<strong>doc</strong>/{...}</code>
+		<p>For example, in our Local Authorities Dataset, the URI for Cheshire East Unitary Authority is</p>
+		<code>http://THE_DOMAIN/<strong>id</strong>/unitary-authority/cheshire-east</code>
+		<p>If you put this into your browser you get redirected, with an HTTP status code of 303 ("See Other"), to an HTML page about Cheshire East</p>
+		<code>http://THE_DOMAIN/<strong>doc</strong>/unitary-authority/cheshire-east</code>
+		<p>In cases where a URI identifies something that is essentially a document (an 'information resource') then we respond with a 200, as their URI and document page URL are one and the same.  This includes <a href="#individual-datasets">Datasets</a> as well as ontology terms and concept schemes.</p>
+	</div>
+	<div class='subsection' id='resource-formats'>
+		<h3>
+			1.2
+			<strong>Resource Formats</strong>
+		</h3>
+		<p>You can specify what format you want the resulting document to be in.  By default you get HTML in a human-readable form, but you can also ask for the document in one of several RDF formats: <strong>RDF/XML</strong>, <strong>N-triples</strong>, <strong>Turtle</strong> or <strong>JSON-LD</strong>.</p>
+		<p>There are two ways to specify which format you want: you can append a <strong>format extension</strong> to the document page's URL or you can use an <strong>HTTP Accept header</strong> with the resource's URI or document page's URL.</p>
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Format</th>
+					<th>Extensions</th>
+					<th>Accept Headers</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class='details'>RDF/XML</td>
+					<td>.rdf</td>
+					<td class='hardwrap'>application/rdf+xml</td>
+				</tr>
+				<tr>
+					<td class='details'>n-triples</td>
+					<td>.nt, .txt, .text</td>
+					<td class='hardwrap'>
+						application/n-triples,
+						text/plain
+					</td>
+				</tr>
+				<tr>
+					<td class='details'>Turtle</td>
+					<td>.ttl</td>
+					<td class='hardwrap'>text/turtle</td>
+				</tr>
+				<tr>
+					<td class='details'>JSON-LD</td>
+					<td>.json</td>
+					<td class='hardwrap'>
+						application/ld+json,
+						application/json
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class='subsection' id='ruby-dereferencing'>
+		<h3>
+			1.3
+			<strong>Example: Dereferencing URIs with Ruby</strong>
+		</h3>
+		<p>Here's an example of dereferencing a URI using the <a href="http://rubydoc.info/gems/rest-client">RestClient</a> library. Similar approaches can be taken in other languages.  This assumes you already have Ruby set up on your system. Also, if you don't already have it, you'll need to install the gem:</p>
+		<code>$ gem install rest-client</code>
+		<p>... and require it in your script.</p>
+		<code>require 'rest-client'</code>
+		<h4>
+			1.3.1
+			<strong>Specifying the format in an accept header - in this case RDF/XML</strong>
+		</h4>
+		<p>If you're using the accept header, you can directly request the URI. This involves two requests, because doing an HTTP GET on the resource identifier gives you a 303 redirect to the appropriate document page. RestClient looks after that for you.</p>
+		<code class='prettyprint lang-ruby'>RestClient.get 'http://THE_DOMAIN/id/unitary-authority/cheshire-east', :accept=>'application/rdf+xml'&#x000A;</code>
+		<p>You can also request the document page directly:</p>
+		<code class='prettyprint lang-ruby'>RestClient.get 'http://THE_DOMAIN/doc/unitary-authority/cheshire-east', :accept=>'application/rdf+xml'&#x000A;</code>
+		<h4>
+			1.3.2
+			<strong>Specifing the format as an extension - in this case JSON</strong>
+		</h4>
+		<p>If using an extension, you must request the document page directly (as '.json' is not part of the URI)</p>
+		<code class='prettyprint lang-ruby'>RestClient.get 'http://THE_DOMAIN/doc/unitary-authority/cheshire-east.json'</code>
+	</div>
+	<div class='subsection' id='curl-dereferencing'>
+		<h3>
+			1.4
+			<strong>Example: Dereferencing URIs with cURL</strong>
+		</h3>
+		<p>Here's an example of dereferencing a URI using the widely available <a href="http://curl.haxx.se">cURL</a> command line program.</p>
+		<h4>
+			1.4.1
+			<strong>Specifying the format in an accept header - in this case Turtle</strong>
+		</h4>
+		<p>If you're using the accept header, you can directly request the URI. This involves two requests, because doing an HTTP GET on the resource identifier gives you a 303 redirect to the appropriate document page. cURL looks after that for you if you use the <code>-L</code> option.</p>
+		<code class='prettyprint'>curl -L -H "Accept: text/turtle" http://THE_DOMAIN/id/unitary-authority/cheshire-east&#x000A;</code>
+		<p>You can also request the document page directly</p>
+		<code class='prettyprint'>curl -H "Accept: text/turtle" http://THE_DOMAIN/doc/unitary-authority/cheshire-east</code>
+		<h4>
+			1.4.2
+			<strong>Specifing the format as an extension - in this case N-triples</strong>
+		</h4>
+		<p>If using an extension, you must request the document page directly (as '.nt' is not part of the URI)</p>
+		<code class='prettyprint lang-ruby'>curl http://THE_DOMAIN/doc/unitary-authority/cheshire-east.nt</code>
+	</div>
 </section>
+
+
+
+
 <section>
 <h2>2 - Other Resource APIs</h2>
 <p>Alongside the URI dereferencing we offer the following additional ways of accessing data in the system. Please be sure to read the <a href="#resource-options-and-limits">Options and Limits</a> section, for some background information which applies to all these APIs, such as details on data formats and pagination.</p>

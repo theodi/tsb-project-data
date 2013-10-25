@@ -2,6 +2,17 @@
 #banner {display:none;}
 #banner iframe {display:none;}
 
+.image-fallback {
+  position:relative;
+  h2 {
+    color:white;
+    position:absolute;
+    left:30px;
+    top: 15%;
+    font-size:48px;
+  }
+}
+
 /* for better than mobile, show banner */
 @media (min-width: 480px) {
   #banner           {display:block;}
@@ -12,7 +23,7 @@
 
 /* for desktop, on qualified browsers, show visualisation (requires modernizr svg) */
 @media (min-width: 960px) {
-  .svg #banner img      {display:none;}
+  .svg #banner .image-fallback      {display:none;}
   .svg #visualisation     {display:block; overflow:hidden !important;}
 }
 

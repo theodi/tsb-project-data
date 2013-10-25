@@ -329,7 +329,7 @@
 	</div>
 </section>
 
-<section class='inprogress'>
+<section>
 	<h2>2 - Other Resource APIs</h2>
 	<p>Alongside the URI dereferencing we offer the following additional ways of accessing data in the system. Please be sure to read the <a href="#resource-options-and-limits">Options and Limits</a> section, for some background information which applies to all these APIs, such as details on data formats and pagination.</p>
 
@@ -478,253 +478,238 @@
 	</div>
 </section>
 
+<section class='inprogress'>
+	<h2>3 - SPARQL</h2>
+	<div class='subsection' id='sparql-introduction'>
+		<h3>
+			3.1
+			<strong>Introduction to SPARQL</strong>
+		</h3>
+		<p>The most flexible way to access the data is by using SPARQL. Pronounced "sparkle", SPARQL stands for <strong>S</strong>parql <strong>P</strong>rotocol and <strong>R</strong>DF <strong>Q</strong>uery <strong>L</strong>anguage. It's a query language, analagous to SQL for relational databases, for retrieving and manipulating data from triple-stores like ours. We support <a href="http://www.w3.org/TR/2013/REC-sparql11-query-20130321/">SPARQL 1.1</a> query syntax.</p>
+		<p>To submit a SPARQL query from your code, issue an HTTP GET request to our <strong>endpoint</strong>:</p>
+		<code>http://THE_DOMAIN/sparql?query={URL-encoded query}</code>
+		<p>For example, to run this simple query...</p>
+		<code class='prettyprint lang-sparql'>SELECT * WHERE {&lt;http://THE_DOMAIN/id/unitary-authority/cheshire-east&gt; ?p ?o}</code>
+		<p>...and get the results as JSON, you could GET the following URL (note the <code>.json</code> extension):</p>
+		<code>http://THE_DOMAIN/sparql.json?query=SELECT+%2A+WHERE+%7B%3Chttp%3A%2F%2FTHE_DOMAIN%2Fid%2Funitary-authority%2Fcheshire-east%3E+%3Fp+%3Fo%7D</code>
+		<p>See below for <a href="#sparql-results-formats">details of SPARQL Results Formats</a> and examples in a variety of languages (at the end of this section).</p>
+	</div>
+	<div class='subsection' id='sparql-results-formats'>
+		<h3>
+			3.2
+			<strong>SPARQL Results formats</strong>
+		</h3>
+		<p>As with other aspects of our API, to get the data in different formats, you can use either format extensions or HTTP Accept headers.</p>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section>
-<h2>3 - SPARQL</h2>
-<div class='subsection' id='sparql-introduction'>
-<h3>
-3.1
-<strong>Introduction to SPARQL</strong>
-</h3>
-<p>The most flexible way to access the data is by using SPARQL. Pronounced "sparkle", SPARQL stands for <strong>S</strong>parql <strong>P</strong>rotocol and <strong>R</strong>DF <strong>Q</strong>uery <strong>L</strong>anguage. It's a query language, analagous to SQL for relational databases, for retrieving and manipulating data from triple-stores like ours. We support <a href="http://www.w3.org/TR/2013/REC-sparql11-query-20130321/">SPARQL 1.1</a> query syntax.</p>
-
-<p>To submit a SPARQL query from your code, issue an HTTP GET request to our <strong>endpoint</strong>:</p>
-<code>http://THE_DOMAIN/sparql?query={URL-encoded query}</code>
-<p>For example, to run this simple query...</p>
-<code class='prettyprint lang-sparql'>SELECT * WHERE {&lt;http://THE_DOMAIN/id/unitary-authority/cheshire-east&gt; ?p ?o}</code>
-<p>...and get the results as JSON, you could GET the following URL (note the <code>.json</code> extension):</p>
-<code>http://THE_DOMAIN/sparql.json?query=SELECT+%2A+WHERE+%7B%3Chttp%3A%2F%2FTHE_DOMAIN
-%2Fid%2Funitary-authority%2Fcheshire-east%3E+%3Fp+%3Fo%7D</code>
-<p>See below for <a href="#sparql-results-formats">details of SPARQL Results Formats</a> and examples in a variety of languages (at the end of this section).</p>
-</div>
-<div class='subsection' id='sparql-results-formats'>
-<h3>
-3.2
-<strong>SPARQL Results formats</strong>
-</h3>
-<p>As with other aspects of our API, to get the data in different formats, you can use either format extensions or HTTP Accept headers.</p>
-
-<p>The available formats depend on the type of SPARQL query. A SPARQL query can be one of four main forms: <strong>SELECT</strong>, <strong>ASK</strong>, <strong>CONSTRUCT</strong> or <strong>DESCRIBE</strong>.</p>
-<table class="table table-striped table-bordered table-hover">
-<thead>
-<tr>
-<th>Query Type</th>
-<th>Format</th>
-<th>Extension</th>
-<th>Accept Headers</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class='details' rowspan='4'>SELECT</td>
-<td>xml</td>
-<td>.xml</td>
-<td class='hardwrap'>
-application/xml,
-application/sparql-results+xml
-</td>
-</tr>
-<tr>
-<td>json</td>
-<td>.json</td>
-<td class='hardwrap'>
-application/json,
-application/sparql-results+json
-</td>
-</tr>
-<tr>
-<td>text</td>
-<td>.txt, .text</td>
-<td class='hardwrap'>text/plain</td>
-</tr>
-<tr>
-<td>csv</td>
-<td>.csv</td>
-<td class='hardwrap'>text/csv</td>
-</tr>
-<tr>
-<td class='details' rowspan='3'>ASK</td>
-<td>json</td>
-<td>.json</td>
-<td class='hardwrap'>
-application/json,
-application/sparql-results+json
-</td>
-</tr>
-<tr>
-<td>xml</td>
-<td>.xml</td>
-<td class='hardwrap'>
-application/xml,
-application/sparql-results+json
-</td>
-</tr>
-<tr>
-<td>text</td>
-<td>.txt, .text</td>
-<td class='hardwrap'>text/plain</td>
-</tr>
-<tr>
-<td class='details' rowspan='3'>CONSTRUCT</td>
-<td>RDF/XML</td>
-<td>.rdf</td>
-<td class='hardwrap'>application/rdf+xml</td>
-</tr>
-<tr>
-<td>N-triples</td>
-<td>.nt, .txt, .text</td>
-<td class='hardwrap'>
-text/plain,
-application/n-triples
-</td>
-</tr>
-<tr>
-<td>Turtle</td>
-<td>.ttl</td>
-<td class='hardwrap'>text/turtle</td>
-</tr>
-<tr>
-<td class='details' rowspan='3'>DESCRIBE</td>
-<td>RDF/XML</td>
-<td>.rdf</td>
-<td class='hardwrap'>application/rdf+xml</td>
-</tr>
-<tr>
-<td>N-triples</td>
-<td>.nt, .txt, .text</td>
-<td class='hardwrap'>
-text/plain,
-application/n-triples
-</td>
-</tr>
-<tr>
-<td>Turtle</td>
-<td>.ttl</td>
-<td class='hardwrap'>text/turtle</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class='subsection' id='sparql-results-pagination'>
-<h3>
-3.3
-<strong>SPARQL Results Pagination</strong>
-</h3>
-<p>We will accept <code>page</code> and <code>per_page</code> query-string parameters for paginating the results of SELECT queries.</p>
-
-<p>For requests made through the website (i.e. HTML format), the page size is defaulted to 20.</p>
-
-<p>For requests to our sparql endpoint for data formats (i.e. non-HTML), there will be no defaults for these parameters (i.e. results are unlimited).</p>
-
-<p>For SELECT queries, for convenience you can optionally pass the pagination parameters and we will use them to apply <code>LIMIT</code> and <code>OFFSET</code> clauses to the query. For other query types (i.e. DESCRIBE, CONSTRUCT, ASK), pagination like this doesn't make so much sense, so those parameters will be ignored.</p>
-
-<p>Please also refer to the <a href="#response-size-limits">Response Size Limits</a> section below, and the examples at the end of this section.</p>
-</div>
-<div class='subsection' id='sparql-errors'>
-<h3>
-3.4
-<strong>SPARQL Errors</strong>
-</h3>
-<p>If you make a SPARQL request with a malformed query in a data format (i.e. non-HTML), then we will respond with HTTP status 400, with a helpful message in the response.</p>
-
-<p>Additionally, please note the <a href="#response-size-limits">Response Size Limits</a>, which apply to all API calls, as well as the <a href="#errors">Errors</a> section.</p>
-</div>
-<div class='subsection' id='sparql-json-p'>
-<h3>
-3.5
-<strong>JSON-P</strong>
-</h3>
-<p>If you're requesting SPARQL results as JSON, you can additionally pass a <code>callback</code> parameter and the results will be wrapped in that function. This is useful for getting around cross-domain issues if you're running JavaScript on older browsers. (Please also see the <a href="#cors">Cross-Origin Resource Sharing</a> section).</p>
-
-<p>For example:</p>
-<code>http://THE_DOMAIN/sparql.json?callback=myCallbackFunction&query=SELECT+%2A+WHERE+%7B%3Chttp%3A%2F%2FTHE_DOMAIN
-%2Fid%2Funitary-authority%2Fcheshire-east%3E+%3Fp+%3Fo%7D</code>
-<p>Or to make a JSON-P request with jQuery, you can omit the callback parameter from the url and just set the dataType to <code>jsonp</code>.</p>
-<code class='prettyprint lang-js'>queryUrl = 'http://THE_DOMAIN/sparql.json?query=SELECT+%2A+WHERE+%7B%3Chttp%3A%2F%2FTHE_DOMAIN
-%2Fid%2Funitary-authority%2Fcheshire-east%3E+%3Fp+%3Fo%7D'&#x000A;&#x000A;$.ajax({&#x000A;  dataType: 'jsonp',&#x000A;  url: queryUrl,&#x000A;  success: function(data) {&#x000A;    // callback code here&#x000A;    alert('success!');&#x000A;  }&#x000A;});</code>
-</div>
-<div class='subsection' id='named-graphs'>
-<h3>
-3.6
-<strong>Use of Named graphs</strong>
-</h3>
-<h4>
-3.6.1
-<strong>Dataset Data</strong>
-</h4>
-<p>The data for each dataset is contained within a separate named graph. The dataset itself has a URI, for example</p>
-<code>http://THE_DOMAIN/data/local-authorities</code>
-<p>The web page for the dataset lists the named graph that contains the dataset, in this case</p>
-<code>http://THE_DOMAIN/graph/local-authorities</code>
-<p>The graph name for the dataset is contained in the dataset metadata, using a predicate called <code>http://publishmydata.com/def/dataset#graph</code> and can be obtained by a query like this:</p>
-<code class='prettyprint lang-sparql'>SELECT ?graph&#x000A;  WHERE {&#x000A;    &lt;http://THE_DOMAIN/data/local-authorities&gt; &lt;http://publishmydata.com/def/dataset#graph&gt; ?graph&#x000A;  }</code>
-<h4>
-3.6.2
-<strong>Dataset Metadata</strong>
-</h4>
-<p>The metadata we store about the <a href="#individual-datasets">dataset</a> itself (that is returned by dereferencing its URI), is stored its own separate graph, for example:</p>
-<code>http://THE_DOMAIN/data/local-authorities/metadata</code>
-<p>We also use named graphs for each concept scheme and ontology.</p>
-</div>
-<div class='subsection' id='parameter-interpolation'>
-<h3>
-3.7
-<strong>Parameter Substitution</strong>
-</h3>
-<p>You can parameterize your SPARQL by including %{tokens} in your queries, and providing values for the tokens on the url query string.</p>
-<code>http://THE_DOMAIN/sparql?query=URL-encoded-SPARQL-query?token1=value-for-token1&token2=value-for-token2</code>
-<p>Note that the following tokens are reserved and cannot be used as parameters for substitution.</p>
-
-<ul>
-<li>controller</li>
-<li>action</li>
-<li>page</li>
-<li>per_page</li>
-<li>id</li>
-<li>commit</li>
-<li>utf8</li>
-<li>query</li>
-</ul>
-</div>
-<div class='subsection' id='ruby-sparql-example'>
-<h3>
-3.8
-<strong>Example: Using Ruby to request data from the SPARQL Endpoint</strong>
-</h3>
-<p>This sample Ruby makes a request to our SPARQL endpoint for all resources of type Unitary Authority (as JSON) and then puts the result in a Hash.</p>
-<code class='prettyprint lang-ruby'>require 'rest-client'&#x000A;require 'json'&#x000A;&#x000A;query = 'SELECT * WHERE {?s a &lt;http://THE_DOMAIN/def/local-government/UnitaryAuthority&gt;}'&#x000A;&#x000A;url = &quot;http://THE_DOMAIN/sparql.json&quot;&#x000A;&#x000A;results_str = RestClient.get url, {:params =&gt; {:query =&gt; query}}&#x000A;results_hash = JSON.parse results_str&#x000A;results_array = results_hash[&quot;results&quot;][&quot;bindings&quot;]&#x000A;&#x000A;puts &quot;total number of results: #{results_array.length}&quot;&#x000A;&#x000A;</code>
-<p><strong>Note</strong>: If you're doing a lot of work with RDF in Ruby, you might want to look at using <a href="http://swirrl.com">Swirrl</a>'s open-source SPARQL ORM for Ruby, <a href="http://github.com/swirrl/tripod">Tripod</a>.</p>
-</div>
-<div class='subsection' id='js-sparql-example'>
-<h3>
-3.8
-<strong>Example: Using JavaScript to request data from the SPARQL Endpoint</strong>
-</h3>
-<p>This example HTML page uses jQuery to make a request to our SPARQL endpoint for all resources of type Unitary Authority (as JSON) and log the results.</p>
-<code class='prettyprint lang-html'>&lt;!DOCTYPE html&gt;&#x000A;&lt;html&gt;&#x000A;  &lt;head&gt;&#x000A;    &lt;script src=&quot;http://code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;&#x000A;  &lt;/head&gt;&#x000A;  &lt;body&gt;&#x000A;    &lt;script type=&quot;text/javascript&quot;&gt;&#x000A;      var query = &quot;SELECT * WHERE {?s a &lt;http://THE_DOMAIN/def/local-government/UnitaryAuthority&gt;}&quot;;&#x000A;      var url = &quot;http://THE_DOMAIN/sparql.json?query=&quot;;&#x000A;      url += encodeURIComponent(query);&#x000A;      $.ajax({&#x000A;        dataType: 'json',&#x000A;        url: url,&#x000A;        success: function(data) {&#x000A;          alert('success: ' + data.results.bindings.length + ' results');&#x000A;          console.log(data);&#x000A;        }&#x000A;      });&#x000A;    &lt;/script&gt;&#x000A;  &lt;/body&gt;&#x000A;&lt;/html&gt;</code>
-<p><strong>Note</strong>: See the <a href="#cors">Cross-Origin Resource Sharing</a> section for a note about accessing data from from other domains.</p>
-</div>
+		<p>The available formats depend on the type of SPARQL query. A SPARQL query can be one of four main forms: <strong>SELECT</strong>, <strong>ASK</strong>, <strong>CONSTRUCT</strong> or <strong>DESCRIBE</strong>.</p>
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Query Type</th>
+					<th>Format</th>
+					<th>Extension</th>
+					<th>Accept Headers</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class='details' rowspan='4'>SELECT</td>
+					<td>xml</td>
+					<td>.xml</td>
+					<td class='hardwrap'>
+						application/xml,
+						application/sparql-results+xml
+					</td>
+				</tr>
+				<tr>
+					<td>json</td>
+					<td>.json</td>
+					<td class='hardwrap'>
+						application/json,
+						application/sparql-results+json
+					</td>
+				</tr>
+				<tr>
+					<td>text</td>
+					<td>.txt, .text</td>
+					<td class='hardwrap'>text/plain</td>
+				</tr>
+				<tr>
+					<td>csv</td>
+					<td>.csv</td>
+					<td class='hardwrap'>text/csv</td>
+				</tr>
+				<tr>
+					<td class='details' rowspan='3'>ASK</td>
+					<td>json</td>
+					<td>.json</td>
+					<td class='hardwrap'>
+						application/json,
+						application/sparql-results+json
+					</td>
+				</tr>
+				<tr>
+					<td>xml</td>
+					<td>.xml</td>
+					<td class='hardwrap'>
+						application/xml,
+						application/sparql-results+json
+					</td>
+				</tr>
+				<tr>
+					<td>text</td>
+					<td>.txt, .text</td>
+					<td class='hardwrap'>text/plain</td>
+				</tr>
+				<tr>
+					<td class='details' rowspan='3'>CONSTRUCT</td>
+					<td>RDF/XML</td>
+					<td>.rdf</td>
+					<td class='hardwrap'>application/rdf+xml</td>
+				</tr>
+				<tr>
+					<td>N-triples</td>
+					<td>.nt, .txt, .text</td>
+					<td class='hardwrap'>
+						text/plain,
+						application/n-triples
+					</td>
+				</tr>
+				<tr>
+					<td>Turtle</td>
+					<td>.ttl</td>
+					<td class='hardwrap'>text/turtle</td>
+				</tr>
+				<tr>
+					<td class='details' rowspan='3'>DESCRIBE</td>
+					<td>RDF/XML</td>
+					<td>.rdf</td>
+					<td class='hardwrap'>application/rdf+xml</td>
+				</tr>
+				<tr>
+					<td>N-triples</td>
+					<td>.nt, .txt, .text</td>
+					<td class='hardwrap'>
+						text/plain,
+						application/n-triples
+					</td>
+				</tr>
+				<tr>
+					<td>Turtle</td>
+					<td>.ttl</td>
+					<td class='hardwrap'>text/turtle</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class='subsection' id='sparql-results-pagination'>
+		<h3>
+			3.3
+			<strong>SPARQL Results Pagination</strong>
+		</h3>
+		<p>We will accept <code>page</code> and <code>per_page</code> query-string parameters for paginating the results of SELECT queries.</p>
+		<p>For requests made through the website (i.e. HTML format), the page size is defaulted to 20.</p>
+		<p>For requests to our sparql endpoint for data formats (i.e. non-HTML), there will be no defaults for these parameters (i.e. results are unlimited).</p>
+		<p>For SELECT queries, for convenience you can optionally pass the pagination parameters and we will use them to apply <code>LIMIT</code> and <code>OFFSET</code> clauses to the query. For other query types (i.e. DESCRIBE, CONSTRUCT, ASK), pagination like this doesn't make so much sense, so those parameters will be ignored.</p>
+		<p>Please also refer to the <a href="#response-size-limits">Response Size Limits</a> section below, and the examples at the end of this section.</p>
+	</div>
+	<div class='subsection' id='sparql-errors'>
+		<h3>
+			3.4
+			<strong>SPARQL Errors</strong>
+		</h3>
+		<p>If you make a SPARQL request with a malformed query in a data format (i.e. non-HTML), then we will respond with HTTP status 400, with a helpful message in the response.</p>
+		<p>Additionally, please note the <a href="#response-size-limits">Response Size Limits</a>, which apply to all API calls, as well as the <a href="#errors">Errors</a> section.</p>
+	</div>
+	<div class='subsection' id='sparql-json-p'>
+		<h3>
+			3.5
+			<strong>JSON-P</strong>
+		</h3>
+		<p>If you're requesting SPARQL results as JSON, you can additionally pass a <code>callback</code> parameter and the results will be wrapped in that function. This is useful for getting around cross-domain issues if you're running JavaScript on older browsers. (Please also see the <a href="#cors">Cross-Origin Resource Sharing</a> section).</p>
+		<p>For example:</p>
+		<code>http://THE_DOMAIN/sparql.json?callback=myCallbackFunction&query=SELECT+%2A+WHERE+%7B%3Chttp%3A%2F%2FTHE_DOMAIN%2Fid%2Funitary-authority%2Fcheshire-east%3E+%3Fp+%3Fo%7D</code>
+		<p>Or to make a JSON-P request with jQuery, you can omit the callback parameter from the url and just set the dataType to <code>jsonp</code>.</p>
+		<code class='prettyprint lang-js'>queryUrl = 'http://THE_DOMAIN/sparql.json?query=SELECT+%2A+WHERE+%7B%3Chttp%3A%2F%2FTHE_DOMAIN%2Fid%2Funitary-authority%2Fcheshire-east%3E+%3Fp+%3Fo%7D'&#x000A;&#x000A;$.ajax({&#x000A;  dataType: 'jsonp',&#x000A;  url: queryUrl,&#x000A;  success: function(data) {&#x000A;    // callback code here&#x000A;    alert('success!');&#x000A;  }&#x000A;});</code>
+	</div>
+	<div class='subsection' id='named-graphs'>
+		<h3>
+			3.6
+			<strong>Use of Named graphs</strong>
+		</h3>
+		<h4>
+			3.6.1
+			<strong>Dataset Data</strong>
+		</h4>
+		<p>The data for each dataset is contained within a separate named graph. The dataset itself has a URI, for example</p>
+		<code>http://THE_DOMAIN/data/local-authorities</code>
+		<p>The web page for the dataset lists the named graph that contains the dataset, in this case</p>
+		<code>http://THE_DOMAIN/graph/local-authorities</code>
+		<p>The graph name for the dataset is contained in the dataset metadata, using a predicate called <code>http://publishmydata.com/def/dataset#graph</code> and can be obtained by a query like this:</p>
+		<code class='prettyprint lang-sparql'><pre>SELECT ?graph&#x000A;  WHERE {&#x000A;    &lt;http://THE_DOMAIN/data/local-authorities&gt; &lt;http://publishmydata.com/def/dataset#graph&gt; ?graph&#x000A;  }</pre></code>
+		<h4>
+			3.6.2
+			<strong>Dataset Metadata</strong>
+		</h4>
+		<p>The metadata we store about the <a href="#individual-datasets">dataset</a> itself (that is returned by dereferencing its URI), is stored its own separate graph, for example:</p>
+		<code>http://THE_DOMAIN/data/local-authorities/metadata</code>
+		<p>We also use named graphs for each concept scheme and ontology.</p>
+	</div>
+	<div class='subsection' id='parameter-interpolation'>
+		<h3>
+			3.7
+			<strong>Parameter Substitution</strong>
+		</h3>
+		<p>You can parameterize your SPARQL by including %{tokens} in your queries, and providing values for the tokens on the url query string.</p>
+		<code>http://THE_DOMAIN/sparql?query=URL-encoded-SPARQL-query?token1=value-for-token1&token2=value-for-token2</code>
+		<p>Note that the following tokens are reserved and cannot be used as parameters for substitution.</p>
+		<ul class="list-inline">
+			<li>controller</li>
+			<li>action</li>
+			<li>page</li>
+			<li>per_page</li>
+			<li>id</li>
+			<li>commit</li>
+			<li>utf8</li>
+			<li>query</li>
+		</ul>
+	</div>
+	<div class='subsection' id='ruby-sparql-example'>
+		<h3>
+			3.8
+			<strong>Example: Using Ruby to request data from the SPARQL Endpoint</strong>
+		</h3>
+		<p>This sample Ruby makes a request to our SPARQL endpoint for all resources of type Unitary Authority (as JSON) and then puts the result in a Hash.</p>
+		<code class='prettyprint lang-ruby'><pre>require 'rest-client'&#x000A;require 'json'&#x000A;&#x000A;query = 'SELECT * WHERE {?s a &lt;http://THE_DOMAIN/def/local-government/UnitaryAuthority&gt;}'&#x000A;&#x000A;url = &quot;http://THE_DOMAIN/sparql.json&quot;&#x000A;&#x000A;results_str = RestClient.get url, {:params =&gt; {:query =&gt; query}}&#x000A;results_hash = JSON.parse results_str&#x000A;results_array = results_hash[&quot;results&quot;][&quot;bindings&quot;]&#x000A;&#x000A;puts &quot;total number of results: #{results_array.length}&quot;&#x000A;&#x000A;</pre></code>
+		<p><strong>Note</strong>: If you're doing a lot of work with RDF in Ruby, you might want to look at using <a href="http://swirrl.com">Swirrl</a>'s open-source SPARQL ORM for Ruby, <a href="http://github.com/swirrl/tripod">Tripod</a>.</p>
+	</div>
+	<div class='subsection' id='js-sparql-example'>
+		<h3>
+			3.8
+			<strong>Example: Using JavaScript to request data from the SPARQL Endpoint</strong>
+		</h3>
+		<p>This example HTML page uses jQuery to make a request to our SPARQL endpoint for all resources of type Unitary Authority (as JSON) and log the results.</p>
+		<code class='prettyprint lang-html'><pre>&lt;!DOCTYPE html&gt;&#x000A;&lt;html&gt;&#x000A;  &lt;head&gt;&#x000A;    &lt;script src=&quot;http://code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;&#x000A;  &lt;/head&gt;&#x000A;  &lt;body&gt;&#x000A;    &lt;script type=&quot;text/javascript&quot;&gt;&#x000A;      var query = &quot;SELECT * WHERE {?s a &lt;http://THE_DOMAIN/def/local-government/UnitaryAuthority&gt;}&quot;;&#x000A;      var url = &quot;http://THE_DOMAIN/sparql.json?query=&quot;;&#x000A;      url += encodeURIComponent(query);&#x000A;      $.ajax({&#x000A;        dataType: 'json',&#x000A;        url: url,&#x000A;        success: function(data) {&#x000A;          alert('success: ' + data.results.bindings.length + ' results');&#x000A;          console.log(data);&#x000A;        }&#x000A;      });&#x000A;    &lt;/script&gt;&#x000A;  &lt;/body&gt;&#x000A;&lt;/html&gt;</pre></code>
+		<p><strong>Note</strong>: See the <a href="#cors">Cross-Origin Resource Sharing</a> section for a note about accessing data from from other domains.</p>
+	</div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <section>
 <h2>4 - General</h2>
 <div class='subsection' id='response-size-limits'>

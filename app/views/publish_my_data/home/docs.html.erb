@@ -4,8 +4,10 @@ page_title "Developer Documentation"
 %>
 
 <% content_for :header do %>
-<h3>Developer Documentation</h3>
-<h1>Using our API</h1>
+<div class="contents">
+	<h3>Developer Documentation</h3>
+	<h1>Using our API</h1>
+</div>
 <% end %>
 
 <% content_for :head do %>
@@ -218,18 +220,6 @@ page_title "Developer Documentation"
 				<a href='#cors'>
 					4.3
 					<strong>CORS</strong>
-				</a>
-			</li>
-			<li>
-				<a href='#discontinued-datasets'>
-					4.4
-					<strong>Discontinued Datasets</strong>
-				</a>
-			</li>
-			<li>
-				<a href='#api-keys'>
-					4.5
-					<strong>API Keys</strong>
 				</a>
 			</li>
 		</ul>
@@ -775,52 +765,6 @@ page_title "Developer Documentation"
 			<code>add_header Access-Control-Allow-Origin "*";</code>
 			<p>This means that if you're writing JavaScript to request data from our server in to a web page hosted on another domain, your browser should check this header and allow it.</p>
 			<p><strong>A Note about Browser Support for CORS:</strong> Modern browsers (such as recent versions of Internet Explorer Firefox, Chrome and Safari) have full CORS support. It is not supported in Internet Explorer 6 and 7. Versions 8 &amp; 9 of Internet Explorer offer limited support. If you need to support older browsers, consider making requests for data via SPARQL, with <a href="#sparql-json-p">JSON-P</a>.</p>
-		</div>
-		<div class='subsection' id='discontinued-datasets'>
-			<h3>
-				4.4
-				<strong>Discontinued Datasets</strong>
-			</h3>
-			<p>A dataset can be marked as 'discontinued'. This approach is most often used in cases where a dataset uses an outdated vocabulary or outdated naming convention for URIs. This is similar to the concept of deprecation (in computer software).</p>
-
-			<p>A discontinued dataset is assigned a type of <code>http://publishmydata.com/def/dataset#DeprecatedDataset</code> as well as the usual <code>http://publishmydata.com/def/dataset#Dataset</code>. The discontinued-status is indicated on the list of datasets in the user interface and on the individual dataset page.</p>
-
-			<p>Optionally, a discontinued dataset may be replaced by another dataset. In this case a link to the new dataset appears on the dataset web page and the dataset metadata contains the triple:</p>
-			<code>&lt;{discontinued dataset URI}&gt; &lt;http://purl.org/dc/terms/isReplacedBy&gt; &lt;{new dataset URI}&gt; .</code>
-			<p>The contents of discontinued datasets are still available via SPARQL queries and other APIs. This allows us to update the way that data is represented without breaking external applications that use it. Discontinued datasets will generally be removed completely after some period of time. Information about planned deletion will be provided in the 'Further Information' section on the dataset web page.</p>
-		</div>
-		<div class='subsection' id='api-keys'>
-			<h3>
-				4.5
-				<strong>API Keys</strong>
-			</h3>
-			<h4>
-				4.5.1
-				<strong>Obtaining an API key</strong>
-			</h4>
-			<p>You can <a href="/users/sign_up">register for an API key</a> to obtain unthrottled access to our API, analytics, and announcements about upcoming API changes. Upon registering you will be logged in and taken to your profile page which displays your unique key. You should then use the API key with all requests to our API.</p>
-			<h4>
-				4.5.2
-				<strong>Using the API Key</strong>
-			</h4>
-			<p>To use the API key, supply it in your requests to our API (including for SPARQL queries) via <strong>either</strong> the <code class='click-to-select'>X-PublishMyData-APIKey</code> HTTP header, <strong>or</strong> the <code class='click-to-select'>api_key</code> query string parameter</p>
-			<p>Note that some corporate or goverment networks may strip non-standard HTTP headers, so in these situations we recommend using the query string parameter instead.</p>
-			<h4>
-				4.5.3
-				<strong>Supplying the API Key in an HTTP header</strong>
-			</h4>
-			<p>For example, using the cURL command line tool to supply the API key in an HTTP header.</p>
-			<code class='prettyprint'>curl -H &quot;X-PublishMyData-APIKey: &lt;your-api-key-here&gt;&quot; &lt;request-url&gt;</code>
-			<p>Replace &lt;your-api-key-here&gt; with your actual API key. e.g.</p>
-			<code class='prettyprint'>curl -H &quot;X-PublishMyData-APIKey: 1a3e2562d2466ecb9462ddfd723a4597&quot; http://THE_DOMAIN/data/additional-affordable-dwellings.json</code>
-			<h4>
-				4.5.4
-				<strong>Supplying the API key in a query string parameter</strong>
-			</h4>
-			<p>For example, using the cURL command line tool to supply the API key in the custom HTTP header.</p>
-			<code class='prettyprint'>curl http://THE_DOMAIN/data/affordable-housing?api_key=&lt;your-api-key-here&gt;</code>
-			<p>Replace &lt;your-api-key-here&gt; with your actual API key. For example:</p>
-			<code class='prettyprint'>curl http://THE_DOMAIN/data/additional-affordable-dwellings.json?api_key=1a3e2562d2466ecb9462ddfd723a4597</code>
 		</div>
 	</section>
 	<script>

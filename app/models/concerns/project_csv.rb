@@ -85,7 +85,6 @@ module ProjectCsv
     ?project_desc
     WHERE
     {<#{uri.to_s}> tsb:hasParticipant ?org_id ;
-                   tsb:hasLeader ?leader_id ;
                    rdfs:label ?project_name ;
                    dct:description ?project_desc ;
                    tsb:competition ?comp ;
@@ -93,6 +92,7 @@ module ProjectCsv
                    tsb:costCategory ?cc ;
                    tsb:projectStatus ?stat ;
                    tsb:supportedBy ?grant .
+    OPTIONAL {<#{uri.to_s}> tsb:hasLeader ?leader_id}
     ?grant tsb:paidTo ?org_id .
     ?cc rdfs:label ?cost_category .
     ?stat rdfs:label ?project_status .
@@ -114,8 +114,8 @@ module ProjectCsv
     OPTIONAL {
       ?site geo:lat ?company_lat .
       ?site geo:long ?company_long .}
-    ?site tsb:region ?region_id .
-    ?region_id rdfs:label ?region .
+    OPTIONAL {?site tsb:region ?region_id .
+    ?region_id rdfs:label ?region .}
     OPTIONAL {?site osgeo:district ?district .}
     OPTIONAL {?address vcard:street-address ?street .}
     OPTIONAL {?address vcard:locality ?town .}
@@ -124,15 +124,15 @@ module ProjectCsv
     ?comp tsb:activityCode ?activity_code .
     ?comp tsb:competitionCode ?competition_code .
     ?comp tsb:competitionYear ?competition_year .
-    ?comp tsb:product ?prod .
-    OPTIONAL {?prod rdfs:label ?product .}
+    OPTIONAL {?comp tsb:product ?prod .
+      OPTIONAL {?prod rdfs:label ?product .}}
     OPTIONAL {
       ?comp tsb:budgetArea ?budg_id .
       ?budg_id rdfs:label ?budget_area .}
     ?grant tsb:offerGrant ?offer_grant ;
            tsb:offerCost ?offer_cost ;
-           tsb:offerPercentage ?offer_percentage ;
            tsb:paymentsToDate ?payments_to_date .
+    OPTIONAL {?grant tsb:offerPercentage ?offer_percentage}
 
     }
     GROUP BY

@@ -41,7 +41,7 @@ module Import
             current_class = nil
           elsif code.length == 4
             # group eg 07.1
-            slug = code
+            slug = code.sub(/\./,'')  # remove full stop to get eg 071
             current_group = slug
             current_class = nil
           elsif code.length == 5
@@ -84,7 +84,7 @@ module Import
             parent = resources[current_section]
             s.broader = parent.uri
             s.sic_section = parent
-            parent.narrower << s.uri
+            parent.narrower = parent.narrower << s.uri
 
           elsif code.length == 4
             # group eg 07.1
@@ -92,7 +92,7 @@ module Import
             s.broader = parent.uri
             s.sic_division = parent
             s.sic_section = resources[current_section]
-            parent.narrower << s.uri
+            parent.narrower = parent.narrower << s.uri
 
           elsif code.length == 5
             # class eg 10.12
@@ -101,18 +101,18 @@ module Import
             s.sic_group = parent
             s.sic_division = resources[current_division]
             s.sic_section = resources[current_section]
-            parent.narrower << s.uri
+            parent.narrower = parent.narrower << s.uri
 
 
           elsif code.length == 7
             # sub-class eg 05.10/1
             parent = resources[current_class]
             s.broader = parent.uri
-            s.sic_group = parent
-            s.sic_division = resources[current_division]
-            s.sic_section = resources[current_section]
             s.sic_class = resources[current_class]
-            parent.narrower << s.uri
+            s.sic_group = resources[current_group]
+            s.sic_division = resources[current_division]
+            s.sic_section = resources[current_section]           
+            parent.narrower = parent.narrower << s.uri
           else
             raise "unexpected format of code"
           end

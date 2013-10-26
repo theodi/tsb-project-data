@@ -193,8 +193,16 @@ module Import
           codes = org_sic_hash[org_number]
           if codes && codes.length > 0
             codes.each do |code|
-              sic_uri = Vocabulary::TSBDEF["concept/sic/#{code}"]
-              o.sic_classes_uris = o.sic_classes_uris.push(sic_uri)
+              if code == "None" || code == "99999"
+                # do nothing - not real codes
+              elsif code.length == 4
+                # add a trailing zero to 4 digit codes
+                sic_uri = Vocabulary::TSBDEF["concept/sic/#{code}0"]
+                o.sic_classes_uris = o.sic_classes_uris.push(sic_uri)
+              else
+                sic_uri = Vocabulary::TSBDEF["concept/sic/#{code}"]
+                o.sic_classes_uris = o.sic_classes_uris.push(sic_uri)
+              end
             end
           end
           # codes = Import::CompaniesHouse.sicCodes(org_number)

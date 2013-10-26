@@ -180,6 +180,7 @@ namespace :db do
     delete_graph("#{TsbProjectData::RDFS_ONTOLOGY_GRAPH.to_s}/metadata") rescue nil
     delete_graph("#{TsbProjectData::RDF_ONTOLOGY_GRAPH.to_s}/metadata") rescue nil
     delete_graph("#{TsbProjectData::TIMELINE_ONTOLOGY_GRAPH.to_s}/metadata") rescue nil
+    delete_graph("#{TsbProjectData::STATSGEO_GRAPH.to_s}/metadata") rescue nil
 
   end
 
@@ -292,6 +293,7 @@ namespace :db do
     replace_graph(TsbProjectData::OWL_ONTOLOGY_GRAPH,'owl.rdf', true, 'application/rdf+xml')
     replace_graph(TsbProjectData::SKOS_ONTOLOGY_GRAPH,'skos.rdf', true, 'application/rdf+xml')
     replace_graph(TsbProjectData::TIMELINE_ONTOLOGY_GRAPH, 'timeline.ttl', true, 'text/turtle')
+    replace_graph(TsbProjectData::STATSGEO_GRAPH, 'statistical-geography.ttl', true, 'text/turtle')
 
   end
 

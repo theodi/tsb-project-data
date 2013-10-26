@@ -25,16 +25,19 @@ class Product
     "IC Tomorrow" => "ICTom",
     "Innovation Voucher" => "IV",
     "Knowledge Transfer Partnership" => "KTP",
-    "Large Scale Demonstrator" => "Large",
-    "Large" => "Large",
-    "Launchpad" => "LP",
+    "KTP" => "KTP",
+    "Large Scale Demonstrator" => "LP",
+    "Large" => "LP",
+    "Launchpad" => "LCHPD",
     "Procurement" => "PROC",
     "Small Business Research Initiative" => "SBRI",
+    "SBRI" => "SBRI",
     "SMART" => "GRD",
     "Smart" => "GRD",
     "Catapult" => "CATP",
     "Event" => "EVENT",
     "Knowledge Transfer Network" => "KTN",
+    "KTN" => "KTN",
     "Special Interest Group" => "SIG",
     "Networking" => "NET",
     "Mission" => "MIS",
@@ -44,8 +47,7 @@ class Product
     "Future Cities Demonstrator" => "FCD",
     "Proof of Market" => "POM",
     "Proof of Concept" => "POC",
-    "Development of Prototype" => "DOP",
-    "SBRI" => "SBRI"
+    "Development of Prototype" => "DOP"
   }
 
 end

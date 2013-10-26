@@ -4,7 +4,7 @@
 
 // override some bootstrap defaults
 $icon-font-path: "/assets/bootstrap/";
-$navbar-height: 70px;
+$navbar-height: 60px;
 $gray-even-lighter:  lighten(#000, 97%);
 
 @import "bootstrap/bootstrap"; // bootstrap3 from pmd
@@ -20,8 +20,8 @@ $gray-even-lighter:  lighten(#000, 97%);
 @import "global-header";
 @import "global-footer";
 
-@import "main-header"; // nav inside main element
-@import "main-nav"; // header inside main element
+@import "titlebar"; // the coloured bar
+@import "main-nav";
 
 @import "advanced-footer";
 @import "advanced-resource-details";
@@ -35,10 +35,7 @@ $gray-even-lighter:  lighten(#000, 97%);
 @import "data-page";
 @import "error-page";
 @import "sparql-page";
-
 @import "resources-page";
 @import "concept-page";
 @import "region-page";
 @import "resource-page";
-
-@import "ie";

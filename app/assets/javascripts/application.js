@@ -11,8 +11,10 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require publish_my_data
+//= require modernizr.js
 //= require jquery/jquery-ui-1.10.3.custom
 //= require moment.js
 //= require debounce.js
 //= require format_number.js
+//= require prettify.js
 //= require_tree .

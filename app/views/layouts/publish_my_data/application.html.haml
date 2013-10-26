@@ -5,50 +5,23 @@
 %html{:lang => 'en'}<>
   <!--<![endif]-->
   %head
-    %title
-      = render 'publish_my_data/shared/meta_title'
-    = yield :page_description
-
-    = stylesheet_link_tag :application
-
-    = yield :head
-
-    /[if lte IE 8]
-      %script{src: "http://html5shiv.googlecode.com/svn/trunk/html5.js"}
-      = javascript_include_tag "respond.min.js"
-
-    = javascript_include_tag :application
-
-    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
-
-  %body
+    = render 'application/head'
+  %body{class: (@advanced_section ? 'advanced ' : '')}
     /[if lt IE 8]
       = render 'publish_my_data/shared/browser_warning'
 
-    = yield :above_header
-
-    -# for sticky footer
     #wrap
       %header
-        %nav
-          .branding
-            = link_to "/" do
-              = image_tag "tsb-logo.png", alt: "TSB logo"
-
-          = form_tag '/projects', method: 'get' do
-            .form-group
-              = submit_tag 'Search'
-              = text_field_tag :search_string, nil, :placeholder => 'Search projects...', id: 'top-nav-search-string'
-
-      %main{class: (@advanced_section ? 'advanced' : '') }
+        = render 'application/masthead', search: true
         = render 'application/nav'
 
         - if content_for? :header
-          %header
-            .header-container
-              .header-row
+          #titlebar
+            .titlebar-container
+              .titlebar-row
                 = yield :header
 
+      %main
         .container
           = yield
 
@@ -62,10 +35,5 @@
             .container
               = yield :advanced_footer
 
-        / uncomment for sticky footer
-        / #push
-
-    -# note: intentionally not in #wrap
     = render "application/footer"
-
-    =# render 'publish_my_data/shared/google_analytics'
+    = render 'publish_my_data/shared/google_analytics'

@@ -95,10 +95,20 @@
         #concept-project-count
           %div
             Number of projects
-            = "(in section: <strong>#{sic_class.sic_section.label}</strong>)".html_safe if sic_class
+            = "(in section: <strong>#{sic_class.sic_section.label}</strong>)".html_safe if sic_class && sic_class.sic_section
           %div
-            %span= projects.total
-            projects
+            -# 1 project -> project | 2+ projects -> list of projects | 0 projects
+            - if projects.total == 1
+              = link_to resource_path_from_uri(projects.first.uri) do
+                %span= projects.total
+                project
+            - elsif projects.total > 1
+              = link_to main_app.projects_path(search_params) do
+                %span= projects.total
+                projects
+            - else
+              %span= 0
+              projects
 
       - if projects.total > 0
         #concept-figures
@@ -125,11 +135,6 @@
             %span.percent #{((projects.facets["offer_grant_stats"]["total"].to_f / projects.facets["offer_cost_stats"]["total"]) * 100).round(1)}%
             of total cost
             (<span class='total-cost'>#{number_to_currency projects.facets["offer_cost_stats"]["total"].to_f, unit: '&pound;'}</span>)
-
-        #concept-search
-          #concept-search-button
-            = link_to "View all projects for this #{concept_scheme_button_text.downcase}", main_app.projects_path(search_params)
-
 
   - if sic_class
     - if sic_class.direct_subclasses.any?

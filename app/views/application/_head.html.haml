@@ -1,0 +1,14 @@
+%title= render 'publish_my_data/shared/meta_title'
+= yield :page_description
+= stylesheet_link_tag :application
+= yield :head
+/[if lte IE 8]
+  %script{src: "http://html5shiv.googlecode.com/svn/trunk/html5.js"}
+  = javascript_include_tag "respond.min.js"
+  = javascript_include_tag "selectivizr-min.js"
+  :scss
+    html, body {
+      height: auto !important;
+    }
+= javascript_include_tag :application
+%meta(name="viewport" content="width=device-width, initial-scale=1.0")

@@ -1,4 +1,4 @@
-main.advanced header {
+body.advanced #titlebar {
   .primary {
     @include make-md-column(8);
   }
@@ -26,9 +26,10 @@ main.advanced header {
 }
 
 article#dataset, article#ontology, article#concept-scheme {
-
   section.metadata {
+
     @include make-row();
+  //  @extend .colouredrow;
     background: #eee;
 
     h3 {
@@ -60,11 +61,13 @@ article#dataset, article#ontology, article#concept-scheme {
     @include make-row();
 
     section#api {
+      @include make-md-column(3);
+      // @extend .colouredbox;
+      background: #f9f9f9;
+
       margin-top:20px;
       padding-top:20px;
       padding-bottom:20px;
-      @include make-md-column(3);
-      background: #f9f9f9;
 
       h3 {
         margin-top:0;

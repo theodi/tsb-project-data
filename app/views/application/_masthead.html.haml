@@ -1,0 +1,13 @@
+#header
+  .header-container
+    .header-row
+      #masthead
+        = link_to "/" do
+          = image_tag "tsb-logo.png", alt: "Technology Strategy Board Projects Open Data"
+      - if search
+        %div
+          = form_tag '/projects', method: 'get' do
+            .form-group
+              = text_field_tag :search_string, nil, :placeholder => 'Search projects...', id: 'top-nav-search-string'
+            %button{name:'commit', type:'submit'}
+              Search

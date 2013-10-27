@@ -41,12 +41,7 @@ page_title "Developer Documentation"
 </style>
 <% end %>
 
-<div class="docs"><!-- clunky wrapping class - better on body -->
-
-	<aside>
-		<p>This page describes the current version of our production API, which was deployed on 26th of June 2013. This release included only backward-compatible changes. See our <a href="/changelog">Change Log</a> for more details of what changed.</p>
-	</aside>
-
+<div class="docs">
 	<nav class='contents'>
 		<h2>Contents</h2>
 		<h4>
@@ -90,51 +85,38 @@ page_title "Developer Documentation"
 					<strong>Individual Datasets</strong>
 				</a>
 			</li>
-			<li>
-				<a href='#themes'>
-					2.2
-					<strong>Themes</strong>
-				</a>
-			</li>
-			<li>
-				<a href='#dataset-collections'>
-					2.3
-					<strong>Collections of Datasets</strong>
-				</a>
-			</li>
-			<li>
 				<a href='#individual-resources'>
-					2.4
+					2.2
 					<strong>Individual Resources</strong>
 				</a>
 			</li>
 			<li>
 				<a href='#resource-collections'>
-					2.5
+					2.3
 					<strong>Collections of Resources</strong>
 				</a>
 			</li>
 			<li>
 				<a href='#resource-options-and-limits'>
-					2.6
+					2.4
 					<strong>Options and Limits</strong>
 				</a>
 			</li>
 			<li>
 				<a href='#ruby-resources-example'>
-					2.7
+					2.5
 					<strong>Example: Using Ruby to get a filtered list of resources</strong>
 				</a>
 			</li>
 			<li>
 				<a href='#js-resources-example'>
-					2.9
+					2.6
 					<strong>Example: Using JavaScript to get a filtered list of resources</strong>
 				</a>
 			</li>
 			<li>
 				<a href='#curl-resources-example'>
-					2.9
+					2.7
 					<strong>Example: Using cURL to get the list of datasets in a theme</strong>
 				</a>
 			</li>
@@ -233,13 +215,13 @@ page_title "Developer Documentation"
 				<strong>URI Dereferencing</strong>
 			</h3>
 			<p>Following the standard practices for Linked Data, we distinguish between a 'real-world' resource and documents about that resource. <strong>Identifiers (URIs)</strong> for the resources follow the pattern:</p>
-			<code>http://THE_DOMAIN/<strong>id</strong>/{...}</code>
+			<code>http://tsb-projects.labs.theodi.org/<strong>id</strong>/{...}</code>
 			<p>When you look them up you get redirected to the corresponding document about that thing. The <strong>document URLs</strong> follow the pattern:</p>
-			<code>http://THE_DOMAIN/<strong>doc</strong>/{...}</code>
+			<code>http://tsb-projects.labs.theodi.org/<strong>doc</strong>/{...}</code>
 			<p>For example, in our Local Authorities Dataset, the URI for Cheshire East Unitary Authority is</p>
-			<code>http://THE_DOMAIN/<strong>id</strong>/unitary-authority/cheshire-east</code>
+			<code>http://tsb-projects.labs.theodi.org/<strong>id</strong>/project/730001</code>
 			<p>If you put this into your browser you get redirected, with an HTTP status code of 303 ("See Other"), to an HTML page about Cheshire East</p>
-			<code>http://THE_DOMAIN/<strong>doc</strong>/unitary-authority/cheshire-east</code>
+			<code>http://tsb-projects.labs.theodi.org/<strong>doc</strong>/project/730001</code>
 			<p>In cases where a URI identifies something that is essentially a document (an 'information resource') then we respond with a 200, as their URI and document page URL are one and the same.  This includes <a href="#individual-datasets">Datasets</a> as well as ontology terms and concept schemes.</p>
 		</div>
 		<div class='subsection' id='resource-formats'>
@@ -301,15 +283,15 @@ page_title "Developer Documentation"
 				<strong>Specifying the format in an accept header - in this case RDF/XML</strong>
 			</h4>
 			<p>If you're using the accept header, you can directly request the URI. This involves two requests, because doing an HTTP GET on the resource identifier gives you a 303 redirect to the appropriate document page. RestClient looks after that for you.</p>
-			<code class='prettyprint lang-ruby'>RestClient.get 'http://THE_DOMAIN/id/unitary-authority/cheshire-east', :accept=>'application/rdf+xml'&#x000A;</code>
+			<code class='prettyprint lang-ruby'>RestClient.get 'http://tsb-projects.labs.theodi.org/id/project/730001', :accept=>'application/rdf+xml'&#x000A;</code>
 			<p>You can also request the document page directly:</p>
-			<code class='prettyprint lang-ruby'>RestClient.get 'http://THE_DOMAIN/doc/unitary-authority/cheshire-east', :accept=>'application/rdf+xml'&#x000A;</code>
+			<code class='prettyprint lang-ruby'>RestClient.get 'http://tsb-projects.labs.theodi.org/doc/project/730001', :accept=>'application/rdf+xml'&#x000A;</code>
 			<h4>
 				1.3.2
 				<strong>Specifing the format as an extension - in this case JSON</strong>
 			</h4>
 			<p>If using an extension, you must request the document page directly (as '.json' is not part of the URI)</p>
-			<code class='prettyprint lang-ruby'>RestClient.get 'http://THE_DOMAIN/doc/unitary-authority/cheshire-east.json'</code>
+			<code class='prettyprint lang-ruby'>RestClient.get 'http://tsb-projects.labs.theodi.org/doc/project/730001.json'</code>
 		</div>
 		<div class='subsection' id='curl-dereferencing'>
 			<h3>
@@ -322,15 +304,15 @@ page_title "Developer Documentation"
 				<strong>Specifying the format in an accept header - in this case Turtle</strong>
 			</h4>
 			<p>If you're using the accept header, you can directly request the URI. This involves two requests, because doing an HTTP GET on the resource identifier gives you a 303 redirect to the appropriate document page. cURL looks after that for you if you use the <code>-L</code> option.</p>
-			<code class='prettyprint'>curl -L -H "Accept: text/turtle" http://THE_DOMAIN/id/unitary-authority/cheshire-east&#x000A;</code>
+			<code class='prettyprint'>curl -L -H "Accept: text/turtle" http://tsb-projects.labs.theodi.org/id/project/730001</code>
 			<p>You can also request the document page directly</p>
-			<code class='prettyprint'>curl -H "Accept: text/turtle" http://THE_DOMAIN/doc/unitary-authority/cheshire-east</code>
+			<code class='prettyprint'>curl -H "Accept: text/turtle" http://tsb-projects.labs.theodi.org/doc/project/730001</code>
 			<h4>
 				1.4.2
 				<strong>Specifing the format as an extension - in this case N-triples</strong>
 			</h4>
 			<p>If using an extension, you must request the document page directly (as '.nt' is not part of the URI)</p>
-			<code class='prettyprint lang-ruby'>curl http://THE_DOMAIN/doc/unitary-authority/cheshire-east.nt</code>
+			<code class='prettyprint lang-ruby'>curl http://tsb-projects.labs.theodi.org/doc/project/730001.nt</code>
 		</div>
 	</section>
 
@@ -345,47 +327,28 @@ page_title "Developer Documentation"
 				<strong>Individual Datasets</strong>
 			</h3>
 			<p>Dataset identifiers take the form</p>
-			<code>http://THE_DOMAIN/data/{dataset-short-name}</code>
+			<code>http://tsb-projects.labs.theodi.org/data/{dataset-short-name}</code>
 			<p>where <code>{dataset-short-name}</code> is a URI section that uniquely identifies the dataset. The short name can contain lower-case letters, numbers, slashes, and hyphens.</p>
 			<p>Dereferencing a dataset identifier responds with HTTP status code 200 and provides metadata about the dataset, including a link to where the dataset contents can be downloaded. For example:</p>
-			<code>http://THE_DOMAIN/data/homelessness-decisions</code>
+			<code>http://tsb-projects.labs.theodi.org/data/tsb-projects-data</code>
 			<p>Please also see the <a href="#named-graphs">Use of Named Graphs</a> section, for how the dataset data and metadata is stored in the database.</p>
-		</div>
-		<div class='subsection' id='themes'>
-			<h3>
-				2.2
-				<strong>Themes</strong>
-			</h3>
-			<p>Datasets are grouped into Themes. A list of all themes is available at:</p><code>http://THE_DOMAIN/themes</code>
-			<p>Information about a particular theme can be accessed by <a href="#uri-dereferencing">dereferencing</a> the theme's URI. e.g.</p>
-			<code>http://THE_DOMAIN/def/concept/themes/homelessness</code>
-		</div>
-		<div class='subsection' id='dataset-collections'>
-			<h3>
-				2.3
-				<strong>Collections of Datasets</strong>
-			</h3>
-			<p>A list of all datasets is available at:</p>
-			<code>http://THE_DOMAIN/data</code><p>This is <a href="#resource-options-and-limits">paginatable</a> with <code>page</code> and <code>per_page</code>.</p>
-
-			<p>Lists of datasets in a single theme are available at: <code>http://THE_DOMAIN/themes/{theme-slug}</code>, where <code>{theme-slug}</code> is the part of the theme URI after the final slash. e.g. <code>homelessness</code></p>
 		</div>
 		<div class='subsection' id='individual-resources'>
 			<h3>
-				2.4
+				2.2
 				<strong>Individual Resources</strong>
 			</h3>
 			<p>As well as using <a href="#uri-dereferencing">URI dereferencing</a> to access information about individual resources, you can use the following URL pattern:</p>
-			<code>http://THE_DOMAIN/resource?uri={resource-uri}</code>
-			<p>This is especially useful for resources for which we have information in our database, but which aren't in the <strong>THE_DOMAIN
+			<code>http://tsb-projects.labs.theodi.org/resource?uri={resource-uri}</code>
+			<p>This is especially useful for resources for which we have information in our database, but which aren't in the <strong>http://tsb-projects.labs.theodi.org
 			</strong> domain (i.e. so you can't dereference them in our site).</p>
-			<code>http://THE_DOMAIN/resource?uri=http://data.ordnancesurvey.co.uk/id/postcodeunit/SW1A1AA</code>
+			<code>http://tsb-projects.labs.theodi.org/resource?uri=http://data.ordnancesurvey.co.uk/id/postcodeunit/CV82FD</code>
 			<p>If using a format extension to request a particular format for the resource, the extension is added immediately after '/resource', for example to get a JSON-LD version of the above postcode</p>
-			<code>http://THE_DOMAIN/resource.json?uri=http://data.ordnancesurvey.co.uk/id/postcodeunit/SW1A1AA</code>
+			<code>http://tsb-projects.labs.theodi.org/resource.json?uri=http://data.ordnancesurvey.co.uk/id/postcodeunit/CV82FD</code>
 		</div>
 		<div class='subsection' id='resource-collections'>
 			<h3>
-				2.5
+				2.3
 				<strong>Collections of Resources</strong>
 			</h3>
 			<p>Collections of resources can be retrieved from <code>/resources</code> by supplying filters. For now, we just support filters for <code>dataset</code> and <code>type_uri</code>.</p>
@@ -411,47 +374,79 @@ page_title "Developer Documentation"
 				</tbody>
 			</table>
 			<p>For Example:</p>
-			<code>http://THE_DOMAIN/resources?dataset=local-authorities&amp;type_uri=http%3A%2F%2FTHE_DOMAIN%2Fdef%2Flocal-government%2FLondonBoroughCouncil</code>
+			<code>http://tsb-projects.labs.theodi.org/resources?dataset=tsb-projects-data&type_uri=http%3A%2F%2Ftsb-projects.labs.theodi.org%2Fdef%2FProject</code>
 		</div>
 		<div class='subsection' id='resource-options-and-limits'>
 			<h3>
-				2.6
+				2.4
 				<strong>Options and Limits</strong>
 			</h3>
 			<h4>
-				2.6.1
+				2.4.1
 				<strong>Formats</strong>
 			</h4>
 			<p>Resources accessed via our resource APIs can be accessed in the same <a href="#resource-format">choice of formats</a> as for URI dereferencing (via both <strong>format extensions</strong> or <strong>HTTP Accept headers</strong>).</p>
 			<h4>
-				2.6.2
+				2.4.2
 				<strong>Pagination</strong>
 			</h4>
 			<p>For any APIs which return collections of things, the list can be paginated using <code>page</code>(default 1) and <code>per_page</code> (default 1000) query-string parameters. The maximum allowable page size will initially be set to 1000, but we may consider increasing this (as well as the default) in the future.</p>
 			<h4>
-				2.6.3
+				2.4.3
 				<strong>Response Size Limits</strong>
 			</h4>
 			<p>All requests to our APIs are subject to the <a href="#response-size-limits">response size limits</a>.</p>
 		</div>
 		<div class='subsection' id='ruby-resources-example'>
 			<h3>
-				2.7
+				2.5
 				<strong>Example: Using Ruby to get a filtered list of resources</strong>
 			</h3>
 			<h4>
-				2.7.1
+				2.5.1
 				<strong>Basic Example</strong>
 			</h4>
-			<p>Here we use Ruby to retrieve a list of all the <strong>observation</strong> resources in the <a href="http://THE_DOMAIN/data/homelessness-decisions">Homelessness Descisions dataset</a> as N-triples.</p>
-			<p>The short name for that dataset is <code>homelessness-decisions</code>, and the URI for the observation type is <code>http://purl.org/linked-data/cube#Observation</code>, so the URL we need to call is as follows. (See <a href="#resource-collections">the Collections of Resources section</a>).</p>
-			<code>http://THE_DOMAIN/resources?dataset=homelessness-decisions&amp;type_uri=http%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23Observation</code>
+			<p>Here we use Ruby to retrieve a list of all the <strong>project</strong> resources in the <a href="http://tsb-projects.labs.theodi.org/data/tsb-projects-data">TSB Projects Data</a> dataset as N-triples.</p>
+			<p>The short name for that dataset is <code>tsb-projects-data</code>, and the URI for the project type is <code>http://tsb-projects.labs.theodi.org/def/Project</code>, so the URL we need to call is as follows. (See <a href="#resource-collections">the Collections of Resources section</a>).</p>
+			<code>http://tsb-projects.labs.theodi.org/resources?dataset=tsb-projects-data&type_uri=http%3A%2F%2Ftsb-projects.labs.theodi.org%2Fdef%2FProject</code>
 			<p>If you visit that URL in your browser, you'll see a paginated list of the resources. We want to get it in N-triples format, so we'll add the .nt extension. (See the <a href="#resource-formats">Formats section</a>).</p>
 			<p>The following Ruby code assigns a string of N-triples into the <code>ntriples_data</code> variable. Note that as the <a href="#resource-options-and-limits">maximum page size</a> is 1000, and there are over 1000 resoures of that type in the dataset, we'll need to make multiple requests.</p>
 			<p>We use the <a href="http://rubydoc.info/gems/rest-client">RestClient</a> here, which you can install with <code>$ gem install rest-client</code>.</p>
-			<pre class='prettyprint lang-ruby'>require 'rest-client'&#x000A;&#x000A;url = &quot;http://THE_DOMAIN/resources.nt&quot;&#x000A;&#x000A;ntriples_data = &quot;&quot;&#x000A;page = 1&#x000A;done = false&#x000A;&#x000A;while !done&#x000A;  puts &quot;requesting page #{page}...&quot;&#x000A;  response = RestClient.get url, {:params =&gt;&#x000A;    {&#x000A;      :page =&gt; page,&#x000A;      :per_page =&gt; 1000,&#x000A;      :dataset =&gt; &quot;homelessness-decisions&quot;,&#x000A;      :type_uri =&gt; &quot;http://purl.org/linked-data/cube#Observation&quot;&#x000A;    }&#x000A;  }&#x000A;&#x000A;  if response.length &gt; 0&#x000A;    ntriples_data += response&#x000A;    page += 1&#x000A;  else&#x000A;    puts &quot;no more data&quot;&#x000A;    done = true&#x000A;  end&#x000A;end&#x000A;&#x000A;puts &quot;data:&quot;&#x000A;puts ntriples_data&#x000A;&#x000A;</pre>
+<pre class='prettyprint lang-ruby'>
+
+require 'rest-client'
+
+url = "http://tsb-projects.labs.theodi.org/resources.nt"
+
+ntriples_data = ""
+page = 1
+done = false
+
+while !done
+  puts "requesting page #{page}..."
+  response = RestClient.get url, {:params =>
+    {
+      :page => page,
+      :per_page => 1000,
+      :dataset => "tsb-projects-data",
+      :type_uri => "http://tsb-projects.labs.theodi.org/def/Project"
+    }
+  }
+
+  if response.length > 0
+    ntriples_data += response
+    page += 1
+  else
+    puts "no more data"
+    done = true
+  end
+end
+
+puts "data:"
+puts ntriples_data
+</pre>
 			<h4>
-				2.7.2
+				2.5.2
 				<strong>Extension: parsing the n-triples into an array of statements.</strong>
 			</h4>
 			<p>The <a href="http://rubydoc.info/github/ruby-rdf/rdf/master/">ruby-rdf</a> library is useful for parsing various rdf formats. Install it with <code>$ gem install rdf</code>. The following code reads our string of ntriples data into an array of <code>RDF::Statement</code>s.</p>
@@ -460,7 +455,7 @@ page_title "Developer Documentation"
 		</div>
 		<div class='subsection' id='js-resources-example'>
 			<h3>
-				2.8
+				2.6
 				<strong>Example: Using JavaScript to get a filtered list of resources</strong>
 			</h3>
 			<p>Here we use jQuery to retrieve a list of all the <strong>observation</strong> resources in the <a href="http://THE_DOMAIN/data/homelessness-decisions">Homelessness Descisions dataset</a> as JSON-LD.</p>
@@ -472,7 +467,7 @@ page_title "Developer Documentation"
 		</div>
 		<div class='subsection' id='curl-resources-example'>
 			<h3>
-				2.9
+				2.7
 				<strong>Example: Using cURL to get the list of datasets in a theme</strong>
 			</h3>
 			<p>Here we use the <a href="http://http://curl.haxx.se/">cURL</a> command line program to get a list of datasets in the housing theme, as JSON-LD.</p>

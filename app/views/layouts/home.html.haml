@@ -11,14 +11,14 @@
       = render 'publish_my_data/shared/browser_warning'
 
     #banner
-      // .container
-      .image-fallback{style: 'position: relative'}
-        .container
-          %h2
-            In #{@this_year} we funded
-            %br
-            #{@this_years_projects} projects
-        = image_tag "home.png"
+      .banner-container
+        .image-fallback{style: 'position: relative'}
+          .container
+            %h2
+              In #{@this_year} we funded
+              %br
+              #{@this_years_projects} projects
+          = image_tag "home.png"
 
       / scrolling atribute invalid html5 but pragmatic
       %iframe{ id: 'visualisation', src: "http://theodi.github.io/tsb-project-data-viz/13_bigviz/embed.html", width: '100%', height: '487px', style: 'border: 0;', scrolling:'no' }

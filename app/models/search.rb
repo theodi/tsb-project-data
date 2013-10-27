@@ -29,11 +29,11 @@ class Search
       'region_labels' => [],
       'participant_size_labels' => [],
       'status_label' => [],
-      'competition_label' => [],
+    #  'competition_label' => [],
       'budget_area_label' => [],
-      'team_label' => [],
+    #  'team_label' => [],
       'participant_sic_section_labels' => [],
-      'cost_category_label' => [],
+   #   'cost_category_label' => [],
       'product_label' => [],
       'participant_legal_entity_form_labels' => []
     }

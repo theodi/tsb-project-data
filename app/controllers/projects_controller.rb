@@ -9,9 +9,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
 
       format.html do
-        Rails.logger.debug "FILTERED SEARCH"
         @projects = @search.results
-        Rails.logger.debug "UNFILTERED SEARCH"
         @search_unfiltered = Search.new()
         @projects_unfiltered = @search_unfiltered.results
         @min_index = (@search.page - 1) * @search.per_page + 1
@@ -35,7 +33,13 @@ class ProjectsController < ApplicationController
 
       format.json do
         @projects = @search.results
-        render :json => { :page => @search.page, :per_page => @search.per_page, :page_of_results => @projects, :total => @projects.total, :grant_stats => @projects.facets["offer_grant_stats"]}
+        render :json => {
+          :page => @search.page,
+          :per_page => @search.per_page,
+          :page_of_results => @projects,
+          :facets => @projects.facets,
+          :total => @projects.total,
+          :grant_stats => @projects.facets["offer_grant_stats"]}
       end
     end
   end

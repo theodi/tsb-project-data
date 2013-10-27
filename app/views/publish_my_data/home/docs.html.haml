@@ -1,0 +1,1038 @@
+:ruby
+  @advanced_section = true
+  page_title "Developer Documentation"
+
+- content_for :header do
+  .contents
+    %h3 Developer Documentation
+    %h1 Using our API
+
+- content_for :head do
+  :scss
+    .docs           {font-size:14px;} /* inconsistent, yes, but restores heierarchy to headings, which we need, because it's a text-heavy page*/
+    .docs           {margin-bottom: 60px;} /* hack to make bottom of the page  pretty */
+    .docs aside       {color:#999;font-style:italic;}
+    .docs code,.docs pre  {background:#ffe; border:0; color:#263F3F; display:block; font-size:0.9em; margin:10px 0; padding:10px;}
+    .docs code        {white-space:normal; word-break:normal; word-wrap:normal;}
+    .docs p code      {background:inherit; display:inline; font-weight:bold; margin:0; padding:0;}
+    .docs ul        {list-style-type:none;}
+
+    /* Pretty printing styles. Used with prettify.js. SPAN elements with the classes below are added by prettyprint. */
+
+    .pln { color: #000 }  /* plain text */
+
+    @media screen {
+      .str { color: #080 }  /* string content */
+      .kwd { color: #008 }  /* a keyword */
+      .com { color: #800 }  /* a comment */
+      .typ { color: #606 }  /* a type name */
+      .lit { color: #066 }  /* a literal value */
+      .pun, .opn, .clo { color: #660 } /* punctuation, lisp open bracket, lisp close bracket */
+      .tag { color: #008 }  /* a markup tag name */
+      .atn { color: #606 }  /* a markup attribute name */
+      .atv { color: #080 }  /* a markup attribute value */
+      .dec, .var { color: #606 }  /* a declaration; a variable name */
+      .fun { color: red }  /* a function name */
+    }
+
+.docs
+  %nav.contents
+    %h2 Contents
+
+    %h4
+      1 -
+      %strong Linked Data API
+
+    %ul
+      %li
+        %a(href="#uri-dereferencing")
+          1.1
+          %strong URI Dereferencing
+      %li
+        %a(href="#resource-formats")
+          1.2
+          %strong Resource Formats
+      %li
+        %a(href="#ruby-dereferencing")
+          1.2
+          %strong Example: Dereferencing URIs with Ruby
+      %li
+        %a(href="#curl-dereferencing")
+          1.2
+          %strong Example: Dereferencing URIs with cURL
+
+    %h4
+      2 -
+      %strong Other Resource APIs
+    %ul
+      %li
+        %a(href="#individual-datasets")
+          2.1
+          %strong Individual Datasets
+      %li
+        %a(href="#individual-resources")
+          2.2
+          %strong Individual Resources
+      %li
+        %a(href="#resource-collections")
+          2.3
+          %strong Collections of Resources
+      %li
+        %a(href="#resource-options-and-limits")
+          2.4
+          %strong Options and Limits
+      %li
+        %a(href="#ruby-resources-example")
+          2.5
+          %strong Example: Using Ruby to get a filtered list of resources
+      %li
+        %a(href="#js-resources-example")
+          2.6
+          %strong Example: Using JavaScript to get a filtered list of resources
+
+    %h4
+      3 -
+      %strong SPARQL
+    %ul
+      %li
+        %a(href="#sparql-introduction")
+          3.1
+          %strong Introduction to SPARQL
+      %li
+        %a(href="#sparql-results-formats")
+          3.2
+          %strong SPARQL Results Formats
+      %li
+        %a(href="#sparql-results-pagination")
+          3.3
+          %strong SPARQL Results Pagination
+      %li
+        %a(href="#sparql-errors")
+          3.4
+          %strong SPARQL Errors
+      %li
+        %a(href="#sparql-json-p")
+          3.5
+          %strong JSON-P
+      %li
+        %a(href="#named-graphs")
+          3.6
+          %strong Use of Named Graphs
+      %li
+        %a(href="#parameter-interpolation")
+          3.7
+          %strong Parameter Substitution
+      %li
+        %a(href="#ruby-sparql-example")
+          3.8
+          %strong Example: Using Ruby to request data from the SPARQL Endpoint
+      %li
+        %a(href="#js-sparql-example")
+          3.9
+          %strong Example: Using JavaScript to request data from the SPARQL Endpoint
+
+    %h4
+      4-
+      %strong Search API
+    %ul
+      %li
+
+    %h4
+      4 -
+      %strong General
+    %ul
+      %li
+        %a(href="#response-size-limits")
+          4.1
+          %strong Response Size Limits
+      %li
+        %a(href="#errors")
+          4.2
+          %strong Errors
+      %li
+        %a(href="#cors")
+          4.3
+          %strong CORS
+
+  %section
+    %h2 1 - Linked Data API
+
+    .subsection#uri-dereferencing
+      %h3
+        1.1
+        %strong URI Dereferencing
+      %p Following the standard practices for Linked Data, we distinguish between a 'real-world' resource and documents about that resource. <strong>Identifiers (URIs)</strong> for the resources follow the pattern:
+      %code http://tsb-projects.labs.theodi.org/<strong>id</strong>/{...}
+      %p When you look them up you get redirected to the corresponding document about that thing. The <strong>document URLs</strong> follow the pattern:
+      %code http://tsb-projects.labs.theodi.org/<strong>doc</strong>/{...}
+      %p For example, in our Local Authorities Dataset, the URI for Cheshire East Unitary Authority is
+      %code http://tsb-projects.labs.theodi.org/<strong>id</strong>/project/730001
+      %p If you put this into your browser you get redirected, with an HTTP status code of 303 ("See Other"), to an HTML page about Cheshire East
+      %code http://tsb-projects.labs.theodi.org/<strong>doc</strong>/project/730001
+
+      :markdown
+        In cases where a URI identifies something that is essentially a document (an 'information resource') then we respond with a 200, as their URI and document page URL are one and the same.  This includes [Datasets](#individual-datasets) as well as ontology terms and concept schemes.
+
+    .subsection#resource-formats
+      %h3
+        1.2
+        %strong Resource Formats
+      :markdown
+        You can specify what format you want the resulting document to be in.  By default you get HTML in a human-readable form, but you can also ask for the document in one of several RDF formats: <strong>RDF/XML</strong>, <strong>N-triples</strong>, <strong>Turtle</strong> or <strong>JSON-LD</strong>.
+
+      :markdown
+        There are two ways to specify which format you want: you can append a <strong>format extension</strong> to the document page's URL or you can use an <Strong>HTTP Accept header</strong> with the resource's URI or document page's URL.
+
+      %table{class: 'table table-striped table-bordered table-hover'}
+        %thead
+          %tr
+            %th Format
+            %th Extensions
+            %th Accept Headers
+        %tbody
+          %tr
+            %td.details RDF/XML
+            %td .rdf
+            %td.hardwrap application/rdf+xml
+          %tr
+            %td.details n-triples
+            %td .nt, .txt, .text
+            %td.hardwrap
+              application/n-triples,
+              text/plain
+          %tr
+            %td.details Turtle
+            %td .ttl
+            %td.hardwrap text/turtle
+          %tr
+            %td.details JSON-LD
+            %td .json
+            %td.hardwrap
+              application/ld+json,
+              application/json
+      %br
+
+    .subsection#ruby-dereferencing
+      %h3
+        1.3
+        %strong Example: Dereferencing URIs with Ruby
+      :markdown
+        Here's an example of dereferencing a URI using the [RestClient](http://rubydoc.info/gems/rest-client) library. Similar approaches can be taken in other languages.  This assumes you already have Ruby set up on your system. Also, if you don't already have it, you'll need to install the gem:
+
+        <code>$ gem install rest-client</code>.
+
+        ... and require it in your script.
+
+        <code>require 'rest-client'</code>.
+
+      %h4
+        1.3.1
+        %strong Specifying the format in an accept header - in this case RDF/XML
+
+      :markdown
+        If you're using the accept header, you can directly request the URI. This involves two requests, because doing an HTTP GET on the resource identifier gives you a 303 redirect to the appropriate document page. RestClient looks after that for you.
+
+      %pre.prettyprint.lang-ruby
+        :preserve
+          RestClient.get 'http://tsb-projects.labs.theodi.org/id/project/730001', :accept=>'application/rdf+xml'
+
+      :markdown
+        You can also request the document page directly:
+
+      %pre.prettyprint.lang-ruby
+        :preserve
+          RestClient.get 'http://tsb-projects.labs.theodi.org/doc/project/730001', :accept=>'application/rdf+xml'
+
+      %h4
+        1.3.2
+        %strong Specifing the format as an extension - in this case JSON
+
+      :markdown
+        If using an extension, you must request the document page directly (as '.json' is not part of the URI)
+
+      %pre.prettyprint.lang-ruby
+        RestClient.get 'http://tsb-projects.labs.theodi.org/doc/project/730001.json'
+
+    .subsection#curl-dereferencing
+      %h3
+        1.4
+        %strong Example: Dereferencing URIs with cURL
+      :markdown
+        Here's an example of dereferencing a URI using the widely available [cURL](http://curl.haxx.se) command line program.
+
+      %h4
+        1.4.1
+        %strong Specifying the format in an accept header - in this case Turtle
+
+      :markdown
+        If you're using the accept header, you can directly request the URI. This involves two requests, because doing an HTTP GET on the resource identifier gives you a 303 redirect to the appropriate document page. cURL looks after that for you if you use the <code>-L</code> option.
+
+      %pre.prettyprint
+        :preserve
+          curl -L -H "Accept: text/turtle" http://tsb-projects.labs.theodi.org/id/project/730001
+
+      :markdown
+        You can also request the document page directly
+
+      %pre.prettyprint
+        curl -H "Accept: text/turtle" http://tsb-projects.labs.theodi.org/doc/project/730001
+
+      %h4
+        1.4.2
+        %strong Specifing the format as an extension - in this case N-triples
+
+      :markdown
+        If using an extension, you must request the document page directly (as '.nt' is not part of the URI)
+
+      %pre.prettyprint.lang-ruby
+        curl http://tsb-projects.labs.theodi.org/doc/project/730001.nt
+
+  %section
+    %h2 2 - Other Resource APIs
+
+    :markdown
+      Alongside the URI dereferencing we offer the following additional ways of accessing data in the system. Please be sure to read the [Options and Limits](#resource-options-and-limits) section, for some background information which applies to all these APIs, such as details on data formats and pagination.
+
+      Some examples of accessing the data from our APIs using different languages follow at the end of this section.
+
+    .subsection#individual-datasets
+      %h3
+        2.1
+        %strong Individual Datasets
+      :markdown
+        Dataset identifiers take the form <code>http://tsb-projects.labs.theodi.org/data/{dataset-short-name}</code>, where <code>{dataset-short-name}</code> is a URI section that uniquely identifies the dataset. The short name can contain lower-case letters, numbers, slashes, and hyphens.
+
+        Dereferencing a dataset identifier responds with HTTP status code 200 and provides metadata about the dataset, including a link to where the dataset contents can be downloaded.
+
+        e.g.
+        <code>http://tsb-projects.labs.theodi.org/data/tsb-projects-data</code>
+
+        Please also see the [Use of Named Graphs](#named-graphs) section, for how the dataset data and metadata is stored in the database.
+
+    .subsection#individual-resources
+      %h3
+        2.2
+        %strong Individual Resources
+      :markdown
+        As well as using [URI dereferencing](#uri-dereferencing) to access information about individual resources, you can use the following URL pattern:
+
+        <code>http://tsb-projects.labs.theodi.org/resource?uri={resource-uri}</code>
+
+        This is especially useful for resources for which we have information in our database, but which aren't in the **tsb-projects.labs.theodi.org** domain (i.e. so you can't dereference them in our site).
+
+        e.g.
+        <code>http://tsb-projects.labs.theodi.org/resource?uri=http://www.w3.org/ns/org#Site</code>
+
+        If using a format extension to request a particular format for the resource, the extension is added immediately after '/resource', for example to get a JSON-LD version of the above postcode
+
+        <code>http://tsb-projects.labs.theodi.org/resource.json?uri=http://www.w3.org/ns/org#Site</code>
+
+    .subsection#resource-collections
+      %h3
+        2.3
+        %strong Collections of Resources
+      :markdown
+        Collections of resources can be retrieved from <code>/resources</code> by supplying filters. For now, we just support filters for <code>dataset</code> and <code>type_uri</code>.
+
+      %table{class: 'table table-striped table-bordered table-hover'}
+        %thead
+          %tr
+            %th Filter parameter
+            %th Expected value
+            %th Behaviour
+        %tbody
+          %tr
+            %td.details dataset
+            %td The <span style="font-style:italic">short name</span> of a dataset (see <a href="#individual-datasets">above</a>).
+            %td Filters the results to only include resources in the named graph of that dataset.
+          %tr
+            %td.details type_uri
+            %td The URI of a resource type.
+            %td Filters the results to only include resources of the type identified by that URI.
+      %br
+
+      :markdown
+        e.g.
+        <code>http://tsb-projects.labs.theodi.org/resources?dataset=tsb-projects-data&type_uri=http%3A%2F%2Ftsb-projects.labs.theodi.org%2Fdef%2FProject</code>
+
+    .subsection#resource-options-and-limits
+      %h3
+        2.4
+        %strong Options and Limits
+
+      %h4
+        2.4.1
+        %strong Formats
+      :markdown
+        Resources accessed via our resource APIs can be accessed in the same [choice of formats](#resource-format) as for URI dereferencing (via both **format extensions** or **HTTP Accept headers**).
+
+      %h4
+        2.4.2
+        %strong Pagination
+      :markdown
+        For any APIs which return collections of things, the list can be paginated using <code>page</code>
+        (default 1) and <code>per_page</code> (default 1000) query-string parameters. The maximum allowable page size will initially be set to 1000, but we may consider increasing this (as well as the default) in the future.
+
+      %h4
+        2.4.3
+        %strong Response Size Limits
+
+      :markdown
+        All requests to our APIs are subject to the [response size limits](#response-size-limits).
+
+    .subsection#ruby-resources-example
+      %h3
+        2.5
+        %strong Example: Using Ruby to get a filtered list of resources
+
+      %h4
+        2.5.1
+        %strong Basic Example
+
+      :markdown
+        Here we use Ruby to retrieve a list of all the **project** resources in the [TSB Projects Data](http://tsb-projects.labs.theodi.org/data/tsb-projects-data) as N-triples.
+
+        The short name for that dataset is <code>tsb-projects-data</code>, and the URI for the project type is <code>http://tsb-projects.labs.theodi.org/def/Project</code>, so the URL we need to call is as follows. (See [the Collections of Resources section](#resource-collections)).
+
+        <code>http://tsb-projects.labs.theodi.org/resources?dataset=tsb-projects-data&type_uri=http%3A%2F%2Ftsb-projects.labs.theodi.org%2Fdef%2FProject</code>
+
+        If you visit that URL in your browser, you'll see a paginated list of the resources. We want to get it in N-triples format, so we'll add the .nt extension. (See the [Formats section](#resource-formats)).
+
+        The following Ruby code assigns a string of N-triples into the <code>ntriples_data</code> variable. Note that as the [maximum page size](#resource-options-and-limits) is 1000, and there are over 1000 resoures of that type in the dataset, we'll need to make multiple requests.
+
+        We use the [RestClient](http://rubydoc.info/gems/rest-client) here, which you can install with <code>$ gem install rest-client</code>.
+
+      %pre.prettyprint.lang-ruby
+        = preserve do
+          :escaped
+            require 'rest-client'
+
+            url = "http://tsb-projects.labs.theodi.org/resources.nt"
+
+            ntriples_data = ""
+            page = 1
+            done = false
+
+            while !done
+              puts "requesting page \#{page}..."
+              response = RestClient.get url, {:params =>
+                {
+                  :page => page,
+                  :per_page => 1000,
+                  :dataset => "tsb-projects-data",
+                  :type_uri => "http://tsb-projects.labs.theodi.org/def/Project"
+                }
+              }
+
+              if response.length > 0
+                ntriples_data += response
+                page += 1
+              else
+                puts "no more data"
+                done = true
+              end
+            end
+
+            puts "data:"
+            puts ntriples_data
+
+      %h4
+        2.5.2
+        %strong Extension: parsing the n-triples into an array of statements.
+
+      :markdown
+        The [ruby-rdf](http://rubydoc.info/github/ruby-rdf/rdf/master/) library is useful for parsing various rdf formats. Install it with <code>$ gem install rdf</code>. The following code reads our string of ntriples data into an array of <code>RDF::Statement</code>s.
+
+      %pre.prettyprint.lang-ruby
+        =preserve do
+          :escaped
+            require 'rdf'
+
+            statements = []
+            RDF::Reader.for(:ntriples).new(ntriples_data) {|r| r.each {|s| statements << s}}
+
+            puts "parsed \#{statements.length} triples"
+
+      :markdown
+        **Note**: If you're doing a lot of work with RDF in Ruby, you might want to look at using [Swirrl](http://swirrl.com)'s open-source SPARQL ORM for Ruby, [Tripod](http://github.com/swirrl/tripod).
+
+    .subsection#js-resources-example
+      %h3
+        2.6
+        %strong Example: Using JavaScript to get a filtered list of resources
+
+      :markdown
+        Here we use jQuery to retrieve a list of all the **project** resources in the [TSB Projects Data](http://tsb-projects.labs.theodi.org/data/tsb-projects-data) as JSON-LD.
+
+        The short name for that dataset is <code>tsb-projects-data</code>, and the URI for the project type is <code>http://tsb-projects.labs.theodi.org/def/Project</code>, so the URL we need to call is as follows. (See [the Collections of Resources section](#resource-collections)).
+
+        <code>http://tsb-projects.labs.theodi.org/resources?dataset=tsb-projects-data&type_uri=http%3A%2F%2Ftsb-projects.labs.theodi.org%2Fdef%2FProject</code>
+
+        If you visit that URL in your browser, you'll see a paginated list of the resources. We want to get it in JSON format, so we'll add the .json extension. (See the [Formats section](#resource-formats)).
+
+        The following HTML page uses JavaScript to request the data as JSON and add it to the <code>results</code> array. Note that as the [maximum page size](#resource-options-and-limits) is 1000, and there are over 1000 resoures of that type in the dataset, we'll need to make multiple requests.
+
+      %pre.prettyprint.lang-js
+        = preserve do
+          :escaped
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <script src="http://code.jquery.com/jquery-1.10.3.min.js"></script>
+              </head>
+              <body>
+                <script type="text/javascript">
+                  var perPage = 100;
+                  var typeUri = "http://tsb-projects.labs.theodi.org/def/Project";
+                  var dataset = "tsb-projects-data";
+
+                  var baseUrl = "http://tsb-projects.labs.theodi.org/resources.json?"
+                  baseUrl += "per_page=" + perPage.toString();
+                  baseUrl += "&dataset=" + dataset;
+                  baseUrl += "&type_uri=" + encodeURIComponent(typeUri);
+
+                  var page = 1;
+                  var results = [];
+
+                  function callAjaxPaging() {
+                    console.log("trying page: " + page.toString());
+                    url = baseUrl + "&page=" + page.toString();
+
+                    $.ajax({
+                      dataType: 'json',
+                      url: url,
+                      success: function(pageOfData) {
+                        results = results.concat(pageOfData);
+                        console.log("got " + results.length.toString() + " so far");
+
+                        if (pageOfData.length == perPage) {
+                          // this page was full. There might be more.
+                          page += 1;
+                          console.log("trying next page");
+                          callAjaxPaging();
+                        } else {
+                          // no more pages.
+                          alert('finished with ' + results.length.toString() + " results");
+                        }
+                      }
+                    });
+                  }
+
+                  alert('press OK to begin');
+                  callAjaxPaging();
+                </script>
+              </body>
+            </html>
+
+  %section
+    %h2 3 - SPARQL
+
+    .subsection#sparql-introduction
+      %h3
+        3.1
+        %strong Introduction to SPARQL
+      :markdown
+
+        The most flexible way to access the data is by using SPARQL. Pronounced "sparkle", SPARQL stands for **S**parql **P**rotocol and **R**DF **Q**uery **L**anguage. It's a query language, analagous to SQL for relational databases, for retrieving and manipulating data from triple-stores like ours. We support [SPARQL 1.1](http://www.w3.org/TR/2013/REC-sparql11-query-20130321/) query syntax.
+
+        To submit a SPARQL query from your code, issue an HTTP GET request to our **endpoint**:
+
+      %code http://tsb-projects.labs.theodi.org/sparql?query={URL-encoded query}
+
+      %p For example, to run this simple query...
+
+      %pre.prettyprint.lang-sparql
+        = preserve do
+          :escaped
+            SELECT * WHERE {
+              ?s a <http://tsb-projects.labs.theodi.org/def/Project>
+            }
+
+      %p ...and get the results as JSON, you could GET the following URL (note the <code>.json</code> extension):
+
+      %code http://tsb-projects.labs.theodi.org/sparql.json?query=SELECT+%2A+WHERE+%7B%0D%0A++%3Fs+a+%3Chttp%3A%2F%2Ftsb-projects.labs.theodi.org%2Fdef%2FProject%3E%0D%0A%7D
+
+      :markdown
+        See below for <a href="#sparql-results-formats">details of SPARQL Results Formats</a> and examples in a variety of languages (at the end of this section).
+
+    .subsection#sparql-results-formats
+      %h3
+        3.2
+        %strong SPARQL Results formats
+
+      :markdown
+        As with other aspects of our API, to get the data in different formats, you can use either format extensions or HTTP Accept headers.
+
+        The available formats depend on the type of SPARQL query. A SPARQL query can be one of four main forms: <strong>SELECT</strong>, <strong>ASK</strong>, <strong>CONSTRUCT</strong> or <strong>DESCRIBE</strong>.
+
+      %table{class: 'table table-striped table-bordered table-hover'}
+        %thead
+          %tr
+            %th Query Type
+            %th Format
+            %th Extension
+            %th Accept Headers
+        %tbody
+          %tr
+            %td.details(rowspan=4) SELECT
+            %td xml
+            %td .xml
+            %td.hardwrap
+              application/xml,
+              application/sparql-results+xml
+          %tr
+            %td json
+            %td .json
+            %td.hardwrap
+              application/json,
+              application/sparql-results+json
+          %tr
+            %td text
+            %td .txt, .text
+            %td.hardwrap text/plain
+          %tr
+            %td csv
+            %td .csv
+            %td.hardwrap text/csv
+          %tr
+            %td.details(rowspan=3) ASK
+            %td json
+            %td .json
+            %td.hardwrap
+              application/json,
+              application/sparql-results+json
+          %tr
+            %td xml
+            %td .xml
+            %td.hardwrap
+              application/xml,
+              application/sparql-results+json
+          %tr
+            %td text
+            %td .txt, .text
+            %td.hardwrap text/plain
+          %tr
+            %td.details(rowspan=3) CONSTRUCT
+            %td RDF/XML
+            %td .rdf
+            %td.hardwrap application/rdf+xml
+          %tr
+            %td N-triples
+            %td .nt, .txt, .text
+            %td.hardwrap
+              text/plain,
+              application/n-triples
+          %tr
+            %td Turtle
+            %td .ttl
+            %td.hardwrap text/turtle
+          %tr
+            %td.details(rowspan=3) DESCRIBE
+            %td RDF/XML
+            %td .rdf
+            %td.hardwrap application/rdf+xml
+          %tr
+            %td N-triples
+            %td .nt, .txt, .text
+            %td.hardwrap
+              text/plain,
+              application/n-triples
+          %tr
+            %td Turtle
+            %td .ttl
+            %td.hardwrap text/turtle
+
+    .subsection#sparql-results-pagination
+      %h3
+        3.3
+        %strong SPARQL Results Pagination
+
+      :markdown
+        We will accept <code>page</code> and <code>per_page</code> query-string parameters for paginating the results of SELECT queries.
+
+        For requests made through the website (i.e. HTML format), the page size is defaulted to 20.
+
+        For requests to our sparql endpoint for data formats (i.e. non-HTML), there will be no defaults for these parameters (i.e. results are unlimited).
+
+        For SELECT queries, for convenience you can optionally pass the pagination parameters and we will use them to apply <code>LIMIT</code> and <code>OFFSET</code> clauses to the query. For other query types (i.e. DESCRIBE, CONSTRUCT, ASK), pagination like this doesn't make so much sense, so those parameters will be ignored.
+
+        Please also refer to the [Response Size Limits](#response-size-limits) section below, and the examples at the end of this section.
+
+    .subsection#sparql-errors
+      %h3
+        3.4
+        %strong SPARQL Errors
+
+      :markdown
+        If you make a SPARQL request with a malformed query in a data format (i.e. non-HTML), then we will respond with HTTP status 400, with a helpful message in the response.
+
+        Additionally, please note the [Response Size Limits](#response-size-limits), which apply to all API calls, as well as the [Errors](#errors) section.
+
+    .subsection#sparql-json-p
+      %h3
+        3.5
+        %strong JSON-P
+
+      :markdown
+        If you're requesting SPARQL results as JSON, you can additionally pass a <code>callback</code> parameter and the results will be wrapped in that function. This is useful for getting around cross-domain issues if you're running JavaScript on older browsers. (Please also see the [Cross-Origin Resource Sharing](#cors) section).
+
+        For example:
+
+      %code
+        http://tsb-projects.labs.theodi.org/sparql.json?callback=myCallbackFunction&query=SELECT+%2A+WHERE+%7B%0D%0A++%3Fs+a+%3Chttp%3A%2F%2Ftsb-projects.labs.theodi.org%2Fdef%2FProject%3E%0D%0A%7D
+
+      :markdown
+        Or to make a JSON-P request with jQuery, you can omit the callback parameter from the url and just set the dataType to <code>jsonp</code>.
+
+      %pre.prettyprint.lang-js
+        = preserve do
+          :escaped
+            queryUrl = 'http://tsb-projects.labs.theodi.org/sparql.json?query=SELECT+%2A+WHERE+%7B%0D%0A++%3Fs+a+%3Chttp%3A%2F%2Ftsb-projects.labs.theodi.org%2Fdef%2FProject%3E%0D%0A%7D'
+
+            $.ajax({
+              dataType: 'jsonp',
+              url: queryUrl,
+              success: function(data) {
+                // callback code here
+                alert('success!');
+              }
+            });
+
+    .subsection#named-graphs
+      %h3
+        3.6
+        %strong Use of Named graphs
+
+      %h4
+        3.6.1
+        %strong Dataset Data
+
+      %p The data for each dataset is contained within a separate named graph. The dataset itself has a URI, for example
+
+      %code http://tsb-projects.labs.theodi.org/data/tsb-projects-data
+
+      %p The web page for the dataset lists the named graph that contains the dataset, in this case
+
+      %code http://tsb-projects.labs.theodi.org/graph/tsb-projects-data
+
+      %p The graph name for the dataset is contained in the dataset metadata, using a predicate called <code>http://publishmydata.com/def/dataset#graph</code> and can be obtained by a query like this:
+
+      %pre.prettyprint.lang-sparql
+        = preserve do
+          :escaped
+            SELECT ?graph
+              WHERE {
+                <http://tsb-projects.labs.theodi.org/data/tsb-projects-data> <http://publishmydata.com/def/dataset#graph> ?graph
+              }
+
+      %h4
+        3.6.2
+        %strong Dataset Metadata
+
+      :markdown
+        The metadata we store about the [dataset](#individual-datasets) itself (that is returned by dereferencing its URI), is stored its own separate graph, for example:
+
+      %code http://tsb-projects.labs.theodi.org/graph/tsb-projects-data/<strong>metadata</strong>
+
+      :markdown
+        We also use named graphs for each concept scheme and ontology.
+
+    .subsection#parameter-interpolation
+      %h3
+        3.7
+        %strong Parameter Substitution
+
+      %p You can parameterize your SPARQL by including %{tokens} in your queries, and providing values for the tokens on the url query string.
+
+      %code http://tsb-projects.labs.theodi.org/sparql?query=URL-encoded-SPARQL-query?token1=value-for-token1&token2=value-for-token2
+
+      :markdown
+        Note that the following tokens are reserved and cannot be used as parameters for substitution.
+
+        - controller
+        - action
+        - page
+        - per_page
+        - id
+        - commit
+        - utf8
+        - query
+
+
+    .subsection#ruby-sparql-example
+      %h3
+        3.8
+        %strong Example: Using Ruby to request data from the SPARQL Endpoint
+
+      :markdown
+        This sample Ruby makes a request to our SPARQL endpoint for all resources of type Project (as JSON) and then puts the result in a Hash.
+
+      %pre.prettyprint.lang-ruby
+        = preserve do
+          :escaped
+            require 'rest-client'
+            require 'json'
+
+            query = 'SELECT * WHERE {?s a <http://tsb-projects.labs.theodi.org/def/Project>}'
+
+            url = "http://tsb-projects.labs.theodi.org/sparql.json"
+
+            results_str = RestClient.get url, {:params => {:query => query}}
+            results_hash = JSON.parse results_str
+            results_array = results_hash["results"]["bindings"]
+
+            puts "total number of results: \#{results_array.length}"
+
+      :markdown
+        **Note**: If you're doing a lot of work with RDF in Ruby, you might want to look at using [Swirrl](http://swirrl.com)'s open-source SPARQL ORM for Ruby, [Tripod](http://github.com/swirrl/tripod).
+
+    .subsection#js-sparql-example
+      %h3
+        3.8
+        %strong Example: Using JavaScript to request data from the SPARQL Endpoint
+
+      :markdown
+        This example HTML page uses jQuery to make a request to our SPARQL endpoint for all resources of type Unitary Authority (as JSON) and log the results.
+
+      %pre.prettyprint.lang-html
+        = preserve do
+          :escaped
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <script src="http://code.jquery.com/jquery-1.10.3.min.js"></script>
+              </head>
+              <body>
+                <script type="text/javascript">
+                  var query = "SELECT * WHERE {?s a <http://tsb-projects.labs.theodi.org/def/Project>}";
+                  var url = "http://tsb-projects.labs.theodi.org/sparql.json?query=";
+                  url += encodeURIComponent(query);
+                  $.ajax({
+                    dataType: 'json',
+                    url: url,
+                    success: function(data) {
+                      alert('success: ' + data.results.bindings.length + ' results');
+                      console.log(data);
+                    }
+                  });
+                </script>
+              </body>
+            </html>
+      :markdown
+        **Note**: See the [Cross-Origin Resource Sharing](#cors) section for a note about accessing data from from other domains.
+
+  %section
+    %h2 4 - Search API
+
+    .subsection#search-api
+      %h3
+        4.1
+        %strong Introduction
+
+      :markdown
+        The projects in the site can be searched programmatically by issuing GET requests to
+
+      %pre.prettyprint
+        :preserve
+          http://tsb-projects.labs.theodi.org/projects</code>.
+
+    .subsection#search-parameters
+      %h3
+        4.3
+        %strong Parameters
+
+      %h4
+        4.3.1
+        %strong Free text search
+
+      :markdown
+        Supply the free text search query in the <code>search_string</code> query string parameter. e.g.
+
+      %pre.prettyprint
+        :preserve
+          http://tsb-projects.labs.theodi.org/projects.json?search_string=lasers
+
+      %h4
+        4.3.2
+        %strong Date range and Grant amount ranges
+
+      :markdown
+        To filter the results by a date range, provide <code>date_from=</code> and <code>date_to</code> query string parameters containing date strings in <code>yyyy-mm-dd</code> format.
+
+      %pre.prettyprint
+        :preserve
+          http://tsb-projects.labs.theodi.org/projects.json?search_string=lasers&date_from=2006-04-01&date_to=2014-06-01
+
+      :markdown
+        Similarly for grant amount ranges, use the <code>offer_grant_from</code> and <code>offer_grant_to</code> parameters.
+
+      %pre.prettyprint
+        :preserve
+          http://tsb-projects.labs.theodi.org/projects.json?search_string=lasers&offer_grant_from=100000&offer_grant_to=200000
+
+      %h4
+        4.3.2
+        %strong Facets
+
+      :markdown
+        You can also filter the results by search facets, by adding additional query string parameters in the format:
+
+      %pre.prettyprint
+        facet[facet_term]=true
+
+      :markdown
+        e.g. The following URL searches for projects including the search term 'lasers', with participants based in London or the North West.
+
+      %pre.prettypring
+        http://tsb-projects.labs.theodi.org/projects.json?search_string=lasers&region_labels%5BNorth+West%5D=true&region_labels%5BLondon%5D=true
+
+      :markdown
+        The table below details the available facets. See the <code>facets</code> object in the JSON search results for a particular query to establish which facet terms are available.
+
+      %table{class: 'table table-striped table-bordered table-hover'}
+        %thead
+          %tr
+            %th Facets
+            %th Notes
+
+        %tbody
+          %tr
+            %td region_labels
+            %td The names of the regions for participants for a project
+          %tr
+            %td participant_size_labels
+            %td The labels for participants' enterprise sizes for a project
+          %tr
+            %td status_label
+            %td The label for a project's status
+          %tr
+            %td budget_area_label
+            %td The label for a project's TSB Budget Area
+          %tr
+            %td product_label
+            %td The label for a project's TSB Product
+          %tr
+            %td participant_sic_section_labels
+            %td The labels for the SIC Sections of the participants on a project
+          %tr
+            %td participant_legal_entity_form_labels
+            %td The labels for the legal entity forms of the participants on a project
+
+    .subsection#search-formats
+      %h3
+        4.2
+        %strong Formats
+
+      :markdown
+        Search results can be retrieved in JSON, Atom or CSV by using a format extension or Accept header as detailed below.
+
+        Note: There are links at the foot of the search results page to get the current set of results in different formats.
+
+      %table{class: 'table table-striped table-bordered table-hover'}
+        %thead
+          %tr
+            %th Format
+            %th Extension
+            %th Accept Headers
+            %th Pagination Behaviour
+            %th Results Format
+        %tbody
+          %tr
+            %td CSV
+            %td .csv
+            %td.hardwrap
+              text/csv
+            %td
+              No pagination: always returns all results.
+            %td
+              One comma-separated row per project/organisation combination
+
+          %tr
+            %td JSON
+            %td .json
+            %td.hardwrap
+              application/json
+            %td
+              Defaults to 10 per page, max 100 per page.
+            %td
+              :markdown
+                A JSON object, including the current **page_of_results** (as an array of project objects, with fields for all the indexed values), the **total** count of projects returned by the search, a **facets** object, and a **grant_stats** object with key stats about the result set.
+
+          %tr
+            %td Atom
+            %td .atom
+            %td.hardwrap
+              application/atom+xml
+            %td
+              Defaults to 10 per page, max 100 per page.
+            %td
+              :markdown
+                An Atom feed with basic entries for the projects returned, including basic details about the projects as well as links get those projects in different formats. The atom entries' updated date will be kept up to date as the projects are modified.
+
+  %section
+    %h2 5 - General
+
+    .subsection#response-size-limits
+      %h3
+        5.1
+        %strong Response Size Limits
+
+      :markdown
+        For all requests to our API, if the request issues a request to the database which causes more than 5MB of data to be returned, we will respond with HTTP status code 400, with the a message in the response body including the phrase <code>Response too large</code>. Note that full pre-canned dumps of all datasets will be available (in zipped n-triples format) at URLs defined in the [dataset metadata](#individual-datasets).
+
+    .subsection#errors
+      %h3
+        5.2
+        %strong Errors
+
+      %table{class: 'table table-striped table-bordered table-hover'}
+        %thead
+          %tr
+            %th Error type
+            %th HTTP status code
+            %th Notes
+        %tbody
+          %tr
+            %td Response too large
+            %td 400
+            %td We will include a text message in the response body including the phrase "Response too large."
+          %tr
+            %td SPARQL Syntax Error
+            %td 400
+            %td We will include a text message in the response body with details of the error.
+          %tr
+            %td Resource Not Found
+            %td 404
+            %td Returned if you request a resource or URL that doesn't exist
+          %tr
+            %td Not Acceptable
+            %td 406
+            %td Returned if you request a non-supported data format
+          %tr
+            %td Unexpected Errors
+            %td 500
+            %td
+          %tr
+            %td Query Timeouts
+            %td 503
+            %td The timeout for requesting data from our database will initially be set to 10 seconds.
+      %br
+
+    .subsection#cors
+      %h3
+        5.3
+        %strong Cross-Origin Resource Sharing (CORS)
+      :markdown
+        Our web server is configured to allow access from all domains (by adding the following line to our nginx configuration):
+
+      <code>add_header Access-Control-Allow-Origin "*";</code>
+
+      :markdown
+        This means that if you're writing JavaScript to request data from our server in to a web page hosted on another domain, your browser should check this header and allow it.
+
+        ####**A Note about Browser Support for CORS:**
+
+        Modern browsers (such as recent versions of Internet Explorer Firefox, Chrome and Safari) have full CORS support. It is not supported in Internet Explorer 6 and 7. Versions 8 & 9 of Internet Explorer offer limited support. If you need to support older browsers, consider making requests for data via SPARQL, with [JSON-P](#sparql-json-p).
+
+  :javascript
+    prettyPrint();

@@ -141,33 +141,39 @@ module Import
         # postcode - connect to OS URI - what should the subject be? the organization? the site?
         if row["Postcode"] && row["Postcode"] != "null"
           postcode = row["Postcode"].gsub(/ /,'') # remove spaces
-          pc_uri = Vocabulary::OSPC[postcode]
+          if postcode[0,2] == "BT"
+            # postcode is in Northern Ireland - no data for NI in OS Code Point Open
+            # could work it out from ONSPD but need to set up a conversion from Irish National Grid to WGS84
 
-          s.postcode = pc_uri
-
-          # Look up location and district for OS postcode and connect to site.
-          query = "SELECT ?lat ?long ?district_gss WHERE {
-            <#{pc_uri}> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ?lat .
-            <#{pc_uri}> <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?long .
-            <#{pc_uri}> <http://data.ordnancesurvey.co.uk/ontology/postcode/district> ?os_district .
-            ?os_district <http://www.w3.org/2002/07/owl#sameAs> ?district_gss
-          }"
-
-          encoded_query = CGI::escape(query)
-          query_url = "http://opendatacommunities.org/sparql.json?query=" + encoded_query + "&api_key=346ead3fc7282de4827f2a5cf408b089"
-          response = JSON.parse(RestClient.get query_url)
-          result = response["results"]["bindings"][0]
-          if result
-            lat = result["lat"]["value"] if result["lat"]
-            long = result["long"]["value"] if result["long"]
-            district = result["district_gss"]["value"] if result["district_gss"]
-            s.lat = lat if lat
-            s.long = long if long
-            s.district = district if district
           else
-            # postcode not found - try looking it up from ONSPD - could be Northern Irish
+            pc_uri = Vocabulary::OSPC[postcode]
+
+            s.postcode = pc_uri
+
+            # Look up location and district for OS postcode and connect to site.
+            query = "SELECT ?lat ?long ?district_gss WHERE {
+              <#{pc_uri}> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ?lat .
+              <#{pc_uri}> <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?long .
+              <#{pc_uri}> <http://data.ordnancesurvey.co.uk/ontology/postcode/district> ?os_district .
+              ?os_district <http://www.w3.org/2002/07/owl#sameAs> ?district_gss
+            }"
+
+            encoded_query = CGI::escape(query)
+            query_url = "http://opendatacommunities.org/sparql.json?query=" + encoded_query + "&api_key=346ead3fc7282de4827f2a5cf408b089"
+            response = JSON.parse(RestClient.get query_url)
+            result = response["results"]["bindings"][0]
+            if result
+              lat = result["lat"]["value"] if result["lat"]
+              long = result["long"]["value"] if result["long"]
+              district = result["district_gss"]["value"] if result["district_gss"]
+              s.lat = lat if lat
+              s.long = long if long
+              s.district = district if district
+            else
+              # postcode not found - 
           
-          end
+            end
+          end #of if Northern Irish block
         end
 
         # legal entity form and enterprise size

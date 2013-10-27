@@ -24,6 +24,7 @@ module Import
       #sic_hash = JSON.parse(File.read(sic_hash_file))
       # each entry has company number as key and an array of sic codes as value
       org_sic_hash = JSON.parse(File.read(org_sic_hash_file))
+      
 
       for i in 2..excel.last_row
         puts "starting row #{i}"

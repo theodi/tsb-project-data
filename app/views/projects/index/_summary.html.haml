@@ -21,19 +21,19 @@
     :ruby
       total_cost = projects.facets["offer_cost_stats"]["total"]
       if total_cost && total_cost > 0
-        width_percent = ((projects.facets["offer_grant_stats"]["total"].to_f / total_cost) * 100).round
+        grant_percent = ((projects.facets["offer_grant_stats"]["total"].to_f / total_cost) * 100).round
       else
-        width_percent = 0
+        grant_percent = 0
       end
 
     #results-summary-progress
       #results-summary-progress-bar
         .prog-bar-background
-          .prog-bar-fill{ style: "width: #{width_percent}%;"}
+          .prog-bar-fill{ style: "width: #{grant_percent}%;"}
 
     #results-summary-total-cost
       %div
         Total grant is
-        %span.percent #{((projects.facets["offer_grant_stats"]["total"].to_f / projects.facets["offer_cost_stats"]["total"]) * 100).round(1)}%
+        %span.percent #{grant_percent.round(1)}%
         of total cost
         (<span class='total-cost'>#{number_to_currency projects.facets["offer_cost_stats"]["total"].to_f, unit: '&pound;'}</span>)

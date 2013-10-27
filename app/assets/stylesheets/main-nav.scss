@@ -18,10 +18,10 @@ header > nav {
     li {
       position: relative;
 
-
       a {
         padding: 20px 0 20px 40px;
         padding-right:0;
+
         font-size: 18px;
         color: $gray-dark !important;
         text-align: center;
@@ -55,6 +55,10 @@ header > nav {
 
       }
 
+      &:first-child {
+        a { padding-left:0 !important;}
+      }
+
       .arrow-down {
         bottom: -8px;
         position: absolute;
@@ -67,6 +71,12 @@ header > nav {
         border-left: 8px solid transparent;
         //@extend .hidden-xs;
       }
+
+      &:first-child {
+        .arrow-down {
+          margin-left: -6px;
+        }
+      }
     }
 
     @media (max-width: $grid-float-breakpoint) {
@@ -76,12 +86,25 @@ header > nav {
       > li {
         float: left;
         > a {
-          padding: 20px;
+          padding: 20px 15px 20px 0px;
+        }
+
+        &:first-child {
+          a { padding-left:0 !important;}
         }
 
         &.advanced a {
-          padding: 20px;
-          padding-bottom: 10px;
+          padding: 20px 15px 10px 0px;
+        }
+
+        .arrow-down {
+          margin: 0 0 0 -14px;
+        }
+
+        &:first-child {
+          .arrow-down {
+            margin-left: -12px;
+          }
         }
       }
     }

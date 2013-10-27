@@ -4,5 +4,5 @@
 
   - project.participants.sort{ |a, b| project.offer_cost_sum_for_organization(b) <=> project.offer_cost_sum_for_organization(a) }.each do |participant|
     - max_offer_cost = project.offer_cost_sum_for_organization(participant) unless max_offer_cost
-    - if project.leader.uri != participant.uri
+    - if project.leader && project.leader.uri != participant.uri
       = render "projects/show/participant_list_item", project: project, participant: participant

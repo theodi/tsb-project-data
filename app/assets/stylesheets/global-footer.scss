@@ -54,6 +54,20 @@ body > footer {
     padding-top: 15px;
     padding-bottom: 15px;
   }
+  #footer-cert {
+    @include make-md-column(3);
+    @include clearfix();
+    margin-top:24px;
+    ul {
+
+      margin-top:-8px;
+      display:block;
+      span {
+        background: none;
+        color: #eee;
+      }
+    }
+  }
 }
 
 // even in advanced mode, make links in footer blue

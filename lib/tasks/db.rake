@@ -141,17 +141,22 @@ namespace :db do
       TsbProjectData::DATA_GRAPH,
       "TSB Projects Data", # title,
       "Data about projects funded by the TSB, and the participating organizations.", #comment
-      "This dataset provides information on the projects and organizations funded by the TSB (and by predecessor organizations such as the Department for Trade and Industry).
-      
-      Funding is provided through competitions or contracts with resulting approved projects involving one or more participants from academic and or business sectors. Payments are made up to the offered grant in arrears against agreed claims. Projects vary in size and can take from a few months to several years.
-      
-      Each participant organization in each project is associated with a grant, provided by the TSB.  Data is provided for each grant on the amount of funding provided, as well as the total cost of the project and hence the matching contribution from the project participant.
-      
-      Each organization is associated with a location, typically the address of its registered office or head office, and this is used to link funding to geographical regions.  The funding is also broken down by 'Priority Area' (for example transport, health care or energy).
-      
-      The data from the TSB has been supplemented by openly licensed external data from a range of sources: including the [Ordnance Survey](http://data.ordnancesurvey.co.uk) (locations of postcode centroids from the Linked Data version of the CodePoint Open product) and SIC code information for companies from [Companies House](http://www.companieshouse.gov.uk/about/miscellaneous/URI.shtml) linked data.
-      
-      Where possible, the data has been linked to related external web resources, including those from the [ONS](http://statistics.data.gov.uk), [Ordnance Survey](http://data.ordnancesurvey.co.uk), [Companies House](http://www.companieshouse.gov.uk/) and [OpenCorporates](http://opencorporates.com).
+      "
+This dataset provides information on the projects and organizations funded by the TSB (and by predecessor organizations such as the Department for Trade and Industry).
+
+Funding is provided through competitions or contracts with resulting approved projects involving one or more participants from academic and or business sectors. Payments are made up to the offered grant in arrears against agreed claims. Projects vary in size and can take from a few months to several years.
+
+Each participant organization in each project is associated with a grant, provided by the TSB.  Data is provided for each grant on the amount of funding provided, as well as the total cost of the project and hence the matching contribution from the project participant.
+
+Each organization is associated with a location, typically the address of its registered office or head office, and this is used to link funding to geographical regions.  The funding is also broken down by 'Priority Area' (for example transport, health care or energy).
+
+The data from the TSB has been supplemented by openly licensed external data from a range of sources: including the [Ordnance Survey](http://data.ordnancesurvey.co.uk) (locations of postcode centroids from the Linked Data version of the CodePoint Open product) and SIC code information for companies from [Companies House](http://www.companieshouse.gov.uk/about/miscellaneous/URI.shtml) linked data.
+
+Where possible, the data has been linked to related external web resources, including those from the [ONS](http://statistics.data.gov.uk), [Ordnance Survey](http://data.ordnancesurvey.co.uk), [Companies House](http://www.companieshouse.gov.uk/) and [OpenCorporates](http://opencorporates.com).
+
+<div style='margin-bottom:40px; margin-top:20px;'>
+  <script src='https://certificates.theodi.org/datasets/640/certificates/12714/badge.js'></script>
+</div>
       ", #desc markdown
       "project_data.nt"
     )

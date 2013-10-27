@@ -43,6 +43,10 @@ h1, h2, h3 {
   // padding: 0 0 260px;        /* pad bottom by footer height */
 }
 
+main > .container {
+  padding-bottom:40px;
+}
+
 body > footer {   height: 260px; }
 
 a, a:hover, a:visited {

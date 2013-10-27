@@ -31,10 +31,10 @@ header #titlebar {
 
       a {
         text-decoration:underline;
-        color: #fff;
+        color: #fff !important;
 
         &:hover {
-          color: #fff;
+          color: #fff !important;
         }
       }
     }

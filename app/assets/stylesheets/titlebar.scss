@@ -31,10 +31,10 @@ header #titlebar {
 
       a {
         text-decoration:underline;
-        color: #fff !important;
+        color: #fff;
 
         &:hover {
-          color: #fff !important;
+          color: #fff;
         }
       }
     }
@@ -43,6 +43,12 @@ header #titlebar {
 
 }
 
-body.advanced  #titlebar {
+body.advanced #titlebar {
   background: $data-header-color;
+
+  .links {
+    a, a:hover, a:visited {
+      color: #fff !important;
+    }
+  }
 }

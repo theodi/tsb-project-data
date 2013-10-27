@@ -6,7 +6,8 @@
 - content_for :header do
   .contents
     %h3
-      Dataset: #{link_to @dataset.title, @dataset}
+      .links
+        Dataset: #{link_to @dataset.title, @dataset}
     %h1
       Resources of Type: #{rdf_type_label || @type_filter}
 

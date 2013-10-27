@@ -51,7 +51,8 @@
           %div Description
           %div
             .description.read-more-content
-              = project.description
+              =# project.description
+              = RDiscount.new(project.description).to_html.html_safe
               .read-more-overlay
             %a.read-more{ href: '#' } Read more
 

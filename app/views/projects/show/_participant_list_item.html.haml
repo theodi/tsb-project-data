@@ -2,7 +2,7 @@
   .project-participant-header
     .project-participant-name
       %div
-        - if participant.uri == project.leader.uri
+        - if project.leader && (participant.uri == project.leader.uri)
           Lead organisation
         - else
           Collaborating Organisation

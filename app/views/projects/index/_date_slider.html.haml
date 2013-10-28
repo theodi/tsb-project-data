@@ -17,25 +17,46 @@
 :javascript
   $(function() {
 
+    // extents
     var minExtentDate = new Date(#{@projects_unfiltered.facets["start_date_stats_unfiltered"]["min"]});
     var maxExtentDate = new Date(#{@projects_unfiltered.facets["end_date_stats_unfiltered"]["max"]});
 
-    var dateFromDate = new Date(#{ @search.date_from ? "'#{@search.date_from}'" : @projects_unfiltered.facets["start_date_stats_unfiltered"]["min"]});
-    var dateToDate = new Date(#{@search.date_to ? "'#{@search.date_to}'" : @projects_unfiltered.facets["end_date_stats_unfiltered"]["max"]});
-
-    var maxExtentDate = maxExtentDate.setMonth( maxExtentDate.getMonth() + 1 ); // add a month to the ends
-    var dateToDate = dateToDate.setMonth( dateToDate.getMonth() + 1 ); // add a month to the ends
+    minExtentDate = firstDayOfCurrentMonth(minExtentDate);
+    maxExtentDate = firstDayOfNextMonth(maxExtentDate); // move end on by one month so get date diff right.
 
     var minExtentMoment = moment.utc(minExtentDate);
     var maxExtentMoment = moment.utc(maxExtentDate);
 
-    var dateFromMoment = moment.utc(dateFromDate);
-    var dateToMoment = moment.utc(dateToDate);
-
     var extentInMonths = maxExtentMoment.diff(minExtentMoment, 'months')
+
+    // date from and to
+
+    var dateFromDate = new Date(#{ @search.date_from ? "'#{@search.date_from}'" : @projects_unfiltered.facets["start_date_stats_unfiltered"]["min"]});
+    var dateToDate = new Date(#{@search.date_to ? "'#{@search.date_to}'" : @projects_unfiltered.facets["end_date_stats_unfiltered"]["max"]});
+
+    var dateFromMoment = moment.utc(firstDayOfCurrentMonth(dateFromDate));
+    var dateToMoment = moment.utc(firstDayOfCurrentMonth(dateToDate));
 
     var dateFromInMonths = dateFromMoment.diff(minExtentMoment, 'months')
     var dateToInMonths = dateToMoment.diff(minExtentMoment, 'months')
+
+    // utility funcs.
+
+    function firstDayOfCurrentMonth(date) {
+      return moment.utc( lastDayOfPrevMonth(date) ).add('days', 1).toDate();
+    }
+
+    function firstDayOfNextMonth( date ) {
+      return moment.utc(date).add('months', 1).date(1).toDate();
+    }
+
+    function lastDayOfCurrentMonth( date ){
+      return moment.utc( firstDayOfNextMonth(date) ).add('days', -1).toDate();
+    }
+
+    function lastDayOfPrevMonth( date ) {
+      return moment.utc(date).date(1).add('days', -1).toDate();
+    }
 
 
     function setSliderValues(from, to) {
@@ -70,8 +91,16 @@
       $("#date-range-desc").html( str );
     }
 
-    function monthsToISODateString(noOfMonths) {
-      return minExtentMoment.clone().add('months', noOfMonths).format("YYYY-MM-DD");
+    function monthsToISODateString(noOfMonths, isEnd) {
+
+      var d = minExtentMoment.clone().add('months', noOfMonths);
+
+      // if it's an end date, move to end of current month
+      if (isEnd) {
+        d = moment.utc( lastDayOfCurrentMonth(d.toDate()) );
+      }
+
+      return d.format("YYYY-MM-DD");
     }
 
     function setDateTextFields(monthsFrom, monthsTo) {
@@ -80,14 +109,14 @@
         $("#date_from").val("");
       }
       else {
-        $("#date_from").val( monthsToISODateString(monthsFrom) );
+        $("#date_from").val( monthsToISODateString(monthsFrom, false) );
       }
 
       if( monthsTo >= extentInMonths ) {
         $("#date_to").val("");
       }
       else {
-        $("#date_to").val( monthsToISODateString(monthsTo) );
+        $("#date_to").val( monthsToISODateString(monthsTo, true) );
       }
     }
 
@@ -97,7 +126,9 @@
       max: extentInMonths,
       step: 1,
       slide: function( event, ui ) {
-        setDateTextFields(ui.values[0], ui.values[1] );
+        var fromValue = ui.values[0];
+        var toValue = ui.values[1];
+        setDateTextFields(fromValue, toValue);
         updateDescription();
       },
       stop: function( event, ui ) {
@@ -111,12 +142,16 @@
       $("form#faceted-search").submit();
     });
 
+
+    // set initial slider values.
     setSliderValues(dateFromInMonths, dateToInMonths);
 
+    // set initial date text fields
     setDateTextFields(
       $( "#date-slider" ).slider("values", 0),
       $( "#date-slider" ).slider("values", 1)
     );
+
     updateDescription();
 
 

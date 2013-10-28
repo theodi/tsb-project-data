@@ -5,7 +5,7 @@
 
   :javascript
     $(function() {
-      $("form#faceted-search #search_string").bind('keyup', $.debounce( 400, function() {
+      $("form#faceted-search #search_string").bind('keyup', $.debounce( 1000, function() {
         $("form#faceted-search").submit();
       }));
     });

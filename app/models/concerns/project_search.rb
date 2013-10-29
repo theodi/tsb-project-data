@@ -11,6 +11,7 @@ module ProjectSearch
       # from project
       indexes :uri, type: 'string', analyzer: 'keyword' # this is the same as what will be in id, but index this field for convenince too.
       indexes :label, type: 'string', analyzer: 'snowball', :boost => 10
+      indexes :label_unanalyzed_downcase, type: 'string', analyzer: 'keyword'
       indexes :start_date, type: 'date'
       indexes :end_date, type: 'date'
       indexes :status_uri, type: 'string', analyzer: 'keyword'
@@ -104,6 +105,7 @@ module ProjectSearch
     {
       uri: uri.to_s,
       label: label,
+      label_unanalyzed_downcase: label.downcase,
       status_uri: project_status_uri.to_s,
       status_label: project_status.label, # needs a lookup, but after first few will be cached.
       description: description,

@@ -24,6 +24,29 @@ describe Search do
     search.params.should == params
   end
 
+  describe "process_sorting_params" do
+    it "should default to sorting by _score, desc" do
+      blank_search.sort_by.should == "_score"
+      blank_search.sort_order.should == "desc"
+    end
+
+    context "the sorting parameters passed in our allowed values" do
+      it "should use the sorting parameters passed to the ctor" do
+        s = Search.new( sort_by: "start_date", sort_order: "asc")
+        s.sort_by.should == "start_date"
+        s.sort_order.should == "asc"
+      end
+    end
+
+    context "the sorting parameters are not in our allowed values" do
+      it "should sort by _score, desc" do
+        s = Search.new( sort_by: "foo", sort_order: "bar")
+        s.sort_by.should == "_score"
+        s.sort_order.should == "desc"
+      end
+    end
+  end
+
   describe "process_pagination_params" do
 
     it "should default to page 1 and 10 per page" do

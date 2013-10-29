@@ -21,6 +21,11 @@ class Search
   attr_accessor :grant_range_filter # range filters
   attr_accessor :date_range_filter # just the date range filters
 
+  attr_accessor :sort_by
+  attr_accessor :sort_order
+
+  attr_accessor :sort_fields
+
   def initialize(params={})
     self.params = params.tap { |h| h.delete(:controller); h.delete(:action); h.delete(:format); h.delete(:utf8); h.delete(:commit) } # store the raw params minus rails's params
 
@@ -29,14 +34,19 @@ class Search
       'region_labels' => [],
       'participant_size_labels' => [],
       'status_label' => [],
-    #  'competition_label' => [],
       'budget_area_label' => [],
-    #  'team_label' => [],
       'participant_sic_section_labels' => [],
-   #   'cost_category_label' => [],
       'product_label' => [],
       'participant_legal_entity_form_labels' => []
     }
+
+    self.sort_fields = {
+      'project name' => 'label_unanalyzed_downcase',
+      'grant amount' => 'total_offer_grant',
+      'start date' => 'start_date',
+      'relevance' => '_score'
+    }
+
     self.terms_filters = []
 
     process_params()
@@ -56,6 +66,10 @@ class Search
 
       search.query do |query|
         query.string self.search_string
+      end
+
+      search.sort do |sort|
+        sort.by self.sort_by, self.sort_order
       end
 
       # facets
@@ -101,6 +115,7 @@ class Search
   private
 
   def process_params
+    process_sorting_params()
     process_pagination_params()
     process_search_string()
     process_facets()
@@ -210,6 +225,15 @@ class Search
     end
 
     self.date_range_filter = range_filter.to_hash if range_filter
+  end
+
+  def process_sorting_params
+
+    self.sort_by = params[:sort_by]
+    self.sort_order = params[:sort_order]
+
+    self.sort_by = '_score' unless self.sort_fields.values.include?(self.sort_by)
+    self.sort_order = 'desc' unless ['asc', 'desc'].include?(self.sort_order)
   end
 
   def process_pagination_params

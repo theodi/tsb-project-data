@@ -16,10 +16,10 @@
         %li= link_to("Atom", projects_path( params.merge(format: 'atom', page: 1, per_page: 20 )))
         %li= link_to("JSON", projects_path( params.merge(format: 'json', page: 1, per_page: 20 )))
 
-#projects-page
-  #search
-    = form_tag '/projects', id: 'faceted-search', method: 'get' do
+= form_tag '/projects', id: 'faceted-search', method: 'get' do
 
+  #projects-page
+    #search
       = submit_tag 'update results'
 
       = render 'projects/index/search_string'
@@ -65,12 +65,11 @@
           )
         });
 
-  #results
-
-    - if @projects.any?
-      = render 'projects/index/summary', projects: @projects
-      = render 'projects/index/header', projects: @projects
-      = render 'projects/index/list', projects: @projects
-      = paginate @projects
-    - else
-      = render 'projects/index/no_results'
+    #results
+      - if @projects.any?
+        = render 'projects/index/summary', projects: @projects
+        = render 'projects/index/header', projects: @projects
+        = render 'projects/index/list', projects: @projects
+        = paginate @projects
+      - else
+        = render 'projects/index/no_results'

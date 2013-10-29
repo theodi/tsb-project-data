@@ -1,7 +1,21 @@
 #results-header
-  #results-header-position
+  #results-range
     Showing
     %span.range #{@min_index}-#{@max_index}
     of
     %span.total #{@projects.total}
     results
+
+  #results-sort
+    Sort by:
+    = select_tag 'sort_by', options_for_select(  @search.sort_fields, @search.sort_by )
+    Order:
+    = select_tag 'sort_order', options_for_select( { "ascending" => "asc", "descending" => "desc" }, @search.sort_order )
+
+    :javascript
+      $(function() {
+        $('form #results-sort select').change( function(e) {
+          $("form#faceted-search").submit();
+        });
+
+      });

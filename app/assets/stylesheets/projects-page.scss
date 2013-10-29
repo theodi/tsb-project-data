@@ -8,14 +8,12 @@
     @include make-md-column(3);
     font-size:16px;
 
-    form#faceted-search {
-      input[type="submit"] {
-        display:none; // only shown in noscript mode.
-        margin-top:10px;
-        margin-bottom:10px;
-        @extend .btn;
-        @extend .btn-primary;
-      }
+    input[type="submit"] {
+      display:none; // only shown in noscript mode.
+      margin-top:10px;
+      margin-bottom:10px;
+      @extend .btn;
+      @extend .btn-primary;
     }
 
     div.ui-slider-range {
@@ -196,17 +194,26 @@
     }
 
     #results-header {
-      padding: 18px 0;
+      padding-bottom: 18px;
       @include make-row();
       font-size: 16px;
 
-      #results-header-position {
-        @include make-md-column(6);
+      select {
+        margin-right:6px;
+      }
 
+      #results-range {
+        @extend .container;
+        margin-bottom:10px;
         span {
           font-weight: bold;
         }
       }
+
+      #results-sort {
+        @extend .container;
+      }
+
     }
 
     ul#results-list {

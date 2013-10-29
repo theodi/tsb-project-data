@@ -65,7 +65,7 @@ class Search
     r = Project.search page: results_page, per_page: results_per_page do |search|
 
       search.query do |query|
-        query.string self.search_string
+        query.string Tire::Utils.escape(self.search_string)
       end
 
       search.sort do |sort|

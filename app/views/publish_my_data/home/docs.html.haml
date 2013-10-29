@@ -176,9 +176,9 @@
       %code http://tsb-projects.labs.theodi.org/<strong>id</strong>/{...}
       %p When you look them up you get redirected to the corresponding document about that thing. The <strong>document URLs</strong> follow the pattern:
       %code http://tsb-projects.labs.theodi.org/<strong>doc</strong>/{...}
-      %p For example, in our Local Authorities Dataset, the URI for Cheshire East Unitary Authority is
+      %p For example, in our Projects dataset, the URI for the Hybrid Turbocharger project is
       %code http://tsb-projects.labs.theodi.org/<strong>id</strong>/project/730001
-      %p If you put this into your browser you get redirected, with an HTTP status code of 303 ("See Other"), to an HTML page about Cheshire East
+      %p If you put this into your browser you get redirected, with an HTTP status code of 303 ("See Other"), to an HTML page about that project.
       %code http://tsb-projects.labs.theodi.org/<strong>doc</strong>/project/730001
 
       :markdown
@@ -878,8 +878,9 @@
         Similarly for grant amount ranges, use the <code>offer_grant_from</code> and <code>offer_grant_to</code> parameters.
 
       %pre.prettyprint
-        :preserve
-          http://tsb-projects.labs.theodi.org/projects.json?search_string=lasers&offer_grant_from=100000&offer_grant_to=200000
+        = preserve do
+          :escaped
+            http://tsb-projects.labs.theodi.org/projects.json?search_string=lasers&offer_grant_from=100000&offer_grant_to=200000
 
       %h4
         4.3.2
@@ -894,8 +895,10 @@
       :markdown
         e.g. The following URL searches for projects including the search term 'lasers', with participants based in London or the North West.
 
-      %pre.prettypring
-        http://tsb-projects.labs.theodi.org/projects.json?search_string=lasers&region_labels%5BNorth+West%5D=true&region_labels%5BLondon%5D=true
+      %pre.prettyprint
+        = preserve do
+          :escaped
+            http://tsb-projects.labs.theodi.org/projects.json?search_string=lasers&region_labels%5BNorth+West%5D=true&region_labels%5BLondon%5D=true
 
       :markdown
         The table below details the available facets. See the <code>facets</code> object in the JSON search results for a particular query to establish which facet terms are available.
@@ -928,6 +931,52 @@
           %tr
             %td participant_legal_entity_form_labels
             %td The labels for the legal entity forms of the participants on a project
+
+      %h4
+        4.3.3
+        %strong Pagination
+
+      :markdown
+        You can page through the results by using <code>page</code> and <code>per_page</code> parameters. e.g.
+
+      %pre.prettyprint
+        http://tsb-projects.labs.theodi.org/projects?search_string=lasers&per_page=30&page=2
+
+      :markdown
+        Note that different results formats have different pagination behaviour (see [formats](/docs#search-formats) below).
+
+      %h4
+        4.3.4
+        %strong Ordering
+
+      :markdown
+        The results of a search can be ordered using <code>sort_by</code> (details below) and <code>sort_order</code> (asc/desc) parameters. The default behvaviour is to sort the results by relevance, descending.
+
+      %table{class: 'table table-striped table-bordered table-hover'}
+        %thead
+          %tr
+            %th sort_by value
+            %th Notes
+
+        %tbody
+          %tr
+            %td _score
+            %td The relevance of the search results to your search terms
+          %tr
+            %td label_unanlyzed_downcase
+            %td The lower case version of a project name, in full
+          %tr
+            %td total_offer_grant
+            %td The total value of the grants offered for a project
+          %tr
+            %td start_date
+            %td The start date of a project
+
+      :markdown
+        e.g.
+
+      %pre.prettyPrint
+        http://tsb-projects.labs.theodi.org/projects?search_string=lasers&sort_by=total_offer_grant&sort_order=desc
 
     .subsection#search-formats
       %h3

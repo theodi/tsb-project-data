@@ -327,16 +327,16 @@
       :markdown
         As well as using [URI dereferencing](#uri-dereferencing) to access information about individual resources, you can use the following URL pattern:
 
-        <code>http://tsb-projects.labs.theodi.org/resource?uri={resource-uri}</code>
+        <code>http://tsb-projects.labs.theodi.org/resource?uri={encoded-resource-uri}</code>
 
         This is especially useful for resources for which we have information in our database, but which aren't in the **tsb-projects.labs.theodi.org** domain (i.e. so you can't dereference them in our site).
 
         e.g.
-        <code>http://tsb-projects.labs.theodi.org/resource?uri=http://www.w3.org/ns/org#Site</code>
+        <code>http://tsb-projects.labs.theodi.org/resource?uri=http%3A%2F%2Fwww.w3.org%2Fns%2Forg%23Site</code>
 
         If using a format extension to request a particular format for the resource, the extension is added immediately after '/resource', for example to get a JSON-LD version of the above postcode
 
-        <code>http://tsb-projects.labs.theodi.org/resource.json?uri=http://www.w3.org/ns/org#Site</code>
+        <code>http://tsb-projects.labs.theodi.org/resource.json?uri=http%3A%2F%2Fwww.w3.org%2Fns%2Forg%23Site</code>
 
     .subsection#resource-collections
       %h3
@@ -375,7 +375,7 @@
         2.4.1
         %strong Formats
       :markdown
-        Resources accessed via our resource APIs can be accessed in the same [choice of formats](#resource-format) as for URI dereferencing (via both **format extensions** or **HTTP Accept headers**).
+        Resources accessed via our resource APIs can be accessed in the same [choice of formats](#resource-formats) as for URI dereferencing (via both **format extensions** or **HTTP Accept headers**).
 
       %h4
         2.4.2
@@ -489,7 +489,7 @@
             <!DOCTYPE html>
             <html>
               <head>
-                <script src="http://code.jquery.com/jquery-1.10.3.min.js"></script>
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
               </head>
               <body>
                 <script type="text/javascript">
@@ -811,7 +811,7 @@
             <!DOCTYPE html>
             <html>
               <head>
-                <script src="http://code.jquery.com/jquery-1.10.3.min.js"></script>
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
               </head>
               <body>
                 <script type="text/javascript">
@@ -845,7 +845,7 @@
 
       %pre.prettyprint
         :preserve
-          http://tsb-projects.labs.theodi.org/projects</code>.
+          http://tsb-projects.labs.theodi.org/projects</code>
 
     .subsection#search-parameters
       %h3
@@ -940,7 +940,7 @@
         You can page through the results by using <code>page</code> and <code>per_page</code> parameters. e.g.
 
       %pre.prettyprint
-        http://tsb-projects.labs.theodi.org/projects?search_string=lasers&per_page=30&page=2
+        http://tsb-projects.labs.theodi.org/projects.json?search_string=lasers&per_page=30&page=2
 
       :markdown
         Note that different results formats have different pagination behaviour (see [formats](/docs#search-formats) below).
@@ -976,7 +976,7 @@
         e.g.
 
       %pre.prettyPrint
-        http://tsb-projects.labs.theodi.org/projects?search_string=lasers&sort_by=total_offer_grant&sort_order=desc
+        http://tsb-projects.labs.theodi.org/projects.json?search_string=lasers&sort_by=total_offer_grant&sort_order=desc
 
     .subsection#search-formats
       %h3

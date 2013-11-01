@@ -28,7 +28,7 @@ class HomeController < ApplicationController
       ?project tsb:projectDuration ?projectDuration .
       ?projectDuration ptime:start ?projectStartDate .
       ?project tsb:competition ?competition .
-      ?competition tsb:budgetArea ?budgetArea .
+      ?competition tsb:priorityArea ?priorityArea .
 
       FILTER(?projectStartDate >= '#{year_no}-01-01'^^xsd:date) .
       FILTER(?projectStartDate <= '#{year_no}-12-31'^^xsd:date) .

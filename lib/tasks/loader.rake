@@ -16,7 +16,7 @@ namespace :loader do
     Import::ProjectStatuses.create_data
     Import::CostCategories.create_data
     Import::SicCodes.create_data
-    Import::BudgetAreas.create_data
+    Import::PriorityAreas.create_data
     Import::OntologyLoader.prepare_ontology
   end
 

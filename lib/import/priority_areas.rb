@@ -1,12 +1,12 @@
 module Import
-  module BudgetAreas
+  module PriorityAreas
 
 
-# create concept scheme for budget areas
+# create concept scheme for priority areas
     def self.create_data
 
       input_file = File.join(Rails.root, 'data', 'input-data', 'data-definitions.xlsx')
-      output_file = File.join(TsbProjectData::DUMP_OUTPUT_PATH, 'budget_areas.nt')
+      output_file = File.join(TsbProjectData::DUMP_OUTPUT_PATH, 'priority_areas.nt')
 
       excel = Roo::Excelx.new(input_file)
       excel.default_sheet = "Reference Data"
@@ -15,12 +15,12 @@ module Import
 
       code2uri = {}
 
-      # URI is  /def/concept/budget-area/{code}
-      BudgetArea::BUDGET_AREA_CODES.each_pair do |label,code|
-        uri = Vocabulary::TSBDEF["concept/budget-area/#{code}"]
-        b = BudgetArea.new(uri)
+      # URI is  /def/concept/priority-area/{code}
+      PriorityArea::PRIORITY_AREA_CODES.each_pair do |label,code|
+        uri = Vocabulary::TSBDEF["concept/priority-area/#{code}"]
+        b = PriorityArea.new(uri)
         b.label = label
-        b.definition = BudgetArea::BUDGET_AREA_COMMENTS[label]
+        b.definition = PriorityArea::PRIORITY_AREA_COMMENTS[label]
         b.notation = code
         code2uri[code] = b
       end
@@ -33,14 +33,14 @@ module Import
         definition = excel.cell(i,4)
         unless code == "ENRG"  # skip duplicate
 
-          p = BudgetSubArea.new(Vocabulary::TSBDEF["concept/budget-area/#{code}"])
+          p = PrioritySubArea.new(Vocabulary::TSBDEF["concept/priority-area/#{code}"])
           code2uri[code] = p
           p.label = label
           p.notation = code
           p.definition = definition if definition
           # broader/narrower links
           parentlabel = excel.cell(i,5).strip
-          parentcode = BudgetArea::BUDGET_AREA_CODES[parentlabel]
+          parentcode = PriorityArea::PRIORITY_AREA_CODES[parentlabel]
 
           parent = code2uri[parentcode]
           p.broader = parent.uri

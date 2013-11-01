@@ -51,9 +51,9 @@ module ProjectSearch
       indexes :competition_uri, type: 'string', analyzer: 'keyword'
       indexes :competition_label, type: 'string', analyzer: 'keyword'
 
-      # competition's budget
-      indexes :budget_area_uri, type: 'string', analyzer: 'keyword'
-      indexes :budget_area_label, type: 'string', analyzer: 'keyword'
+      # competition's budget (priority area)
+      indexes :priority_area_uri, type: 'string', analyzer: 'keyword'
+      indexes :priority_area_label, type: 'string', analyzer: 'keyword'
 
       # competition's product
       indexes :product_uri, type: 'string', analyzer: 'keyword'
@@ -95,7 +95,7 @@ module ProjectSearch
       .merge( participant_legal_entity_form_index_fields)
       .merge(participant_region_index_fields)
       .merge(competition_index_fields)
-      .merge(budget_area_index_fields)
+      .merge(priority_area_index_fields)
       .merge(product_index_fields)
   end
 
@@ -200,14 +200,14 @@ module ProjectSearch
     }
   end
 
-  def budget_area_index_fields
+  def priority_area_index_fields
     @competition_object ||= self.competition
 
     if @competition_object
-      @budget_area_object ||= @competition_object.budget_area
+      @priority_area_object ||= @competition_object.priority_area
       {
-        budget_area_uri: @competition_object.budget_area_uri.to_s,
-        budget_area_label: (@budget_area_object.label rescue nil)
+        priority_area_uri: @competition_object.priority_area_uri.to_s,
+        priority_area_label: (@priority_area_object.label rescue nil)
       }
     else
       {}

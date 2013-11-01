@@ -219,12 +219,12 @@ Geographic Coverage: England, Wales, Scotland, Northern Ireland
     )
 
     replace_concept_scheme_metadata(
-      BudgetArea.get_graph_uri.to_s.gsub("/graph/", "/def/"),
-      BudgetArea.get_graph_uri,
-      "Budget Areas", #title
-      "The set of possible budget areas for TSB project competitions", #comment
+      PriorityArea.get_graph_uri.to_s.gsub("/graph/", "/def/"),
+      PriorityArea.get_graph_uri,
+      "Priority Areas", #title
+      "The set of possible priority areas for TSB project competitions", #comment
       nil, #   "More information coming soon...", #desc markdown
-      "budget_areas.nt"
+      "priority_areas.nt"
     )
 
     replace_concept_scheme_metadata(
@@ -296,10 +296,10 @@ Geographic Coverage: England, Wales, Scotland, Northern Ireland
     replace_graph(CostCategory.get_graph_uri, 'cost_categories.nt')
     replace_graph(SicClass.get_graph_uri, 'sic_codes.nt')
 
-    # TODO: budget areas and regions need their own dataset metadata.
     replace_graph(Region.get_graph_uri, 'regions.nt')
-    delete_graph("http://#{PublishMyData.local_domain}/graph/budget-areas") rescue nil
-    replace_graph(BudgetArea.get_graph_uri, 'budget_areas.nt')
+    delete_graph("http://#{PublishMyData.local_domain}/graph/priority-areas") rescue nil
+    delete_graph("http://#{PublishMyData.local_domain}/graph/budget-areas") rescue nil # leave this in until old naming cleared out
+    replace_graph(PriorityArea.get_graph_uri, 'priority_areas.nt')
 
     # TODO: add some ontology metadata
     replace_graph(TsbProjectData::ONTOLOGY_GRAPH, 'ontology.nt')

@@ -1,15 +1,15 @@
-class BudgetSubArea
+class PrioritySubArea
   include Concept
-  concept_scheme_uri Vocabulary::TSBDEF["concept-scheme/budget-areas"]
+  concept_scheme_uri Vocabulary::TSBDEF["concept-scheme/priority-areas"]
   
   def initialize(uri, graph_uri=nil)
     super(uri,graph_uri)
-    self.rdf_type = self.rdf_type.push(Vocabulary::TSBDEF["BudgetSubArea"])
+    self.rdf_type = self.rdf_type.push(Vocabulary::TSBDEF["PrioritySubArea"])
     self.in_scheme = self.class.resource_concept_scheme_uri
   
   end
   
-  BUDGET_SUB_AREA_CODES = {
+  PRIORITY_SUB_AREA_CODES = {
     "Advanced Materials" => "ADV_MAT",
     "Aerospace" => "AERO",
     "Assisted Living" => "ASS_LIV",

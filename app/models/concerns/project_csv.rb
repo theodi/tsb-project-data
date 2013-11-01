@@ -65,7 +65,7 @@ module ProjectCsv
     ?competition_code
     ?competition_year
     ?product
-    ?budget_area
+    ?priority_area
     ?org_id
     ?org_name
     ?company_number
@@ -127,8 +127,8 @@ module ProjectCsv
     OPTIONAL {?comp tsb:product ?prod .
       OPTIONAL {?prod rdfs:label ?product .}}
     OPTIONAL {
-      ?comp tsb:budgetArea ?budg_id .
-      ?budg_id rdfs:label ?budget_area .}
+      ?comp tsb:priorityArea ?prio_id .
+      ?prio_id rdfs:label ?priority_area .}
     ?grant tsb:offerGrant ?offer_grant ;
            tsb:offerCost ?offer_cost ;
            tsb:paymentsToDate ?payments_to_date .
@@ -150,7 +150,7 @@ module ProjectCsv
     ?competition_code
     ?competition_year
     ?product
-    ?budget_area
+    ?priority_area
     ?org_id
     ?org_name
     ?company_number

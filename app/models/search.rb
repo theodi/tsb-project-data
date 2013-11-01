@@ -34,7 +34,7 @@ class Search
       'region_labels' => [],
       'participant_size_labels' => [],
       'status_label' => [],
-      'budget_area_label' => [],
+      'priority_area_label' => [],
       'participant_sic_section_labels' => [],
       'product_label' => [],
       'participant_legal_entity_form_labels' => []

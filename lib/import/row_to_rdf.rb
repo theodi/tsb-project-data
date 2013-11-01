@@ -262,7 +262,7 @@ module Import
         # check we are not missing any codes
         puts "unknown product value #{product}" unless Product::PRODUCT_CODES[product]
   #      puts team unless Team::TEAM_CODES[team]
-        puts "unknown area value #{area}" unless BudgetArea::BUDGET_AREA_CODES[area]
+        puts "unknown area value #{area}" unless PriorityArea::PRIORITY_AREA_CODES[area]
 
         # Don't use team
         # team_code = Team::TEAM_CODES[team]
@@ -270,10 +270,10 @@ module Import
         #      t_uri = Vocabulary::TSB["team/#{team_code}"]
         #      comp.team_uri = t_uri
         #         end
-        budget_area_code = BudgetArea::BUDGET_AREA_CODES[area]
-        if budget_area_code && budget_area_code != "null"
-          budg_uri = Vocabulary::TSBDEF["concept/budget-area/#{budget_area_code}"]
-          comp.budget_area_uri = budg_uri
+        priority_area_code = PriorityArea::PRIORITY_AREA_CODES[area]
+        if priority_area_code && priority_area_code != "null"
+          prio_uri = Vocabulary::TSBDEF["concept/priority-area/#{priority_area_code}"]
+          comp.priority_area_uri = prio_uri
         end
         # NB use '_uri' setter methods as linking to a URI, not a Tripod Resource
         product_code = Product::PRODUCT_CODES[product]
@@ -281,10 +281,10 @@ module Import
           prod_uri = Vocabulary::TSBDEF["concept/product/#{product_code}"]
           comp.product_uri = prod_uri
         end
-        budget_sub_area_code = BudgetSubArea::BUDGET_SUB_AREA_CODES[subarea]
-        if budget_sub_area_code
-          sub_area_uri = Vocabulary::TSBDEF["concept/budget-area/#{budget_sub_area_code}"]
-          comp.budget_sub_area_uri = sub_area_uri
+        priority_sub_area_code = PrioritySubArea::PRIORITY_SUB_AREA_CODES[subarea]
+        if priority_sub_area_code
+          sub_area_uri = Vocabulary::TSBDEF["concept/priority-area/#{priority_sub_area_code}"]
+          comp.priority_sub_area_uri = sub_area_uri
         end
 
 

@@ -44,9 +44,9 @@
         #project-number
           %div Product
           %div= (link_to(project.competition.product.label, resource_path_from_uri(project.competition.product.uri)) rescue nil ) || "-"
-        #project-budget-area
-          %div Budget area
-          %div= (link_to(project.competition.budget_area.label, resource_path_from_uri(project.competition.budget_area.uri)) rescue nil) || "-"
+        #project-priority-area
+          %div Priority area
+          %div= (link_to(project.competition.priority_area.label, resource_path_from_uri(project.competition.priority_area.uri)) rescue nil) || "-"
 
       #project-about-tertiary
         #project-description

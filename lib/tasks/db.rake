@@ -1,4 +1,5 @@
 namespace :db do
+  ISSUE_DATE = DateTime.parse('2013-11-01')
 
   def delete_graph(graph_uri)
     url = "#{TsbProjectData::DATA_ENDPOINT}?graph=#{graph_uri}"
@@ -42,6 +43,7 @@ namespace :db do
     ds.title = title
     ds.label = ds.title
     ds.comment = comment
+    ds.issued = ISSUE_DATE
     ds.description = description_markdown
     ds.contact_email = "mailto:lee.mullin@tsb.gov.uk"
     ds.license = "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/"
@@ -66,6 +68,7 @@ namespace :db do
     cs.title = title
     cs.label = cs.title
     cs.comment = comment
+    cs.issued = ISSUE_DATE
     cs.description = description_markdown
     cs.contact_email = "mailto:lee.mullin@tsb.gov.uk"
     cs.license = "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/"
@@ -90,6 +93,7 @@ namespace :db do
     ont.title = title
     ont.label = ont.title
     ont.comment = comment
+    ont.issued = ISSUE_DATE
     ont.description = description_markdown
     ont.contact_email = "mailto:lee.mullin@tsb.gov.uk"
     ont.license = "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/"
@@ -268,7 +272,8 @@ Where possible, the data has been linked to related external web resources, incl
   desc 'create csv dump. This also warms up the cache'
   task create_csv_dump: :environment do
     output_csv = Project.generate_csv(Search.new().results(unpaginated: true))
-    File.open(File.join(TsbProjectData::DUMP_OUTPUT_PATH, 'projects.csv'), 'w') do |f|
+    filename = "projects-#{DateTime.now.strftime('%Y%m%d')}.csv"
+    File.open(File.join(TsbProjectData::DUMP_OUTPUT_PATH, filename), 'w') do |f|
       f.write(output_csv)
     end
   end

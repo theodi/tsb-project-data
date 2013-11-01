@@ -14,6 +14,7 @@ end
 
 module TsbProjectData
 
+
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -67,11 +68,16 @@ module TsbProjectData
         :after => :append_assets_path do
       config.assets.paths.unshift Rails.root.join("app", "assets", "bootstrap", "fonts").to_s
       config.assets.paths.unshift Rails.root.join("vendor", "assets", "stylesheets", "jquery-ui-lightness").to_s
-      config.assets.paths.unshift Rails.root.join("vendor", "assets", "svg").to_s
-      config.assets.paths.unshift Rails.root.join("vendor", "assets", "pickadate").to_s
+ #     config.assets.paths.unshift Rails.root.join("vendor", "assets", "svg").to_s
+ #     config.assets.paths.unshift Rails.root.join("vendor", "assets", "pickadate").to_s
     end
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
   end
+
+  REMOTE_EXCEL_FILE_LOCATION = 'http://swirrl-tsb-test.s3.amazonaws.com/TSB-data-public.xlsx'
+  LOCAL_EXCEL_FILE_LOCATION = File.join(Rails.root, 'data', 'input-data', 'TSB-data-public.xlsx')
+  MAINTENANCE_FILE_PATH = File.join(Rails.root, 'tmp', 'maintenance.txt')
+
 end

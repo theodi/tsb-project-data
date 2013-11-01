@@ -112,7 +112,7 @@ describe Search do
     it "should set a date_range_filter with a Tire search filter (based on the from and to dates)" do
       search.date_range_filter.to_hash.should == {
         :and => [
-          {:range=>{:end_date => {:gte=>"Fri, 01 Dec 2006 00:00:00 +0000"}}},
+          {:range=>{:start_date => {:gte=>"Fri, 01 Dec 2006 00:00:00 +0000"}}},
           {:range=>{:start_date=>{:lte=>"Thu, 01 Jan 2015 00:00:00 +0000"}}}
         ]
       }
@@ -182,7 +182,7 @@ describe Search do
         # the date ranges
         {
           :and=>[
-            {:range=>{:end_date=>{:gte=>"Fri, 01 Dec 2006 00:00:00 +0000"}}},
+            {:range=>{:start_date=>{:gte=>"Fri, 01 Dec 2006 00:00:00 +0000"}}},
             {:range=>{:start_date=>{:lte=>"Thu, 01 Jan 2015 00:00:00 +0000"}}}
           ]
         }
@@ -207,7 +207,7 @@ describe Search do
             {:range=>{:total_offer_grant=>{:gte=>50000, :lte=>390000}}},
             {
               :and=>[
-                {:range=>{:end_date=>{:gte=>"Fri, 01 Dec 2006 00:00:00 +0000"}}},
+                {:range=>{:start_date=>{:gte=>"Fri, 01 Dec 2006 00:00:00 +0000"}}},
                 {:range=>{:start_date=>{:lte=>"Thu, 01 Jan 2015 00:00:00 +0000"}}}
               ]
             }

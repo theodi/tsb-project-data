@@ -6,15 +6,20 @@ class ExcelDownload
     self.location = location
   end
 
-  # was it modified after the last dump we made?
   def is_new?
-    self.modified > CsvDump.latest.modified
+    # either we've got no latest csv dump, or this file was modified since our latest csv.
+    (!CsvDump.latest) || self.modified > CsvDump.latest.modified
   end
 
   def modified
     open(location) do |f|
       return f.last_modified
     end
+  end
+
+  # downloads the file to the input data folder.
+  def download!
+    `wget #{self.location} -O #{File.join(Rails.root, 'data', 'input-data', 'TSB-data-public.xlsx')}`
   end
 
   def valid?

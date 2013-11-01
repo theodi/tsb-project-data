@@ -20,6 +20,28 @@ namespace :loader do
     Import::OntologyLoader.prepare_ontology
   end
 
+  task enter_maintenance_mode: :environment do
+    File.open(TsbProjectData::MAINTENANCE_FILE_PATH, "w") {}
+  end
+
+  task leave_maintenance_mode: :environment do
+    Pathname.new(TsbProjectData::MAINTENANCE_FILE_PATH).delete
+  end
+
+
+  task load_new_data_if_available: :environment do
+    puts '>>> checking remote file...'
+    excel_download = ExcelDownload.new(TsbProjectData::REMOTE_EXCEL_FILE_LOCATION)
+
+    if excel_download.is_new?
+      puts '>>> modified!'
+      puts '>>> downloading...'
+      excel_download.download!
+      Rake::Task['loader:complete_load'].invoke
+    else
+      puts '>>> not modified'
+    end
+  end
 
   # params:
   #  * INPUT_FILENAME: file to load
@@ -29,7 +51,10 @@ namespace :loader do
   desc 'deletes search index, parses excel file, creates dump, loads dump into triple store, creates search index'
   task complete_load: :environment do
 
-    input_filename = ENV['INPUT_FILENAME']
+    input_filename = ENV['INPUT_FILENAME'] || 'TSB-data-public.xlsx'
+
+    puts '>>> entering maintenance mode'
+    Rake::Task['loader:enter_maintenance_mode'].invoke
 
     start_time = Time.now
 
@@ -61,6 +86,11 @@ namespace :loader do
     Rake::Task['db:replace_project_data'].invoke
     puts ">>> time elasped #{Time.now - start_time}s"
 
+    puts ">>> updating dataset modified date"
+    ds = PublishMyData::Dataset.find("http://#{PublishMyData.local_domain}/data/#{TsbProjectData::DATASET_SLUG}")
+    ds.modified = DateTime.now
+    ds.save
+
     puts ">>> importing search index..."
     search_index.import
     search_index.refresh
@@ -78,6 +108,8 @@ namespace :loader do
 
     puts ">>> time elasped #{Time.now - start_time}s"
     puts "FINISHED."
+
+    Rake::Task['loader:leave_maintenance_mode'].invoke
 
   end
 end

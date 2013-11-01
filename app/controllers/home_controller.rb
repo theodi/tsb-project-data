@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
 
+  caches_action :index, :about
+
   def index
     @this_year = DateTime.now.year
     @this_years_projects = get_total_projects_for_this_year(@this_year)

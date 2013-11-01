@@ -10,13 +10,13 @@
         %div Total grant
         .figure
           .pounds &pound;#{number_with_delimiter projects.facets["offer_grant_stats"]["total"].to_i}
-          .pence .#{"%.2d" % (projects.facets["offer_grant_stats"]["total"].modulo(1).round(2) * 100).to_i}
+          /.pence .#{"%.2d" % (projects.facets["offer_grant_stats"]["total"].modulo(1).round(2) * 100).to_i}
 
       #results-summary-average-grant
         %div Average grant
         .figure
           .pounds &pound;#{number_with_delimiter projects.facets["offer_grant_stats"]["mean"].to_i}
-          .pence .#{"%.2d" % (projects.facets["offer_grant_stats"]["mean"].modulo(1).round(2) * 100).to_i}
+          /.pence .#{"%.2d" % (projects.facets["offer_grant_stats"]["mean"].modulo(1).round(2) * 100).to_i}
 
     :ruby
       total_cost = projects.facets["offer_cost_stats"]["total"]

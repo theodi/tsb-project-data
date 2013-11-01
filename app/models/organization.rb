@@ -16,6 +16,12 @@ class Organization
   linked_to :enterprise_size, Vocabulary::TSBDEF.enterpriseSize
   linked_to :sic_classes, Vocabulary::TSBDEF.standardIndustrialClassification, class_name: 'SicClass', multivalued: true
 
+  def open_corporates_uri
+    if self.same_as && self.same_as.any?
+      self.same_as.select{ |s| s.to_s.include?("opencorporates.com") }.first.to_s
+    end
+  end
+
   # projects with the largerst grant amount
   def projects_with_largest_grants(limit=5, offset=0)
 

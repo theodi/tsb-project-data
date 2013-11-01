@@ -28,9 +28,9 @@
       #organization-about-primary
         #organization-number
           %div Company number
-          - if organization.same_as && organization.same_as.any?
+          - if organization.open_corporates_uri
             %div
-              = link_to resource_path_from_uri(organization.same_as.first.to_s) do
+              = link_to resource_path_from_uri(organization.open_corporates_uri) do
                 = organization.company_number
                 %span.glyphicon.glyphicon-share
 

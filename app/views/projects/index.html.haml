@@ -27,18 +27,55 @@
 
       = render 'projects/index/search_string'
 
-      #filters
-        = render 'projects/index/grant_slider'
-        = render 'projects/index/date_slider'
+      .show-hide-filters-and-facets
+        .show-filters
+          %a{href:"#"}
+            Show Search Filters
+          %span.glyphicon.glyphicon-expand
+        .hide-filters.hide
+          %a{href:"#"}
+            Hide Search Filters
+          %span.glyphicon.glyphicon-collapse-up
 
-      #facets
-        = render 'projects/index/facet', title: 'Participant Region', facet_name: 'region_labels'
-        = render 'projects/index/facet', title: 'Participant Enterprise Size', facet_name: 'participant_size_labels'
-        = render 'projects/index/facet', title: 'Participant Legal Entity Form', facet_name: 'participant_legal_entity_form_labels'
-        = render 'projects/index/facet', title: 'Project Status', facet_name: 'status_label'
-        = render 'projects/index/facet', title: 'TSB Product', facet_name: 'product_label'
-        = render 'projects/index/facet', title: 'TSB Priority Area', facet_name: 'priority_area_label'
-        = render 'projects/index/facet', title: 'Participant SIC Section', facet_name:'participant_sic_section_labels'
+        :javascript
+          $(function() {
+            $(".show-filters a").click(function(e) {
+              e.preventDefault();
+              $('#filters-and-facets').removeClass('hide');
+              $('.show-filters').addClass('hide');
+              $('.hide-filters').removeClass('hide');
+            });
+
+            $(".hide-filters a").click(function(e) {
+              e.preventDefault();
+              $('#filters-and-facets').addClass('hide');
+              $('.show-filters').removeClass('hide');
+              $('.hide-filters').addClass('hide');
+            });
+          });
+        %noscript
+          :scss
+            #filters-and-facets {
+              display:block !important;
+            }
+            .show-hide-filters-and-facets {
+              display:none !important;
+            }
+
+      #filters-and-facets.hide
+
+        #filters
+          = render 'projects/index/grant_slider'
+          = render 'projects/index/date_slider'
+
+        #facets
+          = render 'projects/index/facet', title: 'Participant Region', facet_name: 'region_labels'
+          = render 'projects/index/facet', title: 'Participant Enterprise Size', facet_name: 'participant_size_labels'
+          = render 'projects/index/facet', title: 'Participant Legal Entity Form', facet_name: 'participant_legal_entity_form_labels'
+          = render 'projects/index/facet', title: 'Project Status', facet_name: 'status_label'
+          = render 'projects/index/facet', title: 'TSB Product', facet_name: 'product_label'
+          = render 'projects/index/facet', title: 'TSB Priority Area', facet_name: 'priority_area_label'
+          = render 'projects/index/facet', title: 'Participant SIC Section', facet_name:'participant_sic_section_labels'
 
       = submit_tag 'update results'
 

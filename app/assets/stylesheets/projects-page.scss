@@ -47,6 +47,35 @@
       padding-bottom:20px;
     }
 
+    #filters-and-facets {
+      display:block;
+
+      &.hide {
+        display:none;
+      }
+
+      @media(min-width: $screen-md) {
+        display:block !important;
+        &.hide {
+          display:block !important;
+        }
+      }
+    }
+
+    .show-hide-filters-and-facets {
+      @media (max-width: $screen-sm-max) {
+        display:block;
+        padding-bottom:10px;
+        padding-top:10px;
+      }
+      &.hide {
+        display:none;
+      }
+      @media (min-width: $screen-md) {
+        display:none;
+      }
+    }
+
     #filters {
       .text-fields {
         display:none;

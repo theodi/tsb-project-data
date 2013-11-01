@@ -24,6 +24,22 @@ class Project
   linked_to :cost_category, Vocabulary::TSBDEF.costCategory
 
 
+  def ordered_participants
+    Organization.find_by_sparql("
+      SELECT (sum(?offer_cost) as ?total_cost) ?uri WHERE {
+        GRAPH <#{Organization.get_graph_uri}> {
+          ?uri <#{Vocabulary::TSBDEF.participatesIn}> <#{self.uri.to_s}> .
+          <#{self.uri.to_s}> <#{Vocabulary::TSBDEF.supportedBy}> ?grant .
+          ?grant <#{Vocabulary::TSBDEF.paidTo}> ?uri .
+          ?grant <#{Vocabulary::TSBDEF.offerCost}> ?offer_cost .
+        }
+      }
+
+      GROUP BY(?uri)
+      ORDER By DESC(?total_cost)
+    ")
+  end
+
   def offer_cost_sum
     supported_by.sum(&:offer_cost).to_f
   end
@@ -50,8 +66,8 @@ class Project
 
   def grants_for_organization(organization)
     Grant
-      .where("?uri <#{Vocabulary::TSBDEF.supports}> <#{self.uri}>")
-      .where("?uri <#{Vocabulary::TSBDEF.paidTo}> <#{organization.uri}>")
+      .where("?uri <#{Vocabulary::TSBDEF.supports}> <#{self.uri.to_s}>")
+      .where("?uri <#{Vocabulary::TSBDEF.paidTo}> <#{organization.uri.to_s}>")
   end
 
   def max_offer_cost

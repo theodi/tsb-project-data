@@ -16,6 +16,26 @@ class Organization
   linked_to :enterprise_size, Vocabulary::TSBDEF.enterpriseSize
   linked_to :sic_classes, Vocabulary::TSBDEF.standardIndustrialClassification, class_name: 'SicClass', multivalued: true
 
+  # projects with the largerst grant amount
+  def projects_with_largest_grants(limit=5, offset=0)
+
+    Project.find_by_sparql("
+      SELECT (sum(?offer_grant) as ?total_grant) ?uri WHERE {
+        GRAPH <#{Organization.get_graph_uri}> {
+          <#{self.uri.to_s}> <#{Vocabulary::TSBDEF.participatesIn}> ?uri .
+          ?uri <#{Vocabulary::TSBDEF.supportedBy}> ?grant .
+          ?grant <#{Vocabulary::TSBDEF.paidTo}> <#{self.uri.to_s}> .
+          ?grant <#{Vocabulary::TSBDEF.offerGrant}> ?offer_grant .
+        }
+      }
+
+      GROUP BY(?uri)
+      ORDER By DESC(?total_grant)
+      LIMIT #{limit}
+      OFFSET #{offset}
+    ")
+  end
+
   def offer_cost_sum
     grants.resources.sum(&:offer_cost).to_f
   end

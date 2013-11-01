@@ -154,6 +154,14 @@ The data from the TSB has been supplemented by openly licensed external data fro
 
 Where possible, the data has been linked to related external web resources, including those from the [ONS](http://statistics.data.gov.uk), [Ordnance Survey](http://data.ordnancesurvey.co.uk), [Companies House](http://www.companieshouse.gov.uk/) and [OpenCorporates](http://opencorporates.com).
 
+Update frequency: monthly
+
+Keywords: innovation, grants, collaboration, business, academia, research, development
+
+Time Period Covered: December 2003 to present
+
+Geographic Coverage: England, Wales, Scotland, Northern Ireland
+
 <div style='margin-bottom:40px; margin-top:20px;'>
   <script src='https://certificates.theodi.org/datasets/640/certificates/12714/badge.js'></script>
 </div>

@@ -19,5 +19,64 @@
   Funding of innovation projects is usually matched by the businesses involved. Taking into account partner and business contributions, in its first five years the Technology Strategy Board has enabled around £2.5bn of investment in innovation. Funding is used for a wide range of products or tools including Knowledge Transfer Partnerships, Knowledge Transfer Networks, Collaborative Research and Development, Smart,  Innovation Vouchers and the new network of Catapult centres. It also champions SBRI, the Small Business Research Initiative.
 
   Funding is provided through competitions or contracts with resulting approved projects involving one or more participants from academic and or  business sectors. Payments are made up to the offered grant in arrears against agreed claims.  Projects vary in size and can take from a few months to several years.
-
-  If you have comments on the site, or suggestions on how the data publishing process could be improved, please [get in touch](mailto:Nic.Jefferis@tsb.gov.uk).
+    
+  
+  ## Data Exploration and API
+  
+  The data can be explored and searched through the [user interface](http://tsb-projects.labs.theodi.org/projects).
+  
+  It can also be accessed via an API and SPARQL endpoint.  See the [Documentation](http://tsb-projects.labs.theodi.org/docs) for details. 
+  
+  ## Data Download
+  
+  The full dataset can be downloaded as [CSV (approximately 15MB)](http://tsb-projects.labs.theodi.org/dumps/projects.csv) or as [RDF n-triples (approximately 68MB)](http://tsb-projects.labs.theodi.org/dumps/project_data.nt).
+  
+  ## Data Provenance
+  
+  The data on this site is published by the Technology Strategy Board from its Grants System.  The Technology Strategy Board was formed in 2007 and took over some of the relevant functions of the Regional Development Agencies and the Department of Trade and Industry. The funding has continued and is included within the dataset however classification and participants’ details may have changed. Change of organisation and process have not been applied to the earlier started projects.
+  
+  ### Data Flow
+  
+  Data is extracted from the _connect Grants system which is used to set up and process claims for funding.  Each Participant submits claim for a part of their Grant for approval and subsequent payment on a quarterly basis depending upon the size of the Project.
+  
+  
+  The grants data is merged with Competition and its Budget Classification via a Data Warehouse.  After quality checks it is exported on a monthly basis for enhancement and publication on the Open Data Site.  Similar and additional data is also made available on the [TSB corporate site](https://www.innovateuk.org/public-data) as part of our commitment to transparency.
+  
+  
+  ## Privacy and Anonymisation
+  
+  The exported data refers only to Organisations or potentially Sole Traders who have received funding through a TSB Product.  These are in the public domain and are therefore not subject to any privacy, confidentiality or Data Protection Act requirements.
+  
+  ## Data Quality
+  
+  ### Quality Assurance
+  
+  The initial data is input on commencement of funding, with controls applied through software validation and manual checking.  Claims from the Project participants are added to the site and reviewed through a Project monitoring process prior to approval and payment.  
+  
+  In creating the data for export further manual checks on the classification of new projects are carried out with adjustments to the source system as well as the Data Warehouse.
+  
+  ### Format Validation
+  
+  The majority of data is text and different systems used over the time period covered means there can be issues with format.  Further refinement of format is applied for publication on the site.
+  
+  ### Manual Verification
+  
+  The manual verification uses spreadsheets to provide different views of the data to detect inconsistencies in classification.  Inconsistencies are corrected in the extract and where relevant in the Grants source system.
+  
+  ### Automated Testing
+  
+  There is no automated testing carried out on the data extracted.
+  
+  ### Known Issues
+  
+  - **Legacy Data.** Previous systems and coding policies have created inconsistency in naming and the dates of Competitions.  In addition the classification for Product and Priority Areas have changed and no realignment has been made to current Delivery Plan Areas
+  - **Enterprise Size.** Participants have changed size over time and be subject to other changes  such as ownership.  These are captured at the time of Grant award and  may not be comparable to current merged data from external references. 
+  
+  ### Reporting Issues
+  
+  If you find any issues or anomalies with the data, please report it to us by emailing [support@innovateuk.org](mailto:support@innovateuk.org) with the subject Projects Open Data Site Issue. 
+  
+  
+  ## Contact Details
+  
+  If you have and questions about the data, suggestions for how the data publishing process could be improved, concerns about the disclosure of personal details, or have noticed any errors in the data, please get in touch with us using methods on our [contact page](https://www.innovateuk.org/contact-us) or by emailing [support@innovateuk.org](mailto:support@innovateuk.org). 

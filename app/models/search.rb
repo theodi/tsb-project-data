@@ -213,7 +213,8 @@ class Search
     self.date_from = DateTime.parse self.params[:date_from] unless self.params[:date_from].blank?
     self.date_to = DateTime.parse self.params[:date_to] unless self.params[:date_to].blank?
 
-    from_range = Tire::Search::Filter.new( :range, {:end_date => { :gte => self.date_from } } ) if self.date_from
+    # project shouild start in range (inclusive).
+    from_range = Tire::Search::Filter.new( :range, {:start_date => { :gte => self.date_from } } ) if self.date_from
     to_range = Tire::Search::Filter.new( :range, {:start_date => { :lte => self.date_to } } ) if self.date_to
 
     if from_range && to_range

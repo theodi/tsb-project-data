@@ -87,7 +87,7 @@
         toStr = moment.utc(maxExtentDate).format("MMM YYYY");
       }
 
-      var str = 'Projects whose duration overlaps: <br/>' + moment.utc(fromStr).format("MMM YYYY") + ' - ' + moment.utc(toStr).format("MMM YYYY");
+      var str = 'Projects which start between: <br/>' + moment.utc(fromStr).format("MMM YYYY") + ' and ' + moment.utc(toStr).format("MMM YYYY");
       $("#date-range-desc").html( str );
     }
 

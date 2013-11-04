@@ -244,6 +244,7 @@ DEPENDENCIES
   capistrano
   publish_my_data!
   rails (= 3.2.13)
+  rdf (= 1.0.8)
   roo
   rspec-rails (~> 2.0)
   sentry-raven!

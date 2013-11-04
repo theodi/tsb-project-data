@@ -6,6 +6,8 @@ gem 'tripod', :git => "https://github.com/Swirrl/tripod.git", :branch => 'links'
 gem 'roo'
 gem 'tire'
 
+gem 'rdf', '1.0.8'
+
 #gem 'publish_my_data', '1.0.3'
 gem 'publish_my_data', :git => "https://github.com/Swirrl/publish_my_data.git", :branch => 'master'
 #uncomment to use local pmd (and comment out line above)

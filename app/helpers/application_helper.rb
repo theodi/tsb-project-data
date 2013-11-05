@@ -11,11 +11,14 @@ module ApplicationHelper
 
     leader_index = project.participant_uris.index(project.leader_uri)
 
-    participant_uris.delete_at(leader_index)
-    participant_uris.insert(0, project.leader_uri)
+    # if the project has a leader, then move it to the start.
+    if leader_index
+      participant_uris.delete_at(leader_index)
+      participant_uris.insert(0, project.leader_uri)
 
-    participant_labels.delete_at(leader_index)
-    participant_labels.insert(0, project.leader_label)
+      participant_labels.delete_at(leader_index)
+      participant_labels.insert(0, project.leader_label)
+    end
 
     (0...participant_uris.length).collect do |i|
       link_to participant_labels[i], resource_path_from_uri(participant_uris[i])

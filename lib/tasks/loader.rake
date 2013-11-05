@@ -52,7 +52,6 @@ namespace :loader do
   task complete_load: :environment do
 
     begin
-      1/0
 
       input_filename = ENV['INPUT_FILENAME'] || 'TSB-data-public.xlsx'
 
@@ -99,6 +98,10 @@ namespace :loader do
       search_index.import
       search_index.refresh
       puts ">>> time elasped #{Time.now - start_time}s"
+
+      puts ">>> relinking dumps"
+      `rm /home/rails/sites/tsb/current/public/dumps/*.*`
+      `ln -nfs /home/rails/sites/tsb/shared/dumps/*.* /home/rails/sites/tsb/current/public/dumps/"
 
       puts ">>> clearing cache..."
       `echo 'flush_all' | nc localhost 11211`

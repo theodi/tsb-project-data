@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  caches_action :index, :about
+  #caches_action :index, :about
 
   def index
     @this_year = DateTime.now.year

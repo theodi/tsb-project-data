@@ -101,7 +101,7 @@ namespace :loader do
 
       puts ">>> relinking dumps"
       `rm /home/rails/sites/tsb/current/public/dumps/*.*`
-      `ln -nfs /home/rails/sites/tsb/shared/dumps/*.* /home/rails/sites/tsb/current/public/dumps/"
+      `ln -nfs /home/rails/sites/tsb/shared/dumps/*.* /home/rails/sites/tsb/current/public/dumps/`
 
       puts ">>> clearing cache..."
       `echo 'flush_all' | nc localhost 11211`

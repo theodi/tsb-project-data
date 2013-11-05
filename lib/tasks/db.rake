@@ -328,7 +328,7 @@ Geographic Coverage: England, Wales, Scotland, Northern Ireland
 
   desc 'replace project dataset data.'
   task replace_project_data: :environment do
-    replace_graph(TsbProjectData::DATA_GRAPH, 'project_data.nt')
+    replace_graph(TsbProjectData::DATA_GRAPH, DataDump.latest.basename)
   end
 
 end

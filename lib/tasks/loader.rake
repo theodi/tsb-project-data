@@ -86,9 +86,10 @@ namespace :loader do
     Rake::Task['db:replace_project_data'].invoke
     puts ">>> time elasped #{Time.now - start_time}s"
 
-    puts ">>> updating dataset modified date"
+    puts ">>> updating dataset modified date and dump"
     ds = PublishMyData::Dataset.find("http://#{PublishMyData.local_domain}/data/#{TsbProjectData::DATASET_SLUG}")
     ds.modified = DateTime.now
+    ds.data_dump = "http://#{PublishMyData.local_domain}/dumps/#{DataDump.latest.basename}"
     ds.save
 
     puts ">>> importing search index..."

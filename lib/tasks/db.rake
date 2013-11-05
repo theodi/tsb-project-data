@@ -49,7 +49,7 @@ namespace :db do
     ds.license = "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/"
     ds.publisher = "http://innovateuk.org"
 
-    ds.data_dump = "http://#{PublishMyData.local_domain}/dumps/#{dump_filename}"
+    ds.data_dump = "http://#{PublishMyData.local_domain}/dumps/#{DataDump.latest.basename}"
     ds.data_graph_uri = data_graph
     ds.write_predicate(Vocabulary::DCTERMS.references, "http://#{PublishMyData.local_domain}/docs")
     ds.write_predicate("http://rdfs.org/ns/void#sparqlEndpoint", "http://#{PublishMyData.local_domain}/sparql")
@@ -74,7 +74,7 @@ namespace :db do
     cs.license = "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/"
     cs.publisher = "http://innovateuk.org"
 
-    cs.data_dump = "http://#{PublishMyData.local_domain}/dumps/#{dump_filename}"
+    #cs.data_dump = "http://#{PublishMyData.local_domain}/dumps/#{dump_filename}"
     cs.data_graph_uri = data_graph
     cs.write_predicate(Vocabulary::DCTERMS.references, "http://#{PublishMyData.local_domain}/docs")
     cs.write_predicate("http://rdfs.org/ns/void#sparqlEndpoint", "http://#{PublishMyData.local_domain}/sparql")
@@ -99,7 +99,7 @@ namespace :db do
     ont.license = "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/"
     ont.publisher = "http://innovateuk.org"
 
-    ont.data_dump = "http://#{PublishMyData.local_domain}/dumps/#{dump_filename}"
+  #  ont.data_dump = "http://#{PublishMyData.local_domain}/dumps/#{dump_filename}"
     ont.data_graph_uri = data_graph
     ont.write_predicate(Vocabulary::DCTERMS.references, "http://#{PublishMyData.local_domain}/docs")
     ont.write_predicate("http://rdfs.org/ns/void#sparqlEndpoint", "http://#{PublishMyData.local_domain}/sparql")
@@ -120,7 +120,7 @@ namespace :db do
     puts "GRAPH: #{data_graph.to_s}/metadata"
 
     o.label = label
-    o.data_dump = "http://#{PublishMyData.local_domain}/dumps/#{dump_filename}"
+    #o.data_dump = "http://#{PublishMyData.local_domain}/dumps/#{dump_filename}"
     o.data_graph_uri = data_graph
 
     o.save! rescue puts o.errors.inspect

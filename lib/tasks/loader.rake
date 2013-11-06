@@ -99,6 +99,13 @@ namespace :loader do
       search_index.refresh
       puts ">>> time elasped #{Time.now - start_time}s"
 
+      puts ">>> clearing cache..."
+      `echo 'flush_all' | nc localhost 11211`
+      puts ">>> time elasped #{Time.now - start_time}s"
+
+      puts ">>> generating data dump"
+      Rake::Task['db:create_csv_dump'].invoke
+
       puts ">>> relinking dumps"
       `rm /home/rails/sites/tsb/current/public/dumps/*.*`
       `ln -nfs /home/rails/sites/tsb/shared/dumps/*.* /home/rails/sites/tsb/current/public/dumps/`
@@ -106,9 +113,6 @@ namespace :loader do
       puts ">>> clearing cache..."
       `echo 'flush_all' | nc localhost 11211`
       puts ">>> time elasped #{Time.now - start_time}s"
-
-      puts ">>> generating data dump (and warming cache)"
-      Rake::Task['db:create_csv_dump'].invoke
 
       # puts ">>> rendering static visualisations"
       # Rake::Task['viz:render_static'].invoke('tsb-projects.labs.theodi.org')

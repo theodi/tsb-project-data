@@ -26,7 +26,8 @@ class ProjectsController < ApplicationController
           # if there are no params, redirect to pre canned version.
           redirect_to '/dumps/projects.csv'
         else
-          @output_csv = Project.generate_csv(@search.results(unpaginated: true))
+          results = @search.results(unpaginated: true)
+          @output_csv = Project.generate_csv(results)
           render csv: @output_csv
         end
       end

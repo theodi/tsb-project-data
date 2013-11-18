@@ -1,5 +1,18 @@
+:ruby
+  largest_grants = organization.projects_with_largest_grants
+  search_params = {:search_string => "participant_labels:\"#{organization.label}\""}
+  projects_search = Search.new(search_params)
+  projects = projects_search.results
+
+%h3
+  - if projects.total > 5
+    Projects with top-5 largest grants
+    (#{link_to "of " + projects.total.to_s, main_app.projects_path(search_params)})
+  - else
+    Projects
+
 %ul#organization-project-list
-  - organization.projects_with_largest_grants.each do |project|
+  - largest_grants.each do |project|
     %li
       .organization-project-header
         .organization-project-name
@@ -11,3 +24,11 @@
 
       .organization-project-grant.organization-grant-details
         = render 'application/grant_summary_stack', cost: project.offer_cost_sum_for_organization(organization), max_cost: organization.offer_cost_sum, grant: project.offer_grant_sum_for_organization(organization), payments: project.payments_to_date_sum_for_organization(organization)
+
+
+= link_to main_app.projects_path(search_params) do
+  Search for all
+  %strong= projects.total
+  projects involving
+  %strong= organization.label
+

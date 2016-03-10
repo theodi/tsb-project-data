@@ -1,9 +1,11 @@
 source 'https://rubygems.org'
 
+gem 'unicorn', '~> 4.8.3'
+gem 'unicorn-worker-killer', '~> 0.4.2'
+
 gem 'rails', '3.2.13'
 gem 'tripod', :git => "https://github.com/Swirrl/tripod.git", :branch => 'd76b33' #lock to the legacy version of tripod
 #gem 'tripod', :path => '../tripod'
-
 
 gem 'rdf', '1.0.8'
 gem 'rdf-json', '1.0.0'

@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/Swirrl/publish_my_data.git
   revision: 4eeea483694fdb3e5399e85190c01ff12d674394
-  branch: master
+  branch: 4eeea
   specs:
     publish_my_data (1.0.3)
       aws-sdk
@@ -19,7 +19,7 @@ GIT
 GIT
   remote: https://github.com/Swirrl/tripod.git
   revision: d76b3385867f18cdf0080b11abdcb8f936a43e3f
-  branch: links
+  branch: d76b33
   specs:
     tripod (0.7.23)
       activemodel (~> 3.2)
@@ -78,11 +78,13 @@ GEM
     addressable (2.3.5)
     ansi (1.4.3)
     arel (3.0.2)
-    aws-sdk (1.11.1)
-      json (~> 1.4)
-      nokogiri (>= 1.4.4)
-      uuidtools (~> 2.1)
-    backports (3.3.4)
+    aws-sdk (2.2.25)
+      aws-sdk-resources (= 2.2.25)
+    aws-sdk-core (2.2.25)
+      jmespath (~> 1.0)
+    aws-sdk-resources (2.2.25)
+      aws-sdk-core (= 2.2.25)
+    backports (3.6.8)
     builder (3.0.4)
     capistrano (2.15.5)
       highline
@@ -90,20 +92,20 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    dalli (2.6.4)
+    dalli (2.7.6)
     diff-lcs (1.2.4)
     ebnf (0.3.1)
       rdf
       sxp
-    entypo-rails (2.0.2)
+    entypo-rails (2.2.3)
       railties (>= 3.1, <= 5)
-    equivalent-xml (0.3.0)
+    equivalent-xml (0.6.0)
       nokogiri (>= 1.4.3)
     erubis (2.7.0)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     guid (0.1.1)
-    haml (4.0.3)
+    haml (4.0.7)
       tilt
     haml-rails (0.4)
       actionpack (>= 3.1, < 4.1)
@@ -115,8 +117,9 @@ GEM
     highline (1.6.19)
     hike (1.2.3)
     i18n (0.6.1)
+    jmespath (1.1.3)
     journey (1.0.4)
-    jquery-rails (3.0.4)
+    jquery-rails (3.1.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.0)
@@ -160,7 +163,7 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
-    rails_autolink (1.1.4)
+    rails_autolink (1.1.6)
       rails (> 3.1)
     railties (3.2.13)
       actionpack (= 3.2.13)
@@ -184,7 +187,7 @@ GEM
     rdf-xsd (1.0.2.1)
       nokogiri (>= 1.5.0)
       rdf (>= 0.3.4)
-    rdiscount (2.1.7)
+    rdiscount (2.1.8)
     rdoc (3.12.2)
       json (~> 1.4)
     rest-client (1.6.7)
@@ -242,12 +245,18 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano
+  kaminari (= 0.14.1)
   publish_my_data!
   rails (= 3.2.13)
   rdf (= 1.0.8)
-  roo
+  rdf-json (= 1.0.0)
+  rdf-rdfxml (= 1.0.2)
+  rdf-turtle (= 1.0.9)
+  roo (= 1.12.2)
   rspec-rails (~> 2.0)
+  sass (= 3.2.12)
+  sass-rails (= 3.2.6)
   sentry-raven!
-  tire
+  tire (= 0.6.0)
   tripod!
   yui-compressor
